@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <strong>Name:</strong>
+            <p>{{user.fullName | titlecase}}</p>
+          </div>
+          <div>
+            <strong>Location:</strong>
+            <p>{{user.city}}, {{user?.country}}</p>
+          </div>
+          <div>
+            <strong>Age:</strong>
+            <p>{{user.age}}</p>
+          </div>
+          <div>
+            <strong>Contact Number:</strong>
+            <p>{{user.contactNumber}}</p>
+          </div>
+          <div>
+            <strong>Last Active:</strong>
+            <p>{{user.lastActive}}</p>
+          </div>
+          <div>
+            <strong>Member since:</strong>
+            <p>{{user.created}}</p>
+          </div>
+          <button class="btn btn-success btn-block">Message</button>
+          <button class="btn btn-warning btn-block">Book</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="tab-panel">
+        <tabset>
+          <tab heading="Bookings">
+            <h6>Bookings</h6>
+          </tab>
+          <tab heading="Messages">
+            <h6>Messages</h6>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

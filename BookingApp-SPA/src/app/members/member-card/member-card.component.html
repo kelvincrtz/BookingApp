@@ -1,0 +1,10 @@
+<div class="card mb-4">
+  <div class="card-body p-3">
+    <h5 class="card-title mb-1"><i class="fa fa-user"></i>{{' ' + user.username}}</h5>
+    <div class="card-subtitle mb-2 text-muted">{{user.fullName | titlecase}}</div>
+    <div class="card-text text-muted"><i class="fa fa-home"></i>{{' ' + user.city}}</div>
+    <div class="card-text text-muted"><i class="fa fa-phone"></i>{{' ' + user.contactNumber}}</div>
+    <button class="btn btn-primary btn-block mt-1" [routerLink]="['/members/', user.id]">Profile</button>
+    <button class="btn btn-warning btn-block mt-1">Message</button>
+  </div>
+</div>

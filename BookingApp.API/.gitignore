@@ -3,3 +3,5 @@ bin
 obj
 *.db
 appsettings.json
+bookingapp.db-shm
+bookingapp.db-wal
