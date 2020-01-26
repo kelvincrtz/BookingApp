@@ -18,8 +18,11 @@ import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { MemberDetailResolver } from './_resolver/member-detail-resolver';
-import { MemberListResolver } from './_resolver/member-list-resolver';
+import { MemberDetailResolver } from './_resolvers/member-detail-resolver';
+import { MemberListResolver } from './_resolvers/member-list-resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit-resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -34,7 +37,8 @@ export function tokenGetter() {
       MemberListComponent,
       MessagesComponent,
       MemberCardComponent,
-      MemberDetailComponent
+      MemberDetailComponent,
+      MemberEditComponent
    ],
    imports: [
       BrowserModule,
@@ -56,7 +60,9 @@ export function tokenGetter() {
       AuthService,
       ErrorInterceptorProvider,
       MemberDetailResolver,
-      MemberListResolver
+      MemberListResolver,
+      MemberEditResolver,
+      PreventUnsavedChanges
    ],
    bootstrap: [
       AppComponent
