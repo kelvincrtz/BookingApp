@@ -1,0 +1,24 @@
+<form class="container mt-4" [formGroup]= "bookingForm" (ngSubmit)="registerBooking()">
+
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="when" placeholder="When">
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="location" placeholder="Where">
+  </div>
+
+  <div title="From">From</div>
+  <timepicker [(ngModel)]="fromTime" formControlName="fromTime" [showMeridian]="isMeridian" (isValid)="isValid($event)"></timepicker>
+  <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>
+
+  <div title="From">To</div>
+  <timepicker [(ngModel)]="toTime" formControlName="toTime" [showMeridian]="isMeridian" (isValid)="isValid($event)"></timepicker>
+  <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" type="submit">Book</button>
+    <button class="btn btn-default" type="button" (click)="cancel()"></button>
+  </div>
+
+</form>

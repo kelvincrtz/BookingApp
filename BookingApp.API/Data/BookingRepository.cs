@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BookingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,28 @@ namespace BookingApp.API.Data
         public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);
+        }
+
+        public async Task<Booking> GetBooking(int id)
+        {
+            return await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
+        }
+
+        public async Task<IEnumerable<Booking>> GetBookings()
+        {
+            return await _context.Bookings.ToListAsync();
+        }
+
+        public Task<IEnumerable<Booking>> GetBookingsForUser(int id)
+        {
+            // TO BE CONTINUED SECTION
+            var bookings = _context.Bookings.AsQueryable();
+
+            bookings = bookings.Where(u => u.UserId == id);
+
+            bookings = bookings.OrderByDescending(d => d.DateAdded);
+
+            return null;
         }
 
         public async Task<User> GetUser(int id)

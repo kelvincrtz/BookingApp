@@ -14,7 +14,9 @@ namespace BookingApp.API.Helpers
             CreateMap<User, UserForDetailedDto>()
                 .ForMember(dest => dest.Age, opt => 
                     opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
-            CreateMap<Booking, BookingsForDetailedDto>();
+            CreateMap<Booking, BookingForDetailedDto>().ReverseMap();
+            CreateMap<Booking, BookingForListDto>();
+            CreateMap<BookingForCreationDto, Booking>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<UserForRegisterDto, User>();
         }

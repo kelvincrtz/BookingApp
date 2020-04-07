@@ -11,5 +11,8 @@ namespace BookingApp.API.Data
          Task<bool> SaveAll();
          Task<IEnumerable<User>> GetUsers();
          Task<User> GetUser(int id);
+         Task<IEnumerable<Booking>> GetBookings();
+         Task<Booking> GetBooking(int id);
+         Task<IEnumerable<Booking>> GetBookingsForUser(int id);
     }
 }

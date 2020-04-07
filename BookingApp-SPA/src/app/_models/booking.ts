@@ -1,15 +1,11 @@
-import { Time } from '@angular/common';
-import { User } from './user';
-
-
 export interface Booking {
     id: number;
     status: string;
     when: Date;
-    fromTime: Time;
-    ToTime: Time;
+    fromTime: Date;
+    toTime: Date;
     location: string;
-    user: User;
-    userId: Number;
+    dateAdded: Date;
+    userId: number;
 }
 
