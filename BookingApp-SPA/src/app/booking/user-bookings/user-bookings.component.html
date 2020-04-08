@@ -9,12 +9,10 @@
   </div>
 
   <div title="From">From</div>
-  <timepicker [(ngModel)]="fromTime" formControlName="fromTime" [showMeridian]="isMeridian" (isValid)="isValid($event)"></timepicker>
-  <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>
+  <timepicker formControlName="fromTime"></timepicker>
 
-  <div title="From">To</div>
-  <timepicker [(ngModel)]="toTime" formControlName="toTime" [showMeridian]="isMeridian" (isValid)="isValid($event)"></timepicker>
-  <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>
+  <div title="To">To</div>
+  <timepicker formControlName="toTime"></timepicker>
 
   <div class="form-group text-center">
     <button class="btn btn-success" type="submit">Book</button>

@@ -8,10 +8,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class UserBookingsComponent implements OnInit {
   bookingForm: FormGroup;
-  isMeridian = true;
-  fromTime = new Date();
-  toTime = new Date();
-  valid = true;
 
   constructor() { }
 
@@ -30,10 +26,6 @@ export class UserBookingsComponent implements OnInit {
 
   cancel() {
 
-  }
-
-  isValid(event: boolean): void {
-    this.valid = event;
   }
 
 }

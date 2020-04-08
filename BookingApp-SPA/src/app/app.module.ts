@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, TabsModule, BsDatepickerModule, TimepickerModule } from 'ngx-bootstrap';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -27,7 +28,9 @@ import { UserBookingsComponent } from './booking/user-bookings/user-bookings.com
 import { UserService } from './_services/user.service';
 import { BookingService } from './_services/booking.service';
 import { BookingListResolver } from './_resolvers/booking-list-resolver';
-import { BookingListComponent } from './booking/booking-list/booking-list/booking-list.component';
+import { BookingListComponent } from './booking/booking-list/booking-list.component';
+import { BookingFormComponent } from './booking/booking-form/booking-form.component';
+import { PreventBookingFormUnsavedChanges } from './_guards/prevent-bookingform-unsaved-changes.guard';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -45,7 +48,8 @@ export function tokenGetter() {
       MemberDetailComponent,
       MemberEditComponent,
       UserBookingsComponent,
-      BookingListComponent
+      BookingListComponent,
+      BookingFormComponent
    ],
    imports: [
       BrowserModule,
@@ -75,7 +79,8 @@ export function tokenGetter() {
       MemberListResolver,
       MemberEditResolver,
       BookingListResolver,
-      PreventUnsavedChanges
+      PreventUnsavedChanges,
+      PreventBookingFormUnsavedChanges
    ],
    bootstrap: [
       AppComponent
