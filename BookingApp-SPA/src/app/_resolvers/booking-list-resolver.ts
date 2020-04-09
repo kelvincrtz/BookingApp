@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { User } from '../_models/user';
-import { UserService } from '../_services/user.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -16,7 +14,7 @@ export class BookingListResolver implements Resolve<Booking[]> {
                 private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Booking[]> {
-        return this.bookingService.getBookings(this.authService.decodedToken.nameId).pipe(
+        return this.bookingService.getBookings(this.authService.decodedToken.nameid).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving bookings. ' + error);
                 this.router.navigate(['/home']);

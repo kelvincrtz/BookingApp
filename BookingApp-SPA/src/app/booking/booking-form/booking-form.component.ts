@@ -16,7 +16,6 @@ export class BookingFormComponent implements OnInit {
   booking: Booking;
   bookingForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
-  decodedNameId: any;
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {

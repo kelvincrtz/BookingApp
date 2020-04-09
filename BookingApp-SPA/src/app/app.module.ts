@@ -8,6 +8,7 @@ import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap'
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -33,6 +34,8 @@ import { BookingFormComponent } from './booking/booking-form/booking-form.compon
 import { PreventBookingFormUnsavedChanges } from './_guards/prevent-bookingform-unsaved-changes.guard';
 import { BookingListForUserComponent } from './booking/booking-list-for-user/booking-list-for-user.component';
 import { BookingListForUserResolver } from './_resolvers/booking-list-for-user-resolver';
+import { BookingEditComponent } from './booking/booking-edit/booking-edit.component';
+import { BookingEditResolver } from './_resolvers/booking-edit-resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -52,7 +55,8 @@ export function tokenGetter() {
       BookingListComponent,
       BookingFormComponent,
       BookingListForUserComponent,
-      TimeAgoPipe
+      BookingEditComponent,
+      TimeAgoPipe,
    ],
    imports: [
       BrowserModule,
@@ -83,8 +87,10 @@ export function tokenGetter() {
       MemberEditResolver,
       BookingListResolver,
       BookingListForUserResolver,
+      BookingEditResolver,
       PreventUnsavedChanges,
-      PreventBookingFormUnsavedChanges
+      PreventBookingFormUnsavedChanges,
+      DatePipe
    ],
    bootstrap: [
       AppComponent

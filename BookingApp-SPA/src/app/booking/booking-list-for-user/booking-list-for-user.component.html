@@ -8,8 +8,10 @@
           <h5 class="card-title">When: {{booking.when | date}}</h5>
           <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
           <p class="card-text">Status: {{booking.status}}</p>
-          <a href="#" class="btn btn-primary">Edit</a>
+
+          <a [routerLink]="['/booking/edit/', booking.id]" class="btn btn-primary">Edit</a>
           <a href="#" class="btn btn-primary">Delete</a>
+
         </div>
         <div class="card-footer text-muted">
           {{booking.dateAdded | timeAgo}}
