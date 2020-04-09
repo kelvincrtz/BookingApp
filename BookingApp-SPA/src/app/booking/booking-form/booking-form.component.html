@@ -7,11 +7,16 @@
       <hr>
           <div class="form-group">
             <input type="text" bsDatepicker [bsConfig]="bsConfig"
-            [ngClass]="{'is-invalid': bookingForm.get('when').errors && bookingForm.get('when').touched}" 
+            [ngClass]="{'is-invalid': bookingForm.get('when').errors && bookingForm.get('when').touched
+                || bookingForm.get('when').touched && bookingForm.hasError('errordate')}" 
             class="form-control" formControlName="when" placeholder="When">
             <div class="invalid-feedback" 
               *ngIf="bookingForm.get('when').hasError('required') && bookingForm.get('when').touched">
               Please choose a date
+            </div>
+            <div class="invalid-feedback"
+              *ngIf="bookingForm.get('when').touched && bookingForm.hasError('errordate')">
+              Please select a valid date
             </div>
           </div>
     
