@@ -5,19 +5,16 @@
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/members']">Members</a>
+        <a class="nav-link" [routerLink]="['/members']">MembersAdminView</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/messages']">Messages</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/bookings']">Bookings</a>
+        <a class="nav-link" [routerLink]="['/bookings']">BookingsAdminView</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/bookingrequest']">Make a booking</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/bookingsforuser']">Your booking</a>
       </li>
     </ul>
   

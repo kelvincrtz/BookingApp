@@ -1,5 +1,19 @@
-  <div class="row">
-    <div *ngFor="let booking of bookings" class="col-lg-2 col-md-3 col sm-6">
-        {{ booking.location}}
+  <div class="slider container">
+    <div *ngFor="let booking of bookings">
+      <div class="card text-center mb-3 mt-3">
+        <div class="card-header">
+          Location at {{booking.location}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">When: {{booking.when | date}}</h5>
+          <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+          <p class="card-text">Status: {{booking.status}}</p>
+          <a href="#" class="btn btn-primary">Edit</a>
+          <a href="#" class="btn btn-primary">Delete</a>
+        </div>
+        <div class="card-footer text-muted">
+          {{booking.dateAdded | timeAgo}}
+        </div>
+      </div>
     </div>
   </div>

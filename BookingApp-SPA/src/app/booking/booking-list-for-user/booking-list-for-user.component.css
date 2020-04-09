@@ -1,0 +1,4 @@
+.slider { 
+    overflow-y: scroll;
+    height: 600px;
+}

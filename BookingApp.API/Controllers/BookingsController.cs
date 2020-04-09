@@ -57,7 +57,7 @@ namespace BookingApp.API.Controllers
         {
             var bookings = await _repo.GetBookingsForUser(userId);
 
-            var bookingsToReturn = _mapper.Map<IEnumerable<BookingForListDto>>(bookings);
+            var bookingsToReturn = _mapper.Map<IEnumerable<BookingForDetailedDto>>(bookings);
 
             return Ok(bookingsToReturn);
         }

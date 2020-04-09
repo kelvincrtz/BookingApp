@@ -21,11 +21,15 @@
           </div>
           <div>
             <strong>Last Active:</strong>
-            <p>{{user.lastActive}}</p>
+            <p>{{user.lastActive | timeAgo }}</p>
           </div>
           <div>
             <strong>Member since:</strong>
-            <p>{{user.created}}</p>
+            <p>{{user.created | date }}</p>
+          </div>
+          <div>
+            <strong>Total number of booking request:</strong>
+            <p>{{user.bookings.length}}</p>
           </div>
           <button class="btn btn-success btn-block">Message</button>
           <button class="btn btn-warning btn-block">Book</button>
@@ -33,10 +37,10 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <div class="tab-panel">
-        <tabset>
+      <div class="card tab-panel">
+        <tabset class="card-body">
           <tab heading="Bookings">
-            <app-booking-list-for-user></app-booking-list-for-user>
+            <app-booking-list-for-user [userId]="user.id"></app-booking-list-for-user>
           </tab>
           <tab heading="Messages">
             <h6>Messages</h6>

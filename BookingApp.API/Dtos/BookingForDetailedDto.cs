@@ -10,5 +10,6 @@ namespace BookingApp.API.Dtos
         public DateTime FromTime { get; set; }
         public DateTime ToTime { get; set; }
         public string Location { get; set; }
+        public DateTime DateAdded { get; set; }
     }
 }
