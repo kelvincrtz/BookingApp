@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookingApp.API.Controllers
 {
-    // [ServiceFilter(typeof(LogUserActivity))]
+    // [ServiceFilter(typeof(LogUserActivity))] TO BE CONTINUED
     [Authorize]
     [Route("api/users/{userId}/[controller]")]
     [ApiController]
@@ -46,6 +46,16 @@ namespace BookingApp.API.Controllers
         {
 
             var bookings = await _repo.GetBookings();
+
+            var bookingsToReturn = _mapper.Map<IEnumerable<BookingForListDto>>(bookings);
+
+            return Ok(bookingsToReturn);
+        }
+
+        [HttpGet("thread")]
+        public async Task<IActionResult> GetBookingsForUser(int userId)
+        {
+            var bookings = await _repo.GetBookingsForUser(userId);
 
             var bookingsToReturn = _mapper.Map<IEnumerable<BookingForListDto>>(bookings);
 

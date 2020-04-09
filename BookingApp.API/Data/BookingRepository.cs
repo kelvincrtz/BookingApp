@@ -35,16 +35,9 @@ namespace BookingApp.API.Data
             return await _context.Bookings.ToListAsync();
         }
 
-        public Task<IEnumerable<Booking>> GetBookingsForUser(int id)
+        public async Task<IEnumerable<Booking>> GetBookingsForUser(int id)
         {
-            // TO BE CONTINUED SECTION
-            var bookings = _context.Bookings.AsQueryable();
-
-            bookings = bookings.Where(u => u.UserId == id);
-
-            bookings = bookings.OrderByDescending(d => d.DateAdded);
-
-            return null;
+            return await _context.Bookings.Where(u => u.UserId == id).OrderByDescending(d => d.DateAdded).ToListAsync();
         }
 
         public async Task<User> GetUser(int id)

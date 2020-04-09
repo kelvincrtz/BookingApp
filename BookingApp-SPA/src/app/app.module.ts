@@ -24,13 +24,14 @@ import { MemberListResolver } from './_resolvers/member-list-resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit-resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
-import { UserBookingsComponent } from './booking/user-bookings/user-bookings.component';
 import { UserService } from './_services/user.service';
 import { BookingService } from './_services/booking.service';
 import { BookingListResolver } from './_resolvers/booking-list-resolver';
 import { BookingListComponent } from './booking/booking-list/booking-list.component';
 import { BookingFormComponent } from './booking/booking-form/booking-form.component';
 import { PreventBookingFormUnsavedChanges } from './_guards/prevent-bookingform-unsaved-changes.guard';
+import { BookingListForUserComponent } from './booking/booking-list-for-user/booking-list-for-user.component';
+import { BookingListForUserResolver } from './_resolvers/booking-list-for-user-resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -47,9 +48,9 @@ export function tokenGetter() {
       MemberCardComponent,
       MemberDetailComponent,
       MemberEditComponent,
-      UserBookingsComponent,
       BookingListComponent,
-      BookingFormComponent
+      BookingFormComponent,
+      BookingListForUserComponent
    ],
    imports: [
       BrowserModule,
@@ -79,6 +80,7 @@ export function tokenGetter() {
       MemberListResolver,
       MemberEditResolver,
       BookingListResolver,
+      BookingListForUserResolver,
       PreventUnsavedChanges,
       PreventBookingFormUnsavedChanges
    ],

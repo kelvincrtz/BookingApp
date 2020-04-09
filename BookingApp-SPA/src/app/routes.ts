@@ -13,6 +13,8 @@ import { BookingListComponent } from './booking/booking-list/booking-list.compon
 import { BookingListResolver } from './_resolvers/booking-list-resolver';
 import { BookingFormComponent } from './booking/booking-form/booking-form.component';
 import { PreventBookingFormUnsavedChanges } from './_guards/prevent-bookingform-unsaved-changes.guard';
+import { BookingListForUserComponent } from './booking/booking-list-for-user/booking-list-for-user.component';
+import { BookingListForUserResolver } from './_resolvers/booking-list-for-user-resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -28,6 +30,7 @@ export const appRoutes: Routes = [
             { path: 'messages', component: MessagesComponent},
             { path: 'bookings', component: BookingListComponent, resolve: {bookings: BookingListResolver}},
             { path: 'bookingrequest', component: BookingFormComponent, resolve: null, canDeactivate: [PreventBookingFormUnsavedChanges]},
+            { path: 'bookingsforuser', component: BookingListForUserComponent, resolve: {bookings: BookingListForUserResolver}}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}
