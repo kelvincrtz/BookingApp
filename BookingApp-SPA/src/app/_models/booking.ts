@@ -7,5 +7,6 @@ export interface Booking {
     location: string;
     dateAdded: Date;
     userId: number;
+    isEdited?: boolean;
 }
 

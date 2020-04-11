@@ -11,6 +11,7 @@ namespace BookingApp.API.Models
         public DateTime ToTime { get; set; }
         public DateTime DateAdded { get; set; }
         public string Location { get; set; }
+        public bool IsEdited { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
     }

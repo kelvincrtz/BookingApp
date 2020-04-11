@@ -44,7 +44,6 @@ namespace BookingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBookings()
         {
-
             var bookings = await _repo.GetBookings();
 
             var bookingsToReturn = _mapper.Map<IEnumerable<BookingForListDto>>(bookings);
@@ -84,6 +83,45 @@ namespace BookingApp.API.Controllers
             }
             
             throw new Exception("Creating the booking failed on save");
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBooking(int userId, int id, BookingForUpdateDto bookingForUpdateDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var bookingFromRepo = await _repo.GetBooking(id);
+
+            if(bookingFromRepo == null)
+                return BadRequest();
+            
+            _mapper.Map(bookingForUpdateDto, bookingFromRepo); 
+            // Be careful here. Make sure no await, no task. Just classes or else mapping exception eventhough you have already did automapper mapping
+
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating booking {id} failed on save");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBooking(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var bookingFromRepo = await _repo.GetBooking(id);
+
+            if(bookingFromRepo == null)
+                return BadRequest();
+
+            _repo.Delete(bookingFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception("Error deleting the request");
         }
     }
 }

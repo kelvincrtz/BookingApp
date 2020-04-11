@@ -29,4 +29,12 @@ export class BookingService {
     return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings/thread');
   }
 
+  updateBooking(id: number, bookingId: number, book: Booking) {
+    return this.http.put<Booking>(this.baseUrl + 'users/' + id + '/bookings/' + bookingId, book);
+  }
+
+  deleteBooking(id: number, bookingId: number) {
+    return this.http.delete(this.baseUrl + 'users/' + id + '/bookings/' + bookingId);
+  }
+
 }

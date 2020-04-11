@@ -8,5 +8,6 @@ namespace BookingApp.API.Dtos
         public string Status { get; set; }
         public DateTime When { get; set; }
         public string Location { get; set; }
+        public bool IsEdited { get; set; }
     }
 }

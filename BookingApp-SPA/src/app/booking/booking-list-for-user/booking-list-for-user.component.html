@@ -5,13 +5,29 @@
           Location at {{booking.location}}
         </div>
         <div class="card-body">
-          <h5 class="card-title">When: {{booking.when | date}}</h5>
+          <div *ngIf="booking.isEdited">
+            <span class="badge badge-pill badge-info">Edited</span>
+          </div>
+          <h5 class="card-title">
+            <blockquote class="blockquote">
+              <p class="mb-0">When: {{booking.when | date}}</p>
+            </blockquote>
+          </h5>
           <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
           <p class="card-text">Status: {{booking.status}}</p>
 
-          <a [routerLink]="['/booking/edit/', booking.id]" class="btn btn-primary">Edit</a>
-          <a href="#" class="btn btn-primary">Delete</a>
-
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" [routerLink]="['/booking/edit/', booking.id]" class="btn btn-outline-success">Edit</button>
+            <button type="button" class="btn btn-outline-danger" (click)="openModal(template)">Delete</button>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Do you want to delete this request?</p>
+                <button type="button" class="btn btn-default" (click)="confirm(booking.id)" >Yes</button>
+                <button type="button" class="btn btn-primary" (click)="decline(booking.id)" >No</button>
+              </div>
+            </ng-template>   
+          </div>
+ 
         </div>
         <div class="card-footer text-muted">
           {{booking.dateAdded | timeAgo}}
