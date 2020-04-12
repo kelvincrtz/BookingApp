@@ -17,6 +17,7 @@ import { BookingListForUserComponent } from './booking/booking-list-for-user/boo
 import { BookingListForUserResolver } from './_resolvers/booking-list-for-user-resolver';
 import { BookingEditComponent } from './booking/booking-edit/booking-edit.component';
 import { BookingEditResolver } from './_resolvers/booking-edit-resolver';
+import { PreventEditBookingFormUnsavedChanges } from './_guards/prevent-editbookingform-unsaved-changes.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -31,9 +32,11 @@ export const appRoutes: Routes = [
                 canDeactivate: [PreventUnsavedChanges]},
             { path: 'messages', component: MessagesComponent},
             { path: 'bookings', component: BookingListComponent, resolve: {bookings: BookingListResolver}},
-            { path: 'bookingrequest', component: BookingFormComponent, resolve: null, canDeactivate: [PreventBookingFormUnsavedChanges]},
+            { path: 'bookingrequest', component: BookingFormComponent, resolve: null,
+                canDeactivate: [PreventBookingFormUnsavedChanges]},
             { path: 'bookingsforuser', component: BookingListForUserComponent, resolve: {bookings: BookingListForUserResolver}},
-            { path: 'booking/edit/:id', component: BookingEditComponent, resolve: {booking: BookingEditResolver}}
+            { path: 'booking/edit/:id', component: BookingEditComponent, resolve: {booking: BookingEditResolver},
+                canDeactivate: [PreventEditBookingFormUnsavedChanges]}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

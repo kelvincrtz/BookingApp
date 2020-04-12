@@ -1,11 +1,9 @@
 import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
-import { ActivatedRoute } from '@angular/router';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AuthService } from 'src/app/_services/auth.service';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-booking-list-for-user',
@@ -14,12 +12,11 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class BookingListForUserComponent implements OnInit {
   @Input() userId: any;
-  authDecodeToken: any;
   bookings: Booking[];
   modalRef: BsModalRef;
   message: string;
 
-  constructor(private route: ActivatedRoute, private booking: BookingService, private alertify: AlertifyService,
+  constructor(private booking: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService, private authService: AuthService) { }
 
   ngOnInit() {
@@ -36,7 +33,6 @@ export class BookingListForUserComponent implements OnInit {
   loadBookingsForUser() {
     this.booking.getBookingsForUser(this.userId).subscribe(bookings => {
       this.bookings = bookings;
-      this.authDecodeToken = this.authService.decodedToken.nameid;
     }, error => {
         this.alertify.error(error);
     });
