@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
@@ -18,6 +18,7 @@ export class BookingEditComponent implements OnInit {
   bookingForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
   bookingFromRepoId: any;
+  @Output() cancelRegister = new EventEmitter();
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -71,7 +72,7 @@ export class BookingEditComponent implements OnInit {
   }
 
   cancel() {
-
+    this.router.navigate(['/members/', this.authService.decodedToken.nameid]);
   }
 
 }

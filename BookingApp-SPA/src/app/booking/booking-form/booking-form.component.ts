@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
@@ -59,5 +59,6 @@ export class BookingFormComponent implements OnInit {
   }
 
   cancel() {
+    this.router.navigate(['/members/', this.authService.decodedToken.nameid]);
   }
 }
