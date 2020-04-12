@@ -32,7 +32,7 @@
             <p>{{user.bookings.length}}</p>
           </div>
           <button class="btn btn-success btn-block">Message</button>
-          <button class="btn btn-warning btn-block">Book</button>
+          <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/bookingrequest']">Make a Booking</button>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="card tab-panel">
         <tabset class="card-body">
           <tab heading="Bookings">
-            <app-booking-list-for-user [userId]="user.id"></app-booking-list-for-user>
+            <app-booking-list-for-user [userId]="user.id" [authDecodeToken]="authDecodeToken"></app-booking-list-for-user>
           </tab>
           <tab heading="Messages">
             <h6>Messages</h6>

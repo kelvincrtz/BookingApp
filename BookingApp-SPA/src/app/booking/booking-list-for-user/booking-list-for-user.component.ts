@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class BookingListForUserComponent implements OnInit {
   @Input() userId: any;
+  @Input() authDecodeToken: any;
   bookings: Booking[];
   modalRef: BsModalRef;
   message: string;

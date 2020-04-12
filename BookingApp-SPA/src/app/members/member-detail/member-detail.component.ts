@@ -3,6 +3,7 @@ import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -11,13 +12,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MemberDetailComponent implements OnInit {
   user: User;
+  authDecodeToken: any;
 
-  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
+
+    this.authDecodeToken = this.authService.decodedToken.nameid;
   }
 
   loadUser() {
@@ -27,5 +32,4 @@ export class MemberDetailComponent implements OnInit {
       this.alertify.error(error);
     });
   }
-
 }
