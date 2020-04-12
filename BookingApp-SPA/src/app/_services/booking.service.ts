@@ -33,8 +33,8 @@ export class BookingService {
     return this.http.put<Booking>(this.baseUrl + 'users/' + id + '/bookings/' + bookingId, book);
   }
 
-  deleteBooking(id: number, bookingId: number) {
-    return this.http.delete(this.baseUrl + 'users/' + id + '/bookings/' + bookingId);
+  deleteBooking(userId: number, id: number) {
+    return this.http.delete(this.baseUrl + 'users/' + userId + '/bookings/' + id);
   }
 
 }

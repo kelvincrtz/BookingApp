@@ -93,8 +93,11 @@ namespace BookingApp.API.Controllers
 
             var bookingFromRepo = await _repo.GetBooking(id);
 
-            if(bookingFromRepo == null)
+            if (bookingFromRepo == null)
                 return BadRequest();
+
+            if (bookingFromRepo.UserId != userId)
+                return Unauthorized();
             
             _mapper.Map(bookingForUpdateDto, bookingFromRepo); 
             // Be careful here. Make sure no await, no task. Just classes or else mapping exception eventhough you have already did automapper mapping
@@ -113,10 +116,14 @@ namespace BookingApp.API.Controllers
 
             var bookingFromRepo = await _repo.GetBooking(id);
 
-            if(bookingFromRepo == null)
+            if (bookingFromRepo == null)
                 return BadRequest();
 
-            _repo.Delete(bookingFromRepo);
+            if (bookingFromRepo.UserId.Equals(userId)) {
+                _repo.Delete(bookingFromRepo);
+            } else {
+                return Unauthorized();
+            }
 
             if (await _repo.SaveAll())
                 return NoContent();

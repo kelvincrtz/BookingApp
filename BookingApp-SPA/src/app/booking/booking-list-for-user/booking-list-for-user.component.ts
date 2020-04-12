@@ -5,6 +5,7 @@ import { BookingService } from 'src/app/_services/booking.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AuthService } from 'src/app/_services/auth.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-booking-list-for-user',
@@ -13,6 +14,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class BookingListForUserComponent implements OnInit {
   @Input() userId: any;
+  authDecodeToken: any;
   bookings: Booking[];
   modalRef: BsModalRef;
   message: string;
@@ -23,6 +25,7 @@ export class BookingListForUserComponent implements OnInit {
   ngOnInit() {
 
     this.loadBookingsForUser();
+
     /*
     this.route.data.subscribe(data => {
       this.bookings = data.bookings;
@@ -33,6 +36,7 @@ export class BookingListForUserComponent implements OnInit {
   loadBookingsForUser() {
     this.booking.getBookingsForUser(this.userId).subscribe(bookings => {
       this.bookings = bookings;
+      this.authDecodeToken = this.authService.decodedToken.nameid;
     }, error => {
         this.alertify.error(error);
     });
@@ -41,6 +45,7 @@ export class BookingListForUserComponent implements OnInit {
   deleteBooking(id: number) {
     this.booking.deleteBooking(this.authService.decodedToken.nameid, id).subscribe(() => {
       this.bookings.splice(this.bookings.findIndex(b => b.id === id), 1);
+      this.alertify.success('Booking has been deleted');
       }, error => {
         this.alertify.error('Failed to delete booking');
       });
@@ -53,7 +58,6 @@ export class BookingListForUserComponent implements OnInit {
   confirm(id: number): void {
     this.deleteBooking(id);
     this.modalRef.hide();
-    this.alertify.success('Booking has been deleted');
   }
 
   decline(id: number): void {
