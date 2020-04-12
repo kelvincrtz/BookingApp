@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BookingApp.API.Data;
 using BookingApp.API.Dtos;
+using BookingApp.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]

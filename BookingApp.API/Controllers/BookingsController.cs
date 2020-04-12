@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookingApp.API.Controllers
 {
-    // [ServiceFilter(typeof(LogUserActivity))] TO BE CONTINUED
     [Authorize]
     [Route("api/users/{userId}/[controller]")]
     [ApiController]
