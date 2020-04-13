@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container">
 
-    <a class="navbar-brand" [routerLink]="['/home']">BookingApp</a>
+    <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']">BookingApp</a>
+    <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['members', authService.decodedToken.nameid]">BookingApp</a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
@@ -20,7 +21,8 @@
         Welcome {{authService.decodedToken.unique_name | titlecase}}
       </a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item" [routerLink]="['/member/edit']"><i class="fa fa-user"></i> Edit Profile</a>
+        <a class="dropdown-item" [routerLink]="['members', authService.decodedToken.nameid]" routerLinkActive="router-link-active" ><i class="fa fa-address-card"></i> View Profile</a>
+        <a class="dropdown-item" [routerLink]="['/member/edit']"><i class="fa fa-edit"></i> Edit Profile</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
       </div>
