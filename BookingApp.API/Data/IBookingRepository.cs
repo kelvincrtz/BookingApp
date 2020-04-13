@@ -12,7 +12,7 @@ namespace BookingApp.API.Data
          Task<bool> SaveAll();
          Task<PagedList<User>> GetUsers(UserParams userParams);
          Task<User> GetUser(int id);
-         Task<IEnumerable<Booking>> GetBookings();
+         Task<PagedList<Booking>> GetBookings(BookingParams bookingParams);
          Task<Booking> GetBooking(int id);
          Task<IEnumerable<Booking>> GetBookingsForUser(int id);
     }

@@ -31,9 +31,11 @@ namespace BookingApp.API.Data
             return await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
         }
 
-        public async Task<IEnumerable<Booking>> GetBookings()
+        public async Task<PagedList<Booking>> GetBookings(BookingParams bookingParams)
         {
-            return await _context.Bookings.ToListAsync();
+            var bookings = _context.Bookings.Include(u => u.User).AsQueryable();
+
+            return await PagedList<Booking>.CreateAsync(bookings, bookingParams.PageNumber, bookingParams.PageSize);
         }
 
         public async Task<IEnumerable<Booking>> GetBookingsForUser(int id)

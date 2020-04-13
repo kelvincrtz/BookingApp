@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Booking } from '../_models/booking';
 import { Observable } from 'rxjs';
+import { PaginatedResult } from '../_models/pagination';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,27 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-  getBookings(id: number): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings');
+  getBookings(id: number, page?, itemsPerPage?): Observable<PaginatedResult<Booking[]>> {
+    const paginatedResult: PaginatedResult<Booking[]> = new PaginatedResult<Booking[]>();
+
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+
+    // return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings');
+    return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings', { observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
   }
 
   getBooking(id: number, bookingId: number): Observable<Booking> {

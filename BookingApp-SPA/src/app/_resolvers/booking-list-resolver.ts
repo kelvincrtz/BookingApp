@@ -9,12 +9,14 @@ import { AuthService } from '../_services/auth.service';
 
 @Injectable()
 export class BookingListResolver implements Resolve<Booking[]> {
+    pageNumber = 1;
+    pageSize = 5;
 
     constructor(private bookingService: BookingService, private router: Router, private alertify: AlertifyService,
                 private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Booking[]> {
-        return this.bookingService.getBookings(this.authService.decodedToken.nameid).pipe(
+        return this.bookingService.getBookings(this.authService.decodedToken.nameid, this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving bookings. ' + error);
                 this.router.navigate(['/home']);

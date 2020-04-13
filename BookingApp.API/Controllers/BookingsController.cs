@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BookingApp.API.Data;
 using BookingApp.API.Dtos;
+using BookingApp.API.Helpers;
 using BookingApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,11 +42,13 @@ namespace BookingApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetBookings()
+        public async Task<IActionResult> GetBookings([FromQuery]BookingParams bookingParams)
         {
-            var bookings = await _repo.GetBookings();
+            var bookings = await _repo.GetBookings(bookingParams);
 
             var bookingsToReturn = _mapper.Map<IEnumerable<BookingForListDto>>(bookings);
+
+            Response.AddPagination(bookings.CurrentPage, bookings.PageSize, bookings.TotalCount, bookings.TotalPages);
 
             return Ok(bookingsToReturn);
         }
