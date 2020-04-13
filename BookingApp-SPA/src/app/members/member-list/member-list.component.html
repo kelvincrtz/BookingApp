@@ -1,4 +1,43 @@
-<div class="container mt-5">
+<div class="container alert alert-primary mt-3" role="alert">
+  <h4 class="alert-heading">Welcome Admin</h4>
+  <p>You have a total of <strong class="text-white bg-dark">{{pagination.totalItems}}</strong> registered users in the system</p>
+  <hr>
+  <div class="mb-0">Click the
+    <div class="badge badge-success text-wrap" style="width: 4rem;">
+      Profile
+    </div>
+    button to view the users detailed information and click the 
+    <div class="badge badge-warning text-wrap" style="width: 5rem;">
+      Message
+    </div>
+    button to send a message to a user 
+  </div>
+  <div class="mb-0 mt-1">Toggle the buttons
+    <div class="badge badge-info text-wrap" style="width: 7rem;">
+      Last Active
+    </div>
+    and
+    <div class="badge badge-info text-wrap" style="width: 8rem;">
+      Newest Member
+    </div>
+    to sort the users
+  </div>
+
+</div>
+
+<div class="container mt-3">
+  <form>
+    <div class="d-flex justify-content-center">
+      <div class="btn-group">
+        <button type="button" name="orderBy" class="btn btn-info" 
+          [(ngModel)]="userParams.orderBy" (click)="loadUsers()" btnRadio="lastActive">Last Active</button>
+        <button type="button" name="orderBy" class="btn btn-info" 
+          [(ngModel)]="userParams.orderBy" (click)="loadUsers()" btnRadio="created">Newest Members</button>
+      </div>
+    </div>
+  </form>
+  <br>
+
   <div class="row">
     <div *ngFor="let user of users" class="col-lg-2 col-md-3 col sm-6">
       <app-member-card [user]="user"></app-member-card>

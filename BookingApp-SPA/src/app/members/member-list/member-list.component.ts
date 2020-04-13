@@ -13,6 +13,7 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 export class MemberListComponent implements OnInit {
   users: User[];
   pagination: Pagination;
+  userParams: any = {};
 
   constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
@@ -21,6 +22,8 @@ export class MemberListComponent implements OnInit {
       this.users = data.users.result;
       this.pagination = data.users.pagination;
     });
+
+    this.userParams.orderBy = 'lastActive';
   }
 
   pageChanged(event: any): void {
@@ -29,7 +32,7 @@ export class MemberListComponent implements OnInit {
   }
 
   loadUsers(currentPage: any) {
-    this.userService.getUsers(currentPage, this.pagination.itemsPerPage)
+    this.userService.getUsers(currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
       this.pagination = res.pagination;

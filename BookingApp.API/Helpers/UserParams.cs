@@ -10,5 +10,7 @@ namespace BookingApp.API.Helpers
             get { return pageSize; }
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value ; }
         }
+
+        public string OrderBy { get; set; }
     }
 }
