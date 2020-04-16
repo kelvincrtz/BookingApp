@@ -16,6 +16,8 @@ export class BookingEditStatusComponent implements OnInit {
   booking: Booking;
   bookingStatus: Booking;
   bookingForm: FormGroup;
+  messageForAdmin: any;
+  requestErrorMessage; any;
 
   @ViewChild('template', {static: true}) template: TemplateRef<any>;
   modalRef: BsModalRef;
@@ -37,7 +39,9 @@ export class BookingEditStatusComponent implements OnInit {
     console.log(this.bookingForm.value);
 
     if (this.bookingForm.get('status').value === this.booking.status) {
-        return this.modalService.show(this.template, {class: 'modal-sm'});
+        this.messageForAdmin = 'This request has already been ' + this.bookingForm.get('status').value.toLowerCase() + ' by you.';
+        this.modalRef = this.modalService.show(this.template, {class: 'modal-sm'});
+        return this.modalRef;
     }
 
     if (this.bookingForm.valid) {
