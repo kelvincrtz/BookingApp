@@ -1,0 +1,63 @@
+<h4 class="container alert alert-dark mt-3" role="alert">
+    <h4 class="alert-heading">Bookings to approve or decline</h4>
+    <p>You have a total of <strong class="text-white bg-dark"></strong> bookings in the system</p>
+    <div><strong class="text-white bg-dark"></strong> pending bookings to be reviewed and</div>
+    <div><strong class="text-white bg-dark"></strong> approved bookings to be confirmed</div>
+    <hr>
+    <div class="mb-0">Click the
+      <div class="badge badge-success text-wrap" style="width: 7rem;">
+        View Request
+      </div>
+      to view the booking request in detail
+    </div>
+    <div class="mb-0 mt-1">Toggle the buttons
+      <div class="badge badge-info text-wrap" style="width: 7rem;">
+        Last Active
+      </div>
+      and
+      <div class="badge badge-info text-wrap" style="width: 8rem;">
+        Newest Member
+      </div>
+      to sort the users
+    </div>
+  
+  </h4>
+
+  <div class="container">
+      <div class="d-flex justify-content-center">
+        <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+              <h5 class="card-title">Dark card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+
+              <form class="" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
+
+                <div class="justify-content-center">
+                  <div class="col-12">
+              
+                    <h2 class="text-center text-primary">Edit booking request</h2>
+                    <hr>
+
+                        <div class="form-group">
+                            <label for="inputState">Select:</label>
+                            <select id="inputState" formControlName="status" class="form-control">
+                              <option selected value="Approved">Approve</option>
+                              <option value="Declined">Decline</option>
+                            </select>
+                        </div>
+                      
+                        <div class="form-group text-center">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid">Submit Request</button>
+                            <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+  </div>

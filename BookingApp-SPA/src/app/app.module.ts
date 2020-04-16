@@ -39,6 +39,8 @@ import { BookingEditComponent } from './booking/booking-edit/booking-edit.compon
 import { BookingEditResolver } from './_resolvers/booking-edit-resolver';
 import { PreventEditBookingFormUnsavedChanges } from './_guards/prevent-editbookingform-unsaved-changes.guard';
 import { BookingCardComponent } from './booking/booking-card/booking-card.component';
+import { BookingEditStatusResolver } from './_resolvers/booking-edit-status-resolver';
+import { BookingEditStatusComponent } from './booking/booking-edit-status/booking-edit-status.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -60,7 +62,8 @@ export function tokenGetter() {
       BookingListForUserComponent,
       BookingEditComponent,
       TimeAgoPipe,
-      BookingCardComponent
+      BookingCardComponent,
+      BookingEditStatusComponent
    ],
    imports: [
       BrowserModule,
@@ -95,6 +98,7 @@ export function tokenGetter() {
       BookingListResolver,
       BookingListForUserResolver,
       BookingEditResolver,
+      BookingEditStatusResolver,
       PreventUnsavedChanges,
       PreventBookingFormUnsavedChanges,
       PreventEditBookingFormUnsavedChanges,

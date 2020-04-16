@@ -110,6 +110,29 @@ namespace BookingApp.API.Controllers
             throw new Exception($"Updating booking {id} failed on save");
         }
 
+        [HttpPut("status/{id}")]
+        public async Task<IActionResult> UpdateBookingStatus(int userId, int id, BookingForUpdateStatusDto bookingForUpdateStatusDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var bookingFromRepo = await _repo.GetBooking(id);
+
+            if (bookingFromRepo == null)
+                return BadRequest();
+
+            // Check if Admin ID is the one updating the request. Implement this after Identity and Role Management
+                 
+            
+            _mapper.Map(bookingForUpdateStatusDto, bookingFromRepo); 
+            // Be careful here. Make sure no await, no task. Just classes or else mapping exception eventhough you have already did automapper mapping
+
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating booking status {id} failed on save");
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBooking(int userId, int id)
         {

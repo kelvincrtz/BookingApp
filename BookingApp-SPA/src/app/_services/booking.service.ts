@@ -25,17 +25,16 @@ export class BookingService {
       params = params.append('pageSize', itemsPerPage);
     }
 
-    // return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings');
     return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings', { observe: 'response', params})
-    .pipe(
-      map(response => {
-        paginatedResult.result = response.body;
-        if (response.headers.get('Pagination') != null) {
-          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-        }
-        return paginatedResult;
-      })
-    );
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        })
+      );
   }
 
   getBooking(id: number, bookingId: number): Observable<Booking> {
@@ -56,6 +55,10 @@ export class BookingService {
 
   deleteBooking(userId: number, id: number) {
     return this.http.delete(this.baseUrl + 'users/' + userId + '/bookings/' + id);
+  }
+
+  updateBookingStatus(id: number, bookingId: number, book: Booking) {
+    return this.http.put<Booking>(this.baseUrl + 'users/' + id + '/bookings/status/' + bookingId, book);
   }
 
 }
