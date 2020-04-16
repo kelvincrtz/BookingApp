@@ -1,0 +1,37 @@
+<div class="card border-success mt-2 h-100">
+  <div class="">
+
+    <div class="card-header bg-transparent border-success text-muted" *ngIf="booking.status=== 'Accepted'">Status: {{booking.status}}</div>
+    <div class="card-header bg-transparent border-info text-muted" *ngIf="booking.status=== 'Request Sent'">Status: {{booking.status}}</div>
+    <div class="card-header bg-transparent border-danger text-muted" *ngIf="booking.status=== 'Denied'">Status: {{booking.status}}</div>
+    <!-- Add Expired Condition here-->
+
+    <div class="card-body">
+      
+      <!-- If Booking is Accepted-->
+      <div class="text-sucess" *ngIf="booking.status=== 'Accepted'">
+        <h5 class="card-title">Location: {{booking.location}}</h5>
+        <p class="card-text">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+        <p class="card-text">When: {{booking.when | date}}</p>
+      </div>
+
+      <!-- If Booking at a request state-->
+      <div class="text-info" *ngIf="booking.status === 'Request Sent'">
+        <h5 class="card-title">Location: {{booking.location}}</h5>
+        <p class="card-text">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+        <p class="card-text">When: {{booking.when | date}}</p>
+      </div>
+
+      <!-- If Booking at a not accepted -->
+      <div class="text-danger" *ngIf="booking.status === 'Denied'">
+        <h5 class="card-title">Location: {{booking.location}}</h5>
+        <p class="card-text">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+        <p class="card-text">When: {{booking.when | date}}</p>
+      </div>
+
+    </div>
+    <div class="card-footer bg-transparent border-success text-muted" *ngIf="booking.status=== 'Accepted'">{{booking.userId}}</div>
+    <div class="card-footer bg-transparent border-success text-muted" *ngIf="booking.status=== 'Request Sent'">{{booking.userId}}</div>
+    <div class="card-footer bg-transparent border-success text-muted" *ngIf="booking.status=== 'Denied'">{{booking.userId}}</div>
+  </div>
+</div>
