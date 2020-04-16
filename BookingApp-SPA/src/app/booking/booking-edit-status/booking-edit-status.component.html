@@ -26,20 +26,15 @@
   <div class="container">
       <div class="d-flex justify-content-center">
         <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
-            <div class="card-header">Header</div>
+            <div class="card-header">Location at: {{booking.location}}</div>
             <div class="card-body">
-              <h5 class="card-title">Dark card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
+              <h5 class="card-title">When: {{booking.when | date}}</h5>
+              <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
 
               <form class="" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
-
                 <div class="justify-content-center">
                   <div class="col-12">
-              
-                    <h2 class="text-center text-primary">Edit booking request</h2>
                     <hr>
-
                         <div class="form-group">
                             <label for="inputState">Select:</label>
                             <select id="inputState" formControlName="status" class="form-control">
@@ -61,3 +56,16 @@
           </div>
       </div>
   </div>
+
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      This is a modal.
+    </div>
+  </ng-template>

@@ -78,6 +78,7 @@ export function tokenGetter() {
       ModalModule.forRoot(),
       PaginationModule.forRoot(),
       ButtonsModule.forRoot(),
+      ModalModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { BsModalService, BsModalRef, TabHeadingDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-booking-edit-status',
@@ -16,8 +17,11 @@ export class BookingEditStatusComponent implements OnInit {
   bookingStatus: Booking;
   bookingForm: FormGroup;
 
+  @ViewChild('template', {static: true}) template: TemplateRef<any>;
+  modalRef: BsModalRef;
+
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private router: Router,
-              private bookingService: BookingService, private authService: AuthService) { }
+              private bookingService: BookingService, private authService: AuthService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -31,6 +35,11 @@ export class BookingEditStatusComponent implements OnInit {
 
   updateBookingStatusRequest() {
     console.log(this.bookingForm.value);
+
+    if (this.bookingForm.get('status').value === this.booking.status) {
+        return this.modalService.show(this.template, {class: 'modal-sm'});
+    }
+
     if (this.bookingForm.valid) {
       this.bookingStatus = Object.assign({}, this.bookingForm.value);
       this.bookingService.updateBookingStatus(this.authService.decodedToken.nameid, this.booking.id, this.bookingStatus).subscribe(next => {
