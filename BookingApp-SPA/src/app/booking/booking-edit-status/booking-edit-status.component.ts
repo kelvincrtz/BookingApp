@@ -17,7 +17,7 @@ export class BookingEditStatusComponent implements OnInit {
   bookingStatus: Booking;
   bookingForm: FormGroup;
   messageForAdmin: any;
-  requestErrorMessage; any;
+  authDecodeName: any;
 
   @ViewChild('template', {static: true}) template: TemplateRef<any>;
   modalRef: BsModalRef;
@@ -33,13 +33,15 @@ export class BookingEditStatusComponent implements OnInit {
     this.bookingForm = new FormGroup({
       status: new FormControl('', Validators.required),
     });
+
+    this.authDecodeName = this.authService.decodedToken.unique_name;
   }
 
   updateBookingStatusRequest() {
     console.log(this.bookingForm.value);
 
     if (this.bookingForm.get('status').value === this.booking.status) {
-        this.messageForAdmin = 'This request has already been ' + this.bookingForm.get('status').value.toLowerCase() + ' by you.';
+        this.messageForAdmin = 'This request has already been ' + this.bookingForm.get('status').value.toLowerCase() + ' by you!';
         this.modalRef = this.modalService.show(this.template, {class: 'modal-sm'});
         return this.modalRef;
     }
