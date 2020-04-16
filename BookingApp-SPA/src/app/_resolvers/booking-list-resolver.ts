@@ -10,7 +10,7 @@ import { AuthService } from '../_services/auth.service';
 @Injectable()
 export class BookingListResolver implements Resolve<Booking[]> {
     pageNumber = 1;
-    pageSize = 5;
+    pageSize = 8;
 
     constructor(private bookingService: BookingService, private router: Router, private alertify: AlertifyService,
                 private authService: AuthService) {}
