@@ -29,6 +29,12 @@ export class BookingService {
       if (bookingParams.status != null) {
         params = params.append('status', bookingParams.status);
       }
+      if (bookingParams.eventstoday != null) {
+        params = params.append('eventstoday', bookingParams.eventstoday);
+      }
+      if (bookingParams.eventsthismonth != null) {
+        params = params.append('eventsthismonth', bookingParams.eventsthismonth);
+      }
     }
 
     return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings', { observe: 'response', params})

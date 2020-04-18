@@ -57,4 +57,22 @@ export class BookingListComponent implements OnInit {
         this.alertify.error(error);
       });
   }
+
+  loadMonth() {
+    this.bookingParams.eventstoday = false;
+    this.bookingParams.eventsthismonth = true;
+    this.loadBookings();
+  }
+
+  loadToday() {
+    this.bookingParams.eventsthismonth = false;
+    this.bookingParams.eventstoday = true;
+    this.loadBookings();
+  }
+
+  loadAll() {
+    this.bookingParams.eventsthismonth = false;
+    this.bookingParams.eventstoday = false;
+    this.loadBookings();
+  }
 }
