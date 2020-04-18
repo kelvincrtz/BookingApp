@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { AuthService } from 'src/app/_services/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-booking-list',
@@ -13,7 +14,11 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class BookingListComponent implements OnInit {
   bookings: Booking[];
+  statusList = [{value: 'Approved', display: 'Approved'}, {value: 'Declined', display: 'Declined'}, {value: 'Request Sent',
+  display: 'Pending'}];
   pagination: Pagination;
+  bookingParams: any = {};
+  @ViewChild('form', {static: true}) form: NgForm;
 
   constructor(private bookingService: BookingService, private alertify: AlertifyService, private route: ActivatedRoute,
               private authService: AuthService) { }
@@ -27,11 +32,24 @@ export class BookingListComponent implements OnInit {
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadBookings(this.pagination.currentPage);
+    this.loadBookings();
   }
 
-  loadBookings(currentPage: any) {
-    this.bookingService.getBookings(this.authService.decodedToken.nameid, currentPage, this.pagination.itemsPerPage)
+  resetFilters() {
+    this.form.reset(this.bookings);
+    this.bookingService.getBookings(this.authService.decodedToken.nameid, this.pagination.currentPage,
+      this.pagination.itemsPerPage)
+     .subscribe((res: PaginatedResult<Booking[]>) => {
+     this.bookings = res.result;
+     this.pagination = res.pagination;
+     }, error => {
+       this.alertify.error(error);
+     });
+  }
+
+  loadBookings() {
+    this.bookingService.getBookings(this.authService.decodedToken.nameid, this.pagination.currentPage,
+       this.pagination.itemsPerPage, this.bookingParams)
       .subscribe((res: PaginatedResult<Booking[]>) => {
       this.bookings = res.result;
       this.pagination = res.pagination;

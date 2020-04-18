@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BookingApp.API.Helpers;
@@ -34,6 +36,22 @@ namespace BookingApp.API.Data
         public async Task<PagedList<Booking>> GetBookings(BookingParams bookingParams)
         {
             var bookings = _context.Bookings.Include(u => u.User).AsQueryable();
+
+            //Get the current month and Year 
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+
+            if (bookingParams.EventsThisMonth) {
+                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month);
+            }
+
+            if (bookingParams.EventsToday) {
+                bookings = bookings.Where(b => b.When == DateTime.Today);
+            }
+
+            if (bookingParams.Status!=null) {
+                bookings = bookings.Where(b => b.Status == bookingParams.Status);
+            }
 
             return await PagedList<Booking>.CreateAsync(bookings, bookingParams.PageNumber, bookingParams.PageSize);
         }

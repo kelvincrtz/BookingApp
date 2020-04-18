@@ -15,7 +15,7 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-  getBookings(id: number, page?, itemsPerPage?): Observable<PaginatedResult<Booking[]>> {
+  getBookings(id: number, page?, itemsPerPage?, bookingParams?): Observable<PaginatedResult<Booking[]>> {
     const paginatedResult: PaginatedResult<Booking[]> = new PaginatedResult<Booking[]>();
 
     let params = new HttpParams();
@@ -23,6 +23,12 @@ export class BookingService {
     if (page != null && itemsPerPage != null) {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
+    }
+
+    if (bookingParams != null) {
+      if (bookingParams.status != null) {
+        params = params.append('status', bookingParams.status);
+      }
     }
 
     return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings', { observe: 'response', params})
