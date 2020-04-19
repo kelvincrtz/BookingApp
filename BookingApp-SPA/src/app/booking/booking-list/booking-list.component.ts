@@ -85,4 +85,5 @@ export class BookingListComponent implements OnInit {
     this.bookingParams.all = true;
     this.loadBookings();
   }
+
 }
