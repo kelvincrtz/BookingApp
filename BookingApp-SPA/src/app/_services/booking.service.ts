@@ -35,6 +35,9 @@ export class BookingService {
       if (bookingParams.eventsthismonth != null) {
         params = params.append('eventsthismonth', bookingParams.eventsthismonth);
       }
+      if (bookingParams.orderBy != null) {
+        params = params.append('orderby', bookingParams.orderBy);
+      }
     }
 
     return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings', { observe: 'response', params})

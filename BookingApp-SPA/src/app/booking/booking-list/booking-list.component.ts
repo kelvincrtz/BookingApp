@@ -28,6 +28,8 @@ export class BookingListComponent implements OnInit {
       this.bookings = data.bookings.result;
       this.pagination = data.bookings.pagination;
     });
+
+    this.bookingParams.orderBy = 'dateadded';
   }
 
   pageChanged(event: any): void {
@@ -69,6 +71,7 @@ export class BookingListComponent implements OnInit {
     this.bookingParams.eventstoday = false;
     this.bookingParams.all = false;
     this.bookingParams.eventsthismonth = true;
+    this.pagination.currentPage = 1;
     this.loadBookings();
   }
 
@@ -76,6 +79,7 @@ export class BookingListComponent implements OnInit {
     this.bookingParams.eventsthismonth = false;
     this.bookingParams.all = false;
     this.bookingParams.eventstoday = true;
+    this.pagination.currentPage = 1;
     this.loadBookings();
   }
 
@@ -83,6 +87,12 @@ export class BookingListComponent implements OnInit {
     this.bookingParams.eventsthismonth = false;
     this.bookingParams.eventstoday = false;
     this.bookingParams.all = true;
+    this.pagination.currentPage = 1;
+    this.loadBookings();
+  }
+
+  loadOrderBy() {
+    this.pagination.currentPage = 1;
     this.loadBookings();
   }
 

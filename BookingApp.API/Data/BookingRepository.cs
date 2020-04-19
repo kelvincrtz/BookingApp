@@ -35,7 +35,7 @@ namespace BookingApp.API.Data
 
         public async Task<PagedList<Booking>> GetBookings(BookingParams bookingParams)
         {
-            var bookings = _context.Bookings.Include(u => u.User).AsQueryable();
+            var bookings = _context.Bookings.Include(u => u.User).OrderByDescending(b => b.DateAdded).AsQueryable();
 
             //Get the current month and Year 
             var month = DateTime.Now.Month;
@@ -52,6 +52,19 @@ namespace BookingApp.API.Data
 
             if (bookingParams.Status!=null) {
                 bookings = bookings.Where(b => b.Status == bookingParams.Status);
+            }
+
+            if (!string.IsNullOrEmpty(bookingParams.OrderBy))
+            {
+                switch (bookingParams.OrderBy)
+                {
+                    case "dateadded":
+                        bookings = bookings.OrderByDescending(b => b.DateAdded);
+                        break;
+                    default:
+                        bookings = bookings.OrderByDescending(b => b.When);
+                        break;
+                }
             }
 
             return await PagedList<Booking>.CreateAsync(bookings, bookingParams.PageNumber, bookingParams.PageSize);
