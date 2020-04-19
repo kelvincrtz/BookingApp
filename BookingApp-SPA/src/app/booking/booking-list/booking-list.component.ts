@@ -67,12 +67,14 @@ export class BookingListComponent implements OnInit {
 
   loadMonth() {
     this.bookingParams.eventstoday = false;
+    this.bookingParams.all = false;
     this.bookingParams.eventsthismonth = true;
     this.loadBookings();
   }
 
   loadToday() {
     this.bookingParams.eventsthismonth = false;
+    this.bookingParams.all = false;
     this.bookingParams.eventstoday = true;
     this.loadBookings();
   }
@@ -80,6 +82,7 @@ export class BookingListComponent implements OnInit {
   loadAll() {
     this.bookingParams.eventsthismonth = false;
     this.bookingParams.eventstoday = false;
+    this.bookingParams.all = true;
     this.loadBookings();
   }
 }

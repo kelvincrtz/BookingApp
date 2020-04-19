@@ -1,28 +1,13 @@
 <div class="container alert alert-primary mt-3" role="alert">
-  <h4 class="alert-heading">Booking system</h4>
+  <h4 class="alert-heading">Booking Query System</h4>
   <p>You have a total of <strong class="text-white bg-dark">{{pagination.totalItems}}</strong> bookings to review.</p>
-  
-  <!-- Implement this section soon -->
-  <div><strong class="text-white bg-dark"></strong> pending bookings to be reviewed and</div>
-  <div><strong class="text-white bg-dark"></strong> approved bookings to be confirmed</div>
-  <!-- Implement this section soon -->
 
   <hr>
   <div class="mb-0">Click the
-    <div class="badge badge-success text-wrap" style="width: 7rem;">
+    <div class="badge badge-info text-wrap" style="width: 7rem;">
       View Request
     </div>
     to view the booking request in detail
-  </div>
-  <div class="mb-0 mt-1">Toggle the buttons
-    <div class="badge badge-info text-wrap" style="width: 7rem;">
-      Last Active
-    </div>
-    and
-    <div class="badge badge-info text-wrap" style="width: 8rem;">
-      Newest Member
-    </div>
-    to sort the users
   </div>
 
   <div class="d-flex justify-content-center py-3">
@@ -34,7 +19,7 @@
             [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" btnRadio="eventstoday">Events Today</button>
           <button type="button" name="eventsthismonth" class="btn btn-info"
           [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" btnRadio="eventsthismonth">Events this Month</button>
-          <button type="button" name="eventstoday" class="btn btn-info"
+          <button type="button" name="eventstoday" class="btn btn-light text-dark"
             [(ngModel)]="bookingParams.eventstoday" (click)="loadAll()" btnRadio="eventstoday">All Events</button>
         </div>
 
@@ -47,8 +32,10 @@
           </select>
         </div>
 
-        <button type="submit" class="btn btn-danger ml-2">Apply Filters</button>
-        <button type="button" class="btn btn-warning ml-2" (click)="resetFilters()">Reset Filter</button>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-danger">Apply Filters</button>
+          <button type="button" class="btn btn-dark" (click)="resetFilters()">Reset Filter</button>
+        </div>
       </form>
   </div>
 
