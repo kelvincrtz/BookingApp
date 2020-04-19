@@ -37,6 +37,12 @@ export class BookingListComponent implements OnInit {
 
   resetFilters() {
     this.form.reset(this.bookings);
+    this.bookingParams.eventsthismonth = false;
+    this.bookingParams.eventstoday = false;
+    this.bookingParams.status = null;
+
+    this.pagination.currentPage = 1;
+
     this.bookingService.getBookings(this.authService.decodedToken.nameid, this.pagination.currentPage,
       this.pagination.itemsPerPage)
      .subscribe((res: PaginatedResult<Booking[]>) => {
@@ -45,6 +51,7 @@ export class BookingListComponent implements OnInit {
      }, error => {
        this.alertify.error(error);
      });
+
   }
 
   loadBookings() {
