@@ -35,3 +35,25 @@
       </div>
     </div>
   </div>
+
+
+<div class="row">
+  <div class="col"*ngFor="let booking of bookings">
+    <div class="card bg-success border-white font-weight-light mt-2 h-95">
+      <div>
+        <div class="card-header bg-transparent border-white text-white">Status: {{booking.status}}</div>
+    
+        <div class="card-body">
+          
+          <div class="text-white">
+            <h5 class="card-title text-capitalize">{{booking.location}}</h5>
+            <p class="card-text">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+            <p class="card-text">When: {{booking.when | date}}</p>
+          </div>
+    
+          <button class="btn btn-info btn-block my-2" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

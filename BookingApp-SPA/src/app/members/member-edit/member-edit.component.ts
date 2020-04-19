@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { User } from 'src/app/_models/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/_services/user.service';
@@ -22,7 +22,7 @@ export class MemberEditComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private userService: UserService,
-              private authService: AuthService) { }
+              private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -36,6 +36,8 @@ export class MemberEditComponent implements OnInit {
       this.editForm.reset(this.user);
     }, error => {
       this.alertify.error(error);
+    }, () => {
+        this.router.navigate(['/members/', this.user.id]);
     });
   }
 

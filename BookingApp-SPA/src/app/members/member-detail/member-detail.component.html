@@ -1,52 +1,47 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-6">
-      <div class="card">
+      <div class="card bg-primary text-white">
         <div class="card-body">
-          <div>
-            <strong>Name:</strong>
-            <p>{{user.fullName | titlecase}}</p>
+
+          <div class="jumbotron bg-primary">
+            <div class="container">
+              <h1 class="display-4">{{user.fullName | titlecase}}</h1>
+              <p class="lead text-white">Lives in {{user.city}}, {{user.country}}</p>
+              <p class="lead text-white">Age of {{user.age}}</p>
+              <p class="lead text-white">Contact number {{user.contactNumber}}</p>
+              <p class="lead text-white">Last active {{user.lastActive | timeAgo }}</p>
+              <p class="lead text-white">Member since {{user.created | date }}</p>
+              <p class="lead text-white">{{user.bookings.length}} total number of booking request</p>
+              <button class="btn btn-success btn-block">Message</button>
+              <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/bookingrequest']">Make a Booking</button>
+            </div>
           </div>
-          <div>
-            <strong>Location:</strong>
-            <p>{{user.city}}, {{user?.country}}</p>
-          </div>
-          <div>
-            <strong>Age:</strong>
-            <p>{{user.age}}</p>
-          </div>
-          <div>
-            <strong>Contact Number:</strong>
-            <p>{{user.contactNumber}}</p>
-          </div>
-          <div>
-            <strong>Last Active:</strong>
-            <p class="text-info">{{user.lastActive | timeAgo }}</p>
-          </div>
-          <div>
-            <strong>Member since:</strong>
-            <p>{{user.created | date }}</p>
-          </div>
-          <div>
-            <strong>Total number of booking request:</strong>
-            <p>{{user.bookings.length}}</p>
-          </div>
-          <button class="btn btn-success btn-block">Message</button>
-          <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/bookingrequest']">Make a Booking</button>
         </div>
       </div>
     </div>
+
     <div class="col-sm-6">
       <div class="card tab-panel">
         <tabset class="card-body">
-          <tab heading="Bookings">
-            <app-booking-list-for-user [userId]="user.id" [authDecodeToken]="authDecodeToken"></app-booking-list-for-user>
-          </tab>
           <tab heading="Messages">
             <h6>Messages</h6>
+          </tab>
+          <tab heading="Bookings">
+            <h6>Bookings</h6>
           </tab>
         </tabset>
       </div>
     </div>
+
+    
   </div>
+    <!--
+        <app-booking-list-for-user [userId]="user.id" [authDecodeToken]="authDecodeToken"></app-booking-list-for-user>
+     -->
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+        <app-booking-list-for-user [userId]="user.id" [authDecodeToken]="authDecodeToken"></app-booking-list-for-user>
+      </div>
+    </div>
 </div>
