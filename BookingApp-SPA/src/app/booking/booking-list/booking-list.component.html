@@ -1,10 +1,10 @@
 <div class="container alert alert-primary mt-3" role="alert">
   <h4 class="alert-heading">Booking Query System</h4>
-  <p>You have a total of <strong class="text-white bg-dark">{{pagination.totalItems}}</strong> bookings to review.</p>
+  <p>You have a total of <strong class="text-white bg-dark">{{pagination.totalItems}}</strong> bookings to review</p>
 
   <hr>
   <div class="mb-0">Click the
-    <div class="badge badge-info text-wrap" style="width: 7rem;">
+    <div class="badge badge-pill badge-info text-wrap" style="width: 7rem;">
       View Request
     </div>
     to view the booking request in detail
@@ -39,9 +39,9 @@
 
         <div class="col">
           <div class="btn-group float-right my-1">
-            <button type="button" name="orderBy" class="btn btn-info" 
+            <button type="button" name="orderBy" class="btn btn-info btn-sm" 
               [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
-            <button type="button" name="orderBy" class="btn btn-info"
+            <button type="button" name="orderBy" class="btn btn-info btn-sm"
               [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">Event Date Request</button>
           </div>
         </div> 
