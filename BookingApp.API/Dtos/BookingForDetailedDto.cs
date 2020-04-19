@@ -12,5 +12,6 @@ namespace BookingApp.API.Dtos
         public string Location { get; set; }
         public DateTime DateAdded { get; set; }
         public bool IsEdited { get; set; }
+        public int UserId { get; set; }
     }
 }

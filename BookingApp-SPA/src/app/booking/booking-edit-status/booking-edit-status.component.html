@@ -1,35 +1,28 @@
 <h4 class="container alert alert-dark mt-3 font-weight-normal" role="alert">
-    <h4 class="alert-heading">Bookings to approve or decline</h4>
-    <p>You have a total of <strong class="text-white bg-dark"></strong> bookings in the system</p>
-    <div><strong class="text-white bg-dark"></strong> pending bookings to be reviewed and</div>
-    <div><strong class="text-white bg-dark"></strong> approved bookings to be confirmed</div>
+    <h4 class="alert-heading">Approve or Decline Request</h4>
+    <p>You have a booking request from 
+      <button [routerLink]="['/members/', booking.userId]" class="btn btn-primary btn-sm">{{user?.fullName}}</button> 
+    to review</p>
     <hr>
-    <div class="mb-0">Click the
-      <div class="badge badge-success text-wrap" style="width: 7rem;">
-        View Request
-      </div>
-      to view the booking request in detail
+    Click
+    <div class="badge badge-success text-wrap" style="width: 3rem;">
+      Save
     </div>
-    <div class="mb-0 mt-1">Toggle the buttons
-      <div class="badge badge-info text-wrap" style="width: 7rem;">
-        Last Active
-      </div>
-      and
-      <div class="badge badge-info text-wrap" style="width: 8rem;">
-        Newest Member
-      </div>
-      to sort the users
+    to save the changes or
+    <div class="badge badge-info text-wrap" style="width: 4rem;">
+      Cancel
     </div>
-  
+    to go back to the Bookings list
   </h4>
 
   <div class="container">
       <div class="d-flex justify-content-center">
         <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
-            <div class="card-header">Location at: {{booking.location}}</div>
+            <div class="card-header h4 text-capitalize">{{booking.location}}</div>
             <div class="card-body">
-              <h5 class="card-title">When: {{booking.when | date}}</h5>
+              <h4 class="card-title font-weight-light">When: {{booking.when | date}}</h4>
               <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+              <p class="card-text">Request made by {{user?.fullName}} </p>
 
               <form class="" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
                 <div class="justify-content-center">

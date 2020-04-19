@@ -6,6 +6,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { BsModalService, BsModalRef, TabHeadingDirective } from 'ngx-bootstrap';
+import { User } from 'src/app/_models/user';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-booking-edit-status',
@@ -18,12 +20,14 @@ export class BookingEditStatusComponent implements OnInit {
   bookingForm: FormGroup;
   messageForAdmin: any;
   authDecodeName: any;
+  user: User;
 
   @ViewChild('template', {static: true}) template: TemplateRef<any>;
   modalRef: BsModalRef;
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private router: Router,
-              private bookingService: BookingService, private authService: AuthService, private modalService: BsModalService) { }
+              private bookingService: BookingService, private authService: AuthService, private modalService: BsModalService,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -35,6 +39,8 @@ export class BookingEditStatusComponent implements OnInit {
     });
 
     this.authDecodeName = this.authService.decodedToken.unique_name;
+
+    this.loadUser();
   }
 
   updateBookingStatusRequest() {
@@ -61,6 +67,14 @@ export class BookingEditStatusComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/bookings/']);
+  }
+
+  loadUser() {
+    this.userService.getUser(this.booking.userId).subscribe((user: User) => {
+      this.user = user;
+    }, error => {
+      console.log(error);
+    });
   }
 
 }
