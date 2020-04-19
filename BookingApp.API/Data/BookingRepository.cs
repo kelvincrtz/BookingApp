@@ -40,13 +40,14 @@ namespace BookingApp.API.Data
             //Get the current month and Year 
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
+            var day = DateTime.Now.Day;
 
             if (bookingParams.EventsThisMonth) {
                 bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month);
             }
 
             if (bookingParams.EventsToday) {
-                bookings = bookings.Where(b => b.When == DateTime.Today);
+                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month && b.When.Day == day);
             }
 
             if (bookingParams.Status!=null) {
