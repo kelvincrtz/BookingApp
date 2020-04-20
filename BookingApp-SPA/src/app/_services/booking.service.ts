@@ -60,8 +60,41 @@ export class BookingService {
     return this.http.post<Booking>(this.baseUrl + 'users/' + id + '/bookings', book);
   }
 
-  getBookingsForUser(id: number): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings/thread');
+  getBookingsForUser(id: number, page?, itemsPerPage?, bookingParams?): Observable<PaginatedResult<Booking[]>> {
+    const paginatedResult: PaginatedResult<Booking[]> = new PaginatedResult<Booking[]>();
+
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+
+    if (bookingParams != null) {
+      if (bookingParams.status != null) {
+        params = params.append('status', bookingParams.status);
+      }
+      if (bookingParams.eventstoday != null) {
+        params = params.append('eventstoday', bookingParams.eventstoday);
+      }
+      if (bookingParams.eventsthismonth != null) {
+        params = params.append('eventsthismonth', bookingParams.eventsthismonth);
+      }
+      if (bookingParams.orderBy != null) {
+        params = params.append('orderby', bookingParams.orderBy);
+      }
+    }
+
+    return this.http.get<Booking[]>(this.baseUrl + 'users/' + id + '/bookings/thread', { observe: 'response', params})
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        })
+      );
   }
 
   updateBooking(id: number, bookingId: number, book: Booking) {

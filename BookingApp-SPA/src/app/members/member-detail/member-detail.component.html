@@ -14,6 +14,7 @@
               <p class="lead text-white">Member since {{user.created | date }}</p>
               <p class="lead text-white">{{user.bookings.length}} total number of booking request</p>
               <button class="btn btn-success btn-block">Message</button>
+              <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/bookingrequest']">Make a Booking</button>
             </div>
           </div>
@@ -33,15 +34,12 @@
         </tabset>
       </div>
     </div>
-
-    
   </div>
-    <!--
-        <app-booking-list-for-user [userId]="user.id" [authDecodeToken]="authDecodeToken"></app-booking-list-for-user>
-     -->
-    <div class="">
-      <div class="">
-        <app-booking-list-for-user [userId]="user.id" [authDecodeToken]="authDecodeToken"></app-booking-list-for-user>
-      </div>
-    </div>
+
+  <!-- 
+  <div class="">
+    <app-booking-list-for-user [userId]="user.id" [authDecodeToken]="authDecodeToken"></app-booking-list-for-user>
+  </div>
+  -->
+  
 </div>

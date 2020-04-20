@@ -17,10 +17,12 @@
         <div class="btn-group mr-2">
           <button type="button" name="eventstoday" class="btn btn-info"
             [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" btnRadio="eventstoday">Events Today</button>
+
           <button type="button" name="eventsthismonth" class="btn btn-info"
           [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" btnRadio="eventsthismonth">Events this Month</button>
-          <button type="button" name="eventstoday" class="btn btn-info"
-            [(ngModel)]="bookingParams.eventstoday" (click)="loadAll()">All Events</button>
+
+          <button type="button" name="eventsall" class="btn btn-info"
+            (click)="loadAll()">All Events</button>
         </div>
 
         <div class="form-group mr-2 my-1">
@@ -55,6 +57,7 @@
   </div>
   <div class="mb-4"></div>
 </div>
+
 
 <div class="d-flex justify-content-center">
   <pagination [boundaryLinks]="true" 

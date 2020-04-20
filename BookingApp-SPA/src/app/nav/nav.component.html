@@ -14,6 +14,9 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/bookings']">BookingsAdminView</a>
       </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/bookingsforuser']">Your Bookings</a>
+      </li>
     </ul>
   
     <div *ngIf="loggedIn()" class="dropdown mr-3" dropdown>

@@ -4,6 +4,8 @@ import { BookingService } from 'src/app/_services/booking.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking-list-for-user',
@@ -17,23 +19,38 @@ export class BookingListForUserComponent implements OnInit {
   modalRef: BsModalRef;
   message: string;
 
+  pageNumber = 1;
+  pageSize = 8;
+  pagination: Pagination;
+
   constructor(private booking: BookingService, private alertify: AlertifyService,
-              private modalService: BsModalService, private authService: AuthService) { }
+              private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
-    this.loadBookingsForUser();
+    // this.loadBookingsForUser();
 
-    /*
     this.route.data.subscribe(data => {
-      this.bookings = data.bookings;
+      this.bookings = data.bookings.result;
+      this.pagination = data.bookings.pagination;
     });
-    */
+
   }
 
   loadBookingsForUser() {
-    this.booking.getBookingsForUser(this.userId).subscribe(bookings => {
-      this.bookings = bookings;
+    this.booking.getBookingsForUser(this.userId, null, null, null).subscribe(bookings => {
+      this.bookings = bookings.result;
+      this.pagination = bookings.pagination;
+    }, error => {
+        this.alertify.error(error);
+    });
+  }
+
+  loadBookingsForUserPagination() {
+    this.booking.getBookingsForUser(this.authService.decodedToken.nameid, this.pagination.currentPage, this.pagination.itemsPerPage, null)
+      .subscribe((res: PaginatedResult<Booking[]>) => {
+        this.bookings = res.result;
+        this.pagination = res.pagination;
     }, error => {
         this.alertify.error(error);
     });
@@ -60,6 +77,11 @@ export class BookingListForUserComponent implements OnInit {
   decline(id: number): void {
     this.modalRef.hide();
     this.alertify.error('Cancelled');
+  }
+
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadBookingsForUserPagination();
   }
 
 }
