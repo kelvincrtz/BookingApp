@@ -54,11 +54,13 @@ namespace BookingApp.API.Controllers
         }
 
         [HttpGet("thread")]
-        public async Task<IActionResult> GetBookingsForUser(int userId)
+        public async Task<IActionResult> GetBookingsForUser(int userId, [FromQuery]BookingParams bookingParams)
         {
-            var bookings = await _repo.GetBookingsForUser(userId);
+            var bookings = await _repo.GetBookingsForUser(userId, bookingParams);
 
             var bookingsToReturn = _mapper.Map<IEnumerable<BookingForDetailedDto>>(bookings);
+
+            Response.AddPagination(bookings.CurrentPage, bookings.PageSize, bookings.TotalCount, bookings.TotalPages);
 
             return Ok(bookingsToReturn);
         }
