@@ -61,18 +61,18 @@ export class BookingEditComponent implements OnInit {
     if (this.bookingForm.valid) {
       this.booking = Object.assign({}, this.bookingForm.value);
       this.bookingService.updateBooking(this.authService.decodedToken.nameid, this.bookingFromRepoId, this.booking).subscribe(next => {
-        this.alertify.success('Booking request has been submitted');
+        this.alertify.success('Booking request has been updated');
         this.bookingForm.reset(this.booking);
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
-        this.router.navigate(['/members/', this.authService.decodedToken.nameid]);
+        this.router.navigate(['/bookingsforuser/']);
       });
     }
   }
 
   cancel() {
-    this.router.navigate(['/members/', this.authService.decodedToken.nameid]);
+    this.router.navigate(['/bookingsforuser/', this.authService.decodedToken.nameid]);
   }
 
 }

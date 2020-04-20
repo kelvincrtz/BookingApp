@@ -23,6 +23,8 @@ export class BookingListForUserComponent implements OnInit {
   pageSize = 8;
   pagination: Pagination;
 
+  name: any;
+
   constructor(private booking: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }
 
@@ -34,6 +36,8 @@ export class BookingListForUserComponent implements OnInit {
       this.bookings = data.bookings.result;
       this.pagination = data.bookings.pagination;
     });
+
+    this.name = this.authService.decodedToken.unique_name;
 
   }
 

@@ -1,7 +1,7 @@
-<div class="card bg-success border-white font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Approved'">
+<div class="card bg-success-custom border-white font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Approved'">
   <div class="">
 
-    <div class="card-header bg-transparent border-white text-white">Status: {{booking.status}}</div>
+    <div class="card-header bg-transparent text-white">Status: {{booking.status}}</div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
@@ -9,20 +9,20 @@
       <!-- If Booking is Accepted-->
       <div class="text-white">
         <h5 class="card-title text-capitalize">{{booking.location}}</h5>
-        <p class="card-text">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+        <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
         <p class="card-text">When: {{booking.when | date}}</p>
       </div>
 
       <button class="btn btn-info btn-block my-2" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
     </div>
-    <div class="card-footer bg-transparent border-white">By: {{user?.fullName}}</div>
+    <div class="card-footer bg-transparent"><small>By {{user?.fullName}}</small></div>
   </div>
 </div>
 
-<div class="card bg-danger border-white font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Declined'">
+<div class="card bg-danger-custom border-white font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Declined'">
   <div class="">
 
-    <div class="card-header bg-transparent border-white">Status: {{booking.status}}</div>
+    <div class="card-header bg-transparent">Status: {{booking.status}}</div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
@@ -30,31 +30,31 @@
       <!-- If Booking at a not accepted -->
       <div class="text-white">
         <h5 class="card-title text-capitalize">{{booking.location}}</h5>
-        <p class="card-text">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+        <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
         <p class="card-text">When: {{booking.when | date}}</p>
       </div>
 
       <button class="btn btn-info btn-block my-2" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
     </div>
-    <div class="card-footer bg-transparent border-white">By: {{user?.fullName}}</div>
+    <div class="card-footer bg-transparent"><small>By {{user?.fullName}}</small></div>
   </div>
 </div>
 
 <div class="card bg-dark border-white font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Request Sent'">
   <div class="">
-    <div class="card-header bg-transparent border-white">Status: {{booking.status}}</div>
+    <div class="card-header bg-transparent">Status: {{booking.status}}</div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
       <!-- If Booking at a request sent-->
       <div class="text-white">
         <h5 class="card-title text-capitalize">{{booking.location}}</h5>
-        <p class="card-text">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+        <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
         <p class="card-text">When: {{booking.when | date}}</p>
       </div>
 
       <button class="btn btn-info btn-block my-2" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
     </div>
-    <div class="card-footer bg-transparent border-white">By: {{user?.fullName}}</div>
+    <div class="card-footer bg-transparent"><small>By {{user?.fullName}}</small></div>
   </div>
 </div>
