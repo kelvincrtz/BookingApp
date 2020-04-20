@@ -1,24 +1,23 @@
-  <div class="slider container">
-    <div *ngFor="let booking of bookings">
-      <div class="card text-center mb-3 mt-3">
-        <div class="card-header">
-          Location at {{booking.location}}
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let booking of bookings">
+    <div class="card border-dark text-dark font-weight-light mt-2 h-95">
+      <div>
+        <div class="card-header border-dark">  
+          <div class="text-muted">Status </div>
+          <div class="d-flex justify-content-between">
+            {{booking.status}} <span class="badge badge-pill badge-info font-italic" *ngIf="booking.isEdited">Edited</span>
+          </div>
         </div>
         <div class="card-body">
-          <div *ngIf="booking.isEdited">
-            <span class="badge badge-pill badge-info">Edited</span>
+          <div class="text-dark">
+            <h5 class="card-title text-capitalize">{{booking.location}}</h5>
+            <div class="card-text font-weight-lighter"> When: {{booking.when | date}} </div>
+            <div class="card-text font-weight-lighter">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</div>
           </div>
-          <h5 class="card-title">
-            <blockquote class="blockquote">
-              <p class="mb-0">When: {{booking.when | date}}</p>
-            </blockquote>
-          </h5>
-          <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
-          <p class="card-text">Status: {{booking.status}}</p>
 
-          <div class="btn-group btn-group-sm" *ngIf="userId == authDecodeToken" role="group">
-            <button type="button" [routerLink]="['/booking/edit/', booking.id]" class="btn btn-outline-success">Edit</button>
-            <button type="button" class="btn btn-outline-danger"  (click)="openModal(template)">Delete</button>
+          <div class="btn-group btn-block btn-group-sm" *ngIf="userId == authDecodeToken">
+            <button type="button" [routerLink]="['/booking/edit/', booking.id]" class="btn btn-primary">Edit</button>
+            <button type="button" class="btn btn-danger"  (click)="openModal(template)">Delete</button>
             <ng-template #template>
               <div class="modal-body text-center">
                 <p>Do you want to delete this request?</p>
@@ -27,31 +26,10 @@
               </div>
             </ng-template>   
           </div>
- 
-        </div>
-        <div class="card-footer text-muted">
-          {{booking.dateAdded | timeAgo}}
-        </div>
-      </div>
-    </div>
-  </div>
 
-
-<div class="row">
-  <div class="col"*ngFor="let booking of bookings">
-    <div class="card bg-success border-white font-weight-light mt-2 h-95">
-      <div>
-        <div class="card-header bg-transparent border-white text-white">Status: {{booking.status}}</div>
-    
-        <div class="card-body">
-          
-          <div class="text-white">
-            <h5 class="card-title text-capitalize">{{booking.location}}</h5>
-            <p class="card-text">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
-            <p class="card-text">When: {{booking.when | date}}</p>
-          </div>
-    
-          <button class="btn btn-info btn-block my-2" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
+        </div>
+        <div class="card-footer border-dark bg-white">
+          <div><small class="font-weight-lighter">Request sent in {{booking.dateAdded | date}} </small></div>
         </div>
       </div>
     </div>
