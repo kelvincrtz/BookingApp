@@ -19,7 +19,7 @@
       <button type="button" name="orderBy" class="btn btn-info" 
         [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
       <button type="button" name="orderBy" class="btn btn-info"
-        [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">Event Date Request</button>
+        [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">By Event Date</button>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
       <div class="card border-dark text-dark font-weight-light mt-2 h-95">
         <div>
           <div class="card-header border-dark">  
-            <div class="text-muted">Status </div>
+            <div class="text-muted d-flex justify-content-between">Status </div>
             <div class="d-flex justify-content-between">
               {{booking.status}} <span class="badge badge-pill badge-info font-italic" *ngIf="booking.isEdited">Edited</span>
             </div>
@@ -55,7 +55,7 @@
   
           </div>
           <div class="card-footer border-dark bg-white">
-            <div><small class="font-weight-lighter">Request sent in {{booking.dateAdded | date}} </small></div>
+            <div><small class="font-weight-lighter">Request sent <span class="badge badge-dark">{{booking.dateAdded | date: 'fullDate'}}</span></small></div>
           </div>
         </div>
       </div>

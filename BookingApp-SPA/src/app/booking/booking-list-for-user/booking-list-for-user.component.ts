@@ -6,6 +6,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-booking-list-for-user',
@@ -31,8 +32,6 @@ export class BookingListForUserComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.loadBookingsForUser();
-
     this.route.data.subscribe(data => {
       this.bookings = data.bookings.result;
       this.pagination = data.bookings.pagination;
@@ -41,7 +40,6 @@ export class BookingListForUserComponent implements OnInit {
     this.name = this.authService.decodedToken.unique_name;
 
     this.bookingParams.orderBy = 'dateadded';
-
   }
 
   loadBookings() {

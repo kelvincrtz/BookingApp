@@ -2,7 +2,7 @@
     <h4 class="alert-heading">Approve or Decline Request</h4>
     <p>You have a booking request from 
       <button [routerLink]="['/members/', booking.userId]" class="btn btn-primary btn-sm">{{user?.fullName}}</button> 
-    to review</p>
+    This request was sent on {{booking.dateAdded | date: 'fullDate'}}</p>
     <hr>
     Click
     <div class="badge badge-success text-wrap" style="width: 3rem;">Save</div>

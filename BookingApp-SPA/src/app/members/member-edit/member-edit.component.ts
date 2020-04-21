@@ -41,4 +41,8 @@ export class MemberEditComponent implements OnInit {
     });
   }
 
+  cancel() {
+    this.router.navigate(['/members/', this.user.id]);
+  }
+
 }

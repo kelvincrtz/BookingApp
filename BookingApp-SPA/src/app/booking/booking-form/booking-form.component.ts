@@ -53,7 +53,7 @@ export class BookingFormComponent implements OnInit {
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
-        this.router.navigate(['/members/', this.authService.decodedToken.nameid]);
+        this.router.navigate(['/bookingsforuser/']);
       });
     }
   }
