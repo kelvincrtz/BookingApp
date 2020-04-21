@@ -42,7 +42,7 @@ export class BookingEditComponent implements OnInit {
     };
 
     this.bookingForm = new FormGroup({
-      when: new FormControl(this.transformDate(this.booking.when), Validators.required),
+      when: new FormControl('', Validators.required),
       location: new FormControl(this.booking.location, Validators.required),
       fromTime: new FormControl(this.booking.fromTime, Validators.required),
       toTime: new FormControl(this.booking.toTime, Validators.required),
@@ -72,7 +72,7 @@ export class BookingEditComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/bookingsforuser/', this.authService.decodedToken.nameid]);
+    this.router.navigate(['/bookingsforuser/']);
   }
 
 }

@@ -3,6 +3,27 @@
   <p>Use this page to manage all your <strong class="text-white bg-dark">{{pagination.totalItems}}</strong> bookings</p>
   <hr>
 
+  <div class="d-flex justify-content-between">
+    <div class="btn-group">
+      <button type="button" name="eventstoday" class="btn btn-info"
+        [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" btnRadio="eventstoday">Events Today</button>
+  
+      <button type="button" name="eventsthismonth" class="btn btn-info"
+      [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" btnRadio="eventsthismonth">Events this Month</button>
+  
+      <button type="button" name="eventsall" class="btn btn-info"
+        (click)="loadAll()">All Events</button>
+    </div>
+
+    <div class="btn-group float-right my-1">
+      <button type="button" name="orderBy" class="btn btn-info" 
+        [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
+      <button type="button" name="orderBy" class="btn btn-info"
+        [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">Event Date Request</button>
+    </div>
+  </div>
+
+
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let booking of bookings">
       <div class="card border-dark text-dark font-weight-light mt-2 h-95">

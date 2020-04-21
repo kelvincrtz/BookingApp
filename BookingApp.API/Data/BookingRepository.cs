@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using BookingApp.API.Helpers;
 using BookingApp.API.Models;
@@ -72,7 +73,35 @@ namespace BookingApp.API.Data
 
         public async Task<PagedList<Booking>> GetBookingsForUser(int id, BookingParams bookingParams)
         {
-            var bookings = _context.Bookings.Where(u => u.UserId == id);
+            // Return Unauthorized for ID that isnt the user
+
+            var bookings = _context.Bookings.Where(u => u.UserId == id).OrderByDescending(b => b.DateAdded).AsQueryable();
+
+            //Get the current Month, Year and Day 
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+            var day = DateTime.Now.Day;
+
+            if (bookingParams.EventsThisMonth) {
+                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month);
+            }
+
+            if (bookingParams.EventsToday) {
+                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month && b.When.Day == day);
+            }
+
+            if (!string.IsNullOrEmpty(bookingParams.OrderBy))
+            {
+                switch (bookingParams.OrderBy)
+                {
+                    case "dateadded":
+                        bookings = bookings.OrderByDescending(b => b.DateAdded);
+                        break;
+                    default:
+                        bookings = bookings.OrderByDescending(b => b.When);
+                        break;
+                }
+            }
 
             return await PagedList<Booking>.CreateAsync(bookings, bookingParams.PageNumber, bookingParams.PageSize);
         }

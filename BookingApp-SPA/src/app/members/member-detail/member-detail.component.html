@@ -13,7 +13,7 @@
               <p class="lead text-white">Last active {{user.lastActive | timeAgo }}</p>
               <p class="lead text-white">Member since {{user.created | date }}</p>
               <p class="lead text-white">{{user.bookings.length}} total number of booking request</p>
-              <button class="btn btn-success btn-block">Message</button>
+              <button *ngIf="user.id != authDecodeToken" class="btn btn-success btn-block">Message</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/bookingrequest']">Make a Booking</button>
             </div>

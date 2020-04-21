@@ -44,7 +44,6 @@ export class BookingEditStatusComponent implements OnInit {
   }
 
   updateBookingStatusRequest() {
-    console.log(this.bookingForm.value);
 
     if (this.bookingForm.get('status').value === this.booking.status) {
         this.messageForAdmin = 'This request has already been ' + this.bookingForm.get('status').value.toLowerCase() + ' by you!';

@@ -24,6 +24,7 @@ export class BookingListForUserComponent implements OnInit {
   pagination: Pagination;
 
   name: any;
+  bookingParams: any = {};
 
   constructor(private booking: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }
@@ -39,25 +40,19 @@ export class BookingListForUserComponent implements OnInit {
 
     this.name = this.authService.decodedToken.unique_name;
 
+    this.bookingParams.orderBy = 'dateadded';
+
   }
 
-  loadBookingsForUser() {
-    this.booking.getBookingsForUser(this.userId, null, null, null).subscribe(bookings => {
-      this.bookings = bookings.result;
-      this.pagination = bookings.pagination;
-    }, error => {
-        this.alertify.error(error);
-    });
-  }
-
-  loadBookingsForUserPagination() {
-    this.booking.getBookingsForUser(this.authService.decodedToken.nameid, this.pagination.currentPage, this.pagination.itemsPerPage, null)
+  loadBookings() {
+    this.booking.getBookingsForUser(this.authService.decodedToken.nameid, this.pagination.currentPage,
+       this.pagination.itemsPerPage, this.bookingParams)
       .subscribe((res: PaginatedResult<Booking[]>) => {
-        this.bookings = res.result;
-        this.pagination = res.pagination;
-    }, error => {
+      this.bookings = res.result;
+      this.pagination = res.pagination;
+      }, error => {
         this.alertify.error(error);
-    });
+      });
   }
 
   deleteBooking(id: number) {
@@ -85,7 +80,36 @@ export class BookingListForUserComponent implements OnInit {
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadBookingsForUserPagination();
+    this.loadBookings();
+  }
+
+  loadMonth() {
+    this.bookingParams.eventstoday = false;
+    this.bookingParams.all = false;
+    this.bookingParams.eventsthismonth = true;
+    this.pagination.currentPage = 1;
+    this.loadBookings();
+  }
+
+  loadToday() {
+    this.bookingParams.eventsthismonth = false;
+    this.bookingParams.all = false;
+    this.bookingParams.eventstoday = true;
+    this.pagination.currentPage = 1;
+    this.loadBookings();
+  }
+
+  loadAll() {
+    this.bookingParams.eventsthismonth = false;
+    this.bookingParams.eventstoday = false;
+    this.bookingParams.all = true;
+    this.pagination.currentPage = 1;
+    this.loadBookings();
+  }
+
+  loadOrderBy() {
+    this.pagination.currentPage = 1;
+    this.loadBookings();
   }
 
 }
