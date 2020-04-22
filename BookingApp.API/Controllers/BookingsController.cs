@@ -56,7 +56,13 @@ namespace BookingApp.API.Controllers
         [HttpGet("thread")]
         public async Task<IActionResult> GetBookingsForUser(int userId, [FromQuery]BookingParams bookingParams)
         {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
             var bookings = await _repo.GetBookingsForUser(userId, bookingParams);
+
+            if (bookings == null)
+                return BadRequest();
 
             var bookingsToReturn = _mapper.Map<IEnumerable<BookingForDetailedDto>>(bookings);
 
