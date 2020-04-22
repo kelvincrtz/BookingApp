@@ -20,6 +20,7 @@ import { BookingEditResolver } from './_resolvers/booking-edit-resolver';
 import { PreventEditBookingFormUnsavedChanges } from './_guards/prevent-editbookingform-unsaved-changes.guard';
 import { BookingEditStatusResolver } from './_resolvers/booking-edit-status-resolver';
 import { BookingEditStatusComponent } from './booking/booking-edit-status/booking-edit-status.component';
+import { MessagesResolver } from './_resolvers/messages-resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -32,7 +33,7 @@ export const appRoutes: Routes = [
             { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
             { path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver},
                 canDeactivate: [PreventUnsavedChanges]},
-            { path: 'messages', component: MessagesComponent},
+            { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver}},
             { path: 'bookings', component: BookingListComponent, resolve: {bookings: BookingListResolver}},
             { path: 'bookingrequest', component: BookingFormComponent, resolve: null,
                 canDeactivate: [PreventBookingFormUnsavedChanges]},

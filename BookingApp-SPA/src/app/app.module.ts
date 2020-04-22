@@ -41,6 +41,8 @@ import { PreventEditBookingFormUnsavedChanges } from './_guards/prevent-editbook
 import { BookingCardComponent } from './booking/booking-card/booking-card.component';
 import { BookingEditStatusResolver } from './_resolvers/booking-edit-status-resolver';
 import { BookingEditStatusComponent } from './booking/booking-edit-status/booking-edit-status.component';
+import { MessageService } from './_services/message.service';
+import { MessagesResolver } from './_resolvers/messages-resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -92,6 +94,7 @@ export function tokenGetter() {
       AuthService,
       UserService,
       BookingService,
+      MessageService,
       ErrorInterceptorProvider,
       MemberDetailResolver,
       MemberListResolver,
@@ -100,6 +103,7 @@ export function tokenGetter() {
       BookingListForUserResolver,
       BookingEditResolver,
       BookingEditStatusResolver,
+      MessagesResolver,
       PreventUnsavedChanges,
       PreventBookingFormUnsavedChanges,
       PreventEditBookingFormUnsavedChanges,
