@@ -119,13 +119,14 @@ namespace BookingApp.API.Data
             switch (messageParams.MessageContainer)
             {
                 case "Inbox":
-                    messages = messages.Where(u => u.RecipientId == messageParams.UserId);
+                    messages = messages.Where(u => u.RecipientId == messageParams.UserId && u.RecipientDeleted == false);
                     break;
                 case "Outbox":
-                    messages = messages.Where(u => u.SenderId == messageParams.UserId);
+                    messages = messages.Where(u => u.SenderId == messageParams.UserId && u.SenderDeleted == false);
                     break;
                 default:
-                    messages = messages.Where(u => u.RecipientId == messageParams.UserId && u.IsRead == false);
+                    messages = messages.Where(u => u.RecipientId == messageParams.UserId 
+                        && u.IsRead == false && u.RecipientDeleted == false);
                     break;
             }
 
@@ -137,8 +138,9 @@ namespace BookingApp.API.Data
         public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
         {
             var messages = await _context.Messages.Include(u => u.Sender).Include(u => u.Recipient)
-                .Where(m => m.RecipientId == userId && m.SenderId == recipientId 
-                        || m.RecipientId == recipientId && m.SenderId == userId).OrderBy(m => m.MessageSent).ToListAsync();
+                .Where(m => m.RecipientId == userId && m.RecipientDeleted == false && m.SenderId == recipientId 
+                         || m.RecipientId == recipientId && m.SenderId == userId && m.SenderDeleted == false)
+                .OrderBy(m => m.MessageSent).ToListAsync();
             
             return messages;
         }
