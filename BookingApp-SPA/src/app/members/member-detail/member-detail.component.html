@@ -1,9 +1,9 @@
 <div class="container mt-4">
   <div class="row">
-    <div class="col-sm-6">
+
+    <div class="col-sm-12 col-md-12 col-lg-6">
       <div class="card bg-primary text-white">
         <div class="card-body">
-
           <div class="jumbotron bg-primary">
             <div class="container">
               <h1 class="display-4">{{user.fullName | titlecase}}</h1>
@@ -23,24 +23,17 @@
       </div>
     </div>
 
-    <div class="col-sm-6">
-      <div class="card tab-panel">
-        <tabset class="card-body">
-          <tab heading="Messages">
-            <h6>Messages</h6>
-          </tab>
-          <tab heading="Bookings">
-            <h6>Bookings</h6>
-          </tab>
-        </tabset>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <div class="card bg-primary text-white">
+        <div class="card-body">
+          <div class="bg-primary">
+            <div class="container">
+              <app-member-messages [recipientId]="user.id"></app-member-messages>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- 
-  <div class="">
-    <app-booking-list-for-user [userId]="user.id" [authDecodeToken]="authDecodeToken"></app-booking-list-for-user>
   </div>
-  -->
-  
 </div>

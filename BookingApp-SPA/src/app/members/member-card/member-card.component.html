@@ -5,6 +5,6 @@
     <div class="card-text text-muted"><i class="fa fa-home"></i>{{' ' + user.city}}</div>
     <div class="card-text text-muted"><i class="fa fa-phone"></i>{{' ' + user.contactNumber}}</div>
     <button class="btn btn-success btn-block mt-1" [routerLink]="['/members/', user.id]">Profile</button>
-    <button class="btn btn-warning btn-block mt-1">Message</button>
+    <button class="btn btn-warning btn-block mt-1" [routerLink]="['/members/', user.id]">Message</button>
   </div>
 </div>
