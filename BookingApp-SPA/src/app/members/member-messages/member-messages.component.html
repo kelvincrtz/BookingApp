@@ -13,9 +13,9 @@
           </span>
           <div class="chat-body">
             <div class="header">
-              <strong class="primary-font">{{message.senderFullName.split(' ')[0]}}</strong>
+              <strong class="">{{message.senderFullName.split(' ')[0]}}</strong>
               <small class="text-muted float-right">
-                <small class="text-white">{{message.messageSent | timeAgo}}</small>
+                <small class="text-white">{{message.messageSent | date : 'shortTime'}}</small>
               </small>
             </div>
             <p class="lead text-white">{{message.content}}</p>
@@ -29,9 +29,9 @@
             <div class="chat-body">
               <div class="header">
                   <small class="text-muted">
-                      <small>{{message.messageSent | timeAgo}}</small>
-                      <small *ngIf="!message.isRead" class="text-danger">(unread)</small>
-                      <small *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeAgo}})</small>
+                      <small>{{message.messageSent | date : 'shortTime'}}</small>
+                      <small *ngIf="!message.isRead" class="text-danger"> (unread)</small>
+                      <small *ngIf="message.isRead" class="text-success"> (Read {{message.dateRead | date : 'shortTime'}})</small>
                   </small>
                 <strong class="primary-font float-right">{{message.senderFullName.split(' ')[0]}}</strong>
               </div>

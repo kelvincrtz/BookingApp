@@ -37,6 +37,7 @@ export class MemberMessagesComponent implements OnInit {
       .subscribe((message: Message) => {
         this.messages.push(message);
         this.newMessage.content = '';
+        this.feedContainer.nativeElement.scrollTop = this.feedContainer.nativeElement.scrollHeight;
       }, error => {
         this.alertify.error(error);
       });

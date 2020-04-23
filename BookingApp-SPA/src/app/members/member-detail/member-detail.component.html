@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
 
-    <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
       <div class="card bg-primary text-white">
         <div class="card-body">
           <div class="jumbotron bg-primary">
@@ -10,7 +10,7 @@
               <p class="lead text-white">Lives in {{user.city}}, {{user.country}}</p>
               <p class="lead text-white">Age of {{user.age}}</p>
               <p class="lead text-white">Contact number {{user.contactNumber}}</p>
-              <p class="lead text-white">Last active {{user.lastActive | timeAgo }}</p>
+              <p class="lead text-white">Last active: {{user.lastActive | date : 'medium' }}</p>
               <p class="lead text-white">Member since {{user.created | date }}</p>
               <p class="lead text-white">{{user.bookings.length}} total number of booking request</p>
               <button *ngIf="user.id != authDecodeToken" class="btn btn-success btn-block">Message</button>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
       <div class="card bg-primary text-white">
         <div class="card-body">
           <div class="bg-primary">
