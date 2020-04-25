@@ -16,5 +16,6 @@ namespace BookingApp.API.Dtos
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<BookingForListDto> Bookings { get; set; }
+        public ICollection<MessageForDetailedDto> MessagesReceived { get; set; }
     }
 }

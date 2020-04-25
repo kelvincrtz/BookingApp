@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Booking } from 'src/app/_models/booking';
+import { Message } from 'src/app/_models/message';
 
 @Component({
   selector: 'app-member-detail',
@@ -13,6 +14,7 @@ import { Booking } from 'src/app/_models/booking';
 })
 export class MemberDetailComponent implements OnInit {
   user: User;
+  messagesReceived: Message[];
   authDecodeToken: any;
 
   constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute,
@@ -21,16 +23,9 @@ export class MemberDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data.user;
+      this.messagesReceived = data.user.messagesReceived;
     });
 
     this.authDecodeToken = this.authService.decodedToken.nameid;
-  }
-
-  loadUser() {
-    this.userService.getUser(+this.route.snapshot.params.id).subscribe((user: User) => {
-      this.user = user;
-    }, error => {
-      this.alertify.error(error);
-    });
   }
 }

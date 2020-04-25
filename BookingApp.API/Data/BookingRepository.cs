@@ -147,7 +147,7 @@ namespace BookingApp.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(b => b.Bookings).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.Include(b => b.Bookings).Include(m => m.MessagesReceived).FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
