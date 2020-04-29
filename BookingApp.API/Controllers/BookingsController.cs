@@ -95,6 +95,25 @@ namespace BookingApp.API.Controllers
             throw new Exception("Creating the booking failed on save");
         }
 
+        [HttpPut("seenbyadmin/{id}")]
+        public async Task<IActionResult> MarkSeenByAdmin(int userId, int id, BookingForSeenAdminDto bookingForSeenAdminDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var bookingFromRepo = await _repo.GetBooking(id);
+
+            if (bookingFromRepo == null)
+                return BadRequest();
+
+             _mapper.Map(bookingForSeenAdminDto, bookingFromRepo);
+
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Marking as seen by admin for booking {id} failed on save");  
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBooking(int userId, int id, BookingForUpdateDto bookingForUpdateDto)
         {

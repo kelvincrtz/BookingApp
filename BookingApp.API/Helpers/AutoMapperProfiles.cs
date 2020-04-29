@@ -21,6 +21,7 @@ namespace BookingApp.API.Helpers
             CreateMap<UserForRegisterDto, User>();
             CreateMap<BookingForUpdateDto, Booking>();
             CreateMap<BookingForUpdateStatusDto, Booking>();
+            CreateMap<BookingForSeenAdminDto, Booking>();
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>();
             CreateMap<Message, MessageForDetailedDto>();
