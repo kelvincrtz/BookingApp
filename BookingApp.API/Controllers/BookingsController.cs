@@ -106,6 +106,9 @@ namespace BookingApp.API.Controllers
             if (bookingFromRepo == null)
                 return BadRequest();
 
+            if (bookingFromRepo.IsSeenByAdmin == true)
+                return BadRequest("Already is marked seen");
+
              _mapper.Map(bookingForSeenAdminDto, bookingFromRepo);
 
             if(await _repo.SaveAll())
@@ -148,8 +151,9 @@ namespace BookingApp.API.Controllers
             if (bookingFromRepo == null)
                 return BadRequest();
 
-            // Check if Admin ID is the one updating the request. Implement this after Identity and Role Management
-                 
+            bookingForUpdateStatusDto.IsSeenByAdmin = true;
+
+            bookingForUpdateStatusDto.IsSeenNotification = false;
             
             _mapper.Map(bookingForUpdateStatusDto, bookingFromRepo); 
             // Be careful here. Make sure no await, no task. Just classes or else mapping exception eventhough you have already did automapper mapping

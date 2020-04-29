@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { BsModalService, BsModalRef, TabHeadingDirective } from 'ngx-bootstrap';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-booking-edit-status',
@@ -31,8 +32,8 @@ export class BookingEditStatusComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.booking = data.booking;
-    });
+        this.booking = data.booking;
+      });
 
     this.bookingForm = new FormGroup({
       status: new FormControl('', Validators.required),
@@ -75,5 +76,4 @@ export class BookingEditStatusComponent implements OnInit {
       console.log(error);
     });
   }
-
 }

@@ -10,6 +10,10 @@ namespace BookingApp.API.Dtos
 
         public DateTime ApproveOrDeclineDate { get; set; }
 
+        public bool IsSeenByAdmin { get; set; }
+
+        public bool IsSeenNotification { get; set; }
+
         public BookingForUpdateStatusDto()
         {
             this.ApproveOrDeclineDate = DateTime.Now;

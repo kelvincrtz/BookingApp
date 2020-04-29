@@ -108,5 +108,4 @@ export class BookingService {
   updateBookingStatus(id: number, bookingId: number, book: Booking) {
     return this.http.put<Booking>(this.baseUrl + 'users/' + id + '/bookings/status/' + bookingId, book);
   }
-
 }

@@ -4,9 +4,5 @@ namespace BookingApp.API.Dtos
     {
         public bool IsSeenByAdmin { get; set; }
 
-        public BookingForSeenAdminDto()
-        {   
-            this.IsSeenByAdmin = true;
-        }
     }
 }
