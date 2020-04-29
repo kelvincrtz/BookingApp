@@ -71,6 +71,15 @@ namespace BookingApp.API.Data
             return await PagedList<Booking>.CreateAsync(bookings, bookingParams.PageNumber, bookingParams.PageSize);
         }
 
+        public async Task<IEnumerable<Booking>> GetNotificationBookingsForUser(int userId)
+        {
+            var bookings = _context.Bookings
+                .Where(u => u.UserId == userId && u.IsSeenByAdmin && !u.IsSeenNotification && u.Status == "Approved" || u.Status == "Declined")
+                .AsQueryable().ToListAsync();
+        
+            return await bookings;
+        }
+
         public async Task<PagedList<Booking>> GetBookingsForUser(int id, BookingParams bookingParams)
         {
             // Return Unauthorized for ID that isnt the user

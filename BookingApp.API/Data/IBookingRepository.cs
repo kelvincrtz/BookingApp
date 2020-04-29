@@ -15,6 +15,7 @@ namespace BookingApp.API.Data
          Task<PagedList<Booking>> GetBookings(BookingParams bookingParams);
          Task<Booking> GetBooking(int id);
          Task<PagedList<Booking>> GetBookingsForUser(int id, BookingParams bookingParams);
+         Task<IEnumerable<Booking>> GetNotificationBookingsForUser(int userId);
          Task<Message> GetMessage(int id);
          Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
          Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);

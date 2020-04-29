@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Booking } from 'src/app/_models/booking';
 import { Message } from 'src/app/_models/message';
+import { BookingService } from 'src/app/_services/booking.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -15,10 +16,14 @@ import { Message } from 'src/app/_models/message';
 export class MemberDetailComponent implements OnInit {
   user: User;
   messagesReceived: Message[];
+  bookings: Booking;
   authDecodeToken: any;
 
-  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute,
-              private authService: AuthService) { }
+  dismissible = true;
+  alerts: any;
+
+  constructor(private route: ActivatedRoute, private authService: AuthService,
+              private bookingService: BookingService, private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -27,5 +32,25 @@ export class MemberDetailComponent implements OnInit {
     });
 
     this.authDecodeToken = this.authService.decodedToken.nameid;
+
+    this.loadNofifyBookings();
+  }
+
+  onClosed(dismissedAlert: any): void {
+    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
+    // Mark as seenNotification true
+  }
+
+  loadNofifyBookings() {
+    this.bookingService.getNotifyBookings(this.authService.decodedToken.nameid)
+      .subscribe((booking: Booking) => {
+      this.bookings = booking;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  markAsSeenNotify() {
+
   }
 }

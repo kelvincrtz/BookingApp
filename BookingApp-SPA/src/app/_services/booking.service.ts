@@ -56,6 +56,10 @@ export class BookingService {
     return this.http.get<Booking>(this.baseUrl + 'users/' + id + '/bookings/' + bookingId) ;
   }
 
+  getNotifyBookings(userId: number): Observable<Booking> {
+    return this.http.get<Booking>(this.baseUrl + 'users/' + userId + '/bookings/notify') ;
+  }
+
   createBooking(id: number, book: Booking) {
     return this.http.post<Booking>(this.baseUrl + 'users/' + id + '/bookings', book);
   }

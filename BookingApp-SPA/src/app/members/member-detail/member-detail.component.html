@@ -35,8 +35,8 @@
       </div>
     </div>
 
-    <!-- You have X number of messages.. Section -->
-    <div *ngIf="user.id == authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
+    <!-- You have X number of messages.. Section
+      <div *ngIf="user.id == authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
       <div class="card bg-primary text-white">
         <div class="card-body">
           <div class="bg-primary">
@@ -45,6 +45,32 @@
                 <button type="button" class="btn btn-secondary" [routerLink]="['/messages']" routerLinkActive="router-link-active">Inbox
                   <span class="badge badge-danger">{{this.messagesReceived.length}}</span>
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <div *ngIf="user.id == authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
+      <div class="card bg-primary text-white">
+        <div class="card-body">
+          <div class="bg-primary">
+            <div class="container">
+              <div>
+                <div *ngFor="let booking of bookings">
+                  <alert *ngIf="booking.status == 'Approved'" [type]='"success"' [dismissible]="dismissible" (onClosed)="onClosed(booking)">
+                    <h4 class="alert-heading">Heads up!</h4>
+                    Your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}!
+                  </alert>
+                  <alert *ngIf="booking.status == 'Declined'" [type]='"danger"' [dismissible]="dismissible" (onClosed)="onClosed(booking)">
+                    <strong>Sorry</strong> but your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}.
+                    <p>
+                      <small>Message the admin to know the details why or you can try and book another request.</small>
+                    </p>
+                  </alert>
+                </div>
               </div>
             </div>
           </div>

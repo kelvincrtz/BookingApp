@@ -71,6 +71,22 @@ namespace BookingApp.API.Controllers
             return Ok(bookingsToReturn);
         }
 
+        [HttpGet("notify")]
+        public async Task<IActionResult> GetNotificationBookingsForUser(int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var bookings = await _repo.GetNotificationBookingsForUser(userId);
+
+            if (bookings == null)
+                return BadRequest("No notifications");
+
+            var bookingsToReturn = _mapper.Map<IEnumerable<BookingForDetailedDto>>(bookings);
+
+            return Ok(bookingsToReturn);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateBooking(int userId, BookingForCreationDto bookingForCreationDto)
         {
