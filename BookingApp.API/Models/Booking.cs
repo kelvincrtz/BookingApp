@@ -12,6 +12,9 @@ namespace BookingApp.API.Models
         public DateTime DateAdded { get; set; }
         public string Location { get; set; }
         public bool IsEdited { get; set; }
+        public bool IsSeenByAdmin { get; set; }
+        public bool IsSeenNotification { get; set; }
+        public DateTime ApproveOrDeclineDate { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
     }

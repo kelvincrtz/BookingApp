@@ -81,7 +81,7 @@ namespace BookingApp.API.Controllers
 
             bookingForCreationDto.UserId = userId;
 
-            bookingForCreationDto.Status = "Request Sent";
+            bookingForCreationDto.Status = "Pending";
 
             var booking = _mapper.Map<Booking>(bookingForCreationDto);
 

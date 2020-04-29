@@ -40,13 +40,13 @@
   </div>
 </div>
 
-<div class="card bg-dark border-white font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Request Sent'">
+<div class="card bg-dark border-white font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Pending'">
   <div class="">
     <div class="card-header bg-transparent">Status: {{booking.status}}</div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
-      <!-- If Booking at a request sent-->
+      <!-- If Booking is at Pending status-->
       <div class="text-white">
         <h5 class="card-title text-capitalize">{{booking.location}}</h5>
         <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
