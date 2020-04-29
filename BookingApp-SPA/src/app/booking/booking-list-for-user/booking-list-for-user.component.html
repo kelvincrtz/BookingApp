@@ -1,6 +1,7 @@
 <div class="container alert alert-primary mt-3" role="alert">
   <h4 class="alert-heading">Hi {{ this.name | titlecase}}</h4>
   <p>Use this page to manage all your <strong class="text-white bg-dark">{{pagination.totalItems}}</strong> bookings</p>
+  <div>You can edit your pending bookings but if it has been approved or declined, you are no longer authorised to edit or delete the request.</div>
   <hr>
 
   <div class="d-flex justify-content-between">
@@ -31,7 +32,10 @@
           <div class="card-header border-dark">  
             <div class="text-muted d-flex justify-content-between">Status </div>
             <div class="d-flex justify-content-between">
-              {{booking.status}} <span class="badge badge-pill badge-info font-italic" *ngIf="booking.isEdited">Edited</span>
+              <div *ngIf="booking.status == 'Approved'" class="text-success">{{booking.status}}</div>
+              <div *ngIf="booking.status == 'Declined'" class="text-danger">{{booking.status}}</div>
+              <div *ngIf="booking.status == 'Pending'" class="text-info">{{booking.status}}</div>
+              <span class="badge badge-pill badge-info font-italic" *ngIf="booking.isEdited">Edited</span>
             </div>
           </div>
           <div class="card-body">
@@ -42,8 +46,8 @@
             </div>
   
             <div class="btn-group btn-block btn-group-sm" *ngIf="userId == authDecodeToken">
-              <button type="button" [routerLink]="['/booking/edit/', booking.id]" class="btn btn-primary">Edit</button>
-              <button type="button" class="btn btn-danger"  (click)="openModal(template)">Delete</button>
+              <button *ngIf="booking.status == 'Pending'" type="button" [routerLink]="['/booking/edit/', booking.id]" class="btn btn-primary">Edit</button>
+              <button *ngIf="booking.status == 'Pending' || booking.status =='Declined'" type="button" class="btn btn-danger"  (click)="openModal(template)">Delete</button>
               <ng-template #template>
                 <div class="modal-body text-center">
                   <p>Do you want to delete this request?</p>
