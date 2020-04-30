@@ -1,7 +1,6 @@
 <div class="container alert alert-primary mt-3" role="alert">
-  <h4 class="alert-heading">Hi {{ this.name | titlecase}}</h4>
-  <p>Use this page to manage all your <strong class="text-white bg-dark">{{bookings.length}}</strong> bookings</p>
-  <div>You can edit your pending bookings but if it has been approved or declined, you are no longer authorised to edit or delete the request.</div>
+  <h4 class="alert-heading">Hi {{ this.name | titlecase}}!</h4> 
+  <div>Use this page to manage all your booking request</div>
   <hr>
 
   <div class="d-flex justify-content-between">
@@ -24,6 +23,25 @@
     </div>
   </div>
 
+  <div *ngIf="bookingParams.eventstoday == true && bookings.length">
+    <h2 class="d-flex justify-content-center font-weight-light">Events Today</h2>
+    <div *ngIf="bookings.length > 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} events found</div>
+    <div *ngIf="bookings.length == 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.eventsthismonth == true && bookings.length">
+    <h2 class="d-flex justify-content-center font-weight-light">Events this month</h2>
+    <div *ngIf="bookings.length > 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} events found</div>
+    <div *ngIf="bookings.length == 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.all == true && bookings.length">
+    <h2 class="d-flex justify-content-center font-weight-light">All Events</h2>
+    <div *ngIf="bookings.length > 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} events found</div>
+    <div *ngIf="bookings.length == 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} event found</div>
+  </div>
+
+  <div class="d-flex justify-content-center" *ngIf="bookings.length== 0">
+    <h3>No results found</h3>
+  </div>
 
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let booking of bookings">

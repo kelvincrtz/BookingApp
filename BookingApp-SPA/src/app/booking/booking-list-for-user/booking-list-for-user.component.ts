@@ -40,6 +40,8 @@ export class BookingListForUserComponent implements OnInit {
     this.name = this.authService.decodedToken.unique_name;
 
     this.bookingParams.orderBy = 'dateadded';
+
+    this.bookingParams.all = true;
   }
 
   loadBookings() {

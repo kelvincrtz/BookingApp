@@ -30,6 +30,8 @@ export class BookingListComponent implements OnInit {
     });
 
     this.bookingParams.orderBy = 'dateadded';
+
+    this.bookingParams.all = true;
   }
 
   pageChanged(event: any): void {
