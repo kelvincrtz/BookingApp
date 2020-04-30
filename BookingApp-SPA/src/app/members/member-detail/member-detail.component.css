@@ -1,3 +1,8 @@
 .body-custom {
     height: 611px;
 }
+
+.body-custom2 {
+    height: 643px;
+    overflow-y: scroll;
+}

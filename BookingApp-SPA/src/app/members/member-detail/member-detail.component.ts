@@ -17,7 +17,7 @@ import { AnonymousSubject } from 'rxjs/internal/Subject';
 export class MemberDetailComponent implements OnInit {
   user: User;
   messagesReceived: Message[];
-  bookings: Booking;
+  bookings: Booking[];
   authDecodeToken: any;
 
   dismissible = true;
@@ -38,13 +38,13 @@ export class MemberDetailComponent implements OnInit {
   }
 
   onClosed(bookingId: any) {
-    // Mark as seenNotification true
     this.markAsSeenNotify(bookingId);
+    this.bookings.splice(this.bookings.findIndex(m => m.id === bookingId), 1);
   }
 
   loadNofifyBookings() {
     this.bookingService.getNotifyBookings(this.authService.decodedToken.nameid)
-      .subscribe((booking: Booking) => {
+      .subscribe((booking: any) => {
       this.bookings = booking;
     }, error => {
       console.log(error);
