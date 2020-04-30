@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { Booking } from 'src/app/_models/booking';
 import { Message } from 'src/app/_models/message';
 import { BookingService } from 'src/app/_services/booking.service';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-member-detail',
@@ -36,9 +37,9 @@ export class MemberDetailComponent implements OnInit {
     this.loadNofifyBookings();
   }
 
-  onClosed(dismissedAlert: any): void {
-    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
+  onClosed(bookingId: any) {
     // Mark as seenNotification true
+    this.markAsSeenNotify(bookingId);
   }
 
   loadNofifyBookings() {
@@ -50,7 +51,7 @@ export class MemberDetailComponent implements OnInit {
     });
   }
 
-  markAsSeenNotify() {
-
+  markAsSeenNotify(bookingId: number) {
+    this.bookingService.markSeenNotify(this.authService.decodedToken.nameid, bookingId);
   }
 }

@@ -60,11 +60,12 @@
             <div class="container">
               <div>
                 <div *ngFor="let booking of bookings">
-                  <alert *ngIf="booking.status == 'Approved'" [type]='"success"' [dismissible]="dismissible" (onClosed)="onClosed(booking)">
+                  <alert *ngIf="booking.status == 'Approved'" [type]='"success"' [dismissible]="dismissible" (onClosed)="onClosed(booking.id)">
                     <h4 class="alert-heading">Heads up!</h4>
                     Your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}!
                   </alert>
-                  <alert *ngIf="booking.status == 'Declined'" [type]='"danger"' [dismissible]="dismissible" (onClosed)="onClosed(booking)">
+
+                  <alert *ngIf="booking.status == 'Declined'" [type]='"danger"' [dismissible]="dismissible" (onClosed)="onClosed(booking.id)">
                     <strong>Sorry</strong> but your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}.
                     <p>
                       <small>Message the admin to know the details why or you can try and book another request.</small>

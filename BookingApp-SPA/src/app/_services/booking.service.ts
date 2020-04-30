@@ -112,4 +112,12 @@ export class BookingService {
   updateBookingStatus(id: number, bookingId: number, book: Booking) {
     return this.http.put<Booking>(this.baseUrl + 'users/' + id + '/bookings/status/' + bookingId, book);
   }
+
+  markSeenNotify(userId: number, bookingId: number) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/bookings/seennotify/' + bookingId, {}).subscribe();
+  }
+
+  markSeenByAdmin(userId: number, bookingId: number) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/bookings/seenbyadmin/' + bookingId, {}).subscribe();
+  }
 }

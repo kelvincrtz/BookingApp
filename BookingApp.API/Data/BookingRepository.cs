@@ -74,9 +74,10 @@ namespace BookingApp.API.Data
         public async Task<IEnumerable<Booking>> GetNotificationBookingsForUser(int userId)
         {
             var bookings = _context.Bookings
-                .Where(u => u.UserId == userId && u.IsSeenByAdmin && !u.IsSeenNotification && u.Status == "Approved" || u.Status == "Declined")
+                .Where(u => u.UserId == userId && u.IsSeenByAdmin && u.Status == "Approved" || u.Status == "Declined")
+                .Where(u => !u.IsSeenNotification)
                 .AsQueryable().ToListAsync();
-        
+
             return await bookings;
         }
 

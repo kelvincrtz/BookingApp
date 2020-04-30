@@ -42,6 +42,8 @@ export class BookingEditStatusComponent implements OnInit {
     this.authDecodeName = this.authService.decodedToken.unique_name;
 
     this.loadUser();
+
+    this.bookingService.markSeenByAdmin(this.authService.decodedToken.nameid, this.booking.id);
   }
 
   updateBookingStatusRequest() {

@@ -111,8 +111,8 @@ namespace BookingApp.API.Controllers
             throw new Exception("Creating the booking failed on save");
         }
 
-        [HttpPut("seenbyadmin/{id}")]
-        public async Task<IActionResult> MarkSeenByAdmin(int userId, int id, BookingForSeenAdminDto bookingForSeenAdminDto)
+        [HttpPost("seenbyadmin/{id}")]
+        public async Task<IActionResult> MarkSeenByAdmin(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -123,14 +123,32 @@ namespace BookingApp.API.Controllers
                 return BadRequest();
 
             if (bookingFromRepo.IsSeenByAdmin == true)
-                return BadRequest("Already is marked seen");
+                return NoContent();
 
-             _mapper.Map(bookingForSeenAdminDto, bookingFromRepo);
+            bookingFromRepo.IsSeenByAdmin = true;
 
             if(await _repo.SaveAll())
                 return NoContent();
 
             throw new Exception($"Marking as seen by admin for booking {id} failed on save");  
+        }
+
+        [HttpPost("seennotify/{id}")]
+        public async Task<IActionResult> MarkAsSeenNotify(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var bookingFromRepo = await _repo.GetBooking(id);
+
+            if(bookingFromRepo.UserId != userId)
+                return Unauthorized();
+
+            bookingFromRepo.IsSeenNotification = true;
+
+            await _repo.SaveAll();
+
+            return NoContent();    
         }
 
         [HttpPut("{id}")]
@@ -166,8 +184,6 @@ namespace BookingApp.API.Controllers
 
             if (bookingFromRepo == null)
                 return BadRequest();
-
-            bookingForUpdateStatusDto.IsSeenByAdmin = true;
 
             bookingForUpdateStatusDto.IsSeenNotification = false;
             
