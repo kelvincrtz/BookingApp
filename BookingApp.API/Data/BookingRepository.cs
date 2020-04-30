@@ -120,6 +120,18 @@ namespace BookingApp.API.Data
         {
             return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
         }
+        
+        public async Task<IEnumerable<Message>> GetNotificationMessagesForUser(int userId)
+        {
+            var messages = _context.Messages
+                .Include(u => u.Sender)
+                .Include(u => u.Recipient)
+                .Where(u => u.RecipientId == userId && u.IsRead == false)
+                .Where(u => u.DateRead == null)
+                .AsQueryable().ToListAsync();
+
+            return await messages;
+        }
 
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {

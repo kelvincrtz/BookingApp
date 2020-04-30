@@ -144,5 +144,22 @@ namespace BookingApp.API.Controllers
 
             return NoContent();    
         }
+
+        [HttpGet("notify")]
+        public async Task<IActionResult> GetNotificationMessagesForUser(int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var messages = await _repo.GetNotificationMessagesForUser(userId);
+
+            if (messages == null)
+                return BadRequest("No notifications");
+
+            var messagesToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messages);
+
+            return Ok(messagesToReturn);
+
+        }
     }
 }

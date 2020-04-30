@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { PaginatedResult } from '../_models/pagination';
 import { Message } from '../_models/message';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class MessageService {
           return paginatedResult;
         })
       );
+  }
+
+  getNotifyMessages(userId: number): Observable<Message> {
+    return this.http.get<Message>(this.baseUrl + 'users/' + userId + '/messages/notify');
   }
 
   getMessageThread(id: number, recipientId: number) {
