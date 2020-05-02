@@ -20,6 +20,8 @@ export class BookingEditComponent implements OnInit {
   bookingFromRepoId: any;
   @Output() cancelRegister = new EventEmitter();
 
+  bsValue = new Date(); // CLUE !!
+
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     if (this.bookingForm.dirty) {
@@ -41,6 +43,8 @@ export class BookingEditComponent implements OnInit {
       containerClass: 'theme-red'
     };
 
+    this.bsValue = new Date(this.transformDate(this.booking.when)); // CLUE !!
+
     this.bookingForm = new FormGroup({
       when: new FormControl('', Validators.required),
       location: new FormControl(this.booking.location, Validators.required),
@@ -54,7 +58,7 @@ export class BookingEditComponent implements OnInit {
   }
 
   transformDate(date: any) {
-    return this.datePipe.transform(date, 'MM/dd/yyyy');
+    return this.datePipe.transform(date, 'yyyy/MM/dd');
   }
 
   updateBookingRequest() {

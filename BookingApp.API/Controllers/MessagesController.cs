@@ -139,6 +139,7 @@ namespace BookingApp.API.Controllers
 
             message.IsRead = true;
             message.DateRead = DateTime.Now;
+            message.IsSeenNotification = true;
 
             await _repo.SaveAll();
 
