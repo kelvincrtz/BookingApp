@@ -1,24 +1,28 @@
 <div class="container alert alert-primary mt-3" role="alert">
   <h4 class="alert-heading">Hi {{ this.name | titlecase}}!</h4> 
-  <div>Use this page to manage all your booking request</div>
+  <div class="small">Use this page to manage all your booking request</div>
+  <div class="small">You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
   <hr>
 
   <div class="d-flex justify-content-between">
     <div class="btn-group">
-      <button type="button" name="eventstoday" class="btn btn-info"
-        [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" btnRadio="eventstoday">Events Today</button>
+      <button type="button" name="eventstoday" class="btn btn-info" tooltip="Shows the events happening today" [delay]="500"
+        [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" btnRadio="eventstoday">Today</button>
+
+      <button type="button" name="eventstoday" class="btn btn-info" tooltip="Shows the events happening tomorrow" [delay]="500"
+      [(ngModel)]="bookingParams.eventstomorrow" (click)="loadTomorrow()" btnRadio="eventstomorrow">Tomorrow</button>
   
-      <button type="button" name="eventsthismonth" class="btn btn-info"
-      [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" btnRadio="eventsthismonth">Events this Month</button>
+      <button type="button" name="eventsthismonth" class="btn btn-info" tooltip="Shows the events happening this month" [delay]="500"
+      [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" btnRadio="eventsthismonth">This Month</button>
   
-      <button type="button" name="eventsall" class="btn btn-info"
+      <button type="button" name="eventsall" class="btn btn-info" tooltip="Shows all the events" [delay]="500"
         (click)="loadAll()">All Events</button>
     </div>
 
     <div class="btn-group float-right my-1">
-      <button type="button" name="orderBy" class="btn btn-info" 
+      <button type="button" name="orderBy" class="btn btn-info" tooltip="Sorts the events by newest request" [delay]="500"
         [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
-      <button type="button" name="orderBy" class="btn btn-info"
+      <button type="button" name="orderBy" class="btn btn-info" tooltip="Sorts results by actual event date" [delay]="500"
         [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">By Event Date</button>
     </div>
   </div>
@@ -28,8 +32,13 @@
     <div *ngIf="bookings.length > 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} events found</div>
     <div *ngIf="bookings.length == 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} event found</div>
   </div>
+  <div *ngIf="bookingParams.eventstomorrow == true && pagination.totalItems">
+    <h2 class="d-flex justify-content-center font-weight-light">Events Tomorrow</h2>
+    <div *ngIf="pagination.totalItems > 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} events found</div>
+    <div *ngIf="pagination.totalItems == 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} event found</div>
+  </div>
   <div *ngIf="bookingParams.eventsthismonth == true && bookings.length">
-    <h2 class="d-flex justify-content-center font-weight-light">Events this month</h2>
+    <h2 class="d-flex justify-content-center font-weight-light">Events this Month</h2>
     <div *ngIf="bookings.length > 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} events found</div>
     <div *ngIf="bookings.length == 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} event found</div>
   </div>
@@ -64,8 +73,10 @@
             </div>
   
             <div class="btn-group btn-block btn-group-sm" *ngIf="userId == authDecodeToken">
-              <button *ngIf="booking.status == 'Pending'" type="button" [routerLink]="['/booking/edit/', booking.id]" class="btn btn-primary">Edit</button>
-              <button *ngIf="booking.status == 'Pending' || booking.status =='Declined'" type="button" class="btn btn-danger"  (click)="openModal(template)">Delete</button>
+              <button type="button" [routerLink]="['/booking/edit/', booking.id]" class="btn btn-primary" tooltip="Click to edit request" [delay]="500"
+                [disabled]="booking.status == 'Approved' || booking.status == 'Declined'">Edit</button>
+              <button type="button" class="btn btn-danger"  (click)="openModal(template)" tooltip="Click to delete this request" [delay]="500"
+                [disabled]="booking.status == 'Approved'">Delete</button>
               <ng-template #template>
                 <div class="modal-body text-center">
                   <p>Do you want to delete this request?</p>

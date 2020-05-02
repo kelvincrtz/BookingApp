@@ -86,6 +86,7 @@ export class BookingListForUserComponent implements OnInit {
   loadMonth() {
     this.bookingParams.eventstoday = false;
     this.bookingParams.all = false;
+    this.bookingParams.eventstomorrow = false;
     this.bookingParams.eventsthismonth = true;
     this.pagination.currentPage = 1;
     this.loadBookings();
@@ -94,7 +95,17 @@ export class BookingListForUserComponent implements OnInit {
   loadToday() {
     this.bookingParams.eventsthismonth = false;
     this.bookingParams.all = false;
+    this.bookingParams.eventstomorrow = false;
     this.bookingParams.eventstoday = true;
+    this.pagination.currentPage = 1;
+    this.loadBookings();
+  }
+
+  loadTomorrow() {
+    this.bookingParams.eventsthismonth = false;
+    this.bookingParams.all = false;
+    this.bookingParams.eventstoday = false;
+    this.bookingParams.eventstomorrow = true;
     this.pagination.currentPage = 1;
     this.loadBookings();
   }
@@ -102,6 +113,7 @@ export class BookingListForUserComponent implements OnInit {
   loadAll() {
     this.bookingParams.eventsthismonth = false;
     this.bookingParams.eventstoday = false;
+    this.bookingParams.eventstomorrow = false;
     this.bookingParams.all = true;
     this.pagination.currentPage = 1;
     this.loadBookings();
