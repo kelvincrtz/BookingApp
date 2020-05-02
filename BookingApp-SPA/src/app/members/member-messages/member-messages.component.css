@@ -18,3 +18,7 @@
     overflow-y: scroll;
     height: 575px;
 }
+
+.bg-custom {
+    background-color: rgb(250, 236, 236);
+}

@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 // tslint:disable-next-line: max-line-length
-import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, AlertModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, AlertModule, TooltipModule, CollapseModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TimeAgoPipe } from 'time-ago-pipe';
@@ -86,6 +86,7 @@ export function tokenGetter() {
       ModalModule.forRoot(),
       AlertModule.forRoot(),
       TooltipModule.forRoot(),
+      CollapseModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {

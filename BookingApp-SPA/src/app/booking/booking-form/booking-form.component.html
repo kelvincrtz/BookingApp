@@ -10,7 +10,7 @@
               <input type="text" bsDatepicker [bsConfig]="bsConfig"
               [ngClass]="{'is-invalid': bookingForm.get('when').errors && bookingForm.get('when').touched
                   || bookingForm.get('when').touched && bookingForm.hasError('errordate')}" 
-              class="form-control" formControlName="when" placeholder="When">
+              class="form-control" formControlName="when" placeholder="Date">
               <div class="invalid-feedback" 
                 *ngIf="bookingForm.get('when').hasError('required') && bookingForm.get('when').touched">
                 Please choose a date
@@ -23,7 +23,7 @@
       
             <div class="form-group">
               <input type="text" [ngClass]="{'is-invalid': bookingForm.get('location').errors && bookingForm.get('location').touched}"
-              class="form-control" formControlName="location" placeholder="Where">
+              class="form-control" formControlName="location" placeholder="Location">
               <div class="invalid-feedback">Location is required</div>
             </div>
             
