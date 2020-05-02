@@ -46,6 +46,7 @@ export class BookingListComponent implements OnInit {
     this.bookingParams.status = null;
 
     this.pagination.currentPage = 1;
+    this.bookingParams.all = true;
 
     this.bookingService.getBookings(this.authService.decodedToken.nameid, this.pagination.currentPage,
       this.pagination.itemsPerPage)

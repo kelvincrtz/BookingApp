@@ -1,19 +1,19 @@
-<h4 class="container alert alert-dark mt-3 font-weight-normal" role="alert">
+<h4 class="container alert bg-custom mt-3 font-weight-normal" role="alert">
     <h4 class="alert-heading">Approve or Decline Request</h4>
     <p>You have a booking request from 
       <button [routerLink]="['/members/', booking.userId]" class="btn btn-primary btn-sm">{{user?.fullName}}</button> 
     This request was sent on {{booking.dateAdded | date: 'fullDate'}}</p>
-    <hr>
-    Click
-    <div class="badge badge-success text-wrap" style="width: 3rem;">Save</div>
-    to save the changes or
-    <div class="badge badge-info text-wrap" style="width: 4rem;">Cancel</div>
-    to go back to the Bookings list
-  </h4>
+    <hr class="hr-custom">
+    <div class="py-30">
+      <alert type="info">
+        The current status of this request is <strong>{{booking.status}}</strong>
+      </alert>
+    </div>
 
-  <div class="container">
+    <div class="container">
       <div class="d-flex justify-content-center">
-        <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+        
+        <div class="card text-white bg-dark border-white mb-3" style="max-width: 30rem;">
             <div class="card-header h4 text-capitalize">{{booking.location}}</div>
             <div class="card-body">
               <h4 class="card-title font-weight-light">When: {{booking.when | date}}</h4>
@@ -34,8 +34,8 @@
                       
                         <div class="form-group text-center">
                           <div class="btn-group" role="group" aria-label="Basic example">
-                            <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid">Save</button>
-                            <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+                            <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" tooltip="Click to save changes" [delay]="500">Save</button>
+                            <button class="btn btn-info" type="button" (click)="cancel()" tooltip="Click to cancel" [delay]="500">Cancel</button>
                           </div>
                         </div>
                   </div>
@@ -44,8 +44,8 @@
             </div>
           </div>
       </div>
-  </div>
-
+    </div>
+  </h4>
 
   <ng-template #template>
     <div class="modal-header">
