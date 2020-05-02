@@ -20,6 +20,8 @@ export class BookingListComponent implements OnInit {
   bookingParams: any = {};
   @ViewChild('form', {static: true}) form: NgForm;
 
+  test: any = {};
+
   constructor(private bookingService: BookingService, private alertify: AlertifyService, private route: ActivatedRoute,
               private authService: AuthService) { }
 
@@ -74,6 +76,7 @@ export class BookingListComponent implements OnInit {
     this.bookingParams.eventstoday = false;
     this.bookingParams.all = false;
     this.bookingParams.eventsthismonth = true;
+    this.bookingParams.eventstomorrow = false;
     this.pagination.currentPage = 1;
     this.loadBookings();
   }
@@ -82,6 +85,16 @@ export class BookingListComponent implements OnInit {
     this.bookingParams.eventsthismonth = false;
     this.bookingParams.all = false;
     this.bookingParams.eventstoday = true;
+    this.bookingParams.eventstomorrow = false;
+    this.pagination.currentPage = 1;
+    this.loadBookings();
+  }
+
+  loadTomorrow() {
+    this.bookingParams.eventsthismonth = false;
+    this.bookingParams.all = false;
+    this.bookingParams.eventstoday = false;
+    this.bookingParams.eventstomorrow = true;
     this.pagination.currentPage = 1;
     this.loadBookings();
   }
@@ -89,6 +102,7 @@ export class BookingListComponent implements OnInit {
   loadAll() {
     this.bookingParams.eventsthismonth = false;
     this.bookingParams.eventstoday = false;
+    this.bookingParams.eventstomorrow = false;
     this.bookingParams.all = true;
     this.pagination.currentPage = 1;
     this.loadBookings();

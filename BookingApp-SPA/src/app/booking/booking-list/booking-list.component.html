@@ -8,13 +8,16 @@
         
         <div class="btn-group mr-2">
           <button type="button" name="eventstoday" class="btn btn-info" tooltip="Shows the events happening today" [delay]="500"
-            [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" btnRadio="eventstoday">Events Today</button>
+          [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" [value]="true" btnRadio="eventstoday">Today</button>
+
+          <button type="button" name="eventstomorrow" class="btn btn-info" tooltip="Shows the events happening tomorrow" [delay]="500"
+          [(ngModel)]="bookingParams.eventstomorrow" (click)="loadTomorrow()" [value]="true" btnRadio="eventstomorrow">Tomorrow</button>
 
           <button type="button" name="eventsthismonth" class="btn btn-info" tooltip="Shows all the events for this current month" [delay]="500"
-          [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" btnRadio="eventsthismonth">Events this Month</button>
+          [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" [value]="true" btnRadio="eventsthismonth">This Month</button>
 
           <button type="button" name="eventsall" class="btn btn-info" tooltip="Shows all the events" [delay]="500"
-            (click)="loadAll()">All Events</button>
+          [(ngModel)]="bookingParams.all" (click)="loadAll()" [value]="true" btnRadio="eventsall">All Events</button>
         </div>
 
         <div class="form-group mr-2 my-1">
@@ -44,6 +47,11 @@
 
   <div *ngIf="bookingParams.eventstoday == true && pagination.totalItems">
     <h2 class="d-flex justify-content-center font-weight-light">Events Today</h2>
+    <div *ngIf="pagination.totalItems > 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} events found</div>
+    <div *ngIf="pagination.totalItems == 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.eventstomorrow == true && pagination.totalItems">
+    <h2 class="d-flex justify-content-center font-weight-light">Events Tomorrow</h2>
     <div *ngIf="pagination.totalItems > 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} events found</div>
     <div *ngIf="pagination.totalItems == 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} event found</div>
   </div>

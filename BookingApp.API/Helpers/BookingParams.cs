@@ -13,6 +13,7 @@ namespace BookingApp.API.Helpers
         public string Status { get; set; }
         public bool EventsThisMonth { get; set; }
         public bool EventsToday { get; set; }
+        public bool EventsTomorrow { get; set; }
         public string OrderBy { get; set; }
     }
 }

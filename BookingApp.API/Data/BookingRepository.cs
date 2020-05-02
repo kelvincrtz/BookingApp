@@ -42,6 +42,7 @@ namespace BookingApp.API.Data
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
             var day = DateTime.Now.Day;
+            var dayPlusOne = DateTime.Now.AddDays(1);
 
             if (bookingParams.EventsThisMonth) {
                 bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month);
@@ -49,6 +50,10 @@ namespace BookingApp.API.Data
 
             if (bookingParams.EventsToday) {
                 bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month && b.When.Day == day);
+            }
+
+            if (bookingParams.EventsTomorrow) {
+                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month && b.When.Day == dayPlusOne.Day);
             }
 
             if (bookingParams.Status!=null) {

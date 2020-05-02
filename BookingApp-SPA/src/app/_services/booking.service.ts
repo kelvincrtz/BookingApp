@@ -32,6 +32,9 @@ export class BookingService {
       if (bookingParams.eventstoday != null) {
         params = params.append('eventstoday', bookingParams.eventstoday);
       }
+      if (bookingParams.eventstomorrow != null) {
+        params = params.append('eventstomorrow', bookingParams.eventstomorrow);
+      }
       if (bookingParams.eventsthismonth != null) {
         params = params.append('eventsthismonth', bookingParams.eventsthismonth);
       }
