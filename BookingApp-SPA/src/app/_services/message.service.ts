@@ -57,4 +57,8 @@ export class MessageService {
   markAsRead(userId: number, messageId: number) {
     return this.http.post(this.baseUrl + 'users/' + userId + '/messages/read/' + messageId, {}).subscribe();
   }
+
+  markNotified(userId: number, messageId: number) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/messages/marknotified/' + messageId, {}).subscribe();
+  }
 }

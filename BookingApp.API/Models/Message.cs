@@ -15,6 +15,7 @@ namespace BookingApp.API.Models
         public DateTime MessageSent { get; set; }
         public bool SenderDeleted { get; set; }
         public bool RecipientDeleted { get; set; }
+        public bool IsSeenNotification { get; set; }
         
     }
 }

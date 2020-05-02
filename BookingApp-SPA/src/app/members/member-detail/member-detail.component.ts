@@ -24,8 +24,7 @@ export class MemberDetailComponent implements OnInit {
   alerts: any;
 
   constructor(private route: ActivatedRoute, private authService: AuthService,
-              private bookingService: BookingService, private alertify: AlertifyService,
-              private messageService: MessageService) { }
+              private bookingService: BookingService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -43,7 +42,8 @@ export class MemberDetailComponent implements OnInit {
     this.bookings.splice(this.bookings.findIndex(m => m.id === bookingId), 1);
   }
 
-  onClosedMessage(messageId: any) {
+  onClosedMessage(messageId: any, recipientId: any) {
+    this.messageService.markNotified(recipientId, messageId);
     this.messages.splice(this.messages.findIndex(m => m.id === messageId), 1);
   }
 
@@ -63,6 +63,11 @@ export class MemberDetailComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  markMessageNotified(messageId: any, recipientId: any) {
+    this.messageService.markNotified(recipientId, messageId);
+    this.messages.splice(this.messages.findIndex(m => m.id === messageId), 1);
   }
 
   markAsSeenNotify(bookingId: number) {

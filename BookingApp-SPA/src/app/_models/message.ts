@@ -8,4 +8,5 @@ export interface Message {
     isRead: boolean;
     dateRead: Date;
     messageSent: Date;
+    isSeenNotification?: boolean;
 }

@@ -136,8 +136,8 @@ namespace BookingApp.API.Data
             var messages = _context.Messages
                 .Include(u => u.Sender)
                 .Include(u => u.Recipient)
-                .Where(u => u.RecipientId == userId && u.IsRead == false)
-                .Where(u => u.DateRead == null)
+                .Where(u => u.RecipientId == userId && u.IsRead == false && u.DateRead == null)
+                .Where(u => u.IsSeenNotification == false)
                 .AsQueryable().ToListAsync();
 
             return await messages;

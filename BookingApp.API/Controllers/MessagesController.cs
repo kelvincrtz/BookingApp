@@ -161,5 +161,23 @@ namespace BookingApp.API.Controllers
             return Ok(messagesToReturn);
 
         }
+
+        [HttpPost("marknotified/{id}")]
+        public async Task<IActionResult> MarkNotified(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var message = await _repo.GetMessage(id);
+
+            if(message.RecipientId != userId)
+                return Unauthorized();
+
+            message.IsSeenNotification = true;
+
+            await _repo.SaveAll();
+
+            return NoContent();    
+        }
     }
 }
