@@ -10,20 +10,10 @@ import { User } from 'src/app/_models/user';
 })
 export class BookingCardComponent implements OnInit {
   @Input() booking: Booking;
-  user: User;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.loadUser();
-  }
-
-  loadUser() {
-    this.userService.getUser(this.booking.userId).subscribe((user: User) => {
-      this.user = user;
-    }, error => {
-      console.log(error);
-    });
   }
 
 }

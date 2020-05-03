@@ -6,7 +6,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-booking-list-for-user',
@@ -26,6 +25,8 @@ export class BookingListForUserComponent implements OnInit {
 
   name: any;
   bookingParams: any = {};
+
+  isCollapsed = true;
 
   constructor(private booking: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }

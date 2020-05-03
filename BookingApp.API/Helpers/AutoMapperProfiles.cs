@@ -18,6 +18,7 @@ namespace BookingApp.API.Helpers
             CreateMap<Booking, BookingForListDto>();
             CreateMap<BookingForCreationDto, Booking>();
             CreateMap<UserForUpdateDto, User>();
+            CreateMap<User, UserForUpdateDto>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<BookingForUpdateDto, Booking>();
             CreateMap<BookingForUpdateStatusDto, Booking>();

@@ -1,7 +1,12 @@
 <div class="container alert alert-primary mt-3" role="alert">
   <h4 class="alert-heading">Hi {{ this.name | titlecase}}!</h4> 
-  <div class="small">Use this page to manage all your booking request</div>
-  <div class="small">You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
+  <button type="button" class="btn btn-light btn-sm" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">INFO
+  </button>
+  <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="mt-1">
+    <div class="">Use this page to manage all your booking requests</div>
+    <div class=""><small class="text-muted">NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
+  </div>
   <hr>
 
   <div class="d-flex justify-content-between">
@@ -54,9 +59,9 @@
 
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let booking of bookings">
-      <div class="card border-dark text-dark font-weight-light mt-2 h-95">
+      <div class="card text-dark font-weight-light mt-2 h-95">
         <div>
-          <div class="card-header border-dark">  
+          <div class="card-header border-white">  
             <div class="text-muted d-flex justify-content-between">Status </div>
             <div class="d-flex justify-content-between">
               <div *ngIf="booking.status == 'Approved'" class="text-success">{{booking.status}}</div>
@@ -87,7 +92,7 @@
             </div>
   
           </div>
-          <div class="card-footer border-dark bg-white">
+          <div class="card-footer border-white">
             <div><small class="font-weight-lighter">Submitted on <span class="badge badge-dark">{{booking.dateAdded | date: 'fullDate'}}</span></small></div>
           </div>
         </div>

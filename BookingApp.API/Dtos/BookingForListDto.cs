@@ -1,4 +1,5 @@
 using System;
+using BookingApp.API.Models;
 
 namespace BookingApp.API.Dtos
 {
@@ -16,5 +17,6 @@ namespace BookingApp.API.Dtos
         public bool IsSeenByAdmin { get; set; }
         public bool IsSeenNotification { get; set; }
         public DateTime ApproveOrDeclineDate { get; set; }
+        public UserForUpdateDto User { get; set; }
     }
 }

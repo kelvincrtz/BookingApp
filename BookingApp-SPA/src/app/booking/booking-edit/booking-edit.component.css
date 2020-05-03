@@ -1,4 +1,21 @@
-.alert {
-    background-color:rgb(101, 134, 224);
+.alert-custom {
+    background: linear-gradient(50deg, #3c67c2 0%, #1db386 40%);
+    border-radius: 0.50em;
 }
+
+.custom-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', sans-serif;
+    font-size: 3em;
+    font-weight: 800;
+    height: 4em;
+    width: 64em;
+    padding: 0.1em 1em;
+    border-radius: 0.25em;
+    display: table-cell;
+    vertical-align: middle;
+    letter-spacing: -2px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background: linear-gradient(60deg, #64ff79 20%, #5ac8fa 40%);
+}
+
   

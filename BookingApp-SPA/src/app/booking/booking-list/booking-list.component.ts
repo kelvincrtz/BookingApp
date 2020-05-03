@@ -45,6 +45,7 @@ export class BookingListComponent implements OnInit {
     this.form.reset(this.bookings);
     this.bookingParams.eventsthismonth = false;
     this.bookingParams.eventstoday = false;
+    this.bookingParams.eventstomorrow = false;
     this.bookingParams.status = null;
 
     this.pagination.currentPage = 1;

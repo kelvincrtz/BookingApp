@@ -1,11 +1,11 @@
-<div class="container alert mt-3" role="alert">
+<div class="container alert-custom mt-3" role="alert">
   <form class="container mt-3" [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
 
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-6 col-sm-12">
-  
-        <h2 class="text-center text-white">Make a Booking</h2>
-        <hr class="custom">
+        <div class="m-4"></div>
+        <h2 class="custom-title">Make a Booking</h2>
+        <hr>
             <div class="form-group">
               <input type="text" bsDatepicker [bsConfig]="bsConfig"
               [ngClass]="{'is-invalid': bookingForm.get('when').errors && bookingForm.get('when').touched

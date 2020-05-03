@@ -38,7 +38,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   onClosed(bookingId: any) {
-    this.markAsSeenNotify(bookingId);
+    this.markBookingNotified(bookingId);
     this.bookings.splice(this.bookings.findIndex(m => m.id === bookingId), 1);
   }
 
@@ -66,11 +66,15 @@ export class MemberDetailComponent implements OnInit {
   }
 
   markMessageNotified(messageId: any, recipientId: any) {
-    this.messageService.markNotified(recipientId, messageId);
-    this.messages.splice(this.messages.findIndex(m => m.id === messageId), 1);
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.messages.length; i++) {
+         this.messageService.markNotified(recipientId, this.messages[i].id);
+         this.messages.splice(this.messages.findIndex(m => m.id === this.messages[i].id), 1);
+    }
   }
 
-  markAsSeenNotify(bookingId: number) {
+  markBookingNotified(bookingId: number) {
     this.bookingService.markSeenNotify(this.authService.decodedToken.nameid, bookingId);
   }
 }

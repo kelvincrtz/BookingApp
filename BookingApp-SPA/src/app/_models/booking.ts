@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface Booking {
     id: number;
     status: string;
@@ -11,4 +13,5 @@ export interface Booking {
     isSeenByAdmin?: boolean;
     isSeenNotification?: boolean;
     approveOrDeclineDate?: Date;
+    user?: User;
 }
