@@ -5,7 +5,7 @@ import { BookingEditComponent } from '../booking/booking-edit/booking-edit.compo
 @Injectable()
 export class PreventEditBookingFormUnsavedChanges implements CanDeactivate<BookingEditComponent> {
     canDeactivate(component: BookingEditComponent) {
-        if (component.bookingForm.touched) {
+        if (component.bookingForm.dirty) {
             return confirm('Are you sure you want to continue? Any unsaved changes will be lost');
         }
         return true;

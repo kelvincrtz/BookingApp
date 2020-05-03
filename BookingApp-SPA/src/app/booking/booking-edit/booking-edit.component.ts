@@ -15,12 +15,13 @@ import { DatePipe } from '@angular/common';
 })
 export class BookingEditComponent implements OnInit {
   booking: Booking;
+  bookingToUpdate: Booking;
   bookingForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
   bookingFromRepoId: any;
   @Output() cancelRegister = new EventEmitter();
 
-  bsValue = new Date(); // CLUE !!
+  bsValue = new Date();
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -43,10 +44,12 @@ export class BookingEditComponent implements OnInit {
       containerClass: 'theme-red'
     };
 
-    this.bsValue = new Date(this.transformDate(this.booking.when)); // CLUE !!
+    this.bsValue = new Date(this.booking.when);
+
+    this.bsValue.setHours(22);
 
     this.bookingForm = new FormGroup({
-      when: new FormControl('', Validators.required),
+      when: new FormControl(this.bsValue, Validators.required),
       location: new FormControl(this.booking.location, Validators.required),
       fromTime: new FormControl(this.booking.fromTime, Validators.required),
       toTime: new FormControl(this.booking.toTime, Validators.required),
@@ -57,16 +60,12 @@ export class BookingEditComponent implements OnInit {
     return g.get('when').value >= Date.now() ? null : {errordate: true } ;
   }
 
-  transformDate(date: any) {
-    return this.datePipe.transform(date, 'yyyy/MM/dd');
-  }
-
   updateBookingRequest() {
     if (this.bookingForm.valid) {
-      this.booking = Object.assign({}, this.bookingForm.value);
-      this.bookingService.updateBooking(this.authService.decodedToken.nameid, this.bookingFromRepoId, this.booking).subscribe(next => {
+      this.bookingToUpdate = Object.assign({}, this.bookingForm.value);
+      this.bookingService.updateBooking(this.authService.decodedToken.nameid, this.bookingFromRepoId, this.bookingToUpdate)
+      .subscribe(next => {
         this.alertify.success('Booking request has been updated');
-        this.bookingForm.reset(this.booking);
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {

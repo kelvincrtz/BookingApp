@@ -38,8 +38,7 @@ export const appRoutes: Routes = [
             { path: 'bookingrequest', component: BookingFormComponent, resolve: null,
                 canDeactivate: [PreventBookingFormUnsavedChanges]},
             { path: 'bookingsforuser', component: BookingListForUserComponent, resolve: {bookings: BookingListForUserResolver}},
-            { path: 'booking/edit/:id', component: BookingEditComponent, resolve: {booking: BookingEditResolver},
-                canDeactivate: [PreventEditBookingFormUnsavedChanges]},
+            { path: 'booking/edit/:id', component: BookingEditComponent, resolve: {booking: BookingEditResolver}},
             { path: 'booking/edit/status/:id', component: BookingEditStatusComponent, resolve: {booking: BookingEditStatusResolver}}
         ]
     },
