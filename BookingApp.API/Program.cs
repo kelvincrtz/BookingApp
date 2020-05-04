@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookingApp.API.Data;
+using BookingApp.API.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,9 +24,11 @@ namespace BookingApp.API
                 var services = scope.ServiceProvider;
                 try 
                 {
-                    var context = services.GetRequiredService<DataContext>(); // For Dependency Injection - Injecting DataContext
-                    context.Database.Migrate(); // If Database doesnt exists, its going to create it for us,
-                    Seed.SeedUsers(context); // Then seeds in users to the database
+                    var context = services.GetRequiredService<DataContext>();
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+                    var roleManager = services.GetRequiredService<RoleManager<Role>>();
+                    context.Database.Migrate(); // If Database doesnt exists, create using seed method
+                    Seed.SeedUsers(userManager, roleManager); // Seeds in users to the database
                 }
                 catch (Exception ex)
                 {       
