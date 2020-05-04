@@ -41,7 +41,7 @@ export const appRoutes: Routes = [
             { path: 'bookingsforuser', component: BookingListForUserComponent, resolve: {bookings: BookingListForUserResolver}},
             { path: 'booking/edit/:id', component: BookingEditComponent, resolve: {booking: BookingEditResolver}},
             { path: 'booking/edit/status/:id', component: BookingEditStatusComponent, resolve: {booking: BookingEditStatusResolver}},
-            { path: 'admin', component: AdminPanelComponent}
+            { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}
