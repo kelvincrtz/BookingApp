@@ -183,7 +183,7 @@ namespace BookingApp.API.Data
 
             return user;
         }
-
+        
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
             var users = _context.Users.Include(b => b.Bookings).OrderByDescending(u => u.LastActive).AsQueryable();
