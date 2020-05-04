@@ -66,7 +66,7 @@ namespace BookingApp.API.Controllers
 
                 return Ok(new
                 {
-                    token = GenerateJwtToken(user), // Write token to the response
+                    token = GenerateJwtToken(user).Result, // Write token to the response
                     user = appUser
                 });
             }

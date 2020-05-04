@@ -45,6 +45,7 @@ import { BookingEditStatusComponent } from './booking/booking-edit-status/bookin
 import { MessageService } from './_services/message.service';
 import { MessagesResolver } from './_resolvers/messages-resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -68,7 +69,8 @@ export function tokenGetter() {
       TimeAgoPipe,
       BookingCardComponent,
       BookingEditStatusComponent,
-      MemberMessagesComponent
+      MemberMessagesComponent,
+      AdminPanelComponent
    ],
    imports: [
       BrowserModule,

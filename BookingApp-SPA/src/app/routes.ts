@@ -21,6 +21,7 @@ import { PreventEditBookingFormUnsavedChanges } from './_guards/prevent-editbook
 import { BookingEditStatusResolver } from './_resolvers/booking-edit-status-resolver';
 import { BookingEditStatusComponent } from './booking/booking-edit-status/booking-edit-status.component';
 import { MessagesResolver } from './_resolvers/messages-resolver';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -39,7 +40,8 @@ export const appRoutes: Routes = [
                 canDeactivate: [PreventBookingFormUnsavedChanges]},
             { path: 'bookingsforuser', component: BookingListForUserComponent, resolve: {bookings: BookingListForUserResolver}},
             { path: 'booking/edit/:id', component: BookingEditComponent, resolve: {booking: BookingEditResolver}},
-            { path: 'booking/edit/status/:id', component: BookingEditStatusComponent, resolve: {booking: BookingEditStatusResolver}}
+            { path: 'booking/edit/status/:id', component: BookingEditStatusComponent, resolve: {booking: BookingEditStatusResolver}},
+            { path: 'admin', component: AdminPanelComponent}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}
