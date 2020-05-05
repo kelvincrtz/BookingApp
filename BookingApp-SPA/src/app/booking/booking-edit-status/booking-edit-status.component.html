@@ -13,8 +13,8 @@
     <div class="container">
       <div class="d-flex justify-content-center">
         
-        <div class="card text-white bg-dark border-white mb-3" style="max-width: 30rem;">
-            <div class="card-header h4 text-capitalize">{{booking.location}}</div>
+        <div class="card card-custom mb-3" style="max-width: 45rem;">
+            <div class="card-header text-capitalize lead text-light">{{booking.location}}</div>
             <div class="card-body">
               <h4 class="card-title font-weight-light">When: {{booking.when | date}}</h4>
               <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>

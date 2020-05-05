@@ -1,9 +1,10 @@
 .bg-custom {
-    background-color:rgba(0, 0, 0, 0.767);
+    background: linear-gradient(150deg, #2d60ce 0%, #2cdba7 40%);
+    border-radius: 0.80em;
 }
 
-.hr-custom {
-    height: 1px;
-    background-color: #ccc;
-    border: none;
+.card-custom {
+    background: linear-gradient(140deg, #356ce4 0%, #3b7cdf 40%);
+    border-radius: 0.80em;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
