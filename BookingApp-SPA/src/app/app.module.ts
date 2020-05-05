@@ -47,6 +47,10 @@ import { MessagesResolver } from './_resolvers/messages-resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { AdminService } from './_services/admin.service';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -72,7 +76,10 @@ export function tokenGetter() {
       BookingEditStatusComponent,
       MemberMessagesComponent,
       AdminPanelComponent,
-      HasRoleDirective
+      HasRoleDirective,
+      UserManagementComponent,
+      PhotoManagementComponent,
+      RolesModalComponent
    ],
    imports: [
       BrowserModule,
@@ -105,6 +112,7 @@ export function tokenGetter() {
       UserService,
       BookingService,
       MessageService,
+      AdminService,
       ErrorInterceptorProvider,
       MemberDetailResolver,
       MemberListResolver,
@@ -118,6 +126,9 @@ export function tokenGetter() {
       PreventBookingFormUnsavedChanges,
       PreventEditBookingFormUnsavedChanges,
       DatePipe
+   ],
+   entryComponents: [
+      RolesModalComponent
    ],
    bootstrap: [
       AppComponent

@@ -3,7 +3,7 @@ import { Message } from './message';
 
 export interface User {
     id: number;
-    username: string;
+    userName: string;
     age: number;
     gender: string;
     created: Date;
@@ -14,4 +14,5 @@ export interface User {
     contactNumber: string;
     bookings?: Booking[];
     messages?: Message[];
+    roles?: string[];
 }
