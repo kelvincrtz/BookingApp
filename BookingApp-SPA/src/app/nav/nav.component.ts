@@ -23,7 +23,12 @@ export class NavComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     }, () => {
-      this.router.navigate(['/members']); // to be changed
+      if (this.authService.roleMatch(['Admin', 'Moderator'])) {
+        this.router.navigate(['/members']);
+      }
+      if (this.authService.roleMatch(['Member'])) {
+        this.router.navigate(['/members', this.authService.decodedToken.nameid]);
+      }
     });
   }
 
