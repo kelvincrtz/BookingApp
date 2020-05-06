@@ -28,6 +28,8 @@ export class BookingListForUserComponent implements OnInit {
 
   isCollapsed = true;
 
+  date: Date = new Date();
+
   constructor(private booking: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }
 
@@ -43,6 +45,8 @@ export class BookingListForUserComponent implements OnInit {
     this.bookingParams.orderBy = 'dateadded';
 
     this.bookingParams.all = true;
+
+    console.log('Date = ' + this.date);
   }
 
   loadBookings() {

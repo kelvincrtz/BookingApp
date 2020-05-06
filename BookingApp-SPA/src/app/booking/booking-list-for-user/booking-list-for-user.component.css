@@ -22,3 +22,7 @@
     font-size: 11px; 
     text-align: center; 
 }
+
+hr {
+    border-color: rgb(60, 119, 207);
+}
