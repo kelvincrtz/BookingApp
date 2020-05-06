@@ -7,17 +7,17 @@
       <form class="form-inline" #form="ngForm" (ngSubmit)="loadBookings()" novalidate>
         
         <div class="btn-group mr-2">
-          <button type="button" name="eventstoday" class="btn btn-info" tooltip="Shows the events happening today" [delay]="500"
-          [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" [value]="true" btnRadio="eventstoday">Today</button>
+          <button type="button" name="eventstoday" class="btn" tooltip="Shows the events happening today" [delay]="500"
+          [(ngModel)]="bookingParams.eventstoday" [ngClass]="bookingParams.eventstoday ? 'btn-success active' : 'btn-secondary'" (click)="loadToday()" [value]="true" btnRadio="eventstoday">Today</button>
 
-          <button type="button" name="eventstomorrow" class="btn btn-info" tooltip="Shows the events happening tomorrow" [delay]="500"
-          [(ngModel)]="bookingParams.eventstomorrow" (click)="loadTomorrow()" [value]="true" btnRadio="eventstomorrow">Tomorrow</button>
+          <button type="button" name="eventstomorrow" class="btn" tooltip="Shows the events happening tomorrow" [delay]="500"
+          [(ngModel)]="bookingParams.eventstomorrow" [ngClass]="bookingParams.eventstomorrow ? 'btn-success active' : 'btn-secondary'" (click)="loadTomorrow()" [value]="true" btnRadio="eventstomorrow">Tomorrow</button>
 
-          <button type="button" name="eventsthismonth" class="btn btn-info" tooltip="Shows all the events for this current month" [delay]="500"
-          [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" [value]="true" btnRadio="eventsthismonth">This Month</button>
+          <button type="button" name="eventsthismonth" class="btn" tooltip="Shows all the events for this current month" [delay]="500"
+          [(ngModel)]="bookingParams.eventsthismonth" [ngClass]="bookingParams.eventsthismonth ? 'btn-success active' : 'btn-secondary'" (click)="loadMonth()" [value]="true" btnRadio="eventsthismonth">This Month</button>
 
-          <button type="button" name="eventsall" class="btn btn-info" tooltip="Shows all the events" [delay]="500"
-          [(ngModel)]="bookingParams.all" (click)="loadAll()" [value]="true" btnRadio="eventsall">All Events</button>
+          <button type="button" name="eventsall" class="btn" tooltip="Shows all the events" [delay]="500"
+          [(ngModel)]="bookingParams.all" [ngClass]="bookingParams.all ? 'btn-success active' : 'btn-secondary'" (click)="loadAll()" [value]="true" btnRadio="eventsall">All Events</button>
         </div>
 
         <div class="form-group mr-2 my-1">

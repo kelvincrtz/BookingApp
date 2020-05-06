@@ -1,9 +1,9 @@
 <h4 class="container alert bg-custom mt-3 font-weight-normal" role="alert">
     <h4 class="alert-heading">Approve or Decline Request</h4>
-    <p>You have a booking request from 
+    <p>Booking request from 
       <button [routerLink]="['/members/', booking.userId]" class="btn btn-primary btn-sm">{{user?.fullName}}</button> 
-    This request was sent on {{booking.dateAdded | date: 'fullDate'}}</p>
-    <hr class="hr-custom">
+    This was sent on {{booking.dateAdded | date: 'fullDate'}}</p>
+    <hr>
     <div class="py-30">
       <alert type="info">
         The current status of this request is <strong>{{booking.status}}</strong>

@@ -1,8 +1,10 @@
 <div class="container alert alert-primary mt-3" role="alert">
-  <h4 class="alert-heading">Hi {{ this.name | titlecase}}!</h4> 
-  <button type="button" class="btn btn-light btn-sm" (click)="isCollapsed = !isCollapsed"
-        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">INFO
-  </button>
+  <div class="d-flex justify-content-between">
+    <h4 class="alert-heading">Hi {{ this.name | titlecase}}!</h4> 
+    <button type="button" class="btn btn-light btn-circle" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i class="fa fa-info-circle"></i> 
+    </button>
+  </div>
   <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="mt-1">
     <div class="">Use this page to manage all your booking requests</div>
     <div class=""><small class="text-muted">NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
@@ -11,17 +13,17 @@
 
   <div class="d-flex justify-content-between">
     <div class="btn-group">
-      <button type="button" name="eventstoday" class="btn btn-info" tooltip="Shows the events happening today" [delay]="500"
-        [(ngModel)]="bookingParams.eventstoday" (click)="loadToday()" btnRadio="eventstoday">Today</button>
+      <button type="button" name="eventstoday" class="btn" tooltip="Shows the events happening today" [delay]="500" [value]="true" 
+        [(ngModel)]="bookingParams.eventstoday" [ngClass]="bookingParams.eventstoday ? 'btn-success active' : 'btn-secondary'" (click)="loadToday()" btnRadio="eventstoday">Today</button>
 
-      <button type="button" name="eventstoday" class="btn btn-info" tooltip="Shows the events happening tomorrow" [delay]="500"
-      [(ngModel)]="bookingParams.eventstomorrow" (click)="loadTomorrow()" btnRadio="eventstomorrow">Tomorrow</button>
+      <button type="button" name="eventstoday" class="btn" tooltip="Shows the events happening tomorrow" [delay]="500" [value]="true" 
+      [(ngModel)]="bookingParams.eventstomorrow" [ngClass]="bookingParams.eventstomorrow ? 'btn-success active' : 'btn-secondary'" (click)="loadTomorrow()" btnRadio="eventstomorrow">Tomorrow</button>
   
-      <button type="button" name="eventsthismonth" class="btn btn-info" tooltip="Shows the events happening this month" [delay]="500"
-      [(ngModel)]="bookingParams.eventsthismonth" (click)="loadMonth()" btnRadio="eventsthismonth">This Month</button>
+      <button type="button" name="eventsthismonth" class="btn" tooltip="Shows the events happening this month" [delay]="500" [value]="true" 
+      [(ngModel)]="bookingParams.eventsthismonth" [ngClass]="bookingParams.eventsthismonth ? 'btn-success active' : 'btn-secondary'" (click)="loadMonth()" btnRadio="eventsthismonth">This Month</button>
   
-      <button type="button" name="eventsall" class="btn btn-info" tooltip="Shows all the events" [delay]="500"
-        (click)="loadAll()">All Events</button>
+      <button type="button" name="eventsall" class="btn" tooltip="Shows all the events" [delay]="500" [value]="true" 
+        [ngClass]="bookingParams.all ? 'btn-success active' : 'btn-secondary'" (click)="loadAll()" btnRadio="eventsall">All Events</button>
     </div>
 
     <div class="btn-group float-right my-1">
