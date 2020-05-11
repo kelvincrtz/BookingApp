@@ -55,6 +55,10 @@ export class BookingService {
       );
   }
 
+  getCalendarBookings(userId: number, year: number, month: number): Observable<Booking> {
+    return this.http.get<Booking>(this.baseUrl + 'users/' + userId + '/bookings/calendar/' + year + '/' + month) ;
+  }
+
   getBooking(id: number, bookingId: number): Observable<Booking> {
     return this.http.get<Booking>(this.baseUrl + 'users/' + id + '/bookings/' + bookingId) ;
   }

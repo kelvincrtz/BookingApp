@@ -22,6 +22,7 @@ import { BookingEditStatusResolver } from './_resolvers/booking-edit-status-reso
 import { BookingEditStatusComponent } from './booking/booking-edit-status/booking-edit-status.component';
 import { MessagesResolver } from './_resolvers/messages-resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { AdminCalendarComponent } from './calendar/admin-calendar/admin-calendar.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -41,7 +42,8 @@ export const appRoutes: Routes = [
             { path: 'bookingsforuser', component: BookingListForUserComponent, resolve: {bookings: BookingListForUserResolver}},
             { path: 'booking/edit/:id', component: BookingEditComponent, resolve: {booking: BookingEditResolver}},
             { path: 'booking/edit/status/:id', component: BookingEditStatusComponent, resolve: {booking: BookingEditStatusResolver}},
-            { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}}
+            { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},
+            { path: 'calendar', component: AdminCalendarComponent, data: {roles: ['Admin', 'Moderator']}}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

@@ -11,6 +11,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { DatePipe } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -51,6 +53,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { AdminCalendarComponent } from './calendar/admin-calendar/admin-calendar.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -79,7 +82,8 @@ export function tokenGetter() {
       HasRoleDirective,
       UserManagementComponent,
       PhotoManagementComponent,
-      RolesModalComponent
+      RolesModalComponent,
+      AdminCalendarComponent
    ],
    imports: [
       BrowserModule,
@@ -98,6 +102,10 @@ export function tokenGetter() {
       AlertModule.forRoot(),
       TooltipModule.forRoot(),
       CollapseModule.forRoot(),
+      CalendarModule.forRoot({
+         provide: DateAdapter,
+         useFactory: adapterFactory,
+      }),
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {

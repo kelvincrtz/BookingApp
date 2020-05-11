@@ -53,6 +53,23 @@ namespace BookingApp.API.Controllers
             return Ok(bookingsToReturn);
         }
 
+        [HttpGet("calendar/{year}/{month}")]
+        public async Task<IActionResult> GetCalendarBookings(int userId, int year, int month)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var bookings = await _repo.GetCalendarBookings(year, month);
+
+            if (bookings == null)
+                return BadRequest();
+
+            var bookingsToReturn = _mapper.Map<IEnumerable<BookingForDetailedDto>>(bookings);
+
+            return Ok(bookingsToReturn);
+
+        }
+
         [HttpGet("thread")]
         public async Task<IActionResult> GetBookingsForUser(int userId, [FromQuery]BookingParams bookingParams)
         {

@@ -45,8 +45,6 @@ export class BookingListForUserComponent implements OnInit {
     this.bookingParams.orderBy = 'dateadded';
 
     this.bookingParams.all = true;
-
-    console.log('Date = ' + this.date);
   }
 
   loadBookings() {

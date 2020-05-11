@@ -34,6 +34,15 @@ namespace BookingApp.API.Data
             return await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
         }
 
+        public async Task<IEnumerable<Booking>> GetCalendarBookings(int year, int month)
+        {
+            var bookings = _context.Bookings
+                .Where(b => b.When.Year == year && b.When.Month == month)
+                .AsQueryable().ToListAsync();
+
+            return await bookings;
+        }
+
         public async Task<PagedList<Booking>> GetBookings(BookingParams bookingParams)
         {
             var bookings = _context.Bookings.Include(u => u.User).OrderByDescending(b => b.DateAdded).AsQueryable();

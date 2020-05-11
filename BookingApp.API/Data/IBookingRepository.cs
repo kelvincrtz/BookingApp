@@ -12,6 +12,7 @@ namespace BookingApp.API.Data
          Task<bool> SaveAll();
          Task<PagedList<User>> GetUsers(UserParams userParams);
          Task<User> GetUser(int id);
+         Task<IEnumerable<Booking>> GetCalendarBookings(int year, int month);
          Task<PagedList<Booking>> GetBookings(BookingParams bookingParams);
          Task<Booking> GetBooking(int id);
          Task<PagedList<Booking>> GetBookingsForUser(int id, BookingParams bookingParams);
