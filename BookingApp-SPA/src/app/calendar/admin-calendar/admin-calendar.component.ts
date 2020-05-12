@@ -48,7 +48,6 @@ const colors: any = {
 })
 export class AdminCalendarComponent implements OnInit {
   activeDayIsOpen = true;
-  bookings: any;
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
@@ -82,6 +81,9 @@ export class AdminCalendarComponent implements OnInit {
   ];
 
   refresh: Subject<any> = new Subject();
+  events: CalendarEvent[];
+
+  /*
   events: CalendarEvent[] = [
     {
       start: startOfDay(new Date(2020, 1, 7)),
@@ -122,28 +124,38 @@ export class AdminCalendarComponent implements OnInit {
       draggable: true,
     }
   ];
+  */
 
   constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadCalendarBookings((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
+    this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
   }
 
-  loadCalendarBookings(year: number, month: number) {
+  loopThroughEvents(res) {
+    const obj: Array<any> = [];
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < res.length; i++) {
+      // tslint:disable-next-line: ban-types
+      const event: Object = {
+        id: res[i].id,
+        title: res[i].location,
+        color: colors.red,
+        start: new Date(res[i].when),
+      };
+      obj.push(event);
+    }
+    this.events = obj;
+    this.refresh.next();
+  }
+
+  getCalendarEvents(year: number, month: number) {
     this.booking.getCalendarBookings(this.authService.decodedToken.nameid, year, month)
-     .subscribe((bookings: any) => {
-      this.bookings = bookings;
+     .subscribe(bookings => {
+      this.loopThroughEvents(bookings);
     }, error => {
       this.alertify.error(error);
     });
-
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.bookings.length; i++) {
-      this.events.push({
-          title: this.bookings[i].location,
-          start: startOfDay(new Date(this.bookings[i].when))
-      });
-    }
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -210,7 +222,7 @@ export class AdminCalendarComponent implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
-    this.loadCalendarBookings((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
+    this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
   }
 
 }
