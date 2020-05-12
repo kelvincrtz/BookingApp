@@ -1,0 +1,120 @@
+<div class="container mt-3">
+  <div class="row text-center mt-3">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Previous
+      </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate">
+          Today
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Next
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month">
+          Month
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week">
+          Week
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day">
+          Day
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-primary" *ngIf="!clickedDate" >
+    Please select a date for your booking
+  </div>
+
+  <div *ngIf="clickedDate" class="alert alert-success">
+    <strong >You clicked on this time: {{ clickedDate | date:'medium' }}</strong>
+    <strong *ngIf="clickedColumn != null">You clicked on this column: {{ clickedColumn }}</strong>
+  </div>
+
+  <div *ngIf="clickMessage" class="alert alert-danger">
+    <strong> {{ clickMessage }}</strong>
+  </div>
+
+  <ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <!-- Fully Booked Days -->
+    <div class="cal-cell-top" (click)="notValidClick()" *ngIf="day.badgeTotal >= 1" style="background-color: lightskyblue;">
+      <div>
+        <span class="cal-day-number text-light">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+      </div>
+    </div> 
+    <!-- Still Available Days -->
+    <div class="cal-cell-top" (click)="validClick(day.date)" *ngIf="day.badgeTotal <= 0"> 
+      <div>
+        <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+      </div>
+    </div>
+    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal >= 1">FULLY BOOKED</small>
+
+    <!-- Expired 
+    <div class="cal-cell-top" *ngIf="day.date < todaysDate" style="background-color: lightgray;"> 
+    </div>
+    <small class="text-light text-center" style="background-color: lightslategray;"  *ngIf="day.date < todaysDate">Expired</small>
+    -->
+  </ng-template>
+
+  <ng-template #customEventTemplate let-column="column">
+
+  </ng-template>
+  
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"
+      [cellTemplate]="customCellTemplate"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="'week'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (dayHeaderClicked)="clickedDate = $event.day.date"
+      (hourSegmentClicked)="clickedDate = $event.date"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (hourSegmentClicked)="clickedDate = $event.date"
+    >
+    </mwl-calendar-day-view>
+  </div>
+</div>

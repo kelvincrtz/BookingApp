@@ -59,6 +59,19 @@
     </div>
   </div>
   <br />
+  <!-- 
+  <ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <div class="cal-cell-top" *ngIf="day.badgeTotal > 0" style="background-color: pink;">
+      <span class="cal-day-badge"
+        >{{ day.badgeTotal }}</span
+      >
+      <span class="cal-day-number"
+        >{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span
+      >
+    </div>
+  </ng-template>
+  -->
+
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
       *ngSwitchCase="CalendarView.Month"

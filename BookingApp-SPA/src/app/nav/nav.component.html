@@ -26,6 +26,9 @@
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/calendar']">Calendar</a>
         </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/bookingcalendar']">BookingCalendar</a>
+        </li>
       </ul>
     
       <div *ngIf="loggedIn()" class="dropdown mr-3" dropdown>
