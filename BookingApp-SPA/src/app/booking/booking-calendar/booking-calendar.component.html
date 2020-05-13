@@ -53,10 +53,6 @@
     </div>
   </div>
 
-  <div class="alert alert-primary" *ngIf="!clickedDate" >
-    Please select a date for your booking
-  </div>
-
   <div *ngIf="clickedDate" class="alert alert-success">
     <strong >You clicked on this time: {{ clickedDate | date:'medium' }}</strong>
     <strong *ngIf="clickedColumn != null">You clicked on this column: {{ clickedColumn }}</strong>
@@ -68,24 +64,26 @@
 
   <ng-template #customCellTemplate let-day="day" let-locale="locale">
     <!-- Fully Booked Days -->
-    <div class="cal-cell-top" (click)="notValidClick()" *ngIf="day.badgeTotal >= 1" style="background-color: lightskyblue;">
+    <div class="cal-cell-top" (click)="notValidClick()" *ngIf="day.badgeTotal >= 1 && day.date > todaysDate" style="background-color: lightskyblue;">
       <div>
         <span class="cal-day-number text-light">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
       </div>
-    </div> 
+    </div>
+    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal >= 1 && day.date > todaysDate">FULLY BOOKED</small>
+
     <!-- Still Available Days -->
-    <div class="cal-cell-top" (click)="validClick(day.date)" *ngIf="day.badgeTotal <= 0"> 
+    <div class="cal-cell-top" (click)="validClick(day.date)" *ngIf="day.badgeTotal <= 0 && day.date > todaysDate"> 
       <div>
         <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
       </div>
     </div>
-    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal >= 1">FULLY BOOKED</small>
 
-    <!-- Expired 
-    <div class="cal-cell-top" *ngIf="day.date < todaysDate" style="background-color: lightgray;"> 
-    </div>
-    <small class="text-light text-center" style="background-color: lightslategray;"  *ngIf="day.date < todaysDate">Expired</small>
-    -->
+    <!-- Expired -->
+    <div class="cal-cell-top" (click)="expiredCell()" *ngIf="day.date < todaysDate" style="background-color: lightgray;"> 
+        <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+      </div>
+    <small class="text-light text-center" style="background-color: lightgray;"  *ngIf="day.date < todaysDate">Expired</small>
+
   </ng-template>
 
   <ng-template #customEventTemplate let-column="column">

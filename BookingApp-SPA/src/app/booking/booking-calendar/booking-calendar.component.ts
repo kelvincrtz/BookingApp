@@ -85,6 +85,11 @@ export class BookingCalendarComponent implements OnInit {
     this.clickMessage = null;
   }
 
+  expiredCell() {
+    this.clickMessage = 'Sorry but we cannot book you on a expired date. Please select a different date';
+    this.clickedDate = null;
+  }
+
   loopThroughEvents(res) {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
