@@ -116,7 +116,11 @@ namespace BookingApp.API.Controllers
 
             bookingForCreationDto.Status = "Pending";
 
+            Console.Write("Before Mapping results " + bookingForCreationDto.FromTime + " " + bookingForCreationDto.ToTime);
+
             var booking = _mapper.Map<Booking>(bookingForCreationDto);
+
+            Console.Write("After Mapping results " + booking.FromTime + " " + booking.ToTime);
 
             userFromRepo.Bookings.Add(booking);
 

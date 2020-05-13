@@ -21,6 +21,7 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
+  CalendarWeekViewBeforeRenderEvent,
 } from 'angular-calendar';
 
 import { BookingService } from 'src/app/_services/booking.service';
@@ -76,17 +77,19 @@ export class BookingCalendarComponent implements OnInit {
   }
 
   notValidClick() {
-    this.clickMessage = 'This day is already fully booked. Please choose a new date';
+    this.clickMessage = 'This day is already fully booked. Please choose a different date.';
+    this.alertify.error('You selected a fully booked day');
     this.clickedDate  = null;
   }
 
-  validClick(day) {
+  validClick(day: any) {
     this.clickedDate  = day;
     this.clickMessage = null;
   }
 
   expiredCell() {
-    this.clickMessage = 'Sorry but we cannot book you on a expired date. Please select a different date';
+    this.clickMessage = 'Sorry but we cannot book you on a expired date. Please select a different date.';
+    this.alertify.error('This date is expired');
     this.clickedDate = null;
   }
 
@@ -123,6 +126,18 @@ export class BookingCalendarComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
+  }
+
+  beforeWeekViewRender(renderEvent: CalendarWeekViewBeforeRenderEvent) {
+    renderEvent.hourColumns.forEach((hourColumn) => {
+      hourColumn.hours.forEach((hour) => {
+        hour.segments.forEach((segment) => {
+          if (segment.date.getHours() >= 2 && segment.date.getHours() <= 5 && segment.date.getDay() === 2) {
+                segment.cssClass = 'bg-pink';
+              }
+          });
+      });
+    });
   }
 
 }

@@ -6,3 +6,9 @@
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+.cal-month-view .bg-pink,
+      .cal-week-view .cal-day-columns .bg-pink,
+      .cal-day-view .bg-pink {
+        background-color: hotpink !important;
+      }

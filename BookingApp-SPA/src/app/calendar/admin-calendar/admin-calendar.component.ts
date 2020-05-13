@@ -83,49 +83,6 @@ export class AdminCalendarComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[];
 
-  /*
-  events: CalendarEvent[] = [
-    {
-      start: startOfDay(new Date(2020, 1, 7)),
-      end: addDays(new Date(), 1),
-      title: 'Bday',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 1),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    }
-  ];
-  */
-
   constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService) { }
 
   ngOnInit() {
@@ -136,12 +93,18 @@ export class AdminCalendarComponent implements OnInit {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
+      const startTime = new Date(res[i].fromTime);
+      const endTime = new Date(res[i].toTime);
+      console.log('Location: ' + res[i].location + ', startTime: ' + startTime.getHours() + ', endTime: ' + endTime.getHours());
       // tslint:disable-next-line: ban-types
       const event: Object = {
         id: res[i].id,
         title: res[i].location,
         color: colors.red,
-        start: new Date(res[i].when),
+        start: addHours(startOfDay(new Date(res[i].when)), startTime.getHours()),
+        //
+        end: addHours(startOfDay(new Date(res[i].when)), 22),
+        //
       };
       obj.push(event);
     }
