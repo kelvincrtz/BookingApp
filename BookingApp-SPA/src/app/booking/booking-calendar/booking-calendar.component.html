@@ -67,6 +67,10 @@
     <div class="cal-cell-top" (click)="notValidClick()" *ngIf="day.badgeTotal >= 1 && day.date > todaysDate" style="background-color: lightskyblue;">
       <div>
         <span class="cal-day-number text-light">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+        <span class="">{{day.events.length}}</span>
+        <div *ngFor="let event of day.events">
+          {{ event }}
+        </div>
       </div>
     </div>
     <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal >= 1 && day.date > todaysDate">FULLY BOOKED</small>
@@ -97,6 +101,7 @@
       [events]="events"
       (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"
       [cellTemplate]="customCellTemplate">
+      (eventClicked)="eventClicked($event)"
     </mwl-calendar-month-view>
 
     <mwl-calendar-week-view
@@ -104,8 +109,7 @@
       [viewDate]="viewDate"
       [events]="events"
       (dayHeaderClicked)="clickedDate = $event.day.date"
-      (hourSegmentClicked)="clickedDate = $event.date"
-      (beforeViewRender)="beforeWeekViewRender($event)">
+      (hourSegmentClicked)="clickedDate = $event.date">
     </mwl-calendar-week-view>
 
     <mwl-calendar-day-view
@@ -115,4 +119,83 @@
       (hourSegmentClicked)="clickedDate = $event.date">
     </mwl-calendar-day-view>
   </div>
+</div>
+
+
+<br /><br /><br />
+
+<h3>
+  Edit events
+  <button class="btn btn-primary float-right">
+    Add new
+  </button>
+  <div class="clearfix"></div>
+</h3>
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Primary color</th>
+        <th>Secondary color</th>
+        <th>Starts at</th>
+        <th>Ends at</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="event.title"
+            (keyup)="refresh.next()"
+          />
+        </td>
+        <td>
+          <input
+            type="color"
+            [(ngModel)]="event.color.primary"
+            (change)="refresh.next()"
+          />
+        </td>
+        <td>
+          <input
+            type="color"
+            [(ngModel)]="event.color.secondary"
+            (change)="refresh.next()"
+          />
+        </td>
+        <td>
+          <input
+            class="form-control"
+            type="text"
+            mwlFlatpickr
+            [(ngModel)]="event.start"
+            (ngModelChange)="refresh.next()"
+            dateFormat="Y-m-dTH:i"
+            altFormat="F j, Y H:i"
+            placeholder="Not set"
+          />
+        </td>
+        <td>
+          <input
+            class="form-control"
+            type="text"
+            mwlFlatpickr
+            [(ngModel)]="event.end"
+            (ngModelChange)="refresh.next()"
+            dateFormat="Y-m-dTH:i"
+            altFormat="F j, Y H:i"
+            placeholder="Not set"
+          />
+        </td>
+        <td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

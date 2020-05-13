@@ -95,7 +95,6 @@ export class AdminCalendarComponent implements OnInit {
     for (let i = 0; i < res.length; i++) {
       const startTime = new Date(res[i].fromTime);
       const endTime = new Date(res[i].toTime);
-      console.log('Location: ' + res[i].location + ', startTime: ' + startTime.getHours() + ' endTime: ' + endTime.getHours());
       // tslint:disable-next-line: ban-types
       const event: Object = {
         id: res[i].id,
@@ -133,44 +132,9 @@ export class AdminCalendarComponent implements OnInit {
     }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     // this.modal.open(this.modalContent, { size: 'lg' });
-  }
-
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {

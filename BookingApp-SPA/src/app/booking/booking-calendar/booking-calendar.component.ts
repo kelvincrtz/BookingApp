@@ -73,7 +73,6 @@ export class BookingCalendarComponent implements OnInit {
   ngOnInit() {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
     this.todaysDate = new Date();
-    console.log(this.todaysDate);
   }
 
   notValidClick() {
@@ -93,7 +92,7 @@ export class BookingCalendarComponent implements OnInit {
     this.clickedDate = null;
   }
 
-  loopThroughEvents(res) {
+  loopThroughEvents(res: any) {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
@@ -128,6 +127,11 @@ export class BookingCalendarComponent implements OnInit {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
   }
 
+  eventClicked({ event }: { event: CalendarEvent }): void {
+    console.log('Event clicked', event);
+  }
+
+  /*
   beforeWeekViewRender(renderEvent: CalendarWeekViewBeforeRenderEvent) {
     renderEvent.hourColumns.forEach((hourColumn) => {
       hourColumn.hours.forEach((hour) => {
@@ -139,5 +143,6 @@ export class BookingCalendarComponent implements OnInit {
       });
     });
   }
+  */
 
 }

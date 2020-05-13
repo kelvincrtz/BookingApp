@@ -80,31 +80,27 @@
       [refresh]="refresh"
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
+      (eventClicked)="handleEvent('Clicked', $event.event)">
     </mwl-calendar-month-view>
+
     <mwl-calendar-week-view
       *ngSwitchCase="CalendarView.Week"
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
       (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      [dayStartHour]="7"
-      [dayEndHour]="24"
-    >
+      [dayStartHour]="6"
+      [dayEndHour]="24">
     </mwl-calendar-week-view>
+
     <mwl-calendar-day-view
       *ngSwitchCase="CalendarView.Day"
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
       (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      [dayStartHour]="7"
-      [dayEndHour]="24"
-    >
+      [dayStartHour]="6"
+      [dayEndHour]="24">
     </mwl-calendar-day-view>
   </div>
   
@@ -114,9 +110,6 @@
   
   <h3>
     Edit events
-    <button class="btn btn-primary float-right" (click)="addEvent()">
-      Add new
-    </button>
     <div class="clearfix"></div>
   </h3>
   
@@ -124,24 +117,18 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Title</th>
+          <th>Location</th>
           <th>Primary color</th>
           <th>Secondary color</th>
           <th>Starts at</th>
           <th>Ends at</th>
-          <th>Remove</th>
         </tr>
       </thead>
   
       <tbody>
         <tr *ngFor="let event of events">
           <td>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="event.title"
-              (keyup)="refresh.next()"
-            />
+            {{event.title}}
           </td>
           <td>
             <input
@@ -158,33 +145,10 @@
             />
           </td>
           <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.start"
-              (ngModelChange)="refresh.next()"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
+            {{event.start | date: 'shortTime'}}
           </td>
           <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.end"
-              (ngModelChange)="refresh.next()"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
-          </td>
-          <td>
-            <button class="btn btn-danger" (click)="deleteEvent(event)">
-              Delete
-            </button>
+            {{event.end | date:'shortTime'}}
           </td>
         </tr>
       </tbody>
