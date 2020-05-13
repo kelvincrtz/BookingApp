@@ -89,22 +89,20 @@ export class AdminCalendarComponent implements OnInit {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
   }
 
-  loopThroughEvents(res) {
+  loopThroughEvents(res: any) {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
       const startTime = new Date(res[i].fromTime);
       const endTime = new Date(res[i].toTime);
-      console.log('Location: ' + res[i].location + ', startTime: ' + startTime.getHours() + ', endTime: ' + endTime.getHours());
+      console.log('Location: ' + res[i].location + ', startTime: ' + startTime.getHours() + ' endTime: ' + endTime.getHours());
       // tslint:disable-next-line: ban-types
       const event: Object = {
         id: res[i].id,
         title: res[i].location,
-        color: colors.red,
+        color: colors.blue,
         start: addHours(startOfDay(new Date(res[i].when)), startTime.getHours()),
-        //
-        end: addHours(startOfDay(new Date(res[i].when)), 22),
-        //
+        end: addHours(startOfDay(new Date(res[i].when)), endTime.getHours()),
       };
       obj.push(event);
     }

@@ -91,6 +91,8 @@
       [refresh]="refresh"
       (eventClicked)="handleEvent('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
+      [dayStartHour]="7"
+      [dayEndHour]="24"
     >
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
@@ -100,6 +102,8 @@
       [refresh]="refresh"
       (eventClicked)="handleEvent('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
+      [dayStartHour]="7"
+      [dayEndHour]="24"
     >
     </mwl-calendar-day-view>
   </div>
