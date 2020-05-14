@@ -13,6 +13,7 @@ import {
   isSameDay,
   isSameMonth,
   addHours,
+  addMinutes,
 } from 'date-fns';
 import { Subject } from 'rxjs';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -78,7 +79,7 @@ export class BookingCalendarComponent implements OnInit {
     this.todaysDate = new Date();
   }
 
-  notValidClick(day) {
+  notValidClick(day: any) {
     // console.log(day);
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
@@ -96,25 +97,52 @@ export class BookingCalendarComponent implements OnInit {
     this.dayRefresh.next();
 
     this.clickMessage = 'This day is already fully booked. Please choose a different date.';
-    this.alertify.error('You selected a fully booked day');
     this.clickedDate  = null;
   }
 
   validClick(day: any) {
-    this.clickedDate  = day;
+    // console.log(day);
+    const obj: Array<any> = [];
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < day.events.length; i++) {
+          // tslint:disable-next-line: ban-types
+        const dayEvent: Object = {
+          id: day.events[i].id,
+          title: day.events[i].title,
+          start: day.events[i].start,
+          end: day.events[i].end,
+        };
+        obj.push(dayEvent);
+    }
+    this.dayEvents = obj.sort((n1, n2) => {
+      if (n1.start.getHours() > n2.start.getHours()) {
+          return 1;
+      }
+
+      if (n1.start.getHours() < n2.start.getHours()) {
+          return -1;
+      }
+      return 0;
+    });
+
+    this.dayRefresh.next();
+
+    this.clickedDate  = day.date;
     this.clickMessage = null;
   }
 
-  expiredCell() {
-    this.clickMessage = 'Sorry but we cannot book you on a expired date. Please select a different date.';
-    this.alertify.error('This date is expired');
+  expiredCell(day: any) {
+    const dayTime = new Date(day.date);
+    this.clickMessage = 'Sorry but ' + dayTime.toString() + ' is a expired date. Please select a valid date.';
     this.clickedDate = null;
+    this.dayEvents = null;
   }
 
   loopThroughEvents(res: any) {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
+      const dayTime = new Date(res[i].when);
       const startTime = new Date(res[i].fromTime);
       const endTime = new Date(res[i].toTime);
       // tslint:disable-next-line: ban-types
@@ -122,8 +150,8 @@ export class BookingCalendarComponent implements OnInit {
         id: res[i].id,
         title: res[i].location,
         color: colors.red,
-        start: addHours(startOfDay(new Date(res[i].when)), startTime.getHours()),
-        end: addHours(startOfDay(new Date(res[i].when)), endTime.getHours()),
+        start: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), startTime.getHours(), startTime.getMinutes()),
+        end: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), endTime.getHours(), endTime.getMinutes()),
       };
       obj.push(event);
     }

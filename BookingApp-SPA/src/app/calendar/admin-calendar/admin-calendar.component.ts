@@ -93,6 +93,7 @@ export class AdminCalendarComponent implements OnInit {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
+      const dayTime = new Date(res[i].when);
       const startTime = new Date(res[i].fromTime);
       const endTime = new Date(res[i].toTime);
       // tslint:disable-next-line: ban-types
@@ -100,8 +101,8 @@ export class AdminCalendarComponent implements OnInit {
         id: res[i].id,
         title: res[i].location,
         color: colors.blue,
-        start: addHours(startOfDay(new Date(res[i].when)), startTime.getHours()),
-        end: addHours(startOfDay(new Date(res[i].when)), endTime.getHours()),
+        start: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), startTime.getHours(), startTime.getMinutes()),
+        end: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), endTime.getHours(), endTime.getMinutes()),
       };
       obj.push(event);
     }
