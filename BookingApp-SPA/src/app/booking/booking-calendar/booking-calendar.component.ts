@@ -93,7 +93,16 @@ export class BookingCalendarComponent implements OnInit {
         };
         obj.push(dayEvent);
     }
-    this.dayEvents = obj;
+    this.dayEvents = obj.sort((n1, n2) => {
+      if (n1.start.getHours() > n2.start.getHours()) {
+          return 1;
+      }
+
+      if (n1.start.getHours() < n2.start.getHours()) {
+          return -1;
+      }
+      return 0;
+    });
     this.dayRefresh.next();
 
     this.clickMessage = 'This day is already fully booked. Please choose a different date.';
