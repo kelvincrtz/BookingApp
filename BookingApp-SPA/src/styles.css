@@ -12,3 +12,9 @@
       .cal-day-view .bg-pink {
         background-color: hotpink !important;
       }
+
+
+      .cal-day-selected,
+      .cal-day-selected:hover {
+        background-color: rgb(247, 90, 173) !important;
+      }

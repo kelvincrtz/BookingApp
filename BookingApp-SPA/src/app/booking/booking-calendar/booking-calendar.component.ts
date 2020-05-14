@@ -23,6 +23,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
   CalendarWeekViewBeforeRenderEvent,
+  CalendarMonthViewDay,
 } from 'angular-calendar';
 
 import { BookingService } from 'src/app/_services/booking.service';
@@ -184,5 +185,9 @@ export class BookingCalendarComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
+  }
+
+  dayClicked(day: CalendarMonthViewDay): void {
+      day.cssClass = 'cal-day-selected';
   }
 }

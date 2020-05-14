@@ -114,7 +114,8 @@
       [viewDate]="viewDate"
       [events]="events"
       (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"
-      [cellTemplate]="customCellTemplate">
+      [cellTemplate]="customCellTemplate"
+      (dayClicked)="dayClicked($event.day)">
     </mwl-calendar-month-view>
 
     <mwl-calendar-week-view
