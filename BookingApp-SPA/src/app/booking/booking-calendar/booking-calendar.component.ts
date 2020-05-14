@@ -61,6 +61,9 @@ export class BookingCalendarComponent implements OnInit {
   events: CalendarEvent[] = [];
   refresh: Subject<any> = new Subject();
 
+  dayEvents: CalendarEvent[] = [];
+  dayRefresh: Subject<any> = new Subject();
+
   todaysDate: Date;
 
   clickedDate: Date;
@@ -75,7 +78,23 @@ export class BookingCalendarComponent implements OnInit {
     this.todaysDate = new Date();
   }
 
-  notValidClick() {
+  notValidClick(day) {
+    // console.log(day);
+    const obj: Array<any> = [];
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < day.events.length; i++) {
+         // tslint:disable-next-line: ban-types
+        const dayEvent: Object = {
+          id: day.events[i].id,
+          title: day.events[i].title,
+          start: day.events[i].start,
+          end: day.events[i].end,
+        };
+        obj.push(dayEvent);
+    }
+    this.dayEvents = obj;
+    this.dayRefresh.next();
+
     this.clickMessage = 'This day is already fully booked. Please choose a different date.';
     this.alertify.error('You selected a fully booked day');
     this.clickedDate  = null;
@@ -96,12 +115,15 @@ export class BookingCalendarComponent implements OnInit {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
+      const startTime = new Date(res[i].fromTime);
+      const endTime = new Date(res[i].toTime);
       // tslint:disable-next-line: ban-types
       const event: Object = {
         id: res[i].id,
         title: res[i].location,
         color: colors.red,
-        start: new Date(res[i].when),
+        start: addHours(startOfDay(new Date(res[i].when)), startTime.getHours()),
+        end: addHours(startOfDay(new Date(res[i].when)), endTime.getHours()),
       };
       obj.push(event);
     }
@@ -126,23 +148,4 @@ export class BookingCalendarComponent implements OnInit {
     this.activeDayIsOpen = false;
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
   }
-
-  eventClicked({ event }: { event: CalendarEvent }): void {
-    console.log('Event clicked', event);
-  }
-
-  /*
-  beforeWeekViewRender(renderEvent: CalendarWeekViewBeforeRenderEvent) {
-    renderEvent.hourColumns.forEach((hourColumn) => {
-      hourColumn.hours.forEach((hour) => {
-        hour.segments.forEach((segment) => {
-          if (segment.date.getHours() >= 2 && segment.date.getHours() <= 5 && segment.date.getDay() === 2) {
-                segment.cssClass = 'bg-pink';
-              }
-          });
-      });
-    });
-  }
-  */
-
 }

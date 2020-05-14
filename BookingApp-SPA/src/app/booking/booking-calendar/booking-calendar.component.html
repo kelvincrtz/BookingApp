@@ -60,16 +60,22 @@
 
   <div *ngIf="clickMessage" class="alert alert-danger text-center">
     <strong> {{ clickMessage }}</strong>
+    <div *ngFor="let day of this.dayEvents">
+     {{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked
+    </div>
   </div>
 
   <ng-template #customCellTemplate let-day="day" let-locale="locale">
     <!-- Fully Booked Days -->
-    <div class="cal-cell-top" (click)="notValidClick()" *ngIf="day.badgeTotal >= 1 && day.date > todaysDate" style="background-color: lightskyblue;">
+    <div class="cal-cell-top" (click)="notValidClick(day)" *ngIf="day.badgeTotal >= 1 && day.date > todaysDate" style="background-color: lightskyblue;">
       <div>
         <span class="cal-day-number text-light">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
         <span class="">{{day.events.length}}</span>
         <div *ngFor="let event of day.events">
-          {{ event }}
+          Where: {{ event.title }}
+          Start: {{ event.start | date:'shortTime'}}
+          End: {{ event.end | date:'shortTime' }}
+          <br /><br />
         </div>
       </div>
     </div>
@@ -101,7 +107,6 @@
       [events]="events"
       (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"
       [cellTemplate]="customCellTemplate">
-      (eventClicked)="eventClicked($event)"
     </mwl-calendar-month-view>
 
     <mwl-calendar-week-view
@@ -119,83 +124,4 @@
       (hourSegmentClicked)="clickedDate = $event.date">
     </mwl-calendar-day-view>
   </div>
-</div>
-
-
-<br /><br /><br />
-
-<h3>
-  Edit events
-  <button class="btn btn-primary float-right">
-    Add new
-  </button>
-  <div class="clearfix"></div>
-</h3>
-
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Primary color</th>
-        <th>Secondary color</th>
-        <th>Starts at</th>
-        <th>Ends at</th>
-        <th>Remove</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let event of events">
-        <td>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="event.title"
-            (keyup)="refresh.next()"
-          />
-        </td>
-        <td>
-          <input
-            type="color"
-            [(ngModel)]="event.color.primary"
-            (change)="refresh.next()"
-          />
-        </td>
-        <td>
-          <input
-            type="color"
-            [(ngModel)]="event.color.secondary"
-            (change)="refresh.next()"
-          />
-        </td>
-        <td>
-          <input
-            class="form-control"
-            type="text"
-            mwlFlatpickr
-            [(ngModel)]="event.start"
-            (ngModelChange)="refresh.next()"
-            dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i"
-            placeholder="Not set"
-          />
-        </td>
-        <td>
-          <input
-            class="form-control"
-            type="text"
-            mwlFlatpickr
-            [(ngModel)]="event.end"
-            (ngModelChange)="refresh.next()"
-            dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i"
-            placeholder="Not set"
-          />
-        </td>
-        <td>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>
