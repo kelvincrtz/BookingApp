@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -115,7 +116,8 @@ export function tokenGetter() {
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
-      })
+      }),
+      NgxMaterialTimepickerModule
    ],
    providers: [
       AuthService,

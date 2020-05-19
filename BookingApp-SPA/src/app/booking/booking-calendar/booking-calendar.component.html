@@ -56,15 +56,28 @@
 
   <div *ngIf="clickedDate" class="alert alert-success text-center">
     <strong >You clicked on this time: {{ clickedDate | date:'fullDate' }}</strong>
+
     <strong *ngIf="clickedColumn != null">You clicked on this column: {{ clickedColumn }}</strong>
+
     <div *ngIf="this.dayEvents.length == 0">
       <span>No bookings here yet. Be the first to book a time slot! </span><i class="fa fa-smile-o fa-2x"></i>
     </div>
+
     <div *ngFor="let day of dayEvents">
       {{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked
      </div>
+
      <div *ngFor="let hours of invalidHours">
        {{hours}}
+     </div>
+
+     <div class="fromTime">
+            <input placeholder="Start time" [ngxTimepicker]="customHint" readonly [min]="'07:30 am'">
+            <ngx-material-timepicker #customHint [enableKeyboardInput]="true"
+                [editableHintTmpl]="fromTimeHint" #min></ngx-material-timepicker>
+            <ng-template #fromTimeHint>
+                <p class="">Start time</p>
+            </ng-template>
      </div>
   </div>
 

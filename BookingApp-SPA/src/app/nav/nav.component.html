@@ -11,9 +11,6 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/messages']">Messages</a>
         </li>
-        <li *appHasRole="['Member']" class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/bookingrequest']">Make a Booking</a>
-        </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/bookings']">Bookings</a>
         </li>
