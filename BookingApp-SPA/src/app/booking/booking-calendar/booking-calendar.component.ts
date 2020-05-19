@@ -73,6 +73,8 @@ export class BookingCalendarComponent implements OnInit {
   clickedColumn: number;
   clickMessage = '';
 
+  invalidHours: number[];
+
   constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService) { }
 
   ngOnInit() {
@@ -81,7 +83,6 @@ export class BookingCalendarComponent implements OnInit {
   }
 
   notValidClick(day: any) {
-    // console.log(day);
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < day.events.length; i++) {
@@ -104,6 +105,7 @@ export class BookingCalendarComponent implements OnInit {
       }
       return 0;
     });
+
     this.dayRefresh.next();
 
     this.clickMessage = 'This day is already fully booked. Please choose a different date.';
@@ -137,13 +139,29 @@ export class BookingCalendarComponent implements OnInit {
 
     this.dayRefresh.next();
 
+    const obj2: Array<any> = [];
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.dayEvents.length; i++) {
+      const startTime = new Date(this.dayEvents[i].start);
+      const endTime = new Date(this.dayEvents[i].end);
+
+      // console.log('Start: ' + startTime.getHours()  + ' Finish: ' + endTime.getHours());
+
+      for (let k = startTime.getHours(); k <= endTime.getHours(); k++) {
+        // console.log(k);
+        obj2.push(k);
+      }
+    }
+
+    this.invalidHours = obj2;
+
     this.clickedDate  = day.date;
     this.clickMessage = null;
   }
 
   expiredCell(day: any) {
     const dayTime = new Date(day.date);
-    this.clickMessage = 'Sorry but ' + dayTime.toString() + ' is a expired date. Please select a valid date.';
+    this.clickMessage = 'Sorry but ' + dayTime.toString() + ' is expired. Please select a valid date.';
     this.clickedDate = null;
     this.dayEvents = null;
   }
@@ -185,9 +203,5 @@ export class BookingCalendarComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
-  }
-
-  dayClicked(day: CalendarMonthViewDay): void {
-      day.cssClass = 'cal-day-selected';
   }
 }

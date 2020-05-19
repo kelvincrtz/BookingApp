@@ -63,6 +63,9 @@
     <div *ngFor="let day of dayEvents">
       {{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked
      </div>
+     <div *ngFor="let hours of invalidHours">
+       {{hours}}
+     </div>
   </div>
 
   <div *ngIf="clickMessage" class="alert alert-danger text-center">
@@ -114,8 +117,7 @@
       [viewDate]="viewDate"
       [events]="events"
       (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"
-      [cellTemplate]="customCellTemplate"
-      (dayClicked)="dayClicked($event.day)">
+      [cellTemplate]="customCellTemplate">
     </mwl-calendar-month-view>
 
     <mwl-calendar-week-view
