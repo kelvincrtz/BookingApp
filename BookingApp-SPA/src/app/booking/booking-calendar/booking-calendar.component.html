@@ -30,6 +30,7 @@
     <div class="col-md-4">
       <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
     </div>
+    <!--
     <div class="col-md-4">
       <div class="btn-group">
         <div
@@ -38,6 +39,7 @@
           [class.active]="view === CalendarView.Month">
           Month
         </div>
+        
         <div
           class="btn btn-primary"
           (click)="setView(CalendarView.Week)"
@@ -52,10 +54,13 @@
         </div>
       </div>
     </div>
+    -->
   </div>
 
+  <!-- Editing Point From Here -->
+
   <div *ngIf="clickedDate" class="alert alert-success text-center">
-    <strong >You clicked on this time: {{ clickedDate | date:'fullDate' }}</strong>
+    <strong >You have clicked on {{ clickedDate | date:'fullDate' }}</strong>
 
     <strong *ngIf="clickedColumn != null">You clicked on this column: {{ clickedColumn }}</strong>
 
@@ -67,18 +72,65 @@
       {{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked
      </div>
 
-     <div *ngFor="let hours of invalidHours">
+     <!-- DO NOT TOUCH
+      <div *ngFor="let hours of invalidHours">
        {{hours}}
-     </div>
+      </div>
+     -->
 
-     <div class="fromTime">
-            <input placeholder="Start time" [ngxTimepicker]="customHint" readonly [min]="'07:30 am'">
-            <ngx-material-timepicker #customHint [enableKeyboardInput]="true"
-                [editableHintTmpl]="fromTimeHint" #min></ngx-material-timepicker>
-            <ng-template #fromTimeHint>
-                <p class="">Start time</p>
-            </ng-template>
-     </div>
+
+    <form class="container mt-3" #registerBooking [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="m-1"></div>
+
+          <div class="form-group">
+            <!-- 
+              <input type="text"
+              [ngClass]="{'is-invalid': bookingForm.get('when').errors && bookingForm.get('when').touched
+                || bookingForm.get('when').touched && bookingForm.hasError('errordate')}" 
+              class="form-control" formControlName="when" placeholder="Date">
+            -->
+
+            <div class="form-group">
+              <input type="text" [ngClass]="{'is-invalid': bookingForm.get('location').errors && bookingForm.get('location').touched}"
+              class="form-control" formControlName="location" placeholder="Location">
+              <div class="invalid-feedback">Location is required</div>
+            </div>
+
+            <div class="form-group">
+              <div title="From">From</div>
+              <timepicker [ngClass]="{'is-invalid': bookingForm.get('fromTime').errors && bookingForm.get('fromTime').touched}"
+              formControlName="fromTime"></timepicker>
+              <div class="alert alert-danger text-center" 
+               *ngIf="bookingForm.get('fromTime').value == null">
+                <small>Start time is required</small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div title="To">To</div>
+              <timepicker [ngClass]="{'is-invalid': bookingForm.get('toTime').errors && bookingForm.get('toTime').touched}"
+                formControlName="toTime"></timepicker>
+                <div class="alert alert-danger text-center" 
+                *ngIf="bookingForm.get('toTime').value == null">
+                  <small>End time is required</small>
+                </div>
+            </div>
+
+
+            <div class="form-group text-center">
+              <div class="btn-group" role="group">          
+                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+
   </div>
 
   <div *ngIf="clickMessage" class="alert alert-danger text-center">
@@ -119,6 +171,9 @@
     <small class="text-light text-center" style="background-color: lightgray;"  *ngIf="day.date < todaysDate">Expired</small>
 
   </ng-template>
+
+
+  <!-- Editing Stop Point Here -->
 
   <ng-template #customEventTemplate let-column="column">
 

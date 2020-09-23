@@ -6,6 +6,8 @@ import { BookingService } from 'src/app/_services/booking.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
+import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
+import { setDate } from 'date-fns';
 
 @Component({
   selector: 'app-booking-form',
@@ -49,6 +51,7 @@ export class BookingFormComponent implements OnInit {
       this.booking = Object.assign({}, this.bookingForm.value);
       this.bookingService.createBooking(this.authService.decodedToken.nameid, this.booking).subscribe(next => {
         this.alertify.success('Booking request has been submitted');
+        console.log(this.booking);
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {

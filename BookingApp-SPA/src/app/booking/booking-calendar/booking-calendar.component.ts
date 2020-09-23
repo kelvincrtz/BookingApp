@@ -29,6 +29,8 @@ import {
 import { BookingService } from 'src/app/_services/booking.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 const colors: any = {
@@ -75,7 +77,10 @@ export class BookingCalendarComponent implements OnInit {
 
   invalidHours: number[];
 
-  constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService) { }
+  bookingForm: FormGroup;
+
+  constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
@@ -157,6 +162,26 @@ export class BookingCalendarComponent implements OnInit {
 
     this.clickedDate  = day.date;
     this.clickMessage = null;
+
+    this.bookingForm = new FormGroup({
+      when: new FormControl(day.date, Validators.required), // add validator here
+      location: new FormControl('', Validators.required),
+      fromTime: new FormControl(day.date, Validators.required),
+      toTime: new FormControl(day.date, Validators.required),
+    }, this.dateValidator);
+
+  }
+
+  dateValidator(g: FormGroup) {
+    return g.get('when').value >= Date.now() ? null : {errordate: true } ;
+  }
+
+  registerBooking() {
+    console.log(this.bookingForm.value);
+  }
+
+  cancel() {
+    // this.router.navigate(['/bookingcalendar/']);
   }
 
   expiredCell(day: any) {
