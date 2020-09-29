@@ -49,6 +49,7 @@ export class BookingFormComponent implements OnInit {
   registerBooking() {
     if (this.bookingForm.valid) {
       this.booking = Object.assign({}, this.bookingForm.value);
+      console.log(this.booking);
       this.bookingService.createBooking(this.authService.decodedToken.nameid, this.booking).subscribe(next => {
         this.alertify.success('Booking request has been submitted');
         console.log(this.booking);

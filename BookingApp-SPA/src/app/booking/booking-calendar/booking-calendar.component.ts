@@ -31,6 +31,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Booking } from 'src/app/_models/booking';
 
 
 const colors: any = {
@@ -79,7 +80,11 @@ export class BookingCalendarComponent implements OnInit {
 
   bookingForm: FormGroup;
 
-  constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService,
+  booking: Booking;
+
+  clickBooking = false;
+
+  constructor(private authService: AuthService, private bookingService: BookingService, private alertify: AlertifyService,
               private router: Router) { }
 
   ngOnInit() {
@@ -118,6 +123,7 @@ export class BookingCalendarComponent implements OnInit {
   }
 
   validClick(day: any) {
+    this.clickBooking = true;
     // console.log(day);
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
@@ -177,16 +183,35 @@ export class BookingCalendarComponent implements OnInit {
   }
 
   registerBooking() {
-    console.log(this.bookingForm.value);
+    // console.log(this.bookingForm.value);
+    if (this.bookingForm.valid) {
+      this.fixDate(this.bookingForm.get('when').value);
+      this.fixDate(this.bookingForm.get('fromTime').value);
+      this.fixDate(this.bookingForm.get('toTime').value);
+      this.booking = Object.assign({}, this.bookingForm.value);
+      this.bookingService.createBooking(this.authService.decodedToken.nameid, this.booking).subscribe(next => {
+        this.alertify.success('Booking request has been submitted');
+        console.log(this.booking);
+      }, error => {
+        this.alertify.error('Error sending the request');
+      }, () => {
+        this.router.navigate(['/bookingsforuser/']);
+      });
+    }
+  }
+
+  fixDate(d: Date): Date {
+    d.setHours(d.getHours() - d.getTimezoneOffset() / 60);
+    return d;
   }
 
   cancel() {
-    // this.router.navigate(['/bookingcalendar/']);
+    this.clickBooking = false;
   }
 
   expiredCell(day: any) {
     const dayTime = new Date(day.date);
-    this.clickMessage = 'Sorry but ' + dayTime.toString() + ' is expired. Please select a valid date.';
+    this.clickMessage = 'Sorry but ' + dayTime.toDateString() + ' is expired. Please select a valid date.';
     this.clickedDate = null;
     this.dayEvents = null;
   }
@@ -213,7 +238,7 @@ export class BookingCalendarComponent implements OnInit {
   }
 
   getCalendarEvents(year: number, month: number) {
-    this.booking.getCalendarBookings(this.authService.decodedToken.nameid, year, month)
+    this.bookingService.getCalendarBookings(this.authService.decodedToken.nameid, year, month)
      .subscribe(bookings => {
       this.loopThroughEvents(bookings);
     }, error => {

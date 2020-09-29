@@ -36,8 +36,12 @@ namespace BookingApp.API.Data
 
         public async Task<IEnumerable<Booking>> GetCalendarBookings(int year, int month)
         {
+            var prevMonth = month-1;
+            var nxtMonth = month+1;
+
             var bookings = _context.Bookings
-                .Where(b => b.When.Year == year && b.When.Month == month)
+                .Where(b => b.When.Year == year)
+                .Where(b => b.When.Month >= prevMonth && b.When.Month <= nxtMonth) 
                 .AsQueryable().ToListAsync();
 
             return await bookings;

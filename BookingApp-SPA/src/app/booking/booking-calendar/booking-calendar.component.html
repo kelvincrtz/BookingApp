@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <div class="row text-center mt-3">
-    <div class="col-md-4">
+    <div class="col-md-4" *ngIf="clickBooking == false">
       <div class="btn-group">
         <div
           class="btn btn-primary"
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" *ngIf="clickBooking == false">
       <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
     </div>
     <!--
@@ -59,13 +59,13 @@
 
   <!-- Editing Point From Here -->
 
-  <div *ngIf="clickedDate" class="alert alert-success text-center">
-    <strong >You have clicked on {{ clickedDate | date:'fullDate' }}</strong>
+  <div *ngIf="clickedDate && clickBooking == true" class="alert alert-success text-center">
+    <h3>{{ clickedDate | date:'fullDate' }}</h3>
 
     <strong *ngIf="clickedColumn != null">You clicked on this column: {{ clickedColumn }}</strong>
 
     <div *ngIf="this.dayEvents.length == 0">
-      <span>No bookings here yet. Be the first to book a time slot! </span><i class="fa fa-smile-o fa-2x"></i>
+      <span>No bookings here yet. Be the first to book a time slot! </span>
     </div>
 
     <div *ngFor="let day of dayEvents">
@@ -79,18 +79,12 @@
      -->
 
 
-    <form class="container mt-3" #registerBooking [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
+    <form class="container mt-3" [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
       <div class="row justify-content-center">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="m-1"></div>
 
           <div class="form-group">
-            <!-- 
-              <input type="text"
-              [ngClass]="{'is-invalid': bookingForm.get('when').errors && bookingForm.get('when').touched
-                || bookingForm.get('when').touched && bookingForm.hasError('errordate')}" 
-              class="form-control" formControlName="when" placeholder="Date">
-            -->
 
             <div class="form-group">
               <input type="text" [ngClass]="{'is-invalid': bookingForm.get('location').errors && bookingForm.get('location').touched}"
@@ -121,7 +115,7 @@
 
             <div class="form-group text-center">
               <div class="btn-group" role="group">          
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" >Submit</button>
                 <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
               </div>
             </div>
@@ -179,7 +173,7 @@
 
   </ng-template>
   
-  <div [ngSwitch]="view">
+  <div [ngSwitch]="view" *ngIf="clickBooking == false">
     <mwl-calendar-month-view
       *ngSwitchCase="'month'"
       [viewDate]="viewDate"
