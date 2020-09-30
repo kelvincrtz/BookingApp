@@ -59,8 +59,9 @@
 
   <!-- Editing Point From Here -->
 
-  <div *ngIf="clickedDate && clickBooking == true" class="alert alert-success text-center">
-    <h3>{{ clickedDate | date:'fullDate' }}</h3>
+  <div *ngIf="clickedDate && clickBooking == true" class="alert alert-primary text-center">
+    <h4 class="alert-heading">{{ clickedDate | date:'fullDate' }}</h4>
+    <hr>
 
     <strong *ngIf="clickedColumn != null">You clicked on this column: {{ clickedColumn }}</strong>
 

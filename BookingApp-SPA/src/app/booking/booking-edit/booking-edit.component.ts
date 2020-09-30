@@ -17,11 +17,8 @@ export class BookingEditComponent implements OnInit {
   booking: Booking;
   bookingToUpdate: Booking;
   bookingForm: FormGroup;
-  bsConfig: Partial<BsDatepickerConfig>;
   bookingFromRepoId: any;
   @Output() cancelRegister = new EventEmitter();
-
-  bsValue = new Date();
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -31,7 +28,7 @@ export class BookingEditComponent implements OnInit {
   }
 
   constructor(private bookingService: BookingService, private authService: AuthService, private alertify: AlertifyService,
-              private router: Router, private route: ActivatedRoute, private datePipe: DatePipe) { }
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -40,16 +37,7 @@ export class BookingEditComponent implements OnInit {
 
     this.bookingFromRepoId = this.booking.id;
 
-    this.bsConfig = {
-      containerClass: 'theme-red'
-    };
-
-    this.bsValue = new Date(this.booking.when);
-
-    this.bsValue.setHours(22);
-
     this.bookingForm = new FormGroup({
-      when: new FormControl(this.bsValue, Validators.required),
       location: new FormControl(this.booking.location, Validators.required),
       fromTime: new FormControl(this.booking.fromTime, Validators.required),
       toTime: new FormControl(this.booking.toTime, Validators.required),
@@ -62,6 +50,8 @@ export class BookingEditComponent implements OnInit {
 
   updateBookingRequest() {
     if (this.bookingForm.valid) {
+      this.fixDate(this.bookingForm.get('fromTime').value);
+      this.fixDate(this.bookingForm.get('toTime').value);
       this.bookingToUpdate = Object.assign({}, this.bookingForm.value);
       this.bookingService.updateBooking(this.authService.decodedToken.nameid, this.bookingFromRepoId, this.bookingToUpdate)
       .subscribe(next => {
@@ -72,6 +62,11 @@ export class BookingEditComponent implements OnInit {
         this.router.navigate(['/bookingsforuser/']);
       });
     }
+  }
+
+  fixDate(d: Date): Date {
+    d.setHours(d.getHours() - d.getTimezoneOffset() / 60);
+    return d;
   }
 
   cancel() {

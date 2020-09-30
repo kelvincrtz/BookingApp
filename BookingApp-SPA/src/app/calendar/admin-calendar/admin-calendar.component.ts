@@ -15,28 +15,28 @@ import {
   addHours,
 } from 'date-fns';
 import { Subject } from 'rxjs';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 
 const colors: any = {
   red: {
-    primary: '#ad2121',
+    primary: '#FF0000',
     secondary: '#FAE3E3',
   },
-  blue: {
-    primary: '#1e90ff',
+  green: {
+    primary: '#90EE90',
     secondary: '#D1E8FF',
   },
-  yellow: {
-    primary: '#e3bc08',
+  dark: {
+    primary: '#989898',
     secondary: '#FDF1BA',
   },
 };
@@ -49,41 +49,19 @@ const colors: any = {
 export class AdminCalendarComponent implements OnInit {
   activeDayIsOpen = true;
 
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        // this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        // this.handleEvent('Deleted', event);
-      },
-    },
-  ];
+  modalRef: BsModalRef;
 
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[];
 
-  constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService) { }
+  constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
@@ -100,7 +78,7 @@ export class AdminCalendarComponent implements OnInit {
       const event: Object = {
         id: res[i].id,
         title: res[i].location,
-        color: colors.blue,
+        meta: res[i].status,
         start: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), startTime.getHours(), startTime.getMinutes()),
         end: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), endTime.getHours(), endTime.getMinutes()),
       };
@@ -108,6 +86,8 @@ export class AdminCalendarComponent implements OnInit {
     }
     this.events = obj;
     this.refresh.next();
+
+    this.colorEvents(this.events);
   }
 
   getCalendarEvents(year: number, month: number) {
@@ -117,6 +97,23 @@ export class AdminCalendarComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  colorEvents(events: CalendarEvent[]) {
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < events.length; i++) {
+      if (events[i].meta === 'Approved') {
+          events[i].color = colors.green;
+      }
+      if (events[i].meta === 'Declined') {
+        events[i].color = colors.red;
+      }
+      if (events[i].meta === 'Pending') {
+        events[i].color = colors.dark;
+      }
+    }
+
+    this.events = events;
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -134,12 +131,7 @@ export class AdminCalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
+    console.log(event);
   }
 
   setView(view: CalendarView) {
@@ -151,4 +143,7 @@ export class AdminCalendarComponent implements OnInit {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
   }
 
+  openModal(event: CalendarEvent, template: TemplateRef<any>): void {
+    console.log(event);
+  }
 }
