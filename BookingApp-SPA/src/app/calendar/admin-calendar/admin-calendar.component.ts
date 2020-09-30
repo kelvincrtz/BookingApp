@@ -28,16 +28,16 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 
 const colors: any = {
   red: {
-    primary: '#FF0000',
-    secondary: '#FAE3E3',
+    primary: '#E00000',
+    secondary: '#E00000',
   },
   green: {
     primary: '#90EE90',
-    secondary: '#D1E8FF',
+    secondary: '#90EE90',
   },
   dark: {
     primary: '#989898',
-    secondary: '#FDF1BA',
+    secondary: '#989898',
   },
 };
 
