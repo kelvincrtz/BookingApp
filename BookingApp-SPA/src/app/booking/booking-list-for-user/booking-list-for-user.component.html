@@ -68,7 +68,7 @@
             <div class="d-flex justify-content-between">
               <div *ngIf="booking.status == 'Approved'" class="text-success">{{booking.status}}</div>
               <div *ngIf="booking.status == 'Declined'" class="text-danger">{{booking.status}}</div>
-              <div *ngIf="booking.status == 'Pending'" class="text-info">{{booking.status}}</div>
+              <div *ngIf="booking.status == 'Pending'" class="text-secondary">{{booking.status}}</div>
               <span class="badge badge-pill badge-info font-italic" *ngIf="booking.isEdited">Edited</span>
             </div>
           </div>

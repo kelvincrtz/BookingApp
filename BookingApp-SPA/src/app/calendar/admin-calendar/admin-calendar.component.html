@@ -71,7 +71,7 @@
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="openModal($event.event)"
       [dayStartHour]="8"
       [dayEndHour]="22">
     </mwl-calendar-week-view>
@@ -81,7 +81,7 @@
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="openModal($event.event)"
       [dayStartHour]="8"
       [dayEndHour]="22">
     </mwl-calendar-day-view>

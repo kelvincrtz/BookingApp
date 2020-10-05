@@ -56,6 +56,7 @@ import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { AdminCalendarComponent } from './calendar/admin-calendar/admin-calendar.component';
 import { BookingCalendarComponent } from './booking/booking-calendar/booking-calendar.component';
+import { AdminCalendarModalComponent } from './calendar/admin-calendar-modal/admin-calendar-modal.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -86,7 +87,8 @@ export function tokenGetter() {
       PhotoManagementComponent,
       RolesModalComponent,
       AdminCalendarComponent,
-      BookingCalendarComponent
+      BookingCalendarComponent,
+      AdminCalendarModalComponent
    ],
    imports: [
       BrowserModule,
@@ -140,7 +142,8 @@ export function tokenGetter() {
       DatePipe
    ],
    entryComponents: [
-      RolesModalComponent
+      RolesModalComponent,
+      AdminCalendarModalComponent
    ],
    bootstrap: [
       AppComponent

@@ -1,24 +1,19 @@
 <h4 class="container alert bg-custom mt-3 font-weight-normal" role="alert">
     <h4 class="alert-heading">Approve or Decline Request</h4>
-    <p>Booking request from 
+    <p>Request from 
       <button [routerLink]="['/members/', booking.userId]" class="btn btn-primary btn-sm">{{user?.fullName}}</button> 
-    This was sent on {{booking.dateAdded | date: 'fullDate'}}</p>
+    This was sent on {{booking.dateAdded | date: 'fullDate'}}.
+    Current status is <strong>{{booking.status}}</strong>.</p>
     <hr>
-    <div class="py-30">
-      <alert type="info">
-        The current status of this request is <strong>{{booking.status}}</strong>
-      </alert>
-    </div>
 
     <div class="container">
       <div class="d-flex justify-content-center">
         
         <div class="card card-custom mb-3" style="max-width: 45rem;">
-            <div class="card-header text-capitalize lead text-light">{{booking.location}}</div>
             <div class="card-body">
-              <h4 class="card-title font-weight-light">When: {{booking.when | date}}</h4>
-              <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
-              <p class="card-text">Request made by {{user?.fullName}} </p>
+              <h6 class="card-text font-weight-light">Location: {{booking.location}}</h6>
+              <h6 class="card-text font-weight-light">When: {{booking.when | date}}</h6>
+              <h6 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h6>
 
               <form class="" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
                 <div class="justify-content-center">

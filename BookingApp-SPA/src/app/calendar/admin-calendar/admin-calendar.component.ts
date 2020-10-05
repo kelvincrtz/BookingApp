@@ -25,19 +25,20 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { AdminCalendarModalComponent } from '../admin-calendar-modal/admin-calendar-modal.component';
 
 const colors: any = {
   red: {
-    primary: '#E00000',
-    secondary: '#E00000',
+    primary: '#e8b5b5',
+    secondary: '#e8b5b5',
   },
   green: {
-    primary: '#90EE90',
-    secondary: '#90EE90',
+    primary: '#b0ebbc',
+    secondary: '#b0ebbc',
   },
   dark: {
-    primary: '#989898',
-    secondary: '#989898',
+    primary: '#c3c9c5',
+    secondary: '#c3c9c5',
   },
 };
 
@@ -59,6 +60,8 @@ export class AdminCalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[];
+
+  bsModalRef: BsModalRef;
 
   constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService) { }
@@ -143,7 +146,12 @@ export class AdminCalendarComponent implements OnInit {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
   }
 
-  openModal(event: CalendarEvent, template: TemplateRef<any>): void {
+  openModal(event: CalendarEvent): void {
     console.log(event);
+    const initialState = {
+      event
+    };
+    this.bsModalRef = this.modalService.show(AdminCalendarModalComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 }
