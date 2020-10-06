@@ -1,4 +1,4 @@
-<h4 class="container alert bg-custom mt-3 font-weight-normal" role="alert">
+<h4 class="container alert alert-primary mt-3 font-weight-normal">
     <h4 class="alert-heading">Approve or Decline Request</h4>
     <p>Request from 
       <button [routerLink]="['/members/', booking.userId]" class="btn btn-primary btn-sm">{{user?.fullName}}</button> 
@@ -9,7 +9,7 @@
     <div class="container">
       <div class="d-flex justify-content-center">
         
-        <div class="card card-custom mb-3" style="max-width: 45rem;">
+        <div class="card card-custom mb-3" style="width: 18rem;">
             <div class="card-body">
               <h6 class="card-text font-weight-light">Location: {{booking.location}}</h6>
               <h6 class="card-text font-weight-light">When: {{booking.when | date}}</h6>

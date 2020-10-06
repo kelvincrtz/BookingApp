@@ -1,4 +1,5 @@
-<div class="modal-header"> <h4 class="modal-title pull-left">Status: </h4>
+<div class="modal-header">
+      <h4 class="modal-title pull-left">Status: </h4>
       <h4 *ngIf="event.meta == 'Approved'" class="modal-title pull-left text-success">{{event.meta}}</h4>
       <h4 *ngIf="event.meta == 'Declined'" class="modal-title pull-left text-danger">{{event.meta}}</h4>
       <h4 *ngIf="event.meta == 'Pending'" class="modal-title pull-left text-secondary">{{event.meta}}</h4>

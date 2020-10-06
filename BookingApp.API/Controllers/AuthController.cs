@@ -42,6 +42,8 @@ namespace BookingApp.API.Controllers
 
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
+            await _userManager.AddToRoleAsync(userToCreate, "Member");
+
             var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
 
             if (result.Succeeded)

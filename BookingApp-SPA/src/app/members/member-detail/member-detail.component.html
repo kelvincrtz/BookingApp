@@ -8,10 +8,10 @@
             <div class="container">
               <h1 class="display-4">{{user.fullName | titlecase}}</h1>
               <p class="lead text-white">Lives in {{user.city}}, {{user.country}}</p>
-              <p class="lead text-white">Age of {{user.age}}</p>
-              <p class="lead text-white">Contact number {{user.contactNumber}}</p>
+              <p class="lead text-white">Age: {{user.age}}</p>
+              <p class="lead text-white">Contact number: {{user.contactNumber}}</p>
               <p class="lead text-white">Last active: {{user.lastActive | date : 'medium' }}</p>
-              <p class="lead text-white">Member since {{user.created | date }}</p>
+              <p class="lead text-white">Member since: {{user.created | date }}</p>
               <p class="lead text-white">{{user.bookings.length}} total number of booking request</p>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingcalendar']">Make a Booking</button>
@@ -42,11 +42,12 @@
             <div class="container">
               <div>
                 <!-- Booking Alert Notifications -->
-                <div *ngIf="bookings?.length == 0 && messages?.length == 0" class="">
+                <div *ngIf="bookings?.length == 0 && messages?.length == 0">
                   <h1 class="display-4 text-center">No notifications</h1>
                 </div>
 
                 <div *ngFor="let booking of bookings">
+
                   <alert *ngIf="booking.status == 'Approved'" [type]='"success"' [dismissible]="dismissible" (onClosed)="onClosed(booking.id)">
                     <h4 class="alert-heading">Heads up!</h4>
                     Your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}!
@@ -58,6 +59,7 @@
                       <small>Message the admin to know the details why or you can try and book another request.</small>
                     </p>
                   </alert>
+
                 </div>
 
                 <!-- Message Alert Notification -->

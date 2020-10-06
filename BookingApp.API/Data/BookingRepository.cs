@@ -89,11 +89,12 @@ namespace BookingApp.API.Data
             return await PagedList<Booking>.CreateAsync(bookings, bookingParams.PageNumber, bookingParams.PageSize);
         }
 
-        public async Task<IEnumerable<Booking>> GetNotificationBookingsForUser(int userId)
+        public async Task<IEnumerable<Booking>> GetNotificationBookingsForUser(int id)
         {
             var bookings = _context.Bookings
-                .Where(u => u.UserId == userId && u.IsSeenByAdmin && u.Status == "Approved" || u.Status == "Declined")
+                .Where(u => u.IsSeenByAdmin && u.Status == "Approved" || u.Status == "Declined")
                 .Where(u => !u.IsSeenNotification)
+                .Where(b => b.UserId == id)
                 .AsQueryable().ToListAsync();
 
             return await bookings;

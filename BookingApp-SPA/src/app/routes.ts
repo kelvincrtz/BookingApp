@@ -45,7 +45,7 @@ export const appRoutes: Routes = [
             { path: 'booking/edit/status/:id', component: BookingEditStatusComponent, resolve: {booking: BookingEditStatusResolver}},
             { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},
             { path: 'calendar', component: AdminCalendarComponent, data: {roles: ['Admin', 'Moderator']}},
-            { path: 'bookingcalendar', component: BookingCalendarComponent, data: {roles: ['Admin', 'Moderator']}}
+            { path: 'bookingcalendar', component: BookingCalendarComponent, data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

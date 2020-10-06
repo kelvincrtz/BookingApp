@@ -61,9 +61,6 @@
 
   <div *ngIf="clickedDate && clickBooking == true" class="alert alert-primary text-center">
     <h4 class="alert-heading">{{ clickedDate | date:'fullDate' }}</h4>
-    <hr>
-
-    <strong *ngIf="clickedColumn != null">You clicked on this column: {{ clickedColumn }}</strong>
 
     <div *ngIf="this.dayEvents.length == 0">
       <span>No bookings here yet. Be the first to book a time slot! </span>
@@ -79,14 +76,11 @@
       </div>
      -->
 
-
-    <form class="container mt-3" [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
+    <form class="container mt-1" [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
       <div class="row justify-content-center">
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <div class="m-1"></div>
-
           <div class="form-group">
-
+            <hr>
             <div class="form-group">
               <input type="text" [ngClass]="{'is-invalid': bookingForm.get('location').errors && bookingForm.get('location').touched}"
               class="form-control" formControlName="location" placeholder="Location">
@@ -113,7 +107,7 @@
                 </div>
             </div>
 
-
+            <hr>
             <div class="form-group text-center">
               <div class="btn-group" role="group">          
                 <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" >Submit</button>
