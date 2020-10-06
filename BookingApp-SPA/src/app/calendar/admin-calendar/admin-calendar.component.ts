@@ -147,7 +147,7 @@ export class AdminCalendarComponent implements OnInit {
   }
 
   openModal(event: CalendarEvent): void {
-    console.log(event);
+    // console.log(event);
     const initialState = {
       event
     };

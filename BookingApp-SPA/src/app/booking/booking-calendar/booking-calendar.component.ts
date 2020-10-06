@@ -70,16 +70,13 @@ export class BookingCalendarComponent implements OnInit {
   dayRefresh: Subject<any> = new Subject();
 
   todaysDate: Date;
-
   clickedDate: Date;
-
   clickedColumn: number;
   clickMessage = '';
 
   invalidHours: number[];
 
   bookingForm: FormGroup;
-
   booking: Booking;
 
   clickBooking = false;
@@ -97,13 +94,18 @@ export class BookingCalendarComponent implements OnInit {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < day.events.length; i++) {
          // tslint:disable-next-line: ban-types
-        const dayEvent: Object = {
-          id: day.events[i].id,
-          title: day.events[i].title,
-          start: day.events[i].start,
-          end: day.events[i].end,
-        };
-        obj.push(dayEvent);
+         if (day.events[i].meta === 'Approved') {
+            // tslint:disable-next-line: ban-types
+            const dayEvent: Object = {
+              id: day.events[i].id,
+              title: day.events[i].title,
+              start: day.events[i].start,
+              end: day.events[i].end,
+              meta: day.events[i].meta,
+            };
+
+            obj.push(dayEvent);
+         }
     }
     this.dayEvents = obj.sort((n1, n2) => {
       if (n1.start.getHours() > n2.start.getHours()) {
@@ -115,6 +117,8 @@ export class BookingCalendarComponent implements OnInit {
       }
       return 0;
     });
+
+    console.log(this.dayEvents);
 
     this.dayRefresh.next();
 
@@ -129,13 +133,17 @@ export class BookingCalendarComponent implements OnInit {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < day.events.length; i++) {
           // tslint:disable-next-line: ban-types
-        const dayEvent: Object = {
-          id: day.events[i].id,
-          title: day.events[i].title,
-          start: day.events[i].start,
-          end: day.events[i].end,
-        };
-        obj.push(dayEvent);
+          if (day.events[i].meta === 'Approved') {
+            // tslint:disable-next-line: ban-types
+            const dayEvent: Object = {
+              id: day.events[i].id,
+              title: day.events[i].title,
+              start: day.events[i].start,
+              end: day.events[i].end,
+              meta: day.events[i].meta,
+            };
+            obj.push(dayEvent);
+          }
     }
     this.dayEvents = obj.sort((n1, n2) => {
       if (n1.start.getHours() > n2.start.getHours()) {
@@ -147,6 +155,8 @@ export class BookingCalendarComponent implements OnInit {
       }
       return 0;
     });
+
+    // console.log(this.dayEvents);
 
     this.dayRefresh.next();
 
@@ -183,7 +193,6 @@ export class BookingCalendarComponent implements OnInit {
   }
 
   registerBooking() {
-    // console.log(this.bookingForm.value);
     if (this.bookingForm.valid) {
       this.fixDate(this.bookingForm.get('when').value);
       this.fixDate(this.bookingForm.get('fromTime').value);
@@ -230,6 +239,7 @@ export class BookingCalendarComponent implements OnInit {
         color: colors.red,
         start: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), startTime.getHours(), startTime.getMinutes()),
         end: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), endTime.getHours(), endTime.getMinutes()),
+        meta: res[i].status,
       };
       obj.push(event);
     }

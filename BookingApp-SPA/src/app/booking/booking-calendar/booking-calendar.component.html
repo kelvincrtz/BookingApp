@@ -57,8 +57,6 @@
     -->
   </div>
 
-  <!-- Editing Point From Here -->
-
   <div *ngIf="clickedDate && clickBooking == true" class="alert alert-primary text-center">
     <h4 class="alert-heading">{{ clickedDate | date:'fullDate' }}</h4>
 
@@ -67,14 +65,8 @@
     </div>
 
     <div *ngFor="let day of dayEvents">
-      {{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked
-     </div>
-
-     <!-- DO NOT TOUCH
-      <div *ngFor="let hours of invalidHours">
-       {{hours}}
-      </div>
-     -->
+      <div *ngIf="day.meta === 'Approved'">{{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked</div>
+    </div>
 
     <form class="container mt-1" [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
       <div class="row justify-content-center">
@@ -108,6 +100,7 @@
             </div>
 
             <hr>
+
             <div class="form-group text-center">
               <div class="btn-group" role="group">          
                 <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" >Submit</button>
@@ -144,8 +137,9 @@
         -->
       </div>
     </div>
-    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal >= 3 && day.date > todaysDate">FULLY BOOKED</small>
-
+    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal == 3 && day.date > todaysDate">FULLY BOOKED</small>
+    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal == 2 && day.date > todaysDate">1 SLOT LEFT</small>
+    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal == 1 && day.date > todaysDate">2 SLOTS LEFT</small>
     <!-- Still Available Days -->
     <div class="cal-cell-top" (click)="validClick(day)" *ngIf="day.badgeTotal < 3 && day.date > todaysDate"> 
       <div>
@@ -160,9 +154,6 @@
     <small class="text-light text-center" style="background-color: lightgray;"  *ngIf="day.date < todaysDate">Expired</small>
 
   </ng-template>
-
-
-  <!-- Editing Stop Point Here -->
 
   <ng-template #customEventTemplate let-column="column">
 
@@ -192,4 +183,4 @@
       (hourSegmentClicked)="clickedDate = $event.date">
     </mwl-calendar-day-view>
   </div>
-</div>
+</div> 

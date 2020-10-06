@@ -16,7 +16,7 @@
               <button *ngIf="user.id == authDecodeToken" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingcalendar']">Make a Booking</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/member/edit']">Edit Profile</button>
-              <button *ngIf="user.id != authDecodeToken" class="btn btn-success btn-block">View {{user.fullName | titlecase}}'s Bookings</button>
+              <button *appHasRole="['Admin', 'Moderator']" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View {{user.fullName | titlecase}}'s Bookings</button>
             </div>
           </div>
         </div>
@@ -56,7 +56,8 @@
                   <alert *ngIf="booking.status == 'Declined'" [type]='"danger"' [dismissible]="dismissible" (onClosed)="onClosed(booking.id)">
                     <strong>Sorry</strong> but your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}.
                     <p>
-                      <small>Message the admin to know the details why or you can try and book another request.</small>
+                      <small>Message the <a>Admin</a> to know why it was declined or <a class="strong" [routerLink]="['/bookingcalendar']">book</a> another request.</small>
+                      
                     </p>
                   </alert>
 
