@@ -74,8 +74,6 @@ export class BookingCalendarComponent implements OnInit {
   clickedColumn: number;
   clickMessage = '';
 
-  invalidHours: number[];
-
   bookingForm: FormGroup;
   booking: Booking;
 
@@ -93,8 +91,6 @@ export class BookingCalendarComponent implements OnInit {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < day.events.length; i++) {
-         // tslint:disable-next-line: ban-types
-         if (day.events[i].meta === 'Approved') {
             // tslint:disable-next-line: ban-types
             const dayEvent: Object = {
               id: day.events[i].id,
@@ -105,7 +101,6 @@ export class BookingCalendarComponent implements OnInit {
             };
 
             obj.push(dayEvent);
-         }
     }
     this.dayEvents = obj.sort((n1, n2) => {
       if (n1.start.getHours() > n2.start.getHours()) {
@@ -117,8 +112,6 @@ export class BookingCalendarComponent implements OnInit {
       }
       return 0;
     });
-
-    console.log(this.dayEvents);
 
     this.dayRefresh.next();
 
@@ -128,12 +121,9 @@ export class BookingCalendarComponent implements OnInit {
 
   validClick(day: any) {
     this.clickBooking = true;
-    // console.log(day);
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < day.events.length; i++) {
-          // tslint:disable-next-line: ban-types
-          if (day.events[i].meta === 'Approved') {
             // tslint:disable-next-line: ban-types
             const dayEvent: Object = {
               id: day.events[i].id,
@@ -143,7 +133,6 @@ export class BookingCalendarComponent implements OnInit {
               meta: day.events[i].meta,
             };
             obj.push(dayEvent);
-          }
     }
     this.dayEvents = obj.sort((n1, n2) => {
       if (n1.start.getHours() > n2.start.getHours()) {
@@ -156,25 +145,7 @@ export class BookingCalendarComponent implements OnInit {
       return 0;
     });
 
-    // console.log(this.dayEvents);
-
     this.dayRefresh.next();
-
-    const obj2: Array<any> = [];
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.dayEvents.length; i++) {
-      const startTime = new Date(this.dayEvents[i].start);
-      const endTime = new Date(this.dayEvents[i].end);
-
-      // console.log('Start: ' + startTime.getHours()  + ' Finish: ' + endTime.getHours());
-
-      for (let k = startTime.getHours(); k <= endTime.getHours(); k++) {
-        // console.log(k);
-        obj2.push(k);
-      }
-    }
-
-    this.invalidHours = obj2;
 
     this.clickedDate  = day.date;
     this.clickMessage = null;
@@ -200,7 +171,7 @@ export class BookingCalendarComponent implements OnInit {
       this.booking = Object.assign({}, this.bookingForm.value);
       this.bookingService.createBooking(this.authService.decodedToken.nameid, this.booking).subscribe(next => {
         this.alertify.success('Booking request has been submitted');
-        console.log(this.booking);
+        // console.log(this.booking);
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
@@ -229,19 +200,20 @@ export class BookingCalendarComponent implements OnInit {
     const obj: Array<any> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
-      const dayTime = new Date(res[i].when);
-      const startTime = new Date(res[i].fromTime);
-      const endTime = new Date(res[i].toTime);
-      // tslint:disable-next-line: ban-types
-      const event: Object = {
-        id: res[i].id,
-        title: res[i].location,
-        color: colors.red,
-        start: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), startTime.getHours(), startTime.getMinutes()),
-        end: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), endTime.getHours(), endTime.getMinutes()),
-        meta: res[i].status,
-      };
-      obj.push(event);
+      if (res[i].status === 'Approved') {
+        const dayTime = new Date(res[i].when);
+        const startTime = new Date(res[i].fromTime);
+        const endTime = new Date(res[i].toTime);
+        // tslint:disable-next-line: ban-types
+        const event: Object = {
+          id: res[i].id,
+          title: res[i].location,
+          start: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), startTime.getHours(), startTime.getMinutes()),
+          end: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), endTime.getHours(), endTime.getMinutes()),
+          meta: res[i].status,
+        };
+        obj.push(event);
+      }
     }
     this.events = obj;
     this.refresh.next();
