@@ -32,6 +32,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Booking } from 'src/app/_models/booking';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 const colors: any = {
@@ -79,8 +80,11 @@ export class BookingCalendarComponent implements OnInit {
 
   clickBooking = false;
 
+  modalRef: BsModalRef;
+  isCollapsed = true;
+
   constructor(private authService: AuthService, private bookingService: BookingService, private alertify: AlertifyService,
-              private router: Router) { }
+              private router: Router, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
@@ -163,7 +167,7 @@ export class BookingCalendarComponent implements OnInit {
     return g.get('when').value >= Date.now() ? null : {errordate: true } ;
   }
 
-  registerBooking() {
+  registerBooking(template: TemplateRef<any>) {
     if (this.bookingForm.valid) {
       this.fixDate(this.bookingForm.get('when').value);
       this.fixDate(this.bookingForm.get('fromTime').value);
@@ -171,10 +175,10 @@ export class BookingCalendarComponent implements OnInit {
       this.booking = Object.assign({}, this.bookingForm.value);
       this.bookingService.createBooking(this.authService.decodedToken.nameid, this.booking).subscribe(next => {
         this.alertify.success('Booking request has been submitted');
-        // console.log(this.booking);
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
+        this.modalRef = this.modalService.show(template, {class: 'modal-md'});
         this.router.navigate(['/bookingsforuser/']);
       });
     }
@@ -226,6 +230,10 @@ export class BookingCalendarComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
   }
 
   setView(view: CalendarView) {

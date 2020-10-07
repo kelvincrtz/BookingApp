@@ -8,3 +8,7 @@
     border-radius: 0.80em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+
+hr {
+    border-color: rgb(60, 119, 207);
+}

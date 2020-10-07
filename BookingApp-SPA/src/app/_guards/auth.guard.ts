@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
       if (match) {
         return true;
       } else {
-        this.router.navigate(['members']);
+        this.router.navigate(['/members', this.authService.decodedToken.nameid]);
         this.alertify.error('You are not allowed to access this area');
       }
     }

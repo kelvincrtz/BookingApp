@@ -44,7 +44,7 @@
       <div *ngIf="day.meta === 'Approved'">{{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked</div>
     </div>
 
-    <form class="container mt-1" [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
+    <form class="container mt-1" [formGroup]="bookingForm" (ngSubmit)="registerBooking(template)">
       <div class="row justify-content-center">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
@@ -88,8 +88,43 @@
         </div>
       </div>
     </form>
-
   </div>
+
+  <button type="button" class="btn btn-danger"  (click)="openModal(template)">Delete</button>
+
+  <ng-template #template>
+    <div class="modal-body">
+      <div class="text-center">Your request has now been submitted. While you wait, please read our terms and conditions for payment information and other policies.
+      </div>
+      <div class="text-center mt-1">
+        <button type="button" class="btn btn-primary btn-circle" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i class="fa fa-info-circle"></i> Terms and Conditions
+        </button>
+      </div>
+      <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="mt-1">
+        <hr>
+
+        <div>
+          <h4>Payment</h4>
+          <i class="fa-li fa fa-square"></i><strong> Credit Card or Bank Transfer</strong>
+        </div>
+        <hr>
+
+        <div>
+          <h5>Cancellation/Refunds </h5>
+        </div>
+
+        <div>
+          <h5>No-show</h5>
+        </div>
+
+        <div class="">Use this page to manage all your booking requests.</div>
+        <div>Wait for the Administrator to process and review your booking request. You will be notified.</div>
+        <div class=""><small class="text-muted">NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
+
+      </div>
+    </div>
+  </ng-template>
 
   <div *ngIf="clickMessage" class="alert alert-danger text-center">
     <strong> {{ clickMessage }}</strong>
