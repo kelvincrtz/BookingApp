@@ -57,8 +57,8 @@
                     <strong>Sorry</strong> but your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}
                     <p>
                       <small>You can message the 
-                        <button class="btn btn-primary btn-sm" tooltip="Click to message the Admin" [routerLink]="['/members/', 6]">Admin</button>
-                         to know why it was declined or <button class="btn btn-primary btn-sm" tooltip="Click to make a booking request"  [routerLink]="['/bookingcalendar']">Book</button> another request.
+                        <button class="btn btn-primary btn-sm" tooltip="Click to message the Admin" (click)="onClosed(booking.id)" [routerLink]="['/members/', 6]">Admin</button>
+                         to know why it was declined or <button class="btn btn-primary btn-sm" tooltip="Click to make a booking request" (click)="onClosed(booking.id)" [routerLink]="['/bookingcalendar']">Book</button> another request.
                         </small>
                     </p>
                   </alert>

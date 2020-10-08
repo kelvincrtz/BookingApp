@@ -24,7 +24,7 @@ export class MemberDetailComponent implements OnInit {
   dismissible = true;
   alerts: any;
 
-  constructor(private route: ActivatedRoute, private authService: AuthService,
+  constructor(private route: ActivatedRoute, private authService: AuthService, private alertify: AlertifyService,
               private bookingService: BookingService, private messageService: MessageService) { }
 
   ngOnInit() {
@@ -53,6 +53,7 @@ export class MemberDetailComponent implements OnInit {
     this.bookingService.getNotifyBookings(this.authService.decodedToken.nameid)
       .subscribe((booking: any) => {
       this.bookings = booking;
+      this.alertify.success('You have a booking notification');
     }, error => {
       console.log(error);
     });
@@ -62,6 +63,7 @@ export class MemberDetailComponent implements OnInit {
     this.messageService.getNotifyMessages(this.authService.decodedToken.nameid)
       .subscribe((message: any) => {
       this.messages = message;
+      this.alertify.success('You have a new message');
     }, error => {
       console.log(error);
     });
