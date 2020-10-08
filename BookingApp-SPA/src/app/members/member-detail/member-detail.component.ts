@@ -19,6 +19,7 @@ export class MemberDetailComponent implements OnInit {
   bookings: Booking[];
   messages: Message[];
   authDecodeToken: any;
+  authDecodeName: any;
 
   dismissible = true;
   alerts: any;
@@ -32,6 +33,7 @@ export class MemberDetailComponent implements OnInit {
     });
 
     this.authDecodeToken = this.authService.decodedToken.nameid;
+    this.authDecodeName = this.authService.decodedToken.unique_name;
 
     this.loadNofifyBookings();
     this.loadNofifyMessages();

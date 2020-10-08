@@ -11,8 +11,8 @@
               <p class="lead text-white">Age: {{user.age}}</p>
               <p class="lead text-white">Contact number: {{user.contactNumber}}</p>
               <p class="lead text-white">Last active: {{user.lastActive | date : 'medium' }}</p>
-              <p class="lead text-white">Member since: {{user.created | date }}</p>
-              <p class="lead text-white">{{user.bookings.length}} total number of booking request</p>
+              <p *ngIf="user.id == authDecodeToken || authDecodeName === 'Admin'" class="lead text-white">Member since: {{user.created | date }}</p>
+              <p *ngIf="user.id == authDecodeToken || authDecodeName === 'Admin'" class="lead text-white">{{user.bookings.length}} total number of booking request</p>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingcalendar']">Make a Booking</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/member/edit']">Edit Profile</button>

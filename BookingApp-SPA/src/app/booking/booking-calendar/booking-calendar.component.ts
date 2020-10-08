@@ -236,6 +236,11 @@ export class BookingCalendarComponent implements OnInit {
     this.modalRef = this.modalService.show(template, {class: 'modal-md'});
   }
 
+  closeModal(): void {
+    this.modalRef.hide();
+    this.alertify.success('Terms and conditions have been read.');
+  }
+
   setView(view: CalendarView) {
     this.view = view;
   }
