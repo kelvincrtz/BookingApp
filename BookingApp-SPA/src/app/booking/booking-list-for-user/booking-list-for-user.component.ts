@@ -6,6 +6,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { ActivatedRoute } from '@angular/router';
+import { BookingEditComponent } from '../booking-edit/booking-edit.component';
 
 @Component({
   selector: 'app-booking-list-for-user',
@@ -29,6 +30,8 @@ export class BookingListForUserComponent implements OnInit {
   isCollapsed = true;
 
   date: Date = new Date();
+
+  bsModalRef: BsModalRef;
 
   constructor(private booking: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }
@@ -125,6 +128,15 @@ export class BookingListForUserComponent implements OnInit {
   loadOrderBy() {
     this.pagination.currentPage = 1;
     this.loadBookings();
+  }
+
+  openEditModal(booking: Booking): void {
+    // console.log(event);
+    const initialState = {
+      booking
+    };
+    this.bsModalRef = this.modalService.show(BookingEditComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
 }

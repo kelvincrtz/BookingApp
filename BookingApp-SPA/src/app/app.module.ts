@@ -143,7 +143,8 @@ export function tokenGetter() {
    ],
    entryComponents: [
       RolesModalComponent,
-      AdminCalendarModalComponent
+      AdminCalendarModalComponent,
+      BookingEditComponent
    ],
    bootstrap: [
       AppComponent
