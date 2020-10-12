@@ -52,8 +52,8 @@ export class BookingEditComponent implements OnInit {
 
   confirm(): void {
     if (this.bookingForm.valid) {
-      this.fixDate(this.bookingForm.get('fromTime').value);
-      this.fixDate(this.bookingForm.get('toTime').value);
+      this.fixDate(new Date(this.bookingForm.get('fromTime').value));
+      this.fixDate(new Date(this.bookingForm.get('toTime').value));
       this.bookingToUpdate = Object.assign({}, this.bookingForm.value);
       this.bookingService.updateBooking(this.authService.decodedToken.nameid, this.bookingFromRepoId, this.bookingToUpdate)
       .subscribe(next => {

@@ -23,4 +23,10 @@ export class HomeComponent implements OnInit {
     this.registerMode = registerMode;
   }
 
+  scrollToElement($element): void {
+    console.log($element);
+    // tslint:disable-next-line: quotemark
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  }
+
 }

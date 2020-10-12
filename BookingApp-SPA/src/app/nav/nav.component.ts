@@ -42,4 +42,10 @@ export class NavComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  scrollToElement($element): void {
+    console.log($element);
+    // tslint:disable-next-line: quotemark
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  }
+
 }
