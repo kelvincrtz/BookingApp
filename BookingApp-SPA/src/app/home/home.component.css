@@ -58,7 +58,7 @@ p {
 	background-color: rgb(210, 224, 10);
 }
 .brand h1 {
-	font-size: 3rem;
+	font-size: 2.8rem;
 	text-transform: uppercase;
 	color: white;
 }
@@ -140,9 +140,9 @@ p {
 
 /* Hero Section */
 #hero {
-	background-image: url();
+	background-image: url('../../assets/hero.jpg');
 	background-size: cover;
-	background-position: top center;
+	background-position: bottom center;
 	position: relative;
 	z-index: 1;
 }
@@ -626,7 +626,7 @@ p {
 		display: inline-block;
 	}
 	#header .nav-list ul li a {
-		font-size: 1.8rem;
+		font-size: 1.1rem;
 	}
 	#header .nav-list ul a:after {
 		display: none;
