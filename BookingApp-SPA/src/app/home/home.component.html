@@ -28,7 +28,7 @@
           <a (click)="scrollToElement(home)">
             <h1>
               <span>A</span>bove <div> </div>
-              <span>A</span>ll Ls
+              <span>A</span>ll <span>L</span>s
             </h1>
           </a>
         </div>
@@ -63,6 +63,20 @@
   </section>
   <!-- End Hero Section  -->
 
+  <!-- Log In Section -->
+  <section #login id="hero">
+    <div class="hero container">
+      <form #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username"
+          placeholder="Username" required [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" 
+          placeholder="Password" required [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+      </form>
+    </div>
+  </section>
+  <!-- End of Log In Section-->
+
 
   <!-- Register Section -->
   <section #register id="hero">
@@ -70,7 +84,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12">
-            <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+            <app-register (cancelRegister)="cancelRegisterMode($event)" (backToHome)="scrollToElement(home)"></app-register>
           </div>
         </div>
       </div>

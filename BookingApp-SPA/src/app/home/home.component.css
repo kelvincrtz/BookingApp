@@ -37,7 +37,7 @@ p {
 	text-align: center;
 }
 .section-title span {
-	color: rgb(210, 224, 10);
+	color: rgb(221, 235, 32);
 }
 
 .cta {
@@ -55,15 +55,15 @@ p {
 }
 .cta:hover {
 	color: white;
-	background-color: rgb(210, 224, 10);
+	background-color: rgb(219, 233, 30);
 }
 .brand h1 {
-	font-size: 2.8rem;
+	font-size: 2.6rem;
 	text-transform: uppercase;
 	color: white;
 }
 .brand h1 span {
-	color: rgb(210, 224, 10);
+	color: rgb(216, 230, 20);
 }
 
 /* Header section */
@@ -153,7 +153,7 @@ p {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	background-color: black;
+	background-color: rgba(0, 0, 0, 0.692);
 	opacity: .7;
 	z-index: -1;
 }

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
+  @Output() backToHome = new EventEmitter();
   user: User;
   registerForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -57,8 +58,9 @@ export class RegisterComponent implements OnInit {
   }
 
   cancel() {
+    this.backToHome.emit('home');
+    this.alertify.message('Cancelled');
     this.cancelRegister.emit(false);
-    this.alertify.message('cancelled');
   }
 
 }
