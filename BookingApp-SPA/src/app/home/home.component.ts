@@ -47,6 +47,10 @@ export class HomeComponent implements OnInit {
     this.loginForm.reset(this.user);
   }
 
+  loggedIn() {
+    return this.authService.loggedIn(); // being checked for JWT validity date
+  }
+
   registerToggle() {
     this.registerMode = true;
   }
