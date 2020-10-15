@@ -27,7 +27,7 @@ export class BookingEditComponent implements OnInit {
               private modalService: BsModalService) { }
 
   ngOnInit() {
-    console.log(this.booking);
+    // console.log(this.booking);
     this.bookingFromRepoId = this.booking.id;
     this.bookingForm = new FormGroup({
       when: new FormControl(this.booking.when, Validators.required),

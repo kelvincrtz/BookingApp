@@ -1,26 +1,4 @@
-  <!-- version 1 Registration System
-    <section class="jumbotron text-center">
-    <div *ngIf="!registerMode" class="container">
-      <h1 class="jumbotron-heading">Example</h1>
-      <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2 mr-2" (click)="registerToggle()" >Register</a>
-        <a href="#" class="btn my-2">More info</a>
-      </p>
-    </div>
-
-    <div *ngIf="registerMode" class="container">
-      <div class="row justify-content-center">
-        <div class="col-4">
-          <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
-        </div>
-      </div>
-    </div>
-  </section>
-  -->
-
   <!-- Header -->
-
   <section id="header">
     <div class="header container">
       <div class="nav-bar">
@@ -56,7 +34,7 @@
         <h1>Welcome to <span></span></h1>
         <h1>ABOVE ALL LS<span></span></h1>
         <a (click)="scrollToElement(testimonials)" type="button" class="cta">Testimonials</a>
-        <a (click)="scrollToElement(testimonials)" type="button" class="cta">Login</a>
+        <a (click)="scrollToElement(login)" type="button" class="cta">Login</a>
         <a (click)="scrollToElement(register)" (click)="registerToggle()" type="button" class="cta">Register</a>
       </div>
     </div>
@@ -64,16 +42,41 @@
   <!-- End Hero Section  -->
 
   <!-- Log In Section -->
-  <section #login id="hero">
+
+  <section #login id="services">
     <div class="hero container">
-      <form #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()">
-        <input class="form-control mr-sm-2" type="text" name="username"
-          placeholder="Username" required [(ngModel)]="model.username">
-        <input class="form-control mr-sm-2" type="password" name="password" 
-          placeholder="Password" required [(ngModel)]="model.password">
-        <button [disabled]="!loginForm.valid" class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
-      </form>
-    </div>
+      <div class="container">
+        <div class="card w-50">
+          <div class="card-body">
+            <form class="" [formGroup]="loginForm" (ngSubmit)="loginClick()">
+              <div class="">
+                <div class="">
+  
+                      <div class="form-group">
+                        <input type="text" [ngClass]="{'is-invalid': loginForm.get('userName').errors && loginForm.get('userName').touched}"
+                        class="form-control" formControlName="userName" placeholder="Username">
+                        <div class="invalid-feedback">Username is required</div>
+                      </div>
+          
+                      <div class="form-group">
+                        <input type="password" [ngClass]="{'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched}"
+                        class="form-control" formControlName="password" placeholder="Password">
+                        <div class="invalid-feedback">Password is required</div>
+                      </div>
+          
+                      <div class="form-group text-center">
+                        <div class="btn-group" role="group">
+                          <button class="btn btn-success" type="submit" value="submit" id="submit" [disabled]="!loginForm.valid">Login</button>
+                          <button class="btn btn-secondary">Cancel</button>
+                        </div>
+                      </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      </div>
   </section>
   <!-- End of Log In Section-->
 
