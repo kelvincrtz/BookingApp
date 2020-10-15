@@ -29,11 +29,15 @@ export class BookingEditComponent implements OnInit {
   ngOnInit() {
     // console.log(this.booking);
     this.bookingFromRepoId = this.booking.id;
+
+    const fromTimeDate = new Date(this.booking.fromTime);
+    const toTimeDate = new Date(this.booking.toTime);
+
     this.bookingForm = new FormGroup({
       when: new FormControl(this.booking.when, Validators.required),
       location: new FormControl(this.booking.location, Validators.required),
-      fromTime: new FormControl(this.booking.fromTime, Validators.required),
-      toTime: new FormControl(this.booking.toTime, Validators.required),
+      fromTime: new FormControl(fromTimeDate, Validators.required),
+      toTime: new FormControl(toTimeDate, Validators.required),
     });
   }
 
@@ -52,8 +56,8 @@ export class BookingEditComponent implements OnInit {
 
   confirm(): void {
     if (this.bookingForm.valid) {
-      this.fixDate(new Date(this.bookingForm.get('fromTime').value));
-      this.fixDate(new Date(this.bookingForm.get('toTime').value));
+      this.fixDate(this.bookingForm.get('fromTime').value);
+      this.fixDate(this.bookingForm.get('toTime').value);
       this.bookingToUpdate = Object.assign({}, this.bookingForm.value);
       this.bookingService.updateBooking(this.authService.decodedToken.nameid, this.bookingFromRepoId, this.bookingToUpdate)
       .subscribe(next => {
