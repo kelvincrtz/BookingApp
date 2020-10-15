@@ -28,7 +28,6 @@ export class BookingEditComponent implements OnInit {
               private modalService: BsModalService) { }
 
   ngOnInit() {
-    console.log(this.booking);
     this.bookingFromRepoId = this.booking.id;
 
     const fromTimeDate = new Date(this.booking.fromTime);
@@ -72,7 +71,14 @@ export class BookingEditComponent implements OnInit {
     this.modalRefConfirm.hide();
     this.bsModalRef.hide();
 
-    this.updateTimeAndLocation(this.bookingToUpdate);
+    // this.updateTimeAndLocation(this.bookingToUpdate);
+
+    console.log('Updated booking from time:' + new Date(this.booking.fromTime));
+    console.log('Updated booking to   time:' + new Date(this.booking.toTime));
+
+    console.log('Form booking from time:' + this.fixDate(new Date(this.bookingToUpdate.fromTime)));
+    console.log('Form booking to   time:' + this.fixDate(new Date(this.bookingToUpdate.toTime)));
+
 
     this.bookingBackToBookingsUser.emit(this.booking);
   }
