@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   }
 
   loginClick() {
-    console.log(this.loginForm.value);
     if (this.loginForm.valid) {
       this.user = Object.assign({}, this.loginForm.value);
       this.authService.login(this.user).subscribe(next => {

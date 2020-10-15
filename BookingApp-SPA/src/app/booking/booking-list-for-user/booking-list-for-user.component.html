@@ -83,7 +83,7 @@
             <div class="btn-group btn-block btn-group-sm" *ngIf="userId == authDecodeToken">
               <button type="button" (click)="openEditModal(booking)" class="btn btn-primary" tooltip="Click to edit request" [delay]="500"
                 [disabled]="booking.status == 'Approved' || booking.status == 'Declined'">Edit</button>
-              <button type="button" class="btn btn-danger"  (click)="openModal(template)" tooltip="Click to delete this request" [delay]="500"
+              <button type="button" class="btn btn-danger" (click)="openModal(template)" tooltip="Click to delete this request" [delay]="500"
                 [disabled]="booking.status == 'Approved'">Delete</button>
               <ng-template #template>
                 <div class="modal-body text-center">

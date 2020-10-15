@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./booking-edit.component.css']
 })
 export class BookingEditComponent implements OnInit {
+  @Output() bookingBackToBookingsUser = new EventEmitter();
   booking: Booking;
   bookingToUpdate: Booking;
   bookingForm: FormGroup;
@@ -27,7 +28,7 @@ export class BookingEditComponent implements OnInit {
               private modalService: BsModalService) { }
 
   ngOnInit() {
-    // console.log(this.booking);
+    console.log(this.booking);
     this.bookingFromRepoId = this.booking.id;
 
     const fromTimeDate = new Date(this.booking.fromTime);
@@ -70,6 +71,17 @@ export class BookingEditComponent implements OnInit {
     }
     this.modalRefConfirm.hide();
     this.bsModalRef.hide();
+
+    this.updateTimeAndLocation(this.bookingToUpdate);
+
+    this.bookingBackToBookingsUser.emit(this.booking);
+  }
+
+  updateTimeAndLocation(bookingUpdate: Booking) {
+    this.booking.when = bookingUpdate.when;
+    this.booking.location = bookingUpdate.location;
+    this.booking.fromTime = bookingUpdate.fromTime;
+    this.booking.toTime = bookingUpdate.toTime;
   }
 
   decline(): void {

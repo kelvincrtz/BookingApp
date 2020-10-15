@@ -40,7 +40,6 @@ export const appRoutes: Routes = [
             { path: 'bookings', component: BookingListComponent, resolve: {bookings: BookingListResolver},
                 data: {roles: ['Admin', 'Moderator']}},
             { path: 'bookingsforuser', component: BookingListForUserComponent, resolve: {bookings: BookingListForUserResolver}},
-            { path: 'booking/edit/:id', component: BookingEditComponent, resolve: {booking: BookingEditResolver}},
             { path: 'booking/edit/status/:id', component: BookingEditStatusComponent, resolve: {booking: BookingEditStatusResolver},
                 data: {roles: ['Admin', 'Moderator']}},
             { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},

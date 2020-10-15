@@ -131,14 +131,31 @@ export class BookingListForUserComponent implements OnInit {
   }
 
   openEditModal(booking: Booking): void {
-    // console.log(event);
     const initialState = {
-      booking
+        booking
     };
+
     this.bsModalRef = this.modalService.show(BookingEditComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
-    // this.bookings.unshift(booking);
-    // this.bookings.splice(this.bookings.findIndex(b => b.id === booking.id), 1);
+
+
+    this.bsModalRef.content.bookingBackToBookingsUser.subscribe((value: Booking) => {
+      const fromTimeDate = new Date(value.fromTime);
+      const toTimeDate = new Date(value.toTime);
+
+      console.log('Converted              to date' + fromTimeDate + ': Time :' + toTimeDate);
+      console.log('Converted Fix Date Method date' + this.fixDate(fromTimeDate) + ': Time :' + this.fixDate(toTimeDate));
+
+      this.bookings.splice(this.bookings.findIndex(b => b.id === booking.id), 1);
+      this.bookings.unshift(value);
+    }, error => {
+        this.alertify.error('Failed to update booking' + error);
+    });
+  }
+
+  fixDate(d: Date): Date {
+    d.setHours(d.getHours() - d.getTimezoneOffset() / 60);
+    return d;
   }
 
 }
