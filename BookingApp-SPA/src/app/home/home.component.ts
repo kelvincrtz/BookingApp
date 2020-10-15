@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit {
       }, error => {
         this.alertify.error('User does not exist');
       }, () => {
-        if (this.authService.roleMatch(['Admin', 'Moderator'])) {
-          this.router.navigate(['/members']);
+        if (this.authService.roleMatch(['Admin'])) {
+          this.router.navigate(['/calendar']);
         }
         if (this.authService.roleMatch(['Member'])) {
           this.router.navigate(['/members', this.authService.decodedToken.nameid]);

@@ -64,6 +64,8 @@ export class BookingEditComponent implements OnInit {
         this.alertify.success('Booking request has been updated');
       }, error => {
         this.alertify.error('Error sending the request');
+      }, () => {
+        this.router.navigate(['/bookingsforuser']);
       });
     }
     this.modalRefConfirm.hide();

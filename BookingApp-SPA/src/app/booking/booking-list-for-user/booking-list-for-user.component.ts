@@ -5,7 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookingEditComponent } from '../booking-edit/booking-edit.component';
 
 @Component({
@@ -33,7 +33,7 @@ export class BookingListForUserComponent implements OnInit {
 
   bsModalRef: BsModalRef;
 
-  constructor(private booking: BookingService, private alertify: AlertifyService,
+  constructor(private booking: BookingService, private alertify: AlertifyService, private router: Router,
               private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -137,6 +137,8 @@ export class BookingListForUserComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(BookingEditComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
+    // this.bookings.unshift(booking);
+    // this.bookings.splice(this.bookings.findIndex(b => b.id === booking.id), 1);
   }
 
 }
