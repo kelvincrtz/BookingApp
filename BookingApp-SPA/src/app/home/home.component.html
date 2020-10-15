@@ -43,13 +43,14 @@
 
   <!-- Log In Section -->
 
-  <section #login id="services">
-    <div class="hero container">
+  <section #login id="login">
+    <div class="login container">
       <div class="container">
         <div class="card w-50">
           <div class="card-body">
             <form class="" [formGroup]="loginForm" (ngSubmit)="loginClick()">
               <div class="">
+                <h1>Login</h1>
                 <div class="">
   
                       <div class="form-group">
@@ -67,7 +68,7 @@
                       <div class="form-group text-center">
                         <div class="btn-group" role="group">
                           <button class="btn btn-success" type="submit" value="submit" id="submit" [disabled]="!loginForm.valid">Login</button>
-                          <button class="btn btn-default" (click)="scrollToElement(home)">Cancel</button>
+                          <button class="btn btn-secondary" (click)="scrollToElement(home)" (click)="cancelLogin()">Cancel</button>
                         </div>
                       </div>
                 </div>
@@ -82,7 +83,7 @@
 
 
   <!-- Register Section -->
-  <section #register id="hero">
+  <section #register id="login">
     <div *ngIf="registerMode" class="hero">
       <div class="container">
         <div class="row justify-content-center">

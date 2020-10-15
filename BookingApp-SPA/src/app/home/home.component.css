@@ -58,13 +58,40 @@ p {
 	background-color: rgb(219, 233, 30);
 }
 .brand h1 {
-	font-size: 2.6rem;
+	font-size: 2.4rem;
 	text-transform: uppercase;
 	color: white;
 }
 .brand h1 span {
 	color: rgb(216, 230, 20);
 }
+
+
+#login {
+	background-image: url();
+	background-size: cover;
+	background-position: bottom center;
+	position: relative;
+	z-index: 1;
+}
+#login::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: linear-gradient(50deg, #5979be 0%, #0b29d3 80%);
+	opacity: .7;
+	z-index: -1;
+}
+#login .hero {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 50px;
+	justify-content: flex-start;
+}
+
 
 
 .card {
@@ -89,7 +116,7 @@ p {
 }
 #header .header {
 	min-height: 8vh;
-	background-color: rgba(31, 30, 30, 0.24);
+	background-color: rgba(31, 30, 30, 0.123);
 	transition: .3s ease background-color;
 }
 #header .nav-bar {
@@ -103,7 +130,7 @@ p {
 }
 #header .nav-list ul {
 	list-style: none;
-	background-color: rgb(31, 30, 30);
+	background-color: rgba(31, 30, 30, 0.911);
 	width: 100vw;
 	height: 100vh;
 	left: 100%;

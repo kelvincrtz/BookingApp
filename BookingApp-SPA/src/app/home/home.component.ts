@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  cancelLogin() {
+    this.loginForm.reset(this.user);
+  }
+
   registerToggle() {
     this.registerMode = true;
   }
