@@ -77,6 +77,8 @@ export class BookingEditComponent implements OnInit {
   }
 
   updateTimeAndLocation(bookingUpdate: Booking) {
+    let today = new Date();
+
     this.booking.when = bookingUpdate.when;
     this.booking.location = bookingUpdate.location;
 
@@ -88,6 +90,8 @@ export class BookingEditComponent implements OnInit {
 
     this.booking.fromTime = fromTimeSet;
     this.booking.toTime = toTimeSet;
+    this.booking.isEdited = true;
+    this.booking.dateAdded = today;
   }
 
   decline(): void {
