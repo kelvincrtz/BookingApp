@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
         this.authService.register(this.user).subscribe(() => {
           this.alertify.success('Registration successful');
         }, error => {
-          this.alertify.error(error.error);
+          this.alertify.error('Username already exists');
         }, () => {
           this.authService.login(this.user).subscribe(() => {
             this.router.navigate(['/members', this.authService.decodedToken.nameid]);
@@ -59,7 +59,6 @@ export class RegisterComponent implements OnInit {
 
   cancel() {
     this.backToHome.emit('home');
-    this.alertify.message('Cancelled');
     this.cancelRegister.emit(false);
   }
 

@@ -77,7 +77,7 @@ export class BookingEditComponent implements OnInit {
   }
 
   updateTimeAndLocation(bookingUpdate: Booking) {
-    let today = new Date();
+    const today = new Date();
 
     this.booking.when = bookingUpdate.when;
     this.booking.location = bookingUpdate.location;
