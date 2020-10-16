@@ -71,14 +71,7 @@ export class BookingEditComponent implements OnInit {
     this.modalRefConfirm.hide();
     this.bsModalRef.hide();
 
-    // this.updateTimeAndLocation(this.bookingToUpdate);
-
-    console.log('Updated booking from time:' + new Date(this.booking.fromTime));
-    console.log('Updated booking to   time:' + new Date(this.booking.toTime));
-
-    console.log('Form booking from time:' + this.fixDate(new Date(this.bookingToUpdate.fromTime)));
-    console.log('Form booking to   time:' + this.fixDate(new Date(this.bookingToUpdate.toTime)));
-
+    this.updateTimeAndLocation(this.bookingToUpdate);
 
     this.bookingBackToBookingsUser.emit(this.booking);
   }
@@ -86,8 +79,15 @@ export class BookingEditComponent implements OnInit {
   updateTimeAndLocation(bookingUpdate: Booking) {
     this.booking.when = bookingUpdate.when;
     this.booking.location = bookingUpdate.location;
-    this.booking.fromTime = bookingUpdate.fromTime;
-    this.booking.toTime = bookingUpdate.toTime;
+
+    const fromTimeSet = new Date();
+    fromTimeSet.setHours(bookingUpdate.fromTime.getUTCHours(), bookingUpdate.fromTime.getUTCMinutes());
+
+    const toTimeSet = new Date();
+    toTimeSet.setHours(bookingUpdate.toTime.getUTCHours(), bookingUpdate.toTime.getUTCMinutes());
+
+    this.booking.fromTime = fromTimeSet;
+    this.booking.toTime = toTimeSet;
   }
 
   decline(): void {
