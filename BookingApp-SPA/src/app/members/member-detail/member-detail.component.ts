@@ -35,8 +35,10 @@ export class MemberDetailComponent implements OnInit {
     this.authDecodeToken = this.authService.decodedToken.nameid;
     this.authDecodeName = this.authService.decodedToken.unique_name;
 
-    this.loadNofifyBookings();
-    this.loadNofifyMessages();
+    if (+this.user.id === +this.authService.decodedToken.nameid) {
+      this.loadNofifyBookings();
+      this.loadNofifyMessages();
+    }
   }
 
   onClosed(bookingId: any) {
@@ -53,7 +55,13 @@ export class MemberDetailComponent implements OnInit {
     this.bookingService.getNotifyBookings(this.authService.decodedToken.nameid)
       .subscribe((booking: any) => {
       this.bookings = booking;
-      this.alertify.success('You have a booking notification');
+      if (this.bookings.length) {
+          if (this.bookings.length === 1) {
+            this.alertify.success('You have a booking notification');
+          } else {
+            this.alertify.success('You have ' + this.bookings.length + ' booking notification');
+          }
+      }
     }, error => {
       console.log(error);
     });
@@ -63,18 +71,23 @@ export class MemberDetailComponent implements OnInit {
     this.messageService.getNotifyMessages(this.authService.decodedToken.nameid)
       .subscribe((message: any) => {
       this.messages = message;
-      this.alertify.success('You have a new message');
+      if (this.messages.length) {
+        if (this.messages.length === 1) {
+          this.alertify.success('You have a new message');
+        } else {
+          this.alertify.success('You have ' + this.messages.length + ' new messages');
+        }
+      }
     }, error => {
       console.log(error);
     });
   }
 
-  markMessageNotified(messageId: any, recipientId: any) {
-
+  markMessageNotified(recipientId: any) {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.messages.length; i++) {
-         this.messageService.markNotified(recipientId, this.messages[i].id);
-         this.messages.splice(this.messages.findIndex(m => m.id === this.messages[i].id), 1);
+        this.messages.splice(this.messages.findIndex(m => m.id === this.messages[i].id), 1);
+        this.messageService.markNotified(recipientId, this.messages[i].id);
     }
   }
 
