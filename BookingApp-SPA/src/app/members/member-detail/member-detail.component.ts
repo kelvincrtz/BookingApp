@@ -35,10 +35,8 @@ export class MemberDetailComponent implements OnInit {
     this.authDecodeToken = this.authService.decodedToken.nameid;
     this.authDecodeName = this.authService.decodedToken.unique_name;
 
-    if (+this.user.id === +this.authService.decodedToken.nameid) {
-      this.loadNofifyBookings();
-      this.loadNofifyMessages();
-    }
+    this.loadNofifyBookings();
+    this.loadNofifyMessages();
   }
 
   onClosed(bookingId: any) {
@@ -55,7 +53,7 @@ export class MemberDetailComponent implements OnInit {
     this.bookingService.getNotifyBookings(this.authService.decodedToken.nameid)
       .subscribe((booking: any) => {
       this.bookings = booking;
-      if (this.bookings.length) {
+      if (this.bookings.length && this.user.id === +this.authService.decodedToken.nameid) {
           if (this.bookings.length === 1) {
             this.alertify.success('You have a booking notification');
           } else {
@@ -71,7 +69,7 @@ export class MemberDetailComponent implements OnInit {
     this.messageService.getNotifyMessages(this.authService.decodedToken.nameid)
       .subscribe((message: any) => {
       this.messages = message;
-      if (this.messages.length) {
+      if (this.messages.length && this.user.id === +this.authService.decodedToken.nameid) {
         if (this.messages.length === 1) {
           this.alertify.success('You have a new message');
         } else {
@@ -86,8 +84,8 @@ export class MemberDetailComponent implements OnInit {
   markMessageNotified(recipientId: any) {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.messages.length; i++) {
-        this.messages.splice(this.messages.findIndex(m => m.id === this.messages[i].id), 1);
         this.messageService.markNotified(recipientId, this.messages[i].id);
+        this.messages.splice(this.messages.findIndex(m => m.id === this.messages[i].id), 1);
     }
   }
 
