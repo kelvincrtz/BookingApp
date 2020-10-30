@@ -15,6 +15,7 @@ namespace BookingApp.API.Data
         public DbSet<Value> Values { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<PhotoReview> PhotoReviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

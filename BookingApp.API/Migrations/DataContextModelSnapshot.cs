@@ -119,6 +119,9 @@ namespace BookingApp.API.Migrations
                     b.Property<bool>("IsApproved")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Rating")
                         .HasColumnType("INTEGER");
 
@@ -132,7 +135,7 @@ namespace BookingApp.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PhotoReview");
+                    b.ToTable("PhotoReviews");
                 });
 
             modelBuilder.Entity("BookingApp.API.Models.Role", b =>

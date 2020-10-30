@@ -8,7 +8,7 @@ namespace BookingApp.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PhotoReview",
+                name: "PhotoReviews",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -17,14 +17,15 @@ namespace BookingApp.API.Migrations
                     Description = table.Column<string>(nullable: true),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     IsApproved = table.Column<bool>(nullable: false),
+                    PublicId = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PhotoReview", x => x.Id);
+                    table.PrimaryKey("PK_PhotoReviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PhotoReview_AspNetUsers_UserId",
+                        name: "FK_PhotoReviews_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -32,15 +33,15 @@ namespace BookingApp.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PhotoReview_UserId",
-                table: "PhotoReview",
+                name: "IX_PhotoReviews_UserId",
+                table: "PhotoReviews",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PhotoReview");
+                name: "PhotoReviews");
         }
     }
 }

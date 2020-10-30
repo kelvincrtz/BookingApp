@@ -86,6 +86,7 @@ namespace BookingApp.API
                 });
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            services.Configure<AdminSettings>(Configuration.GetSection("AdminSettings"));
             services.AddAutoMapper(typeof(BookingRepository).Assembly);
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<LogUserActivity>();
