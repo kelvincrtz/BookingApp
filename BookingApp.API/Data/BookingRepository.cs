@@ -222,5 +222,28 @@ namespace BookingApp.API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<PhotoReview> GetReview(int id)
+        {
+            var review =  await _context.PhotoReviews.FirstOrDefaultAsync(r => r.Id == id);
+
+            return review;
+        }
+
+        public async Task<IEnumerable<PhotoReview>> GetPhotoReviews()
+        {
+            var reviews = await _context.PhotoReviews.OrderByDescending(d => d.DateAdded).AsQueryable().ToListAsync();
+
+            // ONLY SHOW WHEN APPROVED BY THE ADMIN //
+
+            return reviews;
+        }
+
+        public async Task<IEnumerable<PhotoReview>> GetPhotoReviewsForUser(int userId)
+        {
+            var reviews = await _context.PhotoReviews.Where(u => u.UserId == userId).OrderByDescending(d => d.DateAdded).ToListAsync();
+
+            return reviews;
+        }
     }
 }

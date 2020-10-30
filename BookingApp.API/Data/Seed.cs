@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using BookingApp.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Options;
+using BookingApp.API.Helpers;
 
 namespace BookingApp.API.Data
 {
@@ -11,7 +13,7 @@ namespace BookingApp.API.Data
     {
         public static void SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
-            // IConfiguration configuration
+            string userString = Startup.StaticConfig.GetSection("AdminSettings:UName").Value;
 
             if (!userManager.Users.Any())
             {
@@ -34,18 +36,17 @@ namespace BookingApp.API.Data
 
                 foreach(var user in users)
                 {
-                    // configuration.GetSection("SeedUsers:Poken").Value
-                    userManager.CreateAsync(user, "password").Wait();
+                    userManager.CreateAsync(user, Startup.StaticConfig.GetSection("SeedUsers:Poken").Value).Wait();
                     userManager.AddToRoleAsync(user, "Member");
                 }
                 // WARNING Delete Admin creation when in Production
                 // create admin user
                 var adminUser = new User
                 {
-                    UserName = "Admin"
+                    UserName = userString
                 };
-                // configuration.GetSection("Admin:Poken").Value
-                var result = userManager.CreateAsync(adminUser, "password").Result;
+
+                var result = userManager.CreateAsync(adminUser, Startup.StaticConfig.GetSection("AdminSettings:Poken").Value).Result;
 
                 if (result.Succeeded)
                 {

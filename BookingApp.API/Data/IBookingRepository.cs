@@ -21,5 +21,8 @@ namespace BookingApp.API.Data
          Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
          Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
          Task<IEnumerable<Message>> GetNotificationMessagesForUser(int userId);
+         Task<PhotoReview> GetReview(int id);
+         Task<IEnumerable<PhotoReview>> GetPhotoReviews();
+         Task<IEnumerable<PhotoReview>> GetPhotoReviewsForUser(int userId);
     }
 }
