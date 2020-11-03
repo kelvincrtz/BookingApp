@@ -46,6 +46,9 @@ namespace BookingApp.API.Controllers
         {
             var reviewFromRepo =  await _repo.GetReview(id);
 
+            if (reviewFromRepo == null)
+                return BadRequest();
+
             var review = _mapper.Map<ReviewForReturnDto>(reviewFromRepo);
 
             return Ok(review);
@@ -57,13 +60,35 @@ namespace BookingApp.API.Controllers
         {
             var reviews = await _repo.GetReviews();
 
+            if (reviews == null)
+                return BadRequest();
+
             var reviewsToReturn = _mapper.Map<IEnumerable<ReviewForListDto>>(reviews);
 
-            /*
-                TODO: Only get reviews that are Approved
-            */
-
             return Ok(reviewsToReturn);
+        }
+
+        [Authorize]
+        [HttpPut("status/{id}")]
+        public async Task<IActionResult> UpdateReviewStatus(int id, ReviewForUpdateDto reviewForUpdateDto)
+        {
+            var reviewFromRepo =  await _repo.GetReview(id);
+
+            if (reviewFromRepo == null)
+                return BadRequest();
+
+            reviewForUpdateDto.IsApproved = true;
+            
+            _mapper.Map(reviewForUpdateDto, reviewFromRepo); 
+            /*  IMPORTANT
+            Be careful here. Make sure no await, no task. 
+            Just classes or else mapping exception eventhough 
+            you have already did automapper mapping */
+
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating review status {id} failed on save");
         }
 
         [Authorize]
@@ -111,7 +136,6 @@ namespace BookingApp.API.Controllers
              }
 
              return BadRequest("Could not add the photo review");
-
         }  
     }
 }

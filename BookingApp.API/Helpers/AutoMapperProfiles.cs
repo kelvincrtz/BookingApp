@@ -30,6 +30,7 @@ namespace BookingApp.API.Helpers
             CreateMap<Review, ReviewForReturnDto>();
             CreateMap<ReviewForCreationDto, Review>();
             CreateMap<Review, ReviewForListDto>();
+            CreateMap<ReviewForUpdateDto, Review>();
         }
     }
 }

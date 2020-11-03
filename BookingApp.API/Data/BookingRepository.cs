@@ -235,7 +235,10 @@ namespace BookingApp.API.Data
         {
             var reviews = await _context.Reviews.Include(u => u.User).OrderByDescending(d => d.DateAdded).AsQueryable().ToListAsync();
 
-            // ONLY SHOW WHEN APPROVED BY THE ADMIN //
+            /*  TODO:
+                1. ONLY SHOW WHEN APPROVED BY THE ADMIN 
+                2. Add Pagination
+            */
 
             return reviews;
         }
