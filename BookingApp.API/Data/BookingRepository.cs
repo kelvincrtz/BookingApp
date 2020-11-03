@@ -193,7 +193,8 @@ namespace BookingApp.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(b => b.Bookings).Include(m => m.MessagesReceived).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.Include(b => b.Bookings).Include(m => m.MessagesReceived)
+                .Include(r => r.Reviews).FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
@@ -223,25 +224,25 @@ namespace BookingApp.API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<PhotoReview> GetReview(int id)
+        public async Task<Review> GetReview(int id)
         {
-            var review =  await _context.PhotoReviews.FirstOrDefaultAsync(r => r.Id == id);
+            var review =  await _context.Reviews.FirstOrDefaultAsync(r => r.Id == id);
 
             return review;
         }
 
-        public async Task<IEnumerable<PhotoReview>> GetPhotoReviews()
+        public async Task<IEnumerable<Review>> GetReviews()
         {
-            var reviews = await _context.PhotoReviews.OrderByDescending(d => d.DateAdded).AsQueryable().ToListAsync();
+            var reviews = await _context.Reviews.OrderByDescending(d => d.DateAdded).AsQueryable().ToListAsync();
 
             // ONLY SHOW WHEN APPROVED BY THE ADMIN //
 
             return reviews;
         }
 
-        public async Task<IEnumerable<PhotoReview>> GetPhotoReviewsForUser(int userId)
+        public async Task<IEnumerable<Review>> GetReviewsForUser(int userId)
         {
-            var reviews = await _context.PhotoReviews.Where(u => u.UserId == userId).OrderByDescending(d => d.DateAdded).ToListAsync();
+            var reviews = await _context.Reviews.Where(u => u.UserId == userId).OrderByDescending(d => d.DateAdded).ToListAsync();
 
             return reviews;
         }

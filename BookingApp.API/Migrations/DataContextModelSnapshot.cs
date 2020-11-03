@@ -104,7 +104,7 @@ namespace BookingApp.API.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("BookingApp.API.Models.PhotoReview", b =>
+            modelBuilder.Entity("BookingApp.API.Models.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,7 +135,7 @@ namespace BookingApp.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PhotoReviews");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("BookingApp.API.Models.Role", b =>
@@ -391,10 +391,10 @@ namespace BookingApp.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookingApp.API.Models.PhotoReview", b =>
+            modelBuilder.Entity("BookingApp.API.Models.Review", b =>
                 {
                     b.HasOne("BookingApp.API.Models.User", "User")
-                        .WithMany("PhotoReviews")
+                        .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

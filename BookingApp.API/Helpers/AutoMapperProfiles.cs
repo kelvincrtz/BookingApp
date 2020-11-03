@@ -26,6 +26,8 @@ namespace BookingApp.API.Helpers
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>();
             CreateMap<Message, MessageForDetailedDto>();
+            CreateMap<Review, ReviewForReturnDto>();
+            CreateMap<ReviewForCreationDto, Review>();
         }
     }
 }
