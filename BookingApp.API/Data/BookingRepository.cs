@@ -226,14 +226,14 @@ namespace BookingApp.API.Data
 
         public async Task<Review> GetReview(int id)
         {
-            var review =  await _context.Reviews.FirstOrDefaultAsync(r => r.Id == id);
+            var review =  await _context.Reviews.Include(u => u.User).FirstOrDefaultAsync(r => r.Id == id);
 
             return review;
         }
 
         public async Task<IEnumerable<Review>> GetReviews()
         {
-            var reviews = await _context.Reviews.OrderByDescending(d => d.DateAdded).AsQueryable().ToListAsync();
+            var reviews = await _context.Reviews.Include(u => u.User).OrderByDescending(d => d.DateAdded).AsQueryable().ToListAsync();
 
             // ONLY SHOW WHEN APPROVED BY THE ADMIN //
 
@@ -242,7 +242,7 @@ namespace BookingApp.API.Data
 
         public async Task<IEnumerable<Review>> GetReviewsForUser(int userId)
         {
-            var reviews = await _context.Reviews.Where(u => u.UserId == userId).OrderByDescending(d => d.DateAdded).ToListAsync();
+            var reviews = await _context.Reviews.Include(u => u.User).Where(u => u.UserId == userId).OrderByDescending(d => d.DateAdded).ToListAsync();
 
             return reviews;
         }

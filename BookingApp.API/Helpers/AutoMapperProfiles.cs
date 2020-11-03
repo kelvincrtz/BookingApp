@@ -20,6 +20,7 @@ namespace BookingApp.API.Helpers
             CreateMap<UserForUpdateDto, User>();
             CreateMap<User, UserForUpdateDto>();
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<User, UserForReviewListDto>();
             CreateMap<BookingForUpdateDto, Booking>();
             CreateMap<BookingForUpdateStatusDto, Booking>();
             CreateMap<BookingForSeenAdminDto, Booking>();
@@ -28,6 +29,7 @@ namespace BookingApp.API.Helpers
             CreateMap<Message, MessageForDetailedDto>();
             CreateMap<Review, ReviewForReturnDto>();
             CreateMap<ReviewForCreationDto, Review>();
+            CreateMap<Review, ReviewForListDto>();
         }
     }
 }

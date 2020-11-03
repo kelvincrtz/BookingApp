@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -14,8 +15,7 @@ using Microsoft.Extensions.Options;
 
 namespace BookingApp.API.Controllers
 {
-    [Authorize]
-    [Route("api/users/{userId}/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ReviewsController : ControllerBase
     {
@@ -40,6 +40,7 @@ namespace BookingApp.API.Controllers
             _cloudinary = new Cloudinary(acc);
         }
 
+        [Authorize]
         [HttpGet("{id}", Name = "GetReview")]
         public async Task<IActionResult> GetReview(int id)
         {
@@ -50,7 +51,23 @@ namespace BookingApp.API.Controllers
             return Ok(review);
         }
 
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetReviews()
+        {
+            var reviews = await _repo.GetReviews();
+
+            var reviewsToReturn = _mapper.Map<IEnumerable<ReviewForListDto>>(reviews);
+
+            /*
+                TODO: Only get reviews that are Approved
+            */
+
+            return Ok(reviewsToReturn);
+        }
+
+        [Authorize]
+        [HttpPost("users/{userId}")]
         public async Task<IActionResult> AddReviewForUser(int userId, [FromForm]ReviewForCreationDto reviewForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -81,8 +98,6 @@ namespace BookingApp.API.Controllers
              reviewForCreationDto.PublicId = uploadResult.PublicId;
 
              var review = _mapper.Map<Review>(reviewForCreationDto);
-
-             //Console.WriteLine("Number is: "+ userFromRepo.Bookings.Count);
              
              userFromRepo.Reviews.Add(review);
 
@@ -96,7 +111,7 @@ namespace BookingApp.API.Controllers
              }
 
              return BadRequest("Could not add the photo review");
-        }  
 
-}
+        }  
+    }
 }

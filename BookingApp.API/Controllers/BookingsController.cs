@@ -185,7 +185,9 @@ namespace BookingApp.API.Controllers
                 return Unauthorized();
 
             _mapper.Map(bookingForUpdateDto, bookingFromRepo); 
-            // Be careful here. Make sure no await, no task. Just classes or else mapping exception eventhough you have already did automapper mapping
+            // *IMPORTANT* Be careful here. Make sure no await, no task. 
+            // Just classes or else mapping exception eventhough 
+            // you have already did automapper mapping
 
             if(await _repo.SaveAll())
                 return NoContent();
