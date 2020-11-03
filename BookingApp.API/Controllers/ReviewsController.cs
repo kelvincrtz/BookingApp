@@ -56,9 +56,24 @@ namespace BookingApp.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetReviews()
+        public async Task<IActionResult> GetReviewsForHomePage()
         {
-            var reviews = await _repo.GetReviews();
+            var reviews = await _repo.GetReviewsForHomePage();
+
+            if (reviews == null)
+                return BadRequest();
+
+            var reviewsToReturn = _mapper.Map<IEnumerable<ReviewForListDto>>(reviews);
+
+            return Ok(reviewsToReturn);
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet("list")]
+        public async Task<IActionResult> GetMoreReviews()
+        {
+            var reviews = await _repo.GetMoreReviews();
 
             if (reviews == null)
                 return BadRequest();

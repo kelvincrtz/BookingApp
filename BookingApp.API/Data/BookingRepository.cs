@@ -231,13 +231,22 @@ namespace BookingApp.API.Data
             return review;
         }
 
-        public async Task<IEnumerable<Review>> GetReviews()
+        public async Task<IEnumerable<Review>> GetReviewsForHomePage()
         {
-            var reviews = await _context.Reviews.Include(u => u.User).OrderByDescending(d => d.DateAdded).AsQueryable().ToListAsync();
+            var reviews = await _context.Reviews.Include(u => u.User).Where(r => r.IsApproved == true)
+                .OrderByDescending(d => d.DateAdded).Take(6).ToListAsync();
+
+            return reviews;
+        }
+
+        public async Task<IEnumerable<Review>> GetMoreReviews()
+        {
+            var reviews = await _context.Reviews.Include(u => u.User).Where(r => r.IsApproved == true)
+                .OrderByDescending(d => d.DateAdded).ToListAsync();
 
             /*  TODO:
                 1. ONLY SHOW WHEN APPROVED BY THE ADMIN 
-                2. Add Pagination
+                3. Add Pagination
             */
 
             return reviews;
