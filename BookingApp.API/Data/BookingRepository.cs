@@ -49,7 +49,8 @@ namespace BookingApp.API.Data
 
         public async Task<PagedList<Booking>> GetBookings(BookingParams bookingParams)
         {
-            var bookings = _context.Bookings.Include(u => u.User).OrderByDescending(b => b.DateAdded).AsQueryable();
+            var bookings = _context.Bookings.Include(u => u.User)
+                .OrderByDescending(b => b.DateAdded).AsQueryable();
 
             //Get the current Month, Year and Day 
             var month = DateTime.Now.Month;
@@ -254,7 +255,8 @@ namespace BookingApp.API.Data
 
         public async Task<IEnumerable<Review>> GetReviewsForUser(int userId)
         {
-            var reviews = await _context.Reviews.Include(u => u.User).Where(u => u.UserId == userId).OrderByDescending(d => d.DateAdded).ToListAsync();
+            var reviews = await _context.Reviews.Include(u => u.User).Where(u => u.UserId == userId)
+                .OrderByDescending(d => d.DateAdded).ToListAsync();
 
             return reviews;
         }
