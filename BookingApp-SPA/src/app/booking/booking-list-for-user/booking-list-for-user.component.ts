@@ -84,6 +84,10 @@ export class BookingListForUserComponent implements OnInit {
     this.alertify.error('Cancelled');
   }
 
+  review(bookingId: number): void {
+    this.router.navigate(['/booking/review/', bookingId]);
+  }
+
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadBookings();

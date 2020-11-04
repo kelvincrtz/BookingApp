@@ -100,7 +100,7 @@
             <div>
               <small class="font-weight-lighter">Submitted on <span class="badge badge-dark">{{booking.dateAdded | date: 'fullDate'}}</span></small>
               <div *ngIf="booking.status == 'Approved'">
-                <button class="btn btn-outline-info btn-sm mt-2">Want to write us a review? 
+                <button class="btn btn-outline-info btn-sm mt-2" (click)="review(booking.id)">Want to write us a review? 
                   <i class="fa fa-star" aria-hidden="true"></i>
                   <i class="fa fa-star" aria-hidden="true"></i> 
                   <i class="fa fa-star" aria-hidden="true"></i>
