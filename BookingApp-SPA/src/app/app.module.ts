@@ -57,6 +57,8 @@ import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { AdminCalendarComponent } from './calendar/admin-calendar/admin-calendar.component';
 import { BookingCalendarComponent } from './booking/booking-calendar/booking-calendar.component';
 import { AdminCalendarModalComponent } from './calendar/admin-calendar-modal/admin-calendar-modal.component';
+import { BookingReviewComponent } from './booking/booking-review/booking-review.component';
+import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -88,7 +90,8 @@ export function tokenGetter() {
       RolesModalComponent,
       AdminCalendarComponent,
       BookingCalendarComponent,
-      AdminCalendarModalComponent
+      AdminCalendarModalComponent,
+      BookingReviewComponent
    ],
    imports: [
       BrowserModule,
@@ -136,6 +139,7 @@ export function tokenGetter() {
       BookingEditResolver,
       BookingEditStatusResolver,
       MessagesResolver,
+      BookingReviewResolver,
       PreventUnsavedChanges,
       PreventBookingFormUnsavedChanges,
       PreventEditBookingFormUnsavedChanges,

@@ -31,7 +31,7 @@ namespace BookingApp.API.Data
 
         public async Task<Booking> GetBooking(int id)
         {
-            return await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Bookings.Include(u => u.User).FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task<IEnumerable<Booking>> GetCalendarBookings(int year, int month)

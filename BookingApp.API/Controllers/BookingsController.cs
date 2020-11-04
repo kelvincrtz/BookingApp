@@ -30,8 +30,40 @@ namespace BookingApp.API.Controllers
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
+                /*  IMPORTANT
+                    This line of code simply means 
+                    it gets the storage.user.NameIdentifier from Storage
+                    it has no relationship whatsover in the booking
+                    It simply says, if the userId matches who is currently logged in
+                */ 
 
             var booking = await _repo.GetBooking(id);
+
+            if (booking == null)
+                return NotFound();
+
+            var bookingToReturn = _mapper.Map<BookingForDetailedDto>(booking);
+
+            return Ok(bookingToReturn);
+        }
+
+        [HttpGet("{id}/review")]
+        public async Task<IActionResult> GetBookingForReview(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+                /*  IMPORTANT
+                    This line of code simply means 
+                    it gets the storage.user.NameIdentifier from Storage
+                    it has no relationship whatsover in the booking
+                    It simply says, if the userId matches who is currently logged in
+                */ 
+
+            var booking = await _repo.GetBooking(id);
+
+            if (booking.UserId != userId) {
+                return Unauthorized();
+            }
 
             if (booking == null)
                 return NotFound();

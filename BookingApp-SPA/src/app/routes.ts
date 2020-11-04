@@ -24,6 +24,8 @@ import { MessagesResolver } from './_resolvers/messages-resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminCalendarComponent } from './calendar/admin-calendar/admin-calendar.component';
 import { BookingCalendarComponent } from './booking/booking-calendar/booking-calendar.component';
+import { BookingReviewComponent } from './booking/booking-review/booking-review.component';
+import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -44,7 +46,9 @@ export const appRoutes: Routes = [
                 data: {roles: ['Admin', 'Moderator']}},
             { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},
             { path: 'calendar', component: AdminCalendarComponent, data: {roles: ['Admin', 'Moderator']}},
-            { path: 'bookingcalendar', component: BookingCalendarComponent, data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}}
+            { path: 'bookingcalendar', component: BookingCalendarComponent, data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
+            { path: 'booking/review/:id', component: BookingReviewComponent, resolve: {booking: BookingReviewResolver},
+                data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

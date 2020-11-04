@@ -63,6 +63,10 @@ export class BookingService {
     return this.http.get<Booking>(this.baseUrl + 'users/' + id + '/bookings/' + bookingId) ;
   }
 
+  getBookingForReview(id: number, bookingId: number): Observable<Booking> {
+    return this.http.get<Booking>(this.baseUrl + 'users/' + id + '/bookings/' + bookingId + '/review') ;
+  }
+
   getNotifyBookings(userId: number): Observable<Booking> {
     return this.http.get<Booking>(this.baseUrl + 'users/' + userId + '/bookings/notify') ;
   }
