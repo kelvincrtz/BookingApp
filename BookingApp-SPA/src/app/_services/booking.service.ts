@@ -5,6 +5,7 @@ import { Booking } from '../_models/booking';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
+import { Review } from '../_models/review';
 
 @Injectable({
   providedIn: 'root'
@@ -133,5 +134,9 @@ export class BookingService {
 
   markSeenByAdmin(userId: number, bookingId: number) {
     return this.http.post(this.baseUrl + 'users/' + userId + '/bookings/seenbyadmin/' + bookingId, {}).subscribe();
+  }
+
+  createReview(userId: number, review: Review) {
+    return this.http.post<Booking>(this.baseUrl + 'reviews/users/' + userId, review);
   }
 }

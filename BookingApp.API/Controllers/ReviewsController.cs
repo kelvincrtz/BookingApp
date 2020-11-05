@@ -114,6 +114,8 @@ namespace BookingApp.API.Controllers
                 return Unauthorized();
 
              var userFromRepo = await _repo.GetUser(userId);
+
+             var bookingFromRepo = await _repo.GetBooking(reviewForCreationDto.BookingId);
              
              var file = reviewForCreationDto.File;
 
@@ -138,6 +140,8 @@ namespace BookingApp.API.Controllers
              reviewForCreationDto.PublicId = uploadResult.PublicId;
 
              var review = _mapper.Map<Review>(reviewForCreationDto);
+
+             review.Booking = bookingFromRepo;
              
              userFromRepo.Reviews.Add(review);
 
