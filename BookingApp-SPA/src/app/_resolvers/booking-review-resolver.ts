@@ -16,8 +16,8 @@ export class BookingReviewResolver implements Resolve<Booking> {
     resolve(route: ActivatedRouteSnapshot): Observable<Booking> {
         return this.bookingService.getBookingForReview(this.authService.decodedToken.nameid, route.params.id).pipe(
             catchError(error => {
-                this.alertify.error('Problem reviewing this booking request. ' + error);
-                this.router.navigate(['/home']);
+                this.alertify.error(error);
+                this.router.navigate(['/bookingsforuser']);
                 return of(null);
             })
         );

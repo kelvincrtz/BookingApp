@@ -90,7 +90,7 @@ namespace BookingApp.API.Controllers
             var reviewFromRepo =  await _repo.GetReview(id);
 
             if (reviewFromRepo == null)
-                return BadRequest();
+                return BadRequest("No file has been found.");
 
             reviewForUpdateDto.IsApproved = true;
             
@@ -116,6 +116,9 @@ namespace BookingApp.API.Controllers
              var userFromRepo = await _repo.GetUser(userId);
 
              var bookingFromRepo = await _repo.GetBooking(reviewForCreationDto.BookingId);
+
+            if (bookingFromRepo == null)
+                return BadRequest("No file has been found.");
              
              var file = reviewForCreationDto.File;
 

@@ -61,6 +61,9 @@ namespace BookingApp.API.Controllers
 
             var booking = await _repo.GetBooking(id);
 
+            if (booking == null)
+                return BadRequest("You are unauthorized.");
+
             if (booking.UserId != userId) {
                 return Unauthorized();
             }
