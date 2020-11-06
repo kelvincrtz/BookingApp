@@ -33,6 +33,8 @@ export class BookingListForUserComponent implements OnInit {
 
   bsModalRef: BsModalRef;
 
+  todaysDate: Date;
+
   constructor(private booking: BookingService, private alertify: AlertifyService, private router: Router,
               private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }
 
@@ -48,6 +50,8 @@ export class BookingListForUserComponent implements OnInit {
     this.bookingParams.orderBy = 'dateadded';
 
     this.bookingParams.all = true;
+
+    this.todaysDate = new Date();
   }
 
   loadBookings() {
