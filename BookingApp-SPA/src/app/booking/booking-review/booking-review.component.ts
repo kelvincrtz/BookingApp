@@ -20,13 +20,12 @@ export class BookingReviewComponent implements OnInit {
 
   reviewForm: FormGroup;
   uploader: FileUploader;
-  hasBaseDropZoneOver = false;
+
   baseUrl = environment.apiUrl;
 
-  rating = 3;
+  rating = 5;
 
   review: Review;
-  fileToSend: FileItem;
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private router: Router,
               private bookingService: BookingService, private authService: AuthService, private userService: UserService) { }
@@ -39,24 +38,9 @@ export class BookingReviewComponent implements OnInit {
     this.initializeUploader();
 
     this.reviewForm = new FormGroup({
-      description: new FormControl('First test from SPA', Validators.required),
-      rating: new FormControl(3, Validators.required),
-      booking: new FormControl(this.booking, Validators.required),
+      description: new FormControl('', Validators.required),
+      rating: new FormControl(this.rating, Validators.required),
     });
-  }
-
-  registerReview() {
-    if (this.reviewForm.valid) {
-      this.review = Object.assign({}, this.reviewForm.value);
-
-      this.bookingService.createReview(this.authService.decodedToken.nameid, this.review).subscribe(next => {
-        this.alertify.success('Review has been submitted');
-      }, error => {
-        this.alertify.error('Error sending the review');
-      }, () => {
-        this.router.navigate(['/home/']);
-      });
-    }
   }
 
   initializeUploader() {
@@ -72,19 +56,24 @@ export class BookingReviewComponent implements OnInit {
 
     this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false; };
 
-    this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
-      form.append('description', 'test from SPA'); // note comma separating key and value
-      form.append('rating', 1);
-      form.append('bookingId', 1);
-      form.append('userId', 6);
-     };
-
   }
 
   uploadSection() {
-    this.review = Object.assign({}, this.reviewForm.value);
-    this.review.userId = this.authService.decodedToken.nameid;
-    this.uploader.uploadAll();
+    if (this.reviewForm.valid) {
+      this.review = Object.assign({}, this.reviewForm.value);
+
+      this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
+        form.append('description', this.review.description); // note comma separating key and value
+        form.append('rating', this.rating);
+        form.append('bookingId', this.booking.id);
+        form.append('userId', this.authService.decodedToken.nameid);
+       };
+
+      this.uploader.uploadAll();
+
+      // show alertify success
+      // navigate back to my bookings
+    }
   }
 
 }

@@ -1,0 +1,10 @@
+.para {
+    color: rgb(68, 66, 66);
+}
+
+.error-custom {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #d9534f;
+}

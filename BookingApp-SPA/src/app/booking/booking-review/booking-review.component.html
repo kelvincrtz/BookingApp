@@ -1,87 +1,99 @@
-<div class="container alert alert-primary mt-3" role="alert">
-    <h4 class="alert-heading">Review</h4>
-    <div>Write us of your experience with this booking that took place in {{booking.location}} on {{booking.when | date:'fullDate'}} </div>
-    <div>You can also upload a photo of yourself and Susan so we can share it here in our website! <i class="fa fa-smile-o" aria-hidden="true"></i> </div>
+<div class="container alert mt-3" role="alert">
+    <h4 class="alert-heading para">Make a review</h4>
+    <div class="para">Write us of your experience with this booking that took place in {{booking.location}} on {{booking.when | date:'fullDate'}} </div>
+    <div class="para">You can also upload a photo of yourself and Susan so we can share it here in our website! <i class="fa fa-smile-o"></i> </div>
     <hr>
     <div class="container mt-3">
-      <form>
-        <div class="d-flex justify-content-center">
+
+      <div class="row justify-content-center">
+        <div class="col-md-8 mb-3" *ngIf="uploader?.queue?.length == 0">
+            <h4 class="para">Select Image file</h4>
+            <input class="para" type="file" ng2FileSelect [uploader]="uploader"/>
+            <div class="error-custom">Image is required <i class="fa fa-exclamation"></i> </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" *ngIf="uploader?.queue?.length == 1">
+        <div class="col-md-8 mb-3">
+          <h3 class="para">Upload</h3>
+          <table class="table">
+              <thead>
+              <tr>
+                  <th width="50%">Name</th>
+                  <th>Size</th>
+                  <th>Progress</th>
+                  <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of uploader.queue">
+                  <td><strong>{{ item?.file?.name }}</strong></td>
+                  <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                  <td *ngIf="uploader.options.isHTML5">
+                      <div class="progress" style="margin-bottom: 0;">
+                          <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                      </div>
+                  </td>
+                  <td nowrap>
+                      <button type="button" class="btn btn-danger btn-xs"
+                              (click)="item.remove()">
+                          <span class="glyphicon glyphicon-trash"></span> Remove
+                      </button>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+        </div>
+        <br>
+      </div>
+
+      <form class="" [formGroup]="reviewForm">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-md-10 col-sm-12">
+
+                <div class="form-group">
+                  <textarea type="text" [ngClass]="{'is-invalid': reviewForm.get('description').errors && reviewForm.get('description').touched}"
+                  class="form-control" formControlName="description" placeholder="Tell us of your experience" rows="5"></textarea>
+                  <div class="invalid-feedback">Your input is needed</div>
+                </div>
+          </div>
         </div>
       </form>
 
-      <div class="row">
-        <div class="col-md-4">
-            <h3>Select file</h3>
-            <input type="file" ng2FileSelect [uploader]="uploader"/>
-        </div>
- 
-        <div class="col-md-8" style="margin-bottom: 40px">
- 
-            <h3>Upload queue</h3>
-            <p>Queue length: {{ uploader?.queue?.length }}</p>
- 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th width="50%">Name</th>
-                    <th>Size</th>
-                    <th>Progress</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of uploader.queue">
-                    <td><strong>{{ item?.file?.name }}</strong></td>
-                    <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                    <td *ngIf="uploader.options.isHTML5">
-                        <div class="progress" style="margin-bottom: 0;">
-                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-                        </div>
-                    </td>
-                    <td nowrap>
-                        <button type="button" class="btn btn-danger btn-xs"
-                                (click)="item.remove()">
-                            <span class="glyphicon glyphicon-trash"></span> Remove
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
- 
-            <div>
-              <div>
-                  Queue progress:
-                  <div class="progress">
-                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-                  </div>
-              </div>
-              <button type="button" class="btn btn-success btn-s"
-                      (click)="uploadSection()" [disabled]="!uploader.getNotUploadedItems().length">
-                  <span class="glyphicon glyphicon-upload"></span> Upload all
-              </button>
-              <button type="button" class="btn btn-warning btn-s"
-                      (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-                  <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-              </button>
-              <button type="button" class="btn btn-danger btn-s"
-                      (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                  <span class="glyphicon glyphicon-trash"></span> Remove all
-              </button>
-            </div>
+      <div class="row justify-content-center">
+        <div>
+          <div class="">
+            <pre class="row justify-content-center" style="margin:15px 0;"><b><i>Your rating of:</i> {{rating}}/5 </b></pre>
+          </div>
+          <rating [max]="5" [(ngModel)]="rating" [customTemplate]="tt"></rating>
+          <ng-template #tt let-i="index" let-v="value">
+            <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
+              {{i < v ? '&#9733;' : '&#9734;'}}
+            </button>
+          </ng-template>
         </div>
       </div>
-      <br>
 
-      <div>
-        <rating [max]="5" [(ngModel)]="rating" [customTemplate]="tt"></rating>
-        <div class="card">
-          <pre class="card-block card-header" style="margin:15px 0;"> <b>(<i>Rate:</i> {{rating}})</b> </pre>
-        </div>
-        <ng-template #tt let-i="index" let-v="value">
-          <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
-            {{i < v ? '&#9733;' : '&#9734;'}}
+      <div class="row justify-content-center mt-3">
+
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-success btn-s" (click)="uploadSection()" [disabled]="!reviewForm.valid || !uploader.getNotUploadedItems().length ">
+            <span class="glyphicon glyphicon-upload"></span> Upload
           </button>
-        </ng-template>
+
+          <button type="button" class="btn btn-info btn-s">
+            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+          </button>
+        </div>
+      </div>
+
+      <div class="row justify-content-center" *ngIf="this.uploader.isUploading">
+        <div class="col-md-8">
+            Progress:
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+            </div>
+        </div>
       </div>
 
     </div>
