@@ -126,63 +126,24 @@
     </section>
     <!-- End Service Section -->
   
-    <!-- Projects Section -->
+    <!-- Reviews Section -->
     <section #testimonials id="projects">
       <div class="projects container">
         <div class="projects-header">
           <h1 class="section-title">Recent <span>Testimonials</span></h1>
         </div>
-        <div class="all-projects">
+        <div class="all-projects" *ngFor="let review of reviews">
           <div class="project-item">
             <div class="project-info">
-              <h1>Project 1</h1>
-              <h2>Coding is Love</h2>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, iusto cupiditate voluptatum impedit unde rem ipsa distinctio illum quae mollitia ut, accusantium eius odio ducimus illo neque atque libero non sunt harum? Ipsum repellat animi, fugit architecto voluptatum odit et!</p>
+              <h1>{{review.rating}}</h1>
+              <h2>{{review.user.fullName}}</h2>
+              <pre>{{review.description}}</pre>
             </div>
             <div class="project-img">
-              <img src="" alt="img">
+              <img src={{review.url}} alt="img">
             </div>
           </div>
-          <div class="project-item">
-            <div class="project-info">
-              <h1>Project 2</h1>
-              <h2>Coding is Love</h2>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, iusto cupiditate voluptatum impedit unde rem ipsa distinctio illum quae mollitia ut, accusantium eius odio ducimus illo neque atque libero non sunt harum? Ipsum repellat animi, fugit architecto voluptatum odit et!</p>
-            </div>
-            <div class="project-img">
-              <img src="" alt="img">
-            </div>
-          </div>
-          <div class="project-item">
-            <div class="project-info">
-              <h1>Project 3</h1>
-              <h2>Coding is Love</h2>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, iusto cupiditate voluptatum impedit unde rem ipsa distinctio illum quae mollitia ut, accusantium eius odio ducimus illo neque atque libero non sunt harum? Ipsum repellat animi, fugit architecto voluptatum odit et!</p>
-            </div>
-            <div class="project-img">
-              <img src="" alt="img">
-            </div>
-          </div>
-          <div class="project-item">
-            <div class="project-info">
-              <h1>Project 4</h1>
-              <h2>Coding is Love</h2>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, iusto cupiditate voluptatum impedit unde rem ipsa distinctio illum quae mollitia ut, accusantium eius odio ducimus illo neque atque libero non sunt harum? Ipsum repellat animi, fugit architecto voluptatum odit et!</p>
-            </div>
-            <div class="project-img">
-              <img src="" alt="img">
-            </div>
-          </div>
-          <div class="project-item">
-            <div class="project-info">
-              <h1>Project 5</h1>
-              <h2>Coding is Love</h2>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, iusto cupiditate voluptatum impedit unde rem ipsa distinctio illum quae mollitia ut, accusantium eius odio ducimus illo neque atque libero non sunt harum? Ipsum repellat animi, fugit architecto voluptatum odit et!</p>
-            </div>
-            <div class="project-img">
-              <img src="" alt="img">
-            </div>
-          </div>
+          <hr>
         </div>
       </div>
     </section>
@@ -223,15 +184,15 @@
             <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png"/></div>
             <div class="contact-info">
               <h1>Email</h1>
-              <h2>info@gmail.com</h2>
-              <h2>abcd@gmail.com</h2>
+              <h2>aboveallls@gmail.com</h2>
+              <h2>aboveallls@yahoo.com</h2>
             </div>
           </div>
           <div class="contact-item">
             <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/map-marker.png"/></div>
             <div class="contact-info">
               <h1>Address</h1>
-              <h2>Fatikchhari, Chittagong, Bangladesh</h2>
+              <h2>Auckland, New Zealand</h2>
             </div>
           </div>
         </div>

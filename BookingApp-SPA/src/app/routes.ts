@@ -26,9 +26,10 @@ import { AdminCalendarComponent } from './calendar/admin-calendar/admin-calendar
 import { BookingCalendarComponent } from './booking/booking-calendar/booking-calendar.component';
 import { BookingReviewComponent } from './booking/booking-review/booking-review.component';
 import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
+import { ReviewHomeResolver } from './_resolvers/review-home-resolver';
 
 export const appRoutes: Routes = [
-    { path: '', component: HomeComponent},
+    { path: '', component: HomeComponent, resolve: {reviews: ReviewHomeResolver}},
     {
         path: '',
         runGuardsAndResolvers: 'always',

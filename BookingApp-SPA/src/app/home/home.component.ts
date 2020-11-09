@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../_models/user';
+import { Review } from '../_models/review';
 
 @Component({
   selector: 'app-home',
@@ -13,15 +14,23 @@ import { User } from '../_models/user';
 export class HomeComponent implements OnInit {
   registerMode = false;
   user: User;
+  reviews: Review[];
   loginForm: FormGroup;
 
-  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.reviews = data.reviews;
+    });
+
     this.loginForm = new FormGroup({
       userName: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
+
+    console.log('REVIEWS: ' + this.reviews);
   }
 
   loginClick() {
