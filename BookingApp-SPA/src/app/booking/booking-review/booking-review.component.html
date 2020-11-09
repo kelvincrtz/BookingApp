@@ -7,7 +7,7 @@
 
       <div class="row justify-content-center">
         <div class="col-md-8 mb-3" *ngIf="uploader?.queue?.length == 0">
-            <h4 class="para">Select Image file</h4>
+            <h4 class="para">Select Image</h4>
             <input class="para" type="file" ng2FileSelect [uploader]="uploader"/>
             <div class="error-custom">Image is required <i class="fa fa-exclamation"></i> </div>
         </div>
@@ -77,11 +77,11 @@
       <div class="row justify-content-center mt-3">
 
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-success btn-s" (click)="uploadSection()" [disabled]="!reviewForm.valid || !uploader.getNotUploadedItems().length ">
+          <button type="button" class="btn btn-success btn-s" (click)="uploadSection(template)" [disabled]="!reviewForm.valid || !uploader.getNotUploadedItems().length ">
             <span class="glyphicon glyphicon-upload"></span> Upload
           </button>
 
-          <button type="button" class="btn btn-info btn-s">
+          <button type="button" class="btn btn-info btn-s" (click)="cancel()">
             <span class="glyphicon glyphicon-ban-circle"></span> Cancel
           </button>
         </div>
@@ -98,3 +98,20 @@
 
     </div>
   </div>
+
+  <ng-template #template>
+    <div class="modal-body">
+      <div class="text-center">
+        <h5>Review upload was successful!</h5>
+      </div>
+
+        <div class="mt-3">
+          <i class=""></i>Thank you for submitting us a review, we appreciate your time.
+        </div>
+
+        <div class="mt-3">
+          <button type="button" class="btn btn-outline-success btn-circle" (click)="backToBookings()">Back to Bookings</button>
+        </div>
+
+      </div>
+  </ng-template>

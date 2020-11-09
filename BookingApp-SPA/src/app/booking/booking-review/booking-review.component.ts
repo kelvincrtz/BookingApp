@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileItem, FileUploader } from 'ng2-file-upload';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Booking } from 'src/app/_models/booking';
 import { Review } from 'src/app/_models/review';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -23,12 +24,15 @@ export class BookingReviewComponent implements OnInit {
 
   baseUrl = environment.apiUrl;
 
-  rating = 5;
+  rating = 0;
 
   review: Review;
 
+  modalRef: BsModalRef;
+
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private router: Router,
-              private bookingService: BookingService, private authService: AuthService, private userService: UserService) { }
+              private bookingService: BookingService, private authService: AuthService, private userService: UserService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -58,7 +62,7 @@ export class BookingReviewComponent implements OnInit {
 
   }
 
-  uploadSection() {
+  uploadSection(template: TemplateRef<any>) {
     if (this.reviewForm.valid) {
       this.review = Object.assign({}, this.reviewForm.value);
 
@@ -71,9 +75,18 @@ export class BookingReviewComponent implements OnInit {
 
       this.uploader.uploadAll();
 
-      // show alertify success
-      // navigate back to my bookings
+      this.uploader.onSuccessItem = (item, response, status, headers) => {
+        this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+      };
     }
   }
 
+  backToBookings() {
+    this.router.navigate(['/bookingsforuser/']);
+    this.modalRef.hide();
+  }
+
+  cancel() {
+    this.router.navigate(['/bookingsforuser/']);
+  }
 }
