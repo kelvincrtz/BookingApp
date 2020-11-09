@@ -15,8 +15,8 @@
 }
 
 .btn-circle { 
-    width: 30px; 
-    height: 30px; 
+    width: 32px; 
+    height: 32px; 
     padding: 6px 0px; 
     border-radius: 15px; 
     font-size: 11px; 
@@ -26,3 +26,35 @@
 hr {
     border-color: rgb(60, 119, 207);
 }
+
+@-webkit-keyframes pulse {
+    0% { background-color: #d9534f; }
+    50% { background-color: #FFF; }
+    100% { background-color: #d9534f; }
+  }
+
+  @-moz-keyframes pulse {
+    0% { background-color: #d9534f; }
+    50% { background-color: #FFF; }
+    100% { background-color: #d9534f; }
+  }
+
+  @-o-keyframes pulse {
+    0% { background-color: #d9534f; }
+    50% { background-color: #FFF; }
+    100% { background-color: #d9534f; }
+  }
+
+  @keyframes pulse {
+    0% { background-color: #d9534f; }
+    50% { background-color: #FFF; }
+    100% { background-color: #d9534f; }
+  }
+
+  .element {
+    background: #d9534f;
+    -webkit-animation: pulse 3s infinite; /* Safari 4+ */
+    -moz-animation:    pulse 3s infinite; /* Fx 5+ */
+    -o-animation:      pulse 3s infinite; /* Opera 12+ */
+    animation:         pulse 3s infinite; /* IE 10+, Fx 29+ */
+  }

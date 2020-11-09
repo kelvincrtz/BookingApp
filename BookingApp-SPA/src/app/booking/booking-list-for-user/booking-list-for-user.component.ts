@@ -18,6 +18,7 @@ export class BookingListForUserComponent implements OnInit {
   @Input() authDecodeToken: any;
   bookings: Booking[];
   modalRef: BsModalRef;
+  modalRef2: BsModalRef;
   message: string;
 
   pageNumber = 1;
@@ -158,6 +159,14 @@ export class BookingListForUserComponent implements OnInit {
   fixDate(d: Date): Date {
     d.setHours(d.getHours() - d.getTimezoneOffset() / 60);
     return d;
+  }
+
+  paymentInfo(template2: TemplateRef<any>) {
+    this.modalRef2 = this.modalService.show(template2, {class: 'modal-md'});
+  }
+
+  closePayment() {
+    this.modalRef2.hide();
   }
 
 }
