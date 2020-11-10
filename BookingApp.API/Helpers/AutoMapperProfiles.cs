@@ -17,6 +17,7 @@ namespace BookingApp.API.Helpers
             CreateMap<Booking, BookingForDetailedDto>().ReverseMap();
             CreateMap<Booking, BookingForListDto>();
             CreateMap<BookingForCreationDto, Booking>();
+            CreateMap<Booking, BookingForReviewListDto>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<User, UserForUpdateDto>();
             CreateMap<UserForRegisterDto, User>();
@@ -30,6 +31,7 @@ namespace BookingApp.API.Helpers
             CreateMap<Review, ReviewForReturnDto>();
             CreateMap<ReviewForCreationDto, Review>();
             CreateMap<Review, ReviewForListDto>();
+            CreateMap<Review, ReviewForAdminListDto>();
             CreateMap<ReviewForUpdateDto, Review>();
         }
     }

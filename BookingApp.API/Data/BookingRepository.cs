@@ -240,25 +240,27 @@ namespace BookingApp.API.Data
             return reviews;
         }
 
-        public async Task<IEnumerable<Review>> GetMoreReviews()
+        public async Task<PagedList<Review>> GetMoreReviews(ReviewParams reviewParams)
         {
-            var reviews = await _context.Reviews.Include(u => u.User).Where(r => r.IsApproved == true)
-                .OrderByDescending(d => d.DateAdded).ToListAsync();
+            var reviews = _context.Reviews.Include(u => u.User).Where(r => r.IsApproved == true)
+                .OrderByDescending(d => d.DateAdded);
 
-            /*  TODO:
-                1. ONLY SHOW WHEN APPROVED BY THE ADMIN 
-                3. Add Pagination
-            */
-
-            return reviews;
+            return await PagedList<Review>.CreateAsync(reviews, reviewParams.PageNumber, reviewParams.PageSize);
         }
 
-        public async Task<IEnumerable<Review>> GetReviewsForUser(int userId)
+        public async Task<PagedList<Review>> GetReviewsForUser(int userId, ReviewParams reviewParams)
         {
-            var reviews = await _context.Reviews.Include(u => u.User).Where(u => u.UserId == userId)
-                .OrderByDescending(d => d.DateAdded).ToListAsync();
+            var reviews = _context.Reviews.Include(u => u.User).Where(u => u.UserId == userId)
+                .OrderByDescending(d => d.DateAdded);
 
-            return reviews;
+            return await PagedList<Review>.CreateAsync(reviews, reviewParams.PageNumber, reviewParams.PageSize);
+        }
+
+        public async Task<PagedList<Review>> GetReviewsForAdmin(ReviewParams reviewParams)
+        {
+            var reviews = _context.Reviews.Include(u => u.User).OrderByDescending(d => d.DateAdded);
+
+            return await PagedList<Review>.CreateAsync(reviews, reviewParams.PageNumber, reviewParams.PageSize);
         }
     }
 }

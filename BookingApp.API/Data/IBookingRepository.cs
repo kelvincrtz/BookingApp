@@ -23,7 +23,8 @@ namespace BookingApp.API.Data
          Task<IEnumerable<Message>> GetNotificationMessagesForUser(int userId);
          Task<Review> GetReview(int id);
          Task<IEnumerable<Review>> GetReviewsForHomePage();
-         Task<IEnumerable<Review>> GetMoreReviews();
-         Task<IEnumerable<Review>> GetReviewsForUser(int userId);
+         Task<PagedList<Review>> GetMoreReviews(ReviewParams reviewParams);
+         Task<PagedList<Review>> GetReviewsForAdmin(ReviewParams reviewParams);
+         Task<PagedList<Review>> GetReviewsForUser(int userId, ReviewParams reviewParams);
     }
 }

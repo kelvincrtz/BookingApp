@@ -71,21 +71,39 @@ namespace BookingApp.API.Controllers
 
         [AllowAnonymous]
         [HttpGet("list")]
-        public async Task<IActionResult> GetMoreReviews()
+        public async Task<IActionResult> GetMoreReviews([FromQuery]ReviewParams reviewParams)
         {
-            var reviews = await _repo.GetMoreReviews();
+            var reviews = await _repo.GetMoreReviews(reviewParams);
 
             if (reviews == null)
                 return BadRequest();
 
             var reviewsToReturn = _mapper.Map<IEnumerable<ReviewForListDto>>(reviews);
 
+            Response.AddPagination(reviews.CurrentPage, reviews.PageSize, reviews.TotalCount, reviews.TotalPages);
+
             return Ok(reviewsToReturn);
+        }
+        
+        [AllowAnonymous]
+        [HttpGet("list/admin")]
+        public async Task<IActionResult> GetReviewsForAdmin([FromQuery]ReviewParams reviewParams)
+        {
+            var reviews = await _repo.GetReviewsForAdmin(reviewParams);
+
+            if (reviews == null)
+                return BadRequest();
+
+            var reviewsToReturn = _mapper.Map<IEnumerable<ReviewForAdminListDto>>(reviews);
+
+            Response.AddPagination(reviews.CurrentPage, reviews.PageSize, reviews.TotalCount, reviews.TotalPages);
+
+            return Ok(reviews);
         }
 
         [Authorize]
         [HttpPut("status/{id}")]
-        public async Task<IActionResult> UpdateReviewStatus(int id, ReviewForUpdateDto reviewForUpdateDto)
+        public async Task<IActionResult> UpdateReviewStatus(int id, [FromQuery]ReviewForUpdateDto reviewForUpdateDto)
         {
             var reviewFromRepo =  await _repo.GetReview(id);
 
@@ -98,7 +116,8 @@ namespace BookingApp.API.Controllers
             /*  IMPORTANT
             Be careful here. Make sure no await, no task. 
             Just classes or else mapping exception eventhough 
-            you have already did automapper mapping */
+            you have already did automapper mapping 
+            */
 
             if(await _repo.SaveAll())
                 return NoContent();
@@ -116,9 +135,6 @@ namespace BookingApp.API.Controllers
              var userFromRepo = await _repo.GetUser(userId);
 
              var bookingFromRepo = await _repo.GetBooking(reviewForCreationDto.BookingId);
-
-            if (bookingFromRepo == null)
-                return BadRequest("No file has been found.");
              
              var file = reviewForCreationDto.File;
 
@@ -144,8 +160,6 @@ namespace BookingApp.API.Controllers
 
              var review = _mapper.Map<Review>(reviewForCreationDto);
 
-             review.Booking = bookingFromRepo;
-             
              userFromRepo.Reviews.Add(review);
 
              if (await _repo.SaveAll())

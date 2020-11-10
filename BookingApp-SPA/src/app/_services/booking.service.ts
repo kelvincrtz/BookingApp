@@ -147,4 +147,8 @@ export class BookingService {
   getReviewsForAdmin(): Observable<Review> {
     return this.http.get<Review>(this.baseUrl + 'reviews/list');
   }
+
+  updateReviewStatus(id: number, reviewId: number, review: Review) {
+    return this.http.put<Booking>(this.baseUrl + '/reviews/status/' + reviewId, review);
+  }
 }

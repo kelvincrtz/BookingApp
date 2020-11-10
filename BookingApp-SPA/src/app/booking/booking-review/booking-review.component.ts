@@ -71,6 +71,7 @@ export class BookingReviewComponent implements OnInit {
         form.append('rating', this.rating);
         form.append('bookingId', this.booking.id);
         form.append('userId', this.authService.decodedToken.nameid);
+        form.append('booking', this.booking);
        };
 
       this.uploader.uploadAll();

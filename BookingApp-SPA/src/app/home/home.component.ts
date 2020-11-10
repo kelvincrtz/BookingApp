@@ -29,8 +29,6 @@ export class HomeComponent implements OnInit {
       userName: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
-
-    console.log('REVIEWS: ' + this.reviews);
   }
 
   loginClick() {

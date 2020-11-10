@@ -13,4 +13,5 @@ export interface Review {
     user?: User;
     userId?: number;
     bookingId?: number;
+    booking?: Booking;
 }
