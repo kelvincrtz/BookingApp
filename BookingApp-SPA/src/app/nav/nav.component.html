@@ -18,7 +18,7 @@
           <a class="nav-link" [routerLink]="['/bookingsforuser']">Bookings</a>
         </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+          <a class="nav-link" [routerLink]="['/admin']">Management</a>
         </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/calendar']">Calendar</a>
@@ -27,7 +27,7 @@
           <a class="nav-link" [routerLink]="['/bookingcalendar']">BookingCalendar</a>
         </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/reviews']">Reviews</a>
+          <a class="nav-link" [routerLink]="['/reviews/admin/', authService.decodedToken.nameid]">Reviews</a>
         </li>
       </ul>
       

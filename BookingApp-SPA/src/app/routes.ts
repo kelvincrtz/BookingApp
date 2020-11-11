@@ -11,8 +11,6 @@ import { MemberEditResolver } from './_resolvers/member-edit-resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { BookingListComponent } from './booking/booking-list/booking-list.component';
 import { BookingListResolver } from './_resolvers/booking-list-resolver';
-import { BookingFormComponent } from './booking/booking-form/booking-form.component';
-import { PreventBookingFormUnsavedChanges } from './_guards/prevent-bookingform-unsaved-changes.guard';
 import { BookingListForUserComponent } from './booking/booking-list-for-user/booking-list-for-user.component';
 import { BookingListForUserResolver } from './_resolvers/booking-list-for-user-resolver';
 import { BookingEditComponent } from './booking/booking-edit/booking-edit.component';
@@ -27,7 +25,10 @@ import { BookingCalendarComponent } from './booking/booking-calendar/booking-cal
 import { BookingReviewComponent } from './booking/booking-review/booking-review.component';
 import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 import { ReviewHomeResolver } from './_resolvers/review-home-resolver';
-import { ReviewComponent } from './review/review.component';
+import { ReviewListResolver } from './_resolvers/review-list-resolver';
+import { ReviewAdminComponent } from './reviews/review-admin/review-admin.component';
+import { ReviewAdminListResolver } from './_resolvers/review-admin-list-resolver';
+import { ReviewListComponent } from './reviews/review-list/review-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent, resolve: {reviews: ReviewHomeResolver}},
@@ -51,7 +52,9 @@ export const appRoutes: Routes = [
             { path: 'bookingcalendar', component: BookingCalendarComponent, data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
             { path: 'booking/review/:id', component: BookingReviewComponent, resolve: {booking: BookingReviewResolver},
                 data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
-            { path: 'reviews', component: ReviewComponent, data: {roles: ['Admin', 'Moderator']}},
+            { path: 'reviews', component: ReviewListComponent, resolve: {reviews: ReviewListResolver}},
+            { path: 'reviews/admin/:id', component: ReviewAdminComponent, resolve: {reviews: ReviewAdminListResolver},
+                data: {roles: ['Admin', 'Moderator']}},
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

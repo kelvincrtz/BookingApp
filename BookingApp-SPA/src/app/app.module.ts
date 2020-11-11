@@ -60,7 +60,10 @@ import { AdminCalendarModalComponent } from './calendar/admin-calendar-modal/adm
 import { BookingReviewComponent } from './booking/booking-review/booking-review.component';
 import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 import { ReviewHomeResolver } from './_resolvers/review-home-resolver';
-import { ReviewComponent } from './review/review.component';
+import { ReviewListResolver } from './_resolvers/review-list-resolver';
+import { ReviewAdminListResolver } from './_resolvers/review-admin-list-resolver';
+import { ReviewAdminComponent } from './reviews/review-admin/review-admin.component';
+import { ReviewListComponent } from './reviews/review-list/review-list.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -93,7 +96,8 @@ export function tokenGetter() {
       BookingCalendarComponent,
       AdminCalendarModalComponent,
       BookingReviewComponent,
-      ReviewComponent
+      ReviewListComponent,
+      ReviewAdminComponent,
    ],
    imports: [
       BrowserModule,
@@ -145,6 +149,8 @@ export function tokenGetter() {
       MessagesResolver,
       BookingReviewResolver,
       ReviewHomeResolver,
+      ReviewListResolver,
+      ReviewAdminListResolver,
       PreventUnsavedChanges,
       PreventBookingFormUnsavedChanges,
       PreventEditBookingFormUnsavedChanges,

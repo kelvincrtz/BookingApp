@@ -144,7 +144,11 @@ export class BookingService {
     return this.http.get<Review>(this.baseUrl + 'reviews');
   }
 
-  getReviewsForAdmin(): Observable<Review> {
+  getReviewsForAdmin(userId: number): Observable<Review> {
+    return this.http.get<Review>(this.baseUrl + 'reviews/list/admin/' + userId);
+  }
+
+  getMoreReviews(): Observable<Review> {
     return this.http.get<Review>(this.baseUrl + 'reviews/list');
   }
 
