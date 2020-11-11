@@ -133,10 +133,12 @@
       <div class="hero-project">
         <div class="projects">
           <div class="projects-header">
-            <h1 class="section-title"><span>Recent Reviews</span></h1>
+            <div class="d-flex justify-content-center">
+              <h1 class="cta section-title text-center">R<span>ecent</span> R<span>eviews</span></h1>
+            </div>
           </div>
           <div class="all-projects" *ngFor="let review of reviews">
-            <div class="project-item">
+            <div class="project-item mt-3">
               <div class="project-info">
   
                 <div>
@@ -147,9 +149,12 @@
                     </button>
                   </ng-template>
                 </div>
-  
-                <h2>From {{review.user.fullName}}</h2>
-                <pre>{{review.description}}</pre>
+
+                <div class="mt-4">
+                  <pre>"{{review.description}}"</pre>
+                </div>
+
+                <h4>- {{review.user.fullName}}</h4>
                 <div>{{review.dateAdded | date}}</div>
               </div>
               <div class="project-img">
@@ -157,6 +162,10 @@
               </div>
             </div>
             <hr>
+          </div>
+
+          <div class="d-flex justify-content-center mt-4">
+            <a href="" class="cta">See more reviews</a>
           </div>
         </div>
       </div>

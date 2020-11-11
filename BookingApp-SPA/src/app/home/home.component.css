@@ -30,8 +30,8 @@ p {
 pre {
 	color: black;
 	font-size: 1.0rem;
-	margin-top: 5px;
-	font-weight: 200;
+	margin-top: 3px;
+	font-weight: 180;
 	letter-spacing: .05rem;
 }
 .section-title {
@@ -121,7 +121,7 @@ pre {
 }
 #header .header {
 	min-height: 8vh;
-	background-color: rgba(31, 30, 30, 0.123);
+	background-color: rgba(31, 30, 30, 0.212);
 	transition: .3s ease background-color;
 }
 #header .nav-bar {
@@ -249,6 +249,17 @@ pre {
 /* End Hero Section */
 
 /* Services Section */
+#services .service-item {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
+    transition: 0.3s;
+  }
+  
+/* On mouse-over, add a deeper shadow */
+#services .service-item:hover {
+    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2);
+}
+
 #services .services {
 	flex-direction: column;
 	text-align: center;
@@ -323,7 +334,7 @@ pre {
 }
 
 .hero-project {
-	background: linear-gradient(50deg, #a1b7e7 0%, #5b70eb 80%);
+	background: linear-gradient(50deg, #a1b7e7 0%, #687beb 80%);
 	z-index: -1;
 }
 
@@ -377,9 +388,16 @@ pre {
 	height: 300px;
 	overflow: hidden;
 	position: relative;
-	border: 10px solid rgb(254, 255, 248);
-	border-radius: 14px;
+	border-radius: 8px;
+	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
+    transition: 0.3s;
 }
+  
+/* On mouse-over, add a deeper shadow */
+#projects .project-img:hover {
+	box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2);
+}
+
 #projects .project-img:after {
 	content: '';
 	position: absolute;
@@ -387,7 +405,6 @@ pre {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	opacity: .9;
 }
 #projects .project-img img {
 	transition: .3s ease transform;
