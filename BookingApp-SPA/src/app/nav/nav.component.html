@@ -23,8 +23,11 @@
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/calendar']">Calendar</a>
         </li>
-        <li *appHasRole="['Admin', 'Moderator', 'VIP', 'Member']" class="nav-item" routerLinkActive="active">
+        <li *appHasRole="['VIP', 'Member']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/bookingcalendar']">BookingCalendar</a>
+        </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/reviews']">Reviews</a>
         </li>
       </ul>
       

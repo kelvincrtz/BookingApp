@@ -27,6 +27,7 @@ import { BookingCalendarComponent } from './booking/booking-calendar/booking-cal
 import { BookingReviewComponent } from './booking/booking-review/booking-review.component';
 import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 import { ReviewHomeResolver } from './_resolvers/review-home-resolver';
+import { ReviewComponent } from './review/review.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent, resolve: {reviews: ReviewHomeResolver}},
@@ -50,6 +51,7 @@ export const appRoutes: Routes = [
             { path: 'bookingcalendar', component: BookingCalendarComponent, data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
             { path: 'booking/review/:id', component: BookingReviewComponent, resolve: {booking: BookingReviewResolver},
                 data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
+            { path: 'reviews', component: ReviewComponent, data: {roles: ['Admin', 'Moderator']}},
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

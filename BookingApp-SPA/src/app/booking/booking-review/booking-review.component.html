@@ -1,6 +1,6 @@
 <div class="container alert bg-signature mt-3" role="alert">
     <h4 class="alert-heading para">Make a review</h4>
-    <div class="para">Write us of your experience with this booking that took place in {{booking.location}} on {{booking.when | date:'fullDate'}} </div>
+    <div class="para">Write us of your experience with this booking that took place in <strong class="bg-dark">{{booking.location}}</strong> on  <strong class="bg-dark"> {{booking.when | date:'fullDate'}}</strong></div>
     <div class="para">You can also upload a photo of yourself and Susan so we can share it here in our website! <i class="fa fa-smile-o"></i> </div>
     <hr>
     <div class="container mt-3">
@@ -63,7 +63,7 @@
       <div class="row justify-content-center">
         <div>
           <div class="">
-            <pre class="row justify-content-center para" style="margin:10px 0;"><h6>Your rating of: {{rating}}/5 </h6></pre>
+            <pre class="row justify-content-center para" style="margin:10px 0;"><h5>Your rating of: <span class="bg-light text-danger"> {{rating}}/5 </span></h5></pre>
           </div>
           <div class="rating-signature">
             <rating [max]="5" [(ngModel)]="rating" [customTemplate]="tt"></rating>

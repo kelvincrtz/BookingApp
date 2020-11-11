@@ -16,7 +16,6 @@
               <button *ngIf="user.id == authDecodeToken" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingcalendar']">Make a Booking</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/member/edit']">Edit Profile</button>
-              <button *appHasRole="['Admin', 'Moderator']" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View {{user.fullName | titlecase}}'s Bookings</button>
             </div>
           </div>
         </div>

@@ -52,7 +52,6 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
-import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { AdminCalendarComponent } from './calendar/admin-calendar/admin-calendar.component';
@@ -61,6 +60,7 @@ import { AdminCalendarModalComponent } from './calendar/admin-calendar-modal/adm
 import { BookingReviewComponent } from './booking/booking-review/booking-review.component';
 import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 import { ReviewHomeResolver } from './_resolvers/review-home-resolver';
+import { ReviewComponent } from './review/review.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -88,12 +88,12 @@ export function tokenGetter() {
       AdminPanelComponent,
       HasRoleDirective,
       UserManagementComponent,
-      PhotoManagementComponent,
       RolesModalComponent,
       AdminCalendarComponent,
       BookingCalendarComponent,
       AdminCalendarModalComponent,
-      BookingReviewComponent
+      BookingReviewComponent,
+      ReviewComponent
    ],
    imports: [
       BrowserModule,
