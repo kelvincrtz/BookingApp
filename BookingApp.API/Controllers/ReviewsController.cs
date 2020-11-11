@@ -85,10 +85,13 @@ namespace BookingApp.API.Controllers
             return Ok(reviewsToReturn);
         }
         
-        [AllowAnonymous]
-        [HttpGet("list/admin")]
-        public async Task<IActionResult> GetReviewsForAdmin([FromQuery]ReviewParams reviewParams)
+        [Authorize]
+        [HttpGet("list/admin/{userId}")]
+        public async Task<IActionResult> GetReviewsForAdmin(int userId, [FromQuery]ReviewParams reviewParams)
         {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
             var reviews = await _repo.GetReviewsForAdmin(reviewParams);
 
             if (reviews == null)
@@ -98,7 +101,7 @@ namespace BookingApp.API.Controllers
 
             Response.AddPagination(reviews.CurrentPage, reviews.PageSize, reviews.TotalCount, reviews.TotalPages);
 
-            return Ok(reviews);
+            return Ok(reviewsToReturn);
         }
 
         [Authorize]

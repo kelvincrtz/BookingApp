@@ -126,24 +126,38 @@
     </section>
     <!-- End Service Section -->
   
+
+    
     <!-- Reviews Section -->
     <section #testimonials id="projects">
-      <div class="projects container">
-        <div class="projects-header">
-          <h1 class="section-title">Recent <span>Testimonials</span></h1>
-        </div>
-        <div class="all-projects" *ngFor="let review of reviews">
-          <div class="project-item">
-            <div class="project-info">
-              <h1>{{review.rating}}</h1>
-              <h2>{{review.user.fullName}}</h2>
-              <pre>{{review.description}}</pre>
-            </div>
-            <div class="project-img">
-              <img src={{review.url}} alt="img">
-            </div>
+      <div class="hero-project">
+        <div class="projects">
+          <div class="projects-header">
+            <h1 class="section-title"><span>Recent Testimonials</span></h1>
           </div>
-          <hr>
+          <div class="all-projects" *ngFor="let review of reviews">
+            <div class="project-item">
+              <div class="project-info">
+  
+                <div>
+                  <rating [max]="5" [(ngModel)]="review.rating" [customTemplate]="tt" [readonly]=true></rating>
+                  <ng-template #tt let-i="index" let-v="value">
+                    <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
+                      {{i < v ? '&#9733;' : '&#9734;'}}
+                    </button>
+                  </ng-template>
+                </div>
+  
+                <h2>From {{review.user.fullName}}</h2>
+                <pre>{{review.description}}</pre>
+                <div>{{review.dateAdded | date}}</div>
+              </div>
+              <div class="project-img">
+                <img src={{review.url}} alt="img">
+              </div>
+            </div>
+            <hr>
+          </div>
         </div>
       </div>
     </section>
@@ -214,9 +228,6 @@
           </div>
           <div class="social-item">
             <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/twitter.png"/></a>
-          </div>
-          <div class="social-item">
-            <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/behance.png"/></a>
           </div>
         </div>
         <p>Copyright © 2020 AboveAllLs. All rights reserved</p>
