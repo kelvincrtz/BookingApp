@@ -32,6 +32,7 @@ import { ReviewListComponent } from './reviews/review-list/review-list.component
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent, resolve: {reviews: ReviewHomeResolver}},
+    { path: 'reviews', component: ReviewListComponent, resolve: {reviews: ReviewListResolver}},
     {
         path: '',
         runGuardsAndResolvers: 'always',
@@ -52,7 +53,6 @@ export const appRoutes: Routes = [
             { path: 'bookingcalendar', component: BookingCalendarComponent, data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
             { path: 'booking/review/:id', component: BookingReviewComponent, resolve: {booking: BookingReviewResolver},
                 data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
-            { path: 'reviews', component: ReviewListComponent, resolve: {reviews: ReviewListResolver}},
             { path: 'reviews/admin/:id', component: ReviewAdminComponent, resolve: {reviews: ReviewAdminListResolver},
                 data: {roles: ['Admin', 'Moderator']}},
         ]
