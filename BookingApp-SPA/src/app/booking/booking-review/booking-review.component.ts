@@ -78,12 +78,12 @@ export class BookingReviewComponent implements OnInit {
 
       this.uploader.onSuccessItem = (item, response, status, headers) => {
         this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+        this.router.navigate(['/bookingsforuser/']);
       };
     }
   }
 
   backToBookings() {
-    this.router.navigate(['/bookingsforuser/']);
     this.modalRef.hide();
   }
 

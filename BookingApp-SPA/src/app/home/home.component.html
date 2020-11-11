@@ -16,7 +16,7 @@
             <ul>
               <li><a (click)="scrollToElement(home)">Home</a></li>
               <li><a (click)="scrollToElement(services)">Services</a></li>
-              <li><a (click)="scrollToElement(testimonials)">Testimonials</a></li>
+              <li><a (click)="scrollToElement(testimonials)">Reviews</a></li>
               <li><a (click)="scrollToElement(about)">About</a></li>
               <li><a (click)="scrollToElement(contact)">Contact</a></li>
             </ul>
@@ -34,7 +34,7 @@
           <h1>Hello, <span></span></h1>
           <h1>Welcome to <span></span></h1>
           <h1>ABOVE ALL LS<span></span></h1>
-          <a (click)="scrollToElement(testimonials)" type="button" class="cta">Testimonials</a>
+          <a (click)="scrollToElement(testimonials)" type="button" class="cta">Reviews</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(login)" type="button" class="cta">Login</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(register)" (click)="registerToggle()" type="button" class="cta">Sign Up</a>
         </div>
@@ -133,7 +133,7 @@
       <div class="hero-project">
         <div class="projects">
           <div class="projects-header">
-            <h1 class="section-title"><span>Recent Testimonials</span></h1>
+            <h1 class="section-title"><span>Recent Reviews</span></h1>
           </div>
           <div class="all-projects" *ngFor="let review of reviews">
             <div class="project-item">

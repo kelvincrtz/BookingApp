@@ -28,31 +28,31 @@ hr {
 }
 
 @-webkit-keyframes pulse {
-    0% { background-color: #d9534f; }
+    0% { background-color: #eeff00; }
     50% { background-color: #FFF; }
-    100% { background-color: #d9534f; }
+    100% { background-color: #eeff00; }
   }
 
   @-moz-keyframes pulse {
-    0% { background-color: #d9534f; }
+    0% { background-color: #eeff00; }
     50% { background-color: #FFF; }
-    100% { background-color: #d9534f; }
+    100% { background-color: #eeff00; }
   }
 
   @-o-keyframes pulse {
-    0% { background-color: #d9534f; }
+    0% { background-color: #eeff00; }
     50% { background-color: #FFF; }
-    100% { background-color: #d9534f; }
+    100% { background-color: #eeff00; }
   }
 
   @keyframes pulse {
-    0% { background-color: #d9534f; }
+    0% { background-color: #eeff00; }
     50% { background-color: #FFF; }
-    100% { background-color: #d9534f; }
+    100% { background-color: #eeff00; }
   }
 
   .element {
-    background: #d9534f;
+    background: #eeff00;
     -webkit-animation: pulse 3s infinite; /* Safari 4+ */
     -moz-animation:    pulse 3s infinite; /* Fx 5+ */
     -o-animation:      pulse 3s infinite; /* Opera 12+ */

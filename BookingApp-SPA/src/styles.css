@@ -7,14 +7,6 @@
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
-.cal-month-view .bg-pink,
-      .cal-week-view .cal-day-columns .bg-pink,
-      .cal-day-view .bg-pink {
-        background-color: hotpink !important;
-      }
-
-
-      .cal-day-selected,
-      .cal-day-selected:hover {
-        background-color: rgb(247, 90, 173) !important;
-      }
+.bg-signature {
+  background: linear-gradient(50deg, #5482e6 0%, #5b75eb 80%);
+}

@@ -2,9 +2,9 @@
   <div class="row">
 
     <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
-      <div class="card bg-primary text-white">
+      <div class="card bg-signature text-white">
         <div class="card-body">
-          <div class="jumbotron body-custom bg-primary">
+          <div class="jumbotron body-custom bg-signature">
             <div class="container">
               <h1 class="display-4">{{user.fullName | titlecase}}</h1>
               <p class="lead text-white">Lives in {{user.city}}, {{user.country}}</p>
@@ -24,9 +24,9 @@
     </div>
 
     <div *ngIf="user.id != authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
-      <div class="card bg-primary text-white">
+      <div class="card bg-signature text-white">
         <div class="card-body">
-          <div class="bg-primary">
+          <div class="bg-signature">
             <div class="container">
               <app-member-messages [recipientId]="user.id"></app-member-messages>
             </div>
@@ -36,9 +36,9 @@
     </div>
 
     <div *ngIf="user.id == authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
-      <div class="card bg-primary text-white">
+      <div class="card bg-signature text-white">
         <div class="card-body">
-          <div class="body-custom2 bg-primary">
+          <div class="body-custom2 bg-signature">
             <div class="container">
               <div>
                 <!-- Booking Alert Notifications -->

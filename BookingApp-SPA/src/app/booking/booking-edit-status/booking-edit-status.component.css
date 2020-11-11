@@ -4,11 +4,7 @@
 }
 
 .card-custom {
-    background: linear-gradient(140deg, #356ce4 0%, #3b7cdf 40%);
-    border-radius: 0.80em;
+    background: linear-gradient(140deg, #d491b3 0%, #cf89ba 40%);
+    border-radius: 0.60em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-
-hr {
-    border-color: rgb(60, 119, 207);
 }

@@ -289,8 +289,8 @@ pre {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
-	opacity: .9;
+	background: linear-gradient(50deg, #c56e97 0%, #ce7198 80%);
+	opacity: .7;
 	z-index: -1;
 }
 #services .service-bottom .icon {
@@ -377,6 +377,8 @@ pre {
 	height: 300px;
 	overflow: hidden;
 	position: relative;
+	border: 10px solid rgb(254, 255, 248);
+	border-radius: 14px;
 }
 #projects .project-img:after {
 	content: '';

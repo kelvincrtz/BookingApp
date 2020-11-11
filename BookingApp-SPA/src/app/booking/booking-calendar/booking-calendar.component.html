@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <div *ngIf="clickedDate && clickBooking == true" class="alert alert-primary text-center">
+  <div *ngIf="clickedDate && clickBooking == true" class="alert bg-signature text-center">
     <h4 class="alert-heading">{{ clickedDate | date:'fullDate' }}</h4>
 
     <div *ngIf="this.dayEvents.length == 0">
