@@ -150,12 +150,18 @@
                   </ng-template>
                 </div>
 
-                <div class="mt-4">
-                  <pre>"{{review.description}}"</pre>
+                <div class="">
+                  <i class="fa fa-quote-left mt-3"></i>
+                  <pre class="pre m-3"> {{review.description}} </pre>
+                  <div class="d-flex justify-content-end">
+                    <i class="fa fa-quote-right"></i>
+                  </div>
                 </div>
 
-                <h4>- {{review.user.fullName}}</h4>
-                <div>{{review.dateAdded | date}}</div>
+                <div class="mt-3">
+                  <h3 class="font-weight-lighter">- {{review.user.fullName}} </h3> <span class="font-weight-lighter">{{review.dateAdded | date}}</span>
+                </div>
+
               </div>
               <div class="project-img">
                 <img src={{review.url}} alt="img">

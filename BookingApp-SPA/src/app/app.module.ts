@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 // tslint:disable-next-line: max-line-length
-import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, AlertModule, TooltipModule, CollapseModule, RatingModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, AlertModule, TooltipModule, CollapseModule, RatingModule, CarouselModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TimeAgoPipe } from 'time-ago-pipe';
@@ -65,6 +65,7 @@ import { ReviewAdminListResolver } from './_resolvers/review-admin-list-resolver
 import { ReviewAdminComponent } from './reviews/review-admin/review-admin.component';
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
 import { ReviewCardComponent } from './reviews/review-card/review-card.component';
+import { ReviewListCardComponent } from './reviews/review-list-card/review-list-card.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -99,7 +100,8 @@ export function tokenGetter() {
       BookingReviewComponent,
       ReviewListComponent,
       ReviewAdminComponent,
-      ReviewCardComponent
+      ReviewCardComponent,
+      ReviewListCardComponent
    ],
    imports: [
       BrowserModule,
@@ -116,6 +118,7 @@ export function tokenGetter() {
       ButtonsModule.forRoot(),
       ModalModule.forRoot(),
       AlertModule.forRoot(),
+      CarouselModule.forRoot(),
       TooltipModule.forRoot(),
       CollapseModule.forRoot(),
       CalendarModule.forRoot({
