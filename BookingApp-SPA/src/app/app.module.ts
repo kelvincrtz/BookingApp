@@ -64,6 +64,7 @@ import { ReviewListResolver } from './_resolvers/review-list-resolver';
 import { ReviewAdminListResolver } from './_resolvers/review-admin-list-resolver';
 import { ReviewAdminComponent } from './reviews/review-admin/review-admin.component';
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
+import { ReviewCardComponent } from './reviews/review-card/review-card.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -98,6 +99,7 @@ export function tokenGetter() {
       BookingReviewComponent,
       ReviewListComponent,
       ReviewAdminComponent,
+      ReviewCardComponent
    ],
    imports: [
       BrowserModule,
