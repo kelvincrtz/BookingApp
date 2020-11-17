@@ -301,7 +301,7 @@ pre {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	background: linear-gradient(50deg, #c56e97 0%, #ce7198 80%);
+	background: linear-gradient(50deg, #ec86b9 0%, #e47ba6 80%);
 	opacity: .7;
 	z-index: -1;
 }
@@ -417,7 +417,7 @@ pre {
 
 #projects .boxes {
 	padding: 2.5rem;
-	background-color: #fdb36d;
+	background-color: #e2e981;
 	position: relative;
 	border-radius: .25rem;
 	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
@@ -425,7 +425,7 @@ pre {
 
 #projects .quote {
 	padding: 1rem;
-	color: #fdb36d;
+	color: #e2e981;
 	background-color: #fff;
 	justify-content: center;
 	align-items: center;
@@ -437,15 +437,15 @@ pre {
 }
 
 #projects .description {
-		padding: 1rem;
-		background-color: rgba(255,255,255,0.9);
-		color: rgba(0,0,0,0.7);
-		justify-content: center;
-		flex-direction: column;
-		display: flex;
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
-		border-radius: .5rem;
+	padding: 1rem;
+	background-color: rgba(255,255,255,0.9);
+	color: rgba(0,0,0,0.7);
+	justify-content: center;
+	flex-direction: column;
+	display: flex;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-radius: .5rem;
 }
 
 .cta-project {
@@ -453,7 +453,7 @@ pre {
 	padding: 10px 30px;
 	color: white;
 	background-color: transparent;
-	border: 7px solid #fdb36d;
+	border: 7px solid #e2e981;
 	font-size: 2rem;
 	text-transform: uppercase;
 	letter-spacing: .1rem;
@@ -462,7 +462,7 @@ pre {
 }
 .cta-project:hover {
 	color: white;
-	background-color: #fdb36d;
+	background-color: #e2e981;
 }
 
 /* End Projects section */
