@@ -17,10 +17,10 @@
     </li>
     <li class="list-group-item">Date: {{review.dateAdded | date}}</li>
     <li class="list-group-item">
-      <div *ngIf="review.isApproved == false">
-        <div>Status: <span class="text-danger">Not approved</span></div>
+      <div *ngIf="!review.isApproved">
+        <div>Status: <span class="text-danger">Not Approved</span></div>
       </div>
-      <div *ngIf="review.isApproved != false">
+      <div *ngIf="review.isApproved">
         <div>Status: <span class="text-success">Approved</span></div>
     </div>
     </li>

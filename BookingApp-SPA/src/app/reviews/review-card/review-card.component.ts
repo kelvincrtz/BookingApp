@@ -12,6 +12,7 @@ export class ReviewCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.review);
   }
 
 }
