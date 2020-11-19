@@ -301,7 +301,7 @@ pre {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	background: linear-gradient(50deg, #ec86b9 0%, #e47ba6 80%);
+	background-color: rgb(232, 245, 60); 
 	opacity: .7;
 	z-index: -1;
 }
@@ -312,16 +312,16 @@ pre {
 }
 #services .service-item h2 {
 	font-size: 2rem;
-	color: white;
+	color: rgb(36, 33, 33);
 	margin-bottom: 10px;
 	text-transform: uppercase;
 }
 #services .service-item p {
-	color: white;
+	color: rgb(29, 28, 28);
 	text-align: left;
 }
 #services .service-item pre {
-	color: white;
+	color: rgb(29, 27, 27);
 	text-align: left;
 }
 /* End Services Section */
@@ -335,7 +335,7 @@ pre {
 }
 
 .hero-project {
-	background: linear-gradient(50deg, #a1b7e7 0%, #687beb 80%);
+	background: linear-gradient(50deg, #7198eb 0%, #6875eb 80%);
 	z-index: -1;
 }
 
@@ -356,7 +356,6 @@ pre {
 	flex-direction: column;
 	width: 80%;
 	margin: 20px auto;
-
 	border-radius: 10px;
 }
 #projects .project-info {
@@ -392,7 +391,9 @@ pre {
 	position: relative;
 	border-radius: 8px;
 	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
-    transition: 0.3s;
+	transition: 0.3s;
+	padding: 1rem;
+	background-color: rgba(255,255,255,0.9);
 }
   
 /* On mouse-over, add a deeper shadow */
@@ -417,7 +418,7 @@ pre {
 
 #projects .boxes {
 	padding: 2.5rem;
-	background-color: #e2e981;
+	background-color: #e1e97a;
 	position: relative;
 	border-radius: .25rem;
 	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
@@ -425,7 +426,7 @@ pre {
 
 #projects .quote {
 	padding: 1rem;
-	color: #e2e981;
+	color: #ec921c;
 	background-color: #fff;
 	justify-content: center;
 	align-items: center;
@@ -453,7 +454,7 @@ pre {
 	padding: 10px 30px;
 	color: white;
 	background-color: transparent;
-	border: 7px solid #e2e981;
+	border: 7px solid #e1e97a;
 	font-size: 2rem;
 	text-transform: uppercase;
 	letter-spacing: .1rem;
@@ -461,8 +462,8 @@ pre {
 	transition: .3s ease;
 }
 .cta-project:hover {
-	color: white;
-	background-color: #e2e981;
+	color: rgb(26, 24, 24);
+	background-color: #e1e97a;
 }
 
 /* End Projects section */
