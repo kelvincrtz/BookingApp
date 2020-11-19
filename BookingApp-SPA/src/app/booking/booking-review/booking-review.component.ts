@@ -31,8 +31,7 @@ export class BookingReviewComponent implements OnInit {
   modalRef: BsModalRef;
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private router: Router,
-              private bookingService: BookingService, private authService: AuthService, private userService: UserService,
-              private modalService: BsModalService) { }
+              private bookingService: BookingService, private authService: AuthService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -45,6 +44,7 @@ export class BookingReviewComponent implements OnInit {
       description: new FormControl('', Validators.required),
       rating: new FormControl(this.rating, Validators.required),
     });
+
   }
 
   initializeUploader() {
@@ -77,8 +77,14 @@ export class BookingReviewComponent implements OnInit {
       this.uploader.uploadAll();
 
       this.uploader.onSuccessItem = (item, response, status, headers) => {
-        this.modalRef = this.modalService.show(template, {class: 'modal-md'});
-        this.router.navigate(['/bookingsforuser/']);
+        this.bookingService.updateBookingIsReviewed(this.authService.decodedToken.nameid, this.booking.id, this.booking).subscribe(next => {
+          this.alertify.success('Booking is has been updated');
+        }, error => {
+          this.alertify.error('Error sending the request');
+        }, () => {
+          this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+          this.router.navigate(['/bookingsforuser/']);
+        });
       };
     }
   }

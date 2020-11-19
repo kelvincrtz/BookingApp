@@ -252,6 +252,28 @@ namespace BookingApp.API.Controllers
             throw new Exception($"Updating booking status {id} failed on save");
         }
 
+        [HttpPut("isreviewed/{id}")]
+        public async Task<IActionResult> UpdateBookingIsReviewed(int userId, int id, BookingForUpdateIsReviewedDto bookingForUpdateIsReviewedDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var bookingFromRepo = await _repo.GetBooking(id);
+
+            if (bookingFromRepo == null)
+                return BadRequest();
+
+            bookingForUpdateIsReviewedDto.IsReviewed = true;
+            
+            _mapper.Map(bookingForUpdateIsReviewedDto, bookingFromRepo); 
+            // Be careful here. Make sure no await, no task. Just classes or else mapping exception eventhough you have already did automapper mapping
+
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating booking isReviewed {id} failed on save");
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBooking(int userId, int id)
         {

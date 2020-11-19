@@ -13,5 +13,6 @@ export interface Booking {
     isSeenByAdmin?: boolean;
     isSeenNotification?: boolean;
     approveOrDeclineDate?: Date;
+    isReviewed?: boolean;
     user?: User;
 }

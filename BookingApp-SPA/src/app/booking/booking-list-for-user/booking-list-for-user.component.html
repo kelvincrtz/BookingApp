@@ -103,12 +103,16 @@
                 <button class="btn btn-outline-success btn-block btn-sm mt-2" (click)="paymentInfo(template2)">Payment Info
                 </button>
 
-                <button class="btn btn-outline-info btn-block btn-sm mt-2" (click)="review(booking.id)">Want to write us a review? 
+                <button *ngIf="!booking.isReviewed" class="btn btn-outline-info btn-block btn-sm mt-2" (click)="review(booking.id)">Want to write us a review? 
                   <i class="fa fa-star" aria-hidden="true"></i>
                   <i class="fa fa-star" aria-hidden="true"></i> 
                   <i class="fa fa-star" aria-hidden="true"></i>
                   <i class="fa fa-star" aria-hidden="true"></i> 
                 </button>
+
+                <button *ngIf="booking.isReviewed" class="btn btn-outline-danger btn-block btn-sm mt-2">Review has been submitted
+                </button>
+
               </div>
             </div>
             

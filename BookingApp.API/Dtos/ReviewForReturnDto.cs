@@ -11,6 +11,7 @@ namespace BookingApp.API.Dtos
         public string PublicId { get; set; }
         public bool IsApproved { get; set; }
         public int Rating { get; set; }
+        public int BookingId { get; set; }
 
     }
 }

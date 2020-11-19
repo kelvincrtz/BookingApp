@@ -53,7 +53,7 @@ namespace BookingApp.API.Controllers
 
             return Ok(review);
         }
-
+        
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetReviewsForHomePage()
@@ -102,7 +102,7 @@ namespace BookingApp.API.Controllers
             Response.AddPagination(reviews.CurrentPage, reviews.PageSize, reviews.TotalCount, reviews.TotalPages);
 
             return Ok(reviewsToReturn);
-        }
+        }     
 
         [Authorize]
         [HttpPut("status/{id}")]

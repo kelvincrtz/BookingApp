@@ -17,5 +17,6 @@ namespace BookingApp.API.Models
         public DateTime ApproveOrDeclineDate { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
+        public bool IsReviewed { get; set; }
     }
 }

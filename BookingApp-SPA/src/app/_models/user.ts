@@ -1,5 +1,6 @@
 import { Booking } from './booking';
 import { Message } from './message';
+import { Review } from './review';
 
 export interface User {
     id: number;
@@ -15,4 +16,5 @@ export interface User {
     bookings?: Booking[];
     messages?: Message[];
     roles?: string[];
+    reviews?: Review[];
 }

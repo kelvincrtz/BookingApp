@@ -15,6 +15,7 @@ namespace BookingApp.API.Dtos
         public bool IsSeenByAdmin { get; set; }
         public bool IsSeenNotification { get; set; }
         public DateTime ApproveOrDeclineDate { get; set; }
+        public bool IsReviewed { get; set; }
         public int UserId { get; set; }
     }
 }

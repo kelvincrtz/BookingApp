@@ -53,6 +53,8 @@ export class BookingListForUserComponent implements OnInit {
     this.bookingParams.all = true;
 
     this.todaysDate = new Date();
+
+    console.log(this.bookings);
   }
 
   loadBookings() {
