@@ -26,9 +26,9 @@ import { BookingReviewComponent } from './booking/booking-review/booking-review.
 import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 import { ReviewHomeResolver } from './_resolvers/review-home-resolver';
 import { ReviewListResolver } from './_resolvers/review-list-resolver';
-import { ReviewAdminComponent } from './reviews/review-admin/review-admin.component';
 import { ReviewAdminListResolver } from './_resolvers/review-admin-list-resolver';
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
+import { ReviewCardComponent } from './reviews/review-card/review-card.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent, resolve: {reviews: ReviewHomeResolver}},
@@ -53,7 +53,7 @@ export const appRoutes: Routes = [
             { path: 'bookingcalendar', component: BookingCalendarComponent, data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
             { path: 'booking/review/:id', component: BookingReviewComponent, resolve: {booking: BookingReviewResolver},
                 data: {roles: ['Admin', 'Moderator', 'Member', 'VIP']}},
-            { path: 'reviews/admin/:id', component: ReviewAdminComponent, resolve: {reviews: ReviewAdminListResolver},
+            { path: 'reviews/admin/:id', component: ReviewCardComponent, resolve: {reviews: ReviewAdminListResolver},
                 data: {roles: ['Admin', 'Moderator']}},
         ]
     },

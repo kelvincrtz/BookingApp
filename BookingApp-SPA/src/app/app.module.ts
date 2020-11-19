@@ -62,10 +62,10 @@ import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 import { ReviewHomeResolver } from './_resolvers/review-home-resolver';
 import { ReviewListResolver } from './_resolvers/review-list-resolver';
 import { ReviewAdminListResolver } from './_resolvers/review-admin-list-resolver';
-import { ReviewAdminComponent } from './reviews/review-admin/review-admin.component';
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
-import { ReviewCardComponent } from './reviews/review-card/review-card.component';
 import { ReviewListCardComponent } from './reviews/review-list-card/review-list-card.component';
+import { ReviewEditComponent } from './reviews/review-edit/review-edit.component';
+import { ReviewCardComponent } from './reviews/review-card/review-card.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -99,9 +99,9 @@ export function tokenGetter() {
       AdminCalendarModalComponent,
       BookingReviewComponent,
       ReviewListComponent,
-      ReviewAdminComponent,
       ReviewCardComponent,
-      ReviewListCardComponent
+      ReviewListCardComponent,
+      ReviewEditComponent
    ],
    imports: [
       BrowserModule,
@@ -164,7 +164,8 @@ export function tokenGetter() {
    entryComponents: [
       RolesModalComponent,
       AdminCalendarModalComponent,
-      BookingEditComponent
+      BookingEditComponent,
+      ReviewEditComponent
    ],
    bootstrap: [
       AppComponent

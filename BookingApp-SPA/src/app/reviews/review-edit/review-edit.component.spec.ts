@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ReviewAdminComponent } from './review-admin.component';
+import { ReviewEditComponent } from './review-edit.component';
 
-describe('ReviewAdminComponent', () => {
-  let component: ReviewAdminComponent;
-  let fixture: ComponentFixture<ReviewAdminComponent>;
+describe('ReviewEditComponent', () => {
+  let component: ReviewEditComponent;
+  let fixture: ComponentFixture<ReviewEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReviewAdminComponent ]
+      declarations: [ ReviewEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReviewAdminComponent);
+    fixture = TestBed.createComponent(ReviewEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

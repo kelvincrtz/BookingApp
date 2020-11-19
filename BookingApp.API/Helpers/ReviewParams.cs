@@ -4,7 +4,7 @@ namespace BookingApp.API.Helpers
     {
         private const int MaxPageSize = 20;
         public int PageNumber { get; set; }
-        private int pageSize = 10;
+        private int pageSize = 12;
         public int PageSize
         {
             get { return pageSize; }

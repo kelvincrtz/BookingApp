@@ -157,6 +157,7 @@ export class BookingService {
   }
 
   updateReviewStatus(id: number, reviewId: number, review: Review) {
-    return this.http.put<Booking>(this.baseUrl + '/reviews/status/' + reviewId, review);
+    return this.http.put<Booking>(this.baseUrl + 'reviews/status/' + reviewId, review);
   }
+
 }
