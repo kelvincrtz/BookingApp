@@ -46,12 +46,12 @@
 
 <div class="card bg-secondary font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Pending'">
   <div class="">
-    <div class="card-header bg-transparent">Status: {{booking.status}}</div>
+    <div class="card-header bg-transparent text-dark">Status: <strong>{{booking.status}}</strong></div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
       <!-- If Booking is at Pending status-->
-      <div class="text-white">
+      <div class="text-dark">
         <h5 class="card-title text-capitalize">{{booking.user.fullName}}</h5>
         <p class="card-text">Location: {{booking.location}}</p>
         <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
@@ -60,6 +60,6 @@
 
       <button class="btn btn-info btn-block my-2" tooltip="This request needs to be reviewed. Click to update its status" [delay]="500" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
     </div>
-    <div class="card-footer bg-transparent"><small>Request received: {{booking.dateAdded | date}}</small></div>
+    <div class="card-footer bg-transparent text-dark"><small>Request received: {{booking.dateAdded | date}}</small></div>
   </div>
 </div>

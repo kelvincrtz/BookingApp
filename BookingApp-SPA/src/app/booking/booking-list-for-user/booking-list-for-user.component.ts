@@ -53,8 +53,6 @@ export class BookingListForUserComponent implements OnInit {
     this.bookingParams.all = true;
 
     this.todaysDate = new Date();
-
-    console.log(this.bookings);
   }
 
   loadBookings() {
@@ -89,6 +87,13 @@ export class BookingListForUserComponent implements OnInit {
   decline(id: number): void {
     this.modalRef.hide();
     this.alertify.error('Cancelled');
+  }
+
+  compareDates(dateFromRepo: Date): boolean {
+    const fromRepo = new Date(dateFromRepo);
+    if (fromRepo.getDate() <= this.todaysDate.getDate()) {
+      return true;
+    }
   }
 
   review(bookingId: number): void {
