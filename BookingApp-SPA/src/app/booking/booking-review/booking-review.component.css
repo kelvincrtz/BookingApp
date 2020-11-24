@@ -16,3 +16,19 @@
 .rating-signature {
     border-radius: 80mm;
 }
+
+.blink-rating {
+    color: #fff;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    animation: blinkingBackground 2s infinite;
+}
+
+@keyframes blinkingBackground{
+    0%		{ background-color: #e26600;}
+    25%		{ background-color: #ff0000;}
+    50%		{ background-color: #e26600;}
+    75%		{ background-color: #ff0000;}
+    100%	{ background-color: #e26600;}
+}

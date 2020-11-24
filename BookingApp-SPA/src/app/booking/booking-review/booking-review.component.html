@@ -54,29 +54,42 @@
                 <div class="form-group">
                   <textarea type="text" [ngClass]="{'is-invalid': reviewForm.get('description').errors && reviewForm.get('description').touched}"
                   class="form-control" formControlName="description" placeholder="Tell us of your experience" rows="5"></textarea>
-                  <div class="invalid-feedback">Your input is needed</div>
+
+                  <div class="invalid-feedback" 
+                    *ngIf="reviewForm.get('description').hasError('required') && reviewForm.get('description').touched">
+                    Description is required
+                  </div>
+
+                  <div class="invalid-feedback" 
+                    *ngIf="reviewForm.get('description').hasError('minlength') && reviewForm.get('description').touched">
+                      Description must be atleast 4 characters long
+                  </div>
+
+                  <div class="invalid-feedback" 
+                    *ngIf="reviewForm.get('description').hasError('maxlength') && reviewForm.get('description').touched">
+                      Description is not to exceed 200 characters
+                  </div>
+
                 </div>
           </div>
         </div>
       </form>
 
+
       <div class="row justify-content-center">
-        <div>
-          <div class="">
-            <pre class="row justify-content-center para" style="margin:10px 0;"><h5>Your rating of: <span class="bg-light text-danger"> {{rating}}/5 </span></h5></pre>
-          </div>
-          <div class="rating-signature">
-            <rating [max]="5" [(ngModel)]="rating" [customTemplate]="tt"></rating>
-            <ng-template #tt let-i="index" let-v="value">
-              <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
-                {{i < v ? '&#9733;' : '&#9734;'}}
-              </button>
-            </ng-template>
-          </div>
-        </div>
+        <pre class="para" style="margin:10px 0;"><h5>Your rating of: <div class="blink-rating"> {{rating}}/5 </div></h5></pre>
       </div>
 
-      <div class="row justify-content-center my-3">
+      <div class="row justify-content-center rating-signature">
+        <rating [max]="5" [(ngModel)]="rating" [customTemplate]="tt"></rating>
+        <ng-template #tt let-i="index" let-v="value">
+          <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
+            {{i < v ? '&#9733;' : '&#9734;'}}
+          </button>
+        </ng-template>
+      </div>
+
+      <div class="row justify-content-center m-3">
 
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-success btn-s" (click)="uploadSection(template)" [disabled]="!reviewForm.valid || !uploader.getNotUploadedItems().length ">

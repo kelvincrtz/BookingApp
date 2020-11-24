@@ -30,6 +30,8 @@ export class BookingReviewComponent implements OnInit {
 
   modalRef: BsModalRef;
 
+  modalRefRating: BsModalRef;
+
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private router: Router,
               private bookingService: BookingService, private authService: AuthService, private modalService: BsModalService) { }
 
@@ -41,8 +43,8 @@ export class BookingReviewComponent implements OnInit {
     this.initializeUploader();
 
     this.reviewForm = new FormGroup({
-      description: new FormControl('', Validators.required),
-      rating: new FormControl(this.rating, Validators.required),
+      description: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(300)]),
+      rating: new FormControl(this.rating, Validators.required)
     });
 
   }
