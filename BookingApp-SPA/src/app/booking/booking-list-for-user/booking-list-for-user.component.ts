@@ -91,7 +91,7 @@ export class BookingListForUserComponent implements OnInit {
 
   compareDates(dateFromRepo: Date): boolean {
     const fromRepo = new Date(dateFromRepo);
-    if (fromRepo.getDate() <= this.todaysDate.getDate()) {
+    if (fromRepo < this.todaysDate) {
       return true;
     }
   }

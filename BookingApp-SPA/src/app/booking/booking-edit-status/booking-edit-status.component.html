@@ -4,13 +4,14 @@
     <p>Booking request from 
       <button [routerLink]="['/members/', booking.userId]" class="btn btn-info btn-sm">{{user?.fullName}}</button> 
     This was sent on {{booking.dateAdded | date: 'fullDate'}}.
-    Current status is <strong>{{booking.status}}</strong>.</p>
 
     <div class="container">
       <div class="d-flex justify-content-center">
         
-        <div class="card card-custom mb-3" style="width: 20rem;">
-            <div class="card-body">
+
+        <div *ngIf="booking.status === 'Pending'" class="card bg-white mb-3" style="width: 20rem;">
+          <div class="card-header bg-transparent text-dark">Status: <strong>{{booking.status}}</strong></div>
+            <div class="card-body text-dark">
               <h5 class="card-text font-weight-light">Location: {{booking.location}}</h5>
               <h5 class="card-text font-weight-light">When: {{booking.when | date}}</h5>
               <h5 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h5>
@@ -40,6 +41,74 @@
               </form>
             </div>
           </div>
+
+        <div *ngIf="booking.status === 'Approved'" class="card bg-success-custom mb-3" style="width: 20rem;">
+          <div class="card-header bg-transparent">Status: <strong>{{booking.status}}</strong></div>
+          <div class="card-body">
+            <h5 class="card-text font-weight-light">Location: {{booking.location}}</h5>
+            <h5 class="card-text font-weight-light">When: {{booking.when | date}}</h5>
+            <h5 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h5>
+
+            <hr>
+
+            <form class="para" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
+              <div class="justify-content-center">
+                <div class="col-12">
+                  
+                      <div class="form-group">
+                          <label for="inputState">Select:</label>
+                          <select id="inputState" formControlName="status" class="form-control">
+                            <option selected value="Approved">Approve</option>
+                            <option value="Declined">Decline</option>
+                          </select>
+                      </div>
+                    
+                      <div class="form-group text-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" tooltip="Click to save changes" [delay]="500">Save</button>
+                          <button class="btn btn-info" type="button" (click)="cancel()" tooltip="Click to cancel" [delay]="500">Cancel</button>
+                        </div>
+                      </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div *ngIf="booking.status === 'Declined'" class="card bg-danger-custom mb-3" style="width: 20rem;">
+          <div class="card-header bg-transparent">Status: <strong>{{booking.status}}</strong></div>
+          <div class="card-body">
+            <h5 class="card-text font-weight-light">Location: {{booking.location}}</h5>
+            <h5 class="card-text font-weight-light">When: {{booking.when | date}}</h5>
+            <h5 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h5>
+
+            <hr>
+
+            <form class="para" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
+              <div class="justify-content-center">
+                <div class="col-12">
+                  
+                      <div class="form-group">
+                          <label for="inputState">Select:</label>
+                          <select id="inputState" formControlName="status" class="form-control">
+                            <option selected value="Approved">Approve</option>
+                            <option value="Declined">Decline</option>
+                          </select>
+                      </div>
+                    
+                      <div class="form-group text-center">
+                        <div class="btn-group" role="group">
+                          <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" tooltip="Click to save changes" [delay]="500">Save</button>
+                          <button class="btn btn-info" type="button" (click)="cancel()" tooltip="Click to cancel" [delay]="500">Cancel</button>
+                        </div>
+                      </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </h4>

@@ -31,8 +31,7 @@ export class ReviewCardComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
 
     this.bsModalRef.content.reviewBackToReviewsUser.subscribe((value: Review) => {
-      this.reviews.splice(this.reviews.findIndex(b => b.id === review.id), 1);
-      this.reviews.unshift(value);
+      this.reviews.splice(this.reviews.findIndex(b => b.id === review.id), 1, value);
     }, error => {
         this.alertify.error('Failed to update review' + error);
     });

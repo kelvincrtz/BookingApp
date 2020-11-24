@@ -8,3 +8,11 @@
     border-radius: 0.60em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+
+.bg-danger-custom {
+    background-color: rgb(187, 93, 93)
+}
+
+.bg-success-custom {
+    background-color: rgb(44, 167, 85)
+}

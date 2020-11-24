@@ -28,10 +28,8 @@ export class ReviewEditComponent implements OnInit {
     this.reviewFromRepoId = this.review.id;
 
     this.reviewForm = new FormGroup({
-      isApproved: new FormControl(this.review.isApproved, Validators.required),
+      isApproved: new FormControl(this.review.isApproved, Validators.requiredTrue),
     });
-
-    console.log(this.review);
   }
 
   updateReviewRequest(template: TemplateRef<any>) {
@@ -44,6 +42,8 @@ export class ReviewEditComponent implements OnInit {
       this.bookingService.updateReviewStatus(this.authService.decodedToken.nameid, this.reviewFromRepoId, this.reviewToUpdate)
       .subscribe(next => {
         this.alertify.success('Review request has been updated');
+        this.review.isApproved = this.reviewToUpdate.isApproved;
+        this.reviewBackToReviewsUser.emit(this.review);
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
@@ -52,8 +52,6 @@ export class ReviewEditComponent implements OnInit {
     }
     this.modalRefConfirm.hide();
     this.bsModalRef.hide();
-
-    this.reviewBackToReviewsUser.emit(this.review);
   }
 
   cancel() {
