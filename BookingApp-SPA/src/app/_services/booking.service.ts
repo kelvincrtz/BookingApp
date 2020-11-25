@@ -144,16 +144,53 @@ export class BookingService {
     return this.http.post<Booking>(this.baseUrl + 'reviews/users/' + userId, review);
   }
 
-  getReviewsForHome(): Observable<Review> {
-    return this.http.get<Review>(this.baseUrl + 'reviews');
+  getReviewsForHome(): Observable<Review[]> {
+    return this.http.get<Review[]>(this.baseUrl + 'reviews');
   }
 
-  getReviewsForAdmin(userId: number): Observable<Review> {
-    return this.http.get<Review>(this.baseUrl + 'reviews/list/admin/' + userId);
+  /* For Pagination */
+  getReviewsForAdmin(userId: number, page?, itemsPerPage?): Observable<PaginatedResult<Review[]>> {
+    const paginatedResult: PaginatedResult<Review[]> = new PaginatedResult<Review[]>();
+
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+
+    return this.http.get<Review[]>(this.baseUrl + 'reviews/list/admin/' + userId, {observe: 'response', params})
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        })
+      );
   }
 
-  getMoreReviews(): Observable<Review> {
-    return this.http.get<Review>(this.baseUrl + 'reviews/list');
+  /* For Pagination */
+  getMoreReviews(page?, itemsPerPage?): Observable<PaginatedResult<Review[]>> {
+    const paginatedResult: PaginatedResult<Review[]> = new PaginatedResult<Review[]>();
+
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    return this.http.get<Review[]>(this.baseUrl + 'reviews/list', {observe: 'response', params})
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        })
+      );
   }
 
   updateReviewStatus(id: number, reviewId: number, review: Review) {

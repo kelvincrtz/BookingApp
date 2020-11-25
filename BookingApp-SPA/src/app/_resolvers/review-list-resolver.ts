@@ -9,12 +9,14 @@ import { Review } from '../_models/review';
 
 @Injectable()
 export class ReviewListResolver implements Resolve<Review[]> {
+    pageNumber = 1;
+    pageSize = 9;
 
     constructor(private bookingService: BookingService, private router: Router, private route: ActivatedRoute,
                 private alertify: AlertifyService, private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Review[]> {
-        return this.bookingService.getMoreReviews().pipe(
+        return this.bookingService.getMoreReviews(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error(error);
                 this.router.navigate(['/home']);
