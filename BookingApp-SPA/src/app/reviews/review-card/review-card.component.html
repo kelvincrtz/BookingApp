@@ -4,8 +4,8 @@
   <div> <strong class="bg-secondary">NOTE</strong> Only <strong>approved</strong> reviews are shown in the website.</div>
   <hr>
 
-  <div class="d-flex justify-content-center mt-4">
-    <pagination class="pagination" [boundaryLinks]="true" 
+  <div class="d-flex justify-content-center pagination mt-4">
+    <pagination [boundaryLinks]="true" 
                 [totalItems]="pagination.totalItems"
                 [itemsPerPage]="pagination.itemsPerPage"
                 [(ngModel)]="pagination.currentPage"
@@ -21,7 +21,7 @@
         <div class="card mb-3 h-95 font-weight-light text-dark" style="width: 21p;">
           <img src="{{review.url}}" class="card-img-top" alt="...">
           <div class="card-body p-3">
-            <h5 class="card-title">From {{review.user.fullName}}</h5>
+            <h5 class="card-title text-capitalize">From {{review.user.fullName}}</h5>
             <pre class="pre">{{review.description}}</pre>
           </div>
           <ul class="list-group list-group-flush">

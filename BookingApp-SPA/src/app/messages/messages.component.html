@@ -37,10 +37,10 @@
         <td>{{message.content}}</td>
         <td>
           <div *ngIf="messageContainer != 'Outbox'">
-                <strong>{{message.senderFullName}}</strong>
+                <strong class="text-capitalize">{{message.senderFullName}}</strong>
           </div>
           <div *ngIf="messageContainer == 'Outbox'">
-                <strong>{{message.recipientFullName}}</strong>
+                <strong class="text-capitalize">{{message.recipientFullName}}</strong>
           </div>
         </td>
         <td>{{message.messageSent | timeAgo}}</td>
