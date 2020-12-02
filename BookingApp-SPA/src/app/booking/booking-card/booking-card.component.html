@@ -14,7 +14,7 @@
         <p class="card-text">When: {{booking.when | date}}</p>
       </div>
 
-      <button class="btn btn-info btn-block my-2" tooltip="This request has been approved. Click to change its status" [delay]="500" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
+      <button disabled class="btn btn-info btn-block my-2" tooltip="This request has been approved. Click to change its status" [delay]="500" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
     </div>
     <div class="card-footer bg-transparent">
       <small>Request received: {{booking.dateAdded | date}}</small>

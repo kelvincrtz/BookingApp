@@ -99,9 +99,9 @@ export function tokenGetter() {
       AdminCalendarModalComponent,
       BookingReviewComponent,
       ReviewListComponent,
-      ReviewCardComponent,
       ReviewListCardComponent,
-      ReviewEditComponent
+      ReviewEditComponent,
+      ReviewCardComponent
    ],
    imports: [
       BrowserModule,
