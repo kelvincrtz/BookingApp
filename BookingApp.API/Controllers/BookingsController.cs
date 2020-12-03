@@ -230,6 +230,31 @@ namespace BookingApp.API.Controllers
             throw new Exception($"Updating booking {id} failed on save");
         }
 
+        [HttpPut("adminupdate/{id}")]
+        public async Task<IActionResult> UpdateBookingViaAdmin(int userId, int id, BookingForUpdateAdminDto bookingForUpdateAdminDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var bookingFromRepo = await _repo.GetBooking(id);
+
+            if (bookingFromRepo == null)
+                return BadRequest();
+
+            // Add Authorization only for Admin or Moderator //
+
+
+            _mapper.Map(bookingForUpdateAdminDto, bookingFromRepo); 
+            // *IMPORTANT* Be careful here. Make sure no await, no task. 
+            // Just classes or else mapping exception eventhough 
+            // you have already did automapper mapping
+
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating booking using Admin user {id} failed on save");
+        }
+
         [HttpPut("status/{id}")]
         public async Task<IActionResult> UpdateBookingStatus(int userId, int id, BookingForUpdateStatusDto bookingForUpdateStatusDto)
         {

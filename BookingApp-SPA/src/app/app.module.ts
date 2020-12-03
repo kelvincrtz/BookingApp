@@ -56,7 +56,6 @@ import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { AdminCalendarComponent } from './calendar/admin-calendar/admin-calendar.component';
 import { BookingCalendarComponent } from './booking/booking-calendar/booking-calendar.component';
-import { AdminCalendarModalComponent } from './calendar/admin-calendar-modal/admin-calendar-modal.component';
 import { BookingReviewComponent } from './booking/booking-review/booking-review.component';
 import { BookingReviewResolver } from './_resolvers/booking-review-resolver';
 import { ReviewHomeResolver } from './_resolvers/review-home-resolver';
@@ -66,6 +65,7 @@ import { ReviewListComponent } from './reviews/review-list/review-list.component
 import { ReviewListCardComponent } from './reviews/review-list-card/review-list-card.component';
 import { ReviewEditComponent } from './reviews/review-edit/review-edit.component';
 import { ReviewCardComponent } from './reviews/review-card/review-card.component';
+import { BookingEditAdminComponent } from './booking/booking-edit-admin/booking-edit-admin.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -86,6 +86,7 @@ export function tokenGetter() {
       BookingFormComponent,
       BookingListForUserComponent,
       BookingEditComponent,
+      BookingEditAdminComponent,
       TimeAgoPipe,
       BookingCardComponent,
       BookingEditStatusComponent,
@@ -96,7 +97,6 @@ export function tokenGetter() {
       RolesModalComponent,
       AdminCalendarComponent,
       BookingCalendarComponent,
-      AdminCalendarModalComponent,
       BookingReviewComponent,
       ReviewListComponent,
       ReviewListCardComponent,
@@ -163,9 +163,9 @@ export function tokenGetter() {
    ],
    entryComponents: [
       RolesModalComponent,
-      AdminCalendarModalComponent,
       BookingEditComponent,
-      ReviewEditComponent
+      ReviewEditComponent,
+      BookingEditAdminComponent,
    ],
    bootstrap: [
       AppComponent

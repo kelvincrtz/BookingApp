@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AdminCalendarModalComponent } from './admin-calendar-modal.component';
+import { BookingEditAdminComponent } from './booking-edit-admin.component';
 
-describe('AdminCalendarModalComponent', () => {
-  let component: AdminCalendarModalComponent;
-  let fixture: ComponentFixture<AdminCalendarModalComponent>;
+describe('BookingEditAdminComponent', () => {
+  let component: BookingEditAdminComponent;
+  let fixture: ComponentFixture<BookingEditAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminCalendarModalComponent ]
+      declarations: [ BookingEditAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminCalendarModalComponent);
+    fixture = TestBed.createComponent(BookingEditAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

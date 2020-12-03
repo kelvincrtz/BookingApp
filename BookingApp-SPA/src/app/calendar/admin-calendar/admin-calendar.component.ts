@@ -25,7 +25,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { AdminCalendarModalComponent } from '../admin-calendar-modal/admin-calendar-modal.component';
+import { BookingEditAdminComponent } from 'src/app/booking/booking-edit-admin/booking-edit-admin.component';
+import { Booking } from 'src/app/_models/booking';
 
 const colors: any = {
   red: {
@@ -62,8 +63,13 @@ export class AdminCalendarComponent implements OnInit {
   events: CalendarEvent[];
 
   bsModalRef: BsModalRef;
+  bsModalRef2: BsModalRef;
 
-  constructor(private authService: AuthService, private booking: BookingService, private alertify: AlertifyService,
+  closeBtnName: string;
+
+  booking: any = {};
+
+  constructor(private authService: AuthService, private bookingService: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -94,7 +100,7 @@ export class AdminCalendarComponent implements OnInit {
   }
 
   getCalendarEvents(year: number, month: number) {
-    this.booking.getCalendarBookings(this.authService.decodedToken.nameid, year, month)
+    this.bookingService.getCalendarBookings(this.authService.decodedToken.nameid, year, month)
      .subscribe(bookings => {
       this.loopThroughEvents(bookings);
     }, error => {
@@ -146,12 +152,33 @@ export class AdminCalendarComponent implements OnInit {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
   }
 
-  openModal(event: CalendarEvent): void {
-    // console.log(event);
+  openModal(event: CalendarEvent, template: TemplateRef<any>): void {
+
+    this.booking.id = event.id;
+    this.booking.where = event.title;
+    this.booking.when = event.start;
+    this.booking.start = event.start;
+    this.booking.end = event.end;
+    this.booking.status = event.meta;
+
+    this.bsModalRef = this.modalService.show(template);
+  }
+
+  openEditAdminModal(event: CalendarEvent): void {
+
     const initialState = {
-      event
+        event
     };
-    this.bsModalRef = this.modalService.show(AdminCalendarModalComponent, {initialState});
-    this.bsModalRef.content.closeBtnName = 'Close';
+
+
+    this.bsModalRef2 = this.modalService.show(BookingEditAdminComponent, {initialState});
+    this.bsModalRef2.content.closeBtnName = 'Close';
+
+    this.bsModalRef2.content.bookingBackToBookingsUser.subscribe((value: CalendarEvent) => {
+      this.events.splice(this.events.findIndex(b => b.id === event.id), 1);
+      this.events.unshift(value);
+    }, error => {
+        this.alertify.error('Failed to update booking' + error);
+    });
   }
 }
