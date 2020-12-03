@@ -120,6 +120,10 @@ export class BookingService {
     return this.http.put<Booking>(this.baseUrl + 'users/' + id + '/bookings/' + bookingId, book);
   }
 
+  updateBookingAdmin(id: number, bookingId: number, book: Booking) {
+    return this.http.put<Booking>(this.baseUrl + 'users/' + id + '/bookings/adminupdate/' + bookingId, book);
+  }
+
   deleteBooking(userId: number, id: number) {
     return this.http.delete(this.baseUrl + 'users/' + userId + '/bookings/' + id);
   }

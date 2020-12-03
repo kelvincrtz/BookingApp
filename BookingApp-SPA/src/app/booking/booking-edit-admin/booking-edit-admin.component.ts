@@ -15,7 +15,7 @@ import { BookingService } from 'src/app/_services/booking.service';
 })
 export class BookingEditAdminComponent implements OnInit {
   @Output() bookingBackToBookingsUser = new EventEmitter();
-  event: CalendarEvent;
+  event: CalendarEvent<any>;
   bookingToUpdate: Booking;
   bookingForm: FormGroup;
   bookingFromRepoId: any;
@@ -28,7 +28,7 @@ export class BookingEditAdminComponent implements OnInit {
 
   ngOnInit() {
 
-    this.bookingFromRepoId = this.event.id;
+    this.bookingFromRepoId = this.event.id; // Sometimes Undefined
 
     const fromTimeDate = new Date(this.event.start);
     const toTimeDate = new Date(this.event.end);
@@ -57,13 +57,13 @@ export class BookingEditAdminComponent implements OnInit {
       this.fixDate(this.bookingForm.get('fromTime').value);
       this.fixDate(this.bookingForm.get('toTime').value);
       this.bookingToUpdate = Object.assign({}, this.bookingForm.value);
-      this.bookingService.updateBooking(this.authService.decodedToken.nameid, this.bookingFromRepoId, this.bookingToUpdate)
+      this.bookingService.updateBookingAdmin(this.authService.decodedToken.nameid, this.bookingFromRepoId, this.bookingToUpdate)
       .subscribe(next => {
-        this.alertify.success('Booking request has been updated');
+        this.alertify.success('Booking request via Admin has been updated');
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
-        this.router.navigate(['/bookingsforuser']);
+        this.router.navigate(['/calendar']);
       });
     }
     this.modalRefConfirm.hide();
@@ -75,13 +75,14 @@ export class BookingEditAdminComponent implements OnInit {
   }
 
   updateTimeAndLocation(bookingUpdate: Booking) {
-    const today = new Date();
 
     const fromTimeSet = new Date();
     fromTimeSet.setHours(bookingUpdate.fromTime.getUTCHours(), bookingUpdate.fromTime.getUTCMinutes());
+    fromTimeSet.setDate(this.event.start.getDate());
 
     const toTimeSet = new Date();
     toTimeSet.setHours(bookingUpdate.toTime.getUTCHours(), bookingUpdate.toTime.getUTCMinutes());
+    toTimeSet.setDate(this.event.end.getDate());
 
     this.event.start = fromTimeSet;
     this.event.end = toTimeSet;

@@ -36,8 +36,8 @@ namespace BookingApp.API.Data
 
         public async Task<IEnumerable<Booking>> GetCalendarBookings(int year, int month)
         {
-            var prevMonth = month-1;
-            var nxtMonth = month+1;
+            var prevMonth = month-1; // from month-1 to 3 Months Scope
+            var nxtMonth = month+1; // from month+1 to 3 Months Scope
 
             var bookings = _context.Bookings
                 .Where(b => b.When.Year == year)

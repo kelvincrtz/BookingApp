@@ -69,6 +69,8 @@ export class AdminCalendarComponent implements OnInit {
 
   booking: any = {};
 
+  eventToAdjust: CalendarEvent;
+
   constructor(private authService: AuthService, private bookingService: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService) { }
 
@@ -154,6 +156,8 @@ export class AdminCalendarComponent implements OnInit {
 
   openModal(event: CalendarEvent, template: TemplateRef<any>): void {
 
+    this.eventToAdjust = event;
+
     this.booking.id = event.id;
     this.booking.where = event.title;
     this.booking.when = event.start;
@@ -166,19 +170,40 @@ export class AdminCalendarComponent implements OnInit {
 
   openEditAdminModal(event: CalendarEvent): void {
 
+    // Ensure Event ID is populated always or else error - Passed! Stress Test
+
     const initialState = {
         event
     };
-
 
     this.bsModalRef2 = this.modalService.show(BookingEditAdminComponent, {initialState});
     this.bsModalRef2.content.closeBtnName = 'Close';
 
     this.bsModalRef2.content.bookingBackToBookingsUser.subscribe((value: CalendarEvent) => {
+      console.log(value);
       this.events.splice(this.events.findIndex(b => b.id === event.id), 1);
-      this.events.unshift(value);
+      this.addEvent(value, this.eventToAdjust);
     }, error => {
         this.alertify.error('Failed to update booking' + error);
     });
+  }
+
+  addEvent(eventToAdd: CalendarEvent<any>, eventToAdjust: CalendarEvent): void {
+    // console.log(eventToAdd);
+    this.events = [
+      ...this.events,
+      {
+        id: eventToAdjust.id,
+        title: eventToAdjust.title,
+        start: eventToAdd.start,
+        end: eventToAdd.end,
+        color: eventToAdjust.color,
+        meta: eventToAdjust.meta
+      },
+    ];
+  }
+
+  deleteEvent(eventToDelete: CalendarEvent) {
+    this.events = this.events.filter((event) => event !== eventToDelete);
   }
 }

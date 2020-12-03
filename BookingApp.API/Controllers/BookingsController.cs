@@ -241,7 +241,10 @@ namespace BookingApp.API.Controllers
             if (bookingFromRepo == null)
                 return BadRequest();
 
-            // Add Authorization only for Admin or Moderator //
+            // Add Authorization only for Admin or Moderator 
+            
+            
+            //
 
 
             _mapper.Map(bookingForUpdateAdminDto, bookingFromRepo); 
