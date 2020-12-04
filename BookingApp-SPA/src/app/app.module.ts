@@ -66,6 +66,7 @@ import { ReviewListCardComponent } from './reviews/review-list-card/review-list-
 import { ReviewEditComponent } from './reviews/review-edit/review-edit.component';
 import { ReviewCardComponent } from './reviews/review-card/review-card.component';
 import { BookingEditAdminComponent } from './booking/booking-edit-admin/booking-edit-admin.component';
+import { BookingEditStatusModalComponent } from './booking/booking-edit-status-modal/booking-edit-status-modal.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token'); // Fixes problem with Tokens when logging in
@@ -90,6 +91,7 @@ export function tokenGetter() {
       TimeAgoPipe,
       BookingCardComponent,
       BookingEditStatusComponent,
+      BookingEditStatusModalComponent,
       MemberMessagesComponent,
       AdminPanelComponent,
       HasRoleDirective,
@@ -166,6 +168,7 @@ export function tokenGetter() {
       BookingEditComponent,
       ReviewEditComponent,
       BookingEditAdminComponent,
+      BookingEditStatusModalComponent,
    ],
    bootstrap: [
       AppComponent

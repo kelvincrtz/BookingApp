@@ -27,6 +27,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BookingEditAdminComponent } from 'src/app/booking/booking-edit-admin/booking-edit-admin.component';
 import { Booking } from 'src/app/_models/booking';
+import { BookingEditStatusModalComponent } from 'src/app/booking/booking-edit-status-modal/booking-edit-status-modal.component';
 
 const colors: any = {
   red: {
@@ -64,6 +65,7 @@ export class AdminCalendarComponent implements OnInit {
 
   bsModalRef: BsModalRef;
   bsModalRef2: BsModalRef;
+  bsModalRef3: BsModalRef;
 
   closeBtnName: string;
 
@@ -159,8 +161,6 @@ export class AdminCalendarComponent implements OnInit {
 
     this.eventToAdjust = event;
 
-    console.log(this.eventToAdjust);
-
     this.booking.id = event.id;
     this.booking.where = event.title;
     this.booking.when = event.start;
@@ -172,6 +172,7 @@ export class AdminCalendarComponent implements OnInit {
   }
 
   openEditAdminModal(event: CalendarEvent): void {
+    this.bsModalRef.hide();
 
     // Ensure Event ID is populated always or else error - Passed! Stress Test
 
@@ -183,11 +184,33 @@ export class AdminCalendarComponent implements OnInit {
     this.bsModalRef2.content.closeBtnName = 'Close';
 
     this.bsModalRef2.content.bookingBackToBookingsUser.subscribe((value: CalendarEvent) => {
-      console.log(value);
+      // console.log(value);
       this.events.splice(this.events.findIndex(b => b.id === event.id), 1);
       this.addEvent(value, this.eventToAdjust);
     }, error => {
         this.alertify.error('Failed to update booking' + error);
+    });
+  }
+
+  openEditStatusModal(event: CalendarEvent, status: CalendarEvent, title: any): void {
+    this.bsModalRef.hide();
+
+    event.meta = status;
+    event.title = title;
+
+    const initialState = {
+        event
+    };
+
+    this.bsModalRef3 = this.modalService.show(BookingEditStatusModalComponent, {initialState});
+    this.bsModalRef3.content.closeBtnName = 'Close';
+
+    this.bsModalRef3.content.bookingBackToBookingsUser.subscribe((value: CalendarEvent) => {
+      console.log(value);
+      this.events.splice(this.events.findIndex(b => b.id === event.id), 1);
+      this.addEvent(value, this.eventToAdjust); // Double Check
+    }, error => {
+        this.alertify.error('Failed to update booking status' + error);
     });
   }
 

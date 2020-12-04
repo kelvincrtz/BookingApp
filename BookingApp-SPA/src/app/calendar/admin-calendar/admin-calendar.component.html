@@ -105,9 +105,8 @@
       </div>
 
       <div class="modal-footer btn-group" role="group">
-        <button type="button" class="btn btn-warning" (click)="openEditAdminModal(booking)"
-                      [disabled]="booking.status== 'Approved'">Adjust Time</button>
-        <button type="button" class="btn btn-primary" [routerLink]="['/booking/edit/status', booking.id]" (click)="bsModalRef.hide()">Edit Status</button>
+        <button type="button" class="btn btn-warning" (click)="openEditAdminModal(booking)" [disabled]="booking.status== 'Approved'">Adjust Time</button>
+        <button type="button" class="btn btn-primary" (click)="openEditStatusModal(booking, booking.status, booking.where)">Edit Status</button>
         <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">Cancel</button>
       </div>
 
