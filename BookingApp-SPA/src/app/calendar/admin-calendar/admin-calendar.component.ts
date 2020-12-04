@@ -99,6 +99,7 @@ export class AdminCalendarComponent implements OnInit {
     this.refresh.next();
 
     this.colorEvents(this.events);
+
   }
 
   getCalendarEvents(year: number, month: number) {
@@ -157,6 +158,8 @@ export class AdminCalendarComponent implements OnInit {
   openModal(event: CalendarEvent, template: TemplateRef<any>): void {
 
     this.eventToAdjust = event;
+
+    console.log(this.eventToAdjust);
 
     this.booking.id = event.id;
     this.booking.where = event.title;

@@ -28,6 +28,9 @@ export class BookingEditAdminComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log('INFO Start GOING TO MODAL: ' + this.event.start);
+    console.log('INFO End   GOING TO MODAL: ' + this.event.end);
+
     this.bookingFromRepoId = this.event.id; // Sometimes Undefined
 
     const fromTimeDate = new Date(this.event.start);
@@ -77,15 +80,23 @@ export class BookingEditAdminComponent implements OnInit {
   updateTimeAndLocation(bookingUpdate: Booking) {
 
     const fromTimeSet = new Date();
+    fromTimeSet.setMonth(bookingUpdate.fromTime.getUTCMonth());
+    fromTimeSet.setDate(bookingUpdate.fromTime.getUTCDate());
+    fromTimeSet.setFullYear(bookingUpdate.fromTime.getUTCFullYear());
     fromTimeSet.setHours(bookingUpdate.fromTime.getUTCHours(), bookingUpdate.fromTime.getUTCMinutes());
-    fromTimeSet.setDate(this.event.start.getDate());
+
 
     const toTimeSet = new Date();
+    toTimeSet.setMonth(bookingUpdate.toTime.getUTCMonth());
+    toTimeSet.setDate(bookingUpdate.toTime.getUTCDate());
+    toTimeSet.setFullYear(bookingUpdate.toTime.getUTCFullYear());
     toTimeSet.setHours(bookingUpdate.toTime.getUTCHours(), bookingUpdate.toTime.getUTCMinutes());
-    toTimeSet.setDate(this.event.end.getDate());
 
     this.event.start = fromTimeSet;
     this.event.end = toTimeSet;
+
+    console.log('From modal edit admin: ' + this.event.start);
+    console.log('To   modal edit admin: ' + this.event.end);
   }
 
   decline(): void {
