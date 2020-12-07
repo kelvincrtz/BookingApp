@@ -36,6 +36,9 @@
               </div>
             </form>
           </div>
+          <div class="card-footer">
+            Request made by: <button class="btn btn-outline-dark text-capitalize">{{user?.fullName}}</button>
+          </div>
         </div>
 
       <div *ngIf="event.meta === 'Approved'" class="card bg-success-custom text-white mb-3" style="width: 25rem;">
@@ -68,6 +71,9 @@
               </div>
             </div>
           </form>
+        </div>
+        <div class="card-footer">
+          Request made by: <button class="btn btn-outline-light text-capitalize">{{user?.fullName}}</button>
         </div>
       </div>
 
@@ -102,6 +108,9 @@
             </div>
           </form>
         </div>
+        <div class="card-footer">
+          Request made by: <button class="btn btn-outline-light text-capitalize">{{user?.fullName}}</button>
+        </div>
       </div>
 
 
@@ -128,5 +137,16 @@
     <div class="font-weight-light">{{this.messageForAdmin}} </div>
     <br>
     <button *ngIf="modalRef" type="button" class="btn btn-danger" (click)="modalRef.hide()">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #template3>
+  <div class="modal-body text-center">
+    <div *ngIf="bookingForm.dirty" class="alert alert-danger mt-2">
+      <div>You have made changes. Any unsaved changes will be lost.</div>
+    </div>
+    <p>Go to user?</p>
+    <button type="button" class="btn btn-primary" (click)="confirmUser()" >Yes</button>
+    <button type="button" class="btn btn-default" (click)="declineUser()" >No</button>
   </div>
 </ng-template>

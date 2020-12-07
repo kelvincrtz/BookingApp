@@ -28,6 +28,9 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BookingEditAdminComponent } from 'src/app/booking/booking-edit-admin/booking-edit-admin.component';
 import { Booking } from 'src/app/_models/booking';
 import { BookingEditStatusModalComponent } from 'src/app/booking/booking-edit-status-modal/booking-edit-status-modal.component';
+import { Router } from '@angular/router';
+import { User } from 'src/app/_models/user';
+import { UserService } from 'src/app/_services/user.service';
 
 const colors: any = {
   red: {
@@ -41,6 +44,10 @@ const colors: any = {
   dark: {
     primary: '#c3c9c5',
     secondary: '#c3c9c5',
+  },
+  pink: {
+    primary: '#f2b655',
+    secondary: '#f2b655',
   },
 };
 
@@ -73,8 +80,10 @@ export class AdminCalendarComponent implements OnInit {
 
   eventToAdjust: CalendarEvent;
 
+  bookingFromRepo: Booking;
+
   constructor(private authService: AuthService, private bookingService: BookingService, private alertify: AlertifyService,
-              private modalService: BsModalService) { }
+              private modalService: BsModalService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
@@ -113,6 +122,16 @@ export class AdminCalendarComponent implements OnInit {
     });
   }
 
+  getBooking(bookingId: number) {
+    this.bookingService.getBooking(this.authService.decodedToken.nameid, bookingId).subscribe(booking => {
+     this.bookingFromRepo = booking;
+   }, error => {
+     this.alertify.error('Problem retrieving the booking');
+   }, () => {
+    this.router.navigate(['/members', this.bookingFromRepo.userId]);
+   });
+  }
+
   colorEvents(events: CalendarEvent[]) {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < events.length; i++) {
@@ -124,6 +143,9 @@ export class AdminCalendarComponent implements OnInit {
       }
       if (events[i].meta === 'Pending') {
         events[i].color = colors.dark;
+      }
+      if (events[i].meta === 'Cancelled') {
+        events[i].color = colors.pink;
       }
     }
 
@@ -231,5 +253,10 @@ export class AdminCalendarComponent implements OnInit {
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
+  }
+
+  messageUser(bookingId: any) {
+    this.getBooking(bookingId);
+    this.bsModalRef.hide();
   }
 }

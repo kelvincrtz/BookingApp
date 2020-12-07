@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingEditComponent } from '../booking-edit/booking-edit.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-booking-list-for-user',
@@ -19,6 +20,8 @@ export class BookingListForUserComponent implements OnInit {
   bookings: Booking[];
   modalRef: BsModalRef;
   modalRef2: BsModalRef;
+  modalRef3: BsModalRef;
+  modalRef4: BsModalRef;
   message: string;
 
   pageNumber = 1;
@@ -35,6 +38,9 @@ export class BookingListForUserComponent implements OnInit {
   bsModalRef: BsModalRef;
 
   todaysDate: Date;
+
+  bookingStatus: Booking;
+  bookingForm: FormGroup;
 
   constructor(private booking: BookingService, private alertify: AlertifyService, private router: Router,
               private modalService: BsModalService, private authService: AuthService, private route: ActivatedRoute) { }
@@ -174,6 +180,46 @@ export class BookingListForUserComponent implements OnInit {
 
   closePayment() {
     this.modalRef2.hide();
+  }
+
+  cancelInfo(template3: TemplateRef<any>) {
+    this.modalRef3 = this.modalService.show(template3, {class: 'modal-md'});
+  }
+
+  declineCancel() {
+    this.modalRef3.hide();
+  }
+
+  confirmCancel(bookingId: any, booking: Booking) {
+
+    this.bookingForm = new FormGroup({
+      status: new FormControl('Cancelled', Validators.required),
+    });
+
+    this.bookingStatus = Object.assign({}, this.bookingForm.value);
+
+    this.booking.updateBookingStatus(this.authService.decodedToken.nameid, bookingId, this.bookingStatus).subscribe(next => {
+      this.alertify.success('Booking has been cancelled');
+    }, error => {
+      this.alertify.error('Error cancelling the booking request');
+    }, () => {
+      this.modalRef3.hide();
+      this.bookingStatus.id = booking.id;
+      this.bookingStatus.location = booking.location;
+      this.bookingStatus.when = booking.when;
+      this.bookingStatus.fromTime = booking.fromTime;
+      this.bookingStatus.toTime = booking.toTime;
+      this.bookingStatus.dateAdded = booking.dateAdded;
+      this.bookings.splice(this.bookings.findIndex(b => b.id === bookingId), 1, this.bookingStatus);
+    });
+  }
+
+  openCancellationTC(template4: TemplateRef<any>) {
+    this.modalRef4 = this.modalService.show(template4, {class: 'modal-md'});
+  }
+
+  closeCancellationTC() {
+    this.modalRef4.hide();
   }
 
 }

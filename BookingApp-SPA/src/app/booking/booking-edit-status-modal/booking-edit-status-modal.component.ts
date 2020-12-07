@@ -33,6 +33,7 @@ export class BookingEditStatusModalComponent implements OnInit {
   bookingStatus: Booking;
 
   @ViewChild('template2', {static: true}) template2: TemplateRef<any>;
+  @ViewChild('template3', {static: true}) template3: TemplateRef<any>;
   modalRef: BsModalRef;
 
   constructor(private bookingService: BookingService, private authService: AuthService, private alertify: AlertifyService,
@@ -40,8 +41,6 @@ export class BookingEditStatusModalComponent implements OnInit {
               private modalService: BsModalService, private userService: UserService) { }
 
   ngOnInit() {
-
-    console.log(this.event.title);
 
     // From old class
     this.bookingForm = new FormGroup({
@@ -73,7 +72,7 @@ export class BookingEditStatusModalComponent implements OnInit {
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
-        this.router.navigate(['bookings']);
+        // this.router.navigate(['bookings']);
       });
     }
   }
@@ -83,7 +82,23 @@ export class BookingEditStatusModalComponent implements OnInit {
   }
 
   cancel() {
+    this.bsModalRef.hide();
+  }
 
+  confirmUser() {
+
+  }
+
+  declineUser() {
+
+  }
+
+  goToUser(id: any) {
+    if (this.bookingForm.touched) {
+
+    } else {
+      this.router.navigate(['/members', id]);
+    }
   }
 
   decline(): void {
@@ -93,18 +108,17 @@ export class BookingEditStatusModalComponent implements OnInit {
   }
 
   loadUser() {
-    /*
     this.bookingService.getBooking(this.authService.decodedToken.nameid, +this.event.id).subscribe((booking: Booking) => {
       this.bookingToGetUser = booking;
     }, error => {
       console.log(error);
+    }, () => {
+      this.userService.getUser(this.bookingToGetUser.userId).subscribe((user: User) => {
+        this.user = user;
+      }, error => {
+        console.log(error);
+      });
     });
-
-    /* this.userService.getUser(this.booking.userId).subscribe((user: User) => {
-      this.user = user;
-    }, error => {
-      console.log(error);
-    }); */
   }
 
 }

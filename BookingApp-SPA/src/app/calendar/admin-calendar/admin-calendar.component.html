@@ -93,6 +93,7 @@
       <h4 *ngIf="booking.status == 'Approved'" class="modal-title pull-left text-success">{{booking.status}}</h4>
       <h4 *ngIf="booking.status == 'Declined'" class="modal-title pull-left text-danger">{{booking.status}}</h4>
       <h4 *ngIf="booking.status == 'Pending'" class="modal-title pull-left text-secondary">{{booking.status}}</h4>
+      <h4 *ngIf="booking.status == 'Cancelled'" class="modal-title pull-left text-warning">{{booking.status}}</h4>
 
       <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true">&times;</span>
@@ -104,9 +105,14 @@
         <h6 class="font-weight-light">From: {{booking.start  | date: 'shortTime' }} to {{booking.end | date: 'shortTime' }}</h6>
       </div>
 
-      <div class="modal-footer btn-group" role="group">
+      <div class="modal-footer btn-group" role="group" *ngIf="booking.status != 'Cancelled'">
         <button type="button" class="btn btn-warning" (click)="openEditAdminModal(booking)" [disabled]="booking.status== 'Approved'">Adjust Time</button>
         <button type="button" class="btn btn-primary" (click)="openEditStatusModal(booking, booking.status, booking.where)">Edit Status</button>
+        <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">Cancel</button>
+      </div>
+
+      <div class="modal-footer btn-group" role="group" *ngIf="booking.status == 'Cancelled'">
+        <button type="button" class="btn btn-primary" (click)="messageUser(booking.id)">Message User</button>
         <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">Cancel</button>
       </div>
 
