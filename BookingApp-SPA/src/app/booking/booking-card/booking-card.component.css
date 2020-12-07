@@ -6,6 +6,10 @@
     background-color: rgb(24, 168, 72)
 }
 
+.bg-cancelled-custom {
+    background-color: rgb(228, 184, 89)
+}
+
 .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2);

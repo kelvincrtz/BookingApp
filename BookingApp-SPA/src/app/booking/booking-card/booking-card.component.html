@@ -63,3 +63,27 @@
     <div class="card-footer bg-transparent text-dark"><small>Request received: {{booking.dateAdded | date}}</small></div>
   </div>
 </div>
+
+<div class="card bg-warning font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Cancelled'">
+  <div class="">
+
+    <div class="card-header bg-transparent text-dark">Status: {{booking.status}}</div>
+    <!-- Add Expired Condition here-->
+
+    <div class="card-body">
+      
+      <!-- If Booking is Accepted-->
+      <div class="text-dark">
+        <h5 class="card-title text-capitalize">{{booking.user.fullName}}</h5>
+        <p class="card-text">Location: {{booking.location}}</p>
+        <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
+        <p class="card-text">When: {{booking.when | date}}</p>
+      </div>
+
+      <button disabled class="btn btn-info btn-block my-2" tooltip="This request has been approved. Click to change its status" [delay]="500" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
+    </div>
+    <div class="card-footer bg-transparent text-dark">
+      <small>Request received: {{booking.dateAdded | date}}</small>
+    </div>
+  </div>
+</div>
