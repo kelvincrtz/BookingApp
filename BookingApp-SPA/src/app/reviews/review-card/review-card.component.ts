@@ -63,6 +63,8 @@ export class ReviewCardComponent implements OnInit {
 
   openViewBookingModal(bookingId: number): void {
 
+    console.log(bookingId);
+
     this.bookingService.getBooking(this.authService.decodedToken.nameid, bookingId).subscribe((booking: Booking) => {
         this.booking = booking;
     }, error => {

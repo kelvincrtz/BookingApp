@@ -90,13 +90,16 @@ export class BookingEditStatusModalComponent implements OnInit {
   confirmUser(userId: number) {
     this.router.navigate(['/members', userId]);
     this.modalRef.hide();
+    this.bsModalRef.hide();
+    this.modalRef = null;
+    this.bsModalRef = null;
   }
 
   declineUser() {
 
   }
 
-  goToUser(userId: number) {
+  goToUser(userId) {
     if (this.bookingForm.touched) {
       this.modalRef = this.modalService.show(this.template3, {class: 'modal-sm'});
     } else {
