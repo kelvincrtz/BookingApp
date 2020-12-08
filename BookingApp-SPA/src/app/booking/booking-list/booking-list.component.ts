@@ -15,7 +15,7 @@ import { NgForm } from '@angular/forms';
 export class BookingListComponent implements OnInit {
   bookings: Booking[];
   statusList = [{value: 'Approved', display: 'Approved'}, {value: 'Declined', display: 'Declined'}, {value: 'Pending',
-  display: 'Pending'}];
+  display: 'Pending'}, {value: 'Cancelled', display: 'Cancelled'}];
   pagination: Pagination;
   bookingParams: any = {};
   @ViewChild('form', {static: true}) form: NgForm;
