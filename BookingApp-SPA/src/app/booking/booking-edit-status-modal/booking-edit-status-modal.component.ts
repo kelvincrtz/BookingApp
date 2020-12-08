@@ -58,7 +58,7 @@ export class BookingEditStatusModalComponent implements OnInit {
 
 
   updateBookingStatusRequest() {
-    if (this.bookingForm.get('status').value === this.booking.status) {
+    if (this.bookingForm.get('status').value === this.event.meta) {
         this.messageForAdmin = 'This request has already been ' + this.bookingForm.get('status').value.toLowerCase() + ' by you!';
         this.modalRef = this.modalService.show(this.template2, {class: 'modal-sm'});
         return this.modalRef;
@@ -66,15 +66,17 @@ export class BookingEditStatusModalComponent implements OnInit {
 
     if (this.bookingForm.valid) {
       this.bookingStatus = Object.assign({}, this.bookingForm.value);
-      this.bookingService.updateBookingStatus(this.authService.decodedToken.nameid, this.booking.id, this.bookingStatus).subscribe(next => {
+      this.bookingService.updateBookingStatus(this.authService.decodedToken.nameid, +this.event.id, this.bookingStatus).subscribe(next => {
         this.alertify.success('Booking status has been updated');
-        // this.bookingForm.reset(this.booking);
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
-        // this.router.navigate(['bookings']);
+        this.event.meta = this.bookingForm.get('status').value;
+        this.bookingBackToBookingsUser.emit(this.event);
       });
     }
+
+    this.bsModalRef.hide();
   }
 
   confirm() {
@@ -85,19 +87,21 @@ export class BookingEditStatusModalComponent implements OnInit {
     this.bsModalRef.hide();
   }
 
-  confirmUser() {
-
+  confirmUser(userId: number) {
+    this.router.navigate(['/members', userId]);
+    this.modalRef.hide();
   }
 
   declineUser() {
 
   }
 
-  goToUser(id: any) {
+  goToUser(userId: number) {
     if (this.bookingForm.touched) {
-
+      this.modalRef = this.modalService.show(this.template3, {class: 'modal-sm'});
     } else {
-      this.router.navigate(['/members', id]);
+      this.router.navigate(['/members', userId]);
+      this.bsModalRef.hide();
     }
   }
 

@@ -30,8 +30,8 @@
               <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/member/edit']">Edit Profile</button>
 
 
-              <div *ngIf="user.city == null || user.contactNumber == null" class="alert alert-danger mt-4">
-                <div>Thank you for signing up! You can add more information about your contact number and location by going
+              <div *ngIf="user.city == null || user.contactNumber == null">
+                <div class="alert alert-danger mt-4" *ngIf="user.id == authDecodeToken || authDecodeName === user.userName">Thank you for signing up! You can add more information about your contact number and location by going
                   <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-sm" [routerLink]="['/member/edit']">here</button>
                 </div>
               </div>

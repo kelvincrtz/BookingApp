@@ -228,9 +228,33 @@ export class AdminCalendarComponent implements OnInit {
     this.bsModalRef3.content.closeBtnName = 'Close';
 
     this.bsModalRef3.content.bookingBackToBookingsUser.subscribe((value: CalendarEvent) => {
-      console.log(value);
       this.events.splice(this.events.findIndex(b => b.id === event.id), 1);
-      this.addEvent(value, this.eventToAdjust); // Double Check
+      if (value.meta === 'Approved') {
+        this.events = [
+          ...this.events,
+          {
+            id: event.id,
+            title: event.title,
+            start: event.start,
+            end: event.end,
+            color: colors.green,
+            meta: value.meta
+          },
+        ];
+      }
+      if (value.meta === 'Declined') {
+        this.events = [
+          ...this.events,
+          {
+            id: event.id,
+            title: event.title,
+            start: event.start,
+            end: event.end,
+            color: colors.red,
+            meta: value.meta
+          },
+        ];
+      }
     }, error => {
         this.alertify.error('Failed to update booking status' + error);
     });
