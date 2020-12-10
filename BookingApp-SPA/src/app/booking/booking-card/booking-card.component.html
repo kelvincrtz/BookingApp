@@ -1,17 +1,18 @@
-<div class="card bg-success-custom font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Approved'">
-  <div class="">
+<div class="card font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Approved'">
+  <div class="text-dark">
 
-    <div class="card-header bg-transparent text-white">Status: {{booking.status}}</div>
+    <div class="card-header bg-success-custom text-white">Status: <span class="font-weight-bold">{{booking.status}}</span></div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
       
       <!-- If Booking is Accepted-->
-      <div class="text-white">
+      <div class="">
         <h5 class="card-title text-capitalize">{{booking.user.fullName}}</h5>
-        <p class="card-text">Location: {{booking.location}}</p>
+        <p class="card-text">{{booking.location}}</p>
         <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
         <p class="card-text">When: {{booking.when | date}}</p>
+        <p *ngIf="booking.isReviewed" class="">Review: <span class="font-italic font-weight-bold text-danger bg-white">Sent</span></p>
       </div>
 
       <button disabled class="btn btn-info btn-block my-2" tooltip="This request has been approved. Click to change its status" [delay]="500" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
@@ -22,18 +23,18 @@
   </div>
 </div>
 
-<div class="card bg-danger-custom font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Declined'">
-  <div class="">
+<div class="card font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Declined'">
+  <div class="text-dark">
 
-    <div class="card-header bg-transparent">Status: {{booking.status}}</div>
+    <div class="card-header bg-danger-custom text-white">Status: <span class="font-weight-bold">{{booking.status}}</span></div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
 
       <!-- If Booking at a not accepted -->
-      <div class="text-white">
+      <div class="text-dark">
         <h5 class="card-title text-capitalize">{{booking.user.fullName}}</h5>
-        <p class="card-text">Location: {{booking.location}}</p>
+        <p class="card-text">{{booking.location}}</p>
         <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
         <p class="card-text">When: {{booking.when | date}}</p>
       </div>
@@ -46,14 +47,14 @@
 
 <div class="card bg-white font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Pending'">
   <div class="">
-    <div class="card-header bg-transparent text-dark">Status: <strong>{{booking.status}}</strong></div>
+    <div class="card-header bg-transparent text-dark">Status: <span class="font-weight-bold">{{booking.status}}</span></div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
       <!-- If Booking is at Pending status-->
       <div class="text-dark">
         <h5 class="card-title text-capitalize">{{booking.user.fullName}}</h5>
-        <p class="card-text">Location: {{booking.location}}</p>
+        <p class="card-text">{{booking.location}}</p>
         <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
         <p class="card-text">Date: {{booking.when | date}}</p>
       </div>
@@ -64,10 +65,10 @@
   </div>
 </div>
 
-<div class="card bg-warning font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Cancelled'">
+<div class="card font-weight-light mt-2 h-95" *ngIf="booking.status=== 'Cancelled'">
   <div class="">
 
-    <div class="card-header bg-transparent text-dark">Status: {{booking.status}}</div>
+    <div class="card-header bg-cancelled-custom">Status: <span class="font-weight-bold">{{booking.status}}</span></div>
     <!-- Add Expired Condition here-->
 
     <div class="card-body">
@@ -75,12 +76,12 @@
       <!-- If Booking is Cancelled-->
       <div class="text-dark">
         <h5 class="card-title text-capitalize">{{booking.user.fullName}}</h5>
-        <p class="card-text">Location: {{booking.location}}</p>
+        <p class="card-text">{{booking.location}}</p>
         <p class="card-text">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</p>
         <p class="card-text">When: {{booking.when | date}}</p>
       </div>
 
-      <button class="btn btn-dark btn-block my-2" tooltip="This request has been Cancelled by the user" [delay]="500" [routerLink]="['/member', booking.userId]">Message User</button>
+      <button class="btn bg-cancelled-custom btn-block my-2 text-white" tooltip="This request has been Cancelled by the user" [delay]="500" [routerLink]="['/member', booking.userId]">Message User</button>
     </div>
     <div class="card-footer bg-transparent text-dark">
       <small>Request received: {{booking.dateAdded | date}}</small>

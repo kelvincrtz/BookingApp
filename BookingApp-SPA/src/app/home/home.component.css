@@ -235,20 +235,20 @@ pre {
 	left: 0;
 	height: 100%;
 	width: 0;
-	background-color: rgb(210, 224, 10);
+	background-color: rgb(243, 228, 13);
 	animation: text_reveal_box 1s ease;
 	animation-delay: .5s;
 }
 #hero h1:nth-child(1) span {
 	animation-delay: .5s;
-	background-color: rgb(219, 87, 87);
+	background-color: rgb(243, 228, 13);
 }
 #hero h1:nth-child(2) span {
 	animation-delay: 1.5s;
 }
 #hero h1:nth-child(3) span {
 	animation-delay: 2.5s;
-	background-color: rgb(78, 236, 105);
+	background-color: rgb(243, 228, 13);
 }
 #hero .custom:nth-child(3) span {
 	color:yellow;

@@ -29,6 +29,7 @@ export class BookingReviewComponent implements OnInit {
   review: Review;
 
   modalRef: BsModalRef;
+  modalRef2: BsModalRef;
 
   modalRefRating: BsModalRef;
 
@@ -64,7 +65,21 @@ export class BookingReviewComponent implements OnInit {
 
   }
 
+  confimRatingToUser(template: TemplateRef<any>, template2: TemplateRef<any>) {
+    if (this.rating <= 3) {
+      // Open modal to confim rating to the user
+      this.modalRef2 = this.modalService.show(template2, {class: 'modal-md'});
+    } else {
+      this.uploadSection(template);
+    }
+  }
+
   uploadSection(template: TemplateRef<any>) {
+
+    if (this.rating <= 3 ) {
+      this.modalRef2.hide();
+    }
+
     if (this.reviewForm.valid) {
       this.review = Object.assign({}, this.reviewForm.value);
 
@@ -93,10 +108,6 @@ export class BookingReviewComponent implements OnInit {
         // Populate Review
         this.review.bookingId = this.booking.id;
         this.review.rating = this.rating;
-
-        console.log('Info Description: ' + this.review.description);
-        console.log('Info Rating: ' + this.review.rating);
-        console.log('Info Booking: ' + this.review.bookingId);
 
         // Call booking service for review upload no photo
         this.bookingService.createReviewNoPhoto(this.authService.decodedToken.nameid, this.review).subscribe(next => {

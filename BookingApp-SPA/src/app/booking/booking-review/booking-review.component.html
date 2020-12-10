@@ -91,7 +91,7 @@
       <div class="row justify-content-center m-3">
 
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-success btn-s" (click)="uploadSection(template)" [disabled]="!reviewForm.valid">
+          <button type="button" class="btn btn-success btn-s" (click)="confimRatingToUser(template, template2)" [disabled]="!reviewForm.valid">
             <span class="glyphicon glyphicon-upload"></span> Upload
           </button>
 
@@ -128,4 +128,24 @@
         </div>
 
       </div>
+  </ng-template>
+
+
+  <ng-template #template2>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Rating</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div *ngIf="rating > 1"> You have a rating of {{rating}} stars. Do you want to proceed?</div>
+      <div *ngIf="rating == 1"> You have a rating of {{rating}} star. Do you want to proceed?</div>
+      <div class="d-flex justify-content-center">
+        <div class="mt-2 btn-group">
+          <button type="button" class="btn btn-primary" (click)="uploadSection(template)">Yes</button>
+          <button type="button" class="btn btn-danger" (click)="modalRef2.hide()">No</button>
+        </div>
+      </div>
+    </div>
   </ng-template>
