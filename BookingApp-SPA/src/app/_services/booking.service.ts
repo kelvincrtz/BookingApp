@@ -148,6 +148,10 @@ export class BookingService {
     return this.http.post<Booking>(this.baseUrl + 'reviews/users/' + userId, review);
   }
 
+  createReviewNoPhoto(userId: number, review: Review) {
+    return this.http.post<Booking>(this.baseUrl + 'reviews/users/' + userId + '/nophoto', review);
+  }
+
   getReviewsForHome(): Observable<Review[]> {
     return this.http.get<Review[]>(this.baseUrl + 'reviews');
   }

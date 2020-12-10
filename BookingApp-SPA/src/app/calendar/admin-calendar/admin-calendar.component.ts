@@ -45,7 +45,7 @@ const colors: any = {
     primary: '#c3c9c5',
     secondary: '#c3c9c5',
   },
-  pink: {
+  orange: {
     primary: '#f2b655',
     secondary: '#f2b655',
   },
@@ -82,11 +82,14 @@ export class AdminCalendarComponent implements OnInit {
 
   bookingFromRepo: Booking;
 
+  todaysDate: Date;
+
   constructor(private authService: AuthService, private bookingService: BookingService, private alertify: AlertifyService,
               private modalService: BsModalService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
+    this.todaysDate = new Date();
   }
 
   loopThroughEvents(res: any) {
@@ -145,7 +148,7 @@ export class AdminCalendarComponent implements OnInit {
         events[i].color = colors.dark;
       }
       if (events[i].meta === 'Cancelled') {
-        events[i].color = colors.pink;
+        events[i].color = colors.orange;
       }
     }
 
@@ -177,6 +180,10 @@ export class AdminCalendarComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
+  }
+
+  expiredCell(day: any) {
+    const dayTime = new Date(day.date);
   }
 
   openModal(event: CalendarEvent, template: TemplateRef<any>): void {

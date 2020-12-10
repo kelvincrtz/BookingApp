@@ -53,6 +53,20 @@ namespace BookingApp.API.Controllers
 
             return Ok(review);
         }
+
+        [Authorize]
+        [HttpGet("{id}", Name = "GetReviewNoPhoto")]
+        public async Task<IActionResult> GetReviewNoPhoto(int id)
+        {
+            var reviewFromRepo =  await _repo.GetReview(id);
+
+            if (reviewFromRepo == null)
+                return BadRequest();
+
+            var review = _mapper.Map<ReviewForReturnNoPhotoDto>(reviewFromRepo);
+
+            return Ok(review);
+        }
         
         [AllowAnonymous]
         [HttpGet]
@@ -156,10 +170,10 @@ namespace BookingApp.API.Controllers
 
                     uploadResult = _cloudinary.Upload(uploadParams);
                  }
-             }
 
-             reviewForCreationDto.Url = uploadResult.Url.ToString();
-             reviewForCreationDto.PublicId = uploadResult.PublicId;
+                reviewForCreationDto.Url = uploadResult.Url.ToString();
+                reviewForCreationDto.PublicId = uploadResult.PublicId;
+             }
 
              var review = _mapper.Map<Review>(reviewForCreationDto);
 
@@ -175,6 +189,31 @@ namespace BookingApp.API.Controllers
              }
 
              return BadRequest("Could not add the photo review");
-        }  
+        }
+
+        [Authorize]
+        [HttpPost("users/{userId}/nophoto")]
+        public async Task<IActionResult> AddReviewForUserNoPhoto(int userId, ReviewForCreationNoPhotoDto reviewForCreationNoPhotoDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+             var userFromRepo = await _repo.GetUser(userId);
+
+             var review = _mapper.Map<Review>(reviewForCreationNoPhotoDto);
+
+             userFromRepo.Reviews.Add(review);
+
+             if (await _repo.SaveAll())
+             {
+                 
+                 var reviewNoPhotoToReturn = _mapper.Map<ReviewForReturnNoPhotoDto>(review);
+
+                 return CreatedAtRoute("GetReviewNoPhoto", new {userId = userId, id = review.Id }, reviewNoPhotoToReturn);
+                 
+             }
+
+             return BadRequest("Could not add the review without photo");
+        }    
     }
 }

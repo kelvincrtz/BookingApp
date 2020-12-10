@@ -72,7 +72,7 @@
 
     <div class="card-body">
       
-      <!-- If Booking is Accepted-->
+      <!-- If Booking is Cancelled-->
       <div class="text-dark">
         <h5 class="card-title text-capitalize">{{booking.user.fullName}}</h5>
         <p class="card-text">Location: {{booking.location}}</p>
@@ -80,7 +80,7 @@
         <p class="card-text">When: {{booking.when | date}}</p>
       </div>
 
-      <button disabled class="btn btn-info btn-block my-2" tooltip="This request has been approved. Click to change its status" [delay]="500" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
+      <button class="btn btn-dark btn-block my-2" tooltip="This request has been Cancelled by the user" [delay]="500" [routerLink]="['/member', booking.userId]">Message User</button>
     </div>
     <div class="card-footer bg-transparent text-dark">
       <small>Request received: {{booking.dateAdded | date}}</small>

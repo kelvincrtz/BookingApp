@@ -70,11 +70,10 @@ pre {
 }
 .brand h1 {
 	font-size: 2.4rem;
-	text-transform: uppercase;
 	color: white;
 }
 .brand h1 span {
-	color: rgb(216, 230, 20);
+	color: rgb(230, 245, 19);
 }
 
 
@@ -242,12 +241,17 @@ pre {
 }
 #hero h1:nth-child(1) span {
 	animation-delay: .5s;
+	background-color: rgb(219, 87, 87);
 }
 #hero h1:nth-child(2) span {
 	animation-delay: 1.5s;
 }
 #hero h1:nth-child(3) span {
 	animation-delay: 2.5s;
+	background-color: rgb(78, 236, 105);
+}
+#hero .custom:nth-child(3) span {
+	color:yellow;
 }
 
 /* End Hero Section */
@@ -642,9 +646,10 @@ pre {
 }
 @keyframes text_reveal_name {
 	100% {
-		color: rgb(210, 224, 10);
-		font-weight: 500;
+		color: rgb(238, 238, 238);
+		font-weight: 700;
 	}
+	
 }
 /* End Keyframes */
 

@@ -76,18 +76,44 @@ export class BookingReviewComponent implements OnInit {
         form.append('booking', this.booking);
        };
 
-      this.uploader.uploadAll();
+      if (this.uploader.getNotUploadedItems().length) {
+        this.uploader.uploadAll();
 
-      this.uploader.onSuccessItem = (item, response, status, headers) => {
+        this.uploader.onSuccessItem = (item, response, status, headers) => {
         this.bookingService.updateBookingIsReviewed(this.authService.decodedToken.nameid, this.booking.id, this.booking).subscribe(next => {
-          this.alertify.success('Booking is has been updated');
+            this.alertify.success('Review has been created');
+          }, error => {
+            this.alertify.error('Error sending the request');
+          }, () => {
+            this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+            this.router.navigate(['/bookingsforuser/']);
+          });
+        };
+      } else {
+        // Populate Review
+        this.review.bookingId = this.booking.id;
+        this.review.rating = this.rating;
+
+        console.log('Info Description: ' + this.review.description);
+        console.log('Info Rating: ' + this.review.rating);
+        console.log('Info Booking: ' + this.review.bookingId);
+
+        // Call booking service for review upload no photo
+        this.bookingService.createReviewNoPhoto(this.authService.decodedToken.nameid, this.review).subscribe(next => {
+          this.alertify.success('Review with no photo has been created');
         }, error => {
-          this.alertify.error('Error sending the request');
+          this.alertify.error('Error sending the review without photo');
         }, () => {
-          this.modalRef = this.modalService.show(template, {class: 'modal-md'});
-          this.router.navigate(['/bookingsforuser/']);
+        this.bookingService.updateBookingIsReviewed(this.authService.decodedToken.nameid, this.booking.id, this.booking).subscribe(next => {
+            this.alertify.success('Mark booking is reviewed succesful');
+          }, error => {
+            this.alertify.error('Error marking reviewed for the booking');
+          }, () => {
+            this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+            this.router.navigate(['/bookingsforuser/']);
+          });
         });
-      };
+      }
     }
   }
 

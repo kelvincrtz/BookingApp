@@ -6,8 +6,8 @@
           <div class="brand">
             <a (click)="scrollToElement(home)">
               <h1>
-                <span>A</span>bove <div> </div>
-                <span>A</span>ll <span>L</span>s
+                Above <div></div>
+                All <span>L</span>'s
               </h1>
             </a>
           </div>
@@ -33,7 +33,7 @@
         <div>
           <h1>Hello, <span></span></h1>
           <h1>Welcome to <span></span></h1>
-          <h1>ABOVE ALL LS<span></span></h1>
+          <h1>Above All L's<span></span></h1>
           <a (click)="scrollToElement(testimonials)" type="button" class="cta">Reviews</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(login)" type="button" class="cta">Login</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(register)" (click)="registerToggle()" type="button" class="cta">Sign Up</a>
@@ -176,7 +176,8 @@
               <div class="project-info mx-4">
                 <div class="projects boxes">
                   <div class="project-img">
-                    <img src={{review.url}} alt="img">
+                    <img *ngIf="review.url" src={{review.url}} alt="img">
+                    <img *ngIf="review.url == null" src="../../assets/happy.png" alt="img">
                   </div>
                 </div>
               </div>
@@ -203,12 +204,17 @@
           </div>
         </div>
         <div class="col-right">
-          <h1 class="section-title">About <span>Susan</span></h1>
-          <h2>Driving Instructor</h2>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores, velit alias eius non illum beatae atque repellat ratione qui veritatis repudiandae adipisci maiores. At inventore necessitatibus deserunt exercitationem cumque earum omnis ipsum rem accusantium quis, quas quia, accusamus provident suscipit magni! Expedita sint ad dolore, commodi labore nihil velit earum ducimus nulla quae nostrum fugit aut, deserunt reprehenderit libero enim!</p>
-          <a href="#" class="cta">Download Resume</a>
+          <h1 class="section-title"><span>Team</span></h1>
+          <h2>Susan Matencio - Driving Instructor</h2>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores,
+             velit alias eius non illum beatae atque repellat ratione qui veritatis 
+             repudiandae adipisci maiores. At inventore necessitatibus deserunt exercitationem 
+             cumque earum omnis ipsum rem accusantium quis, quas quia, accusamus provident suscipit magni! 
+             Expedita sint ad dolore, commodi labore nihil velit earum ducimus nulla quae nostrum fugit aut, 
+             deserunt reprehenderit libero enim!</p>
         </div>
       </div>
+      <!-- Something similar to contact section -->
     </section>
     <!-- End About Section -->
   
@@ -248,7 +254,7 @@
     <!-- Footer -->
     <section id="footer">
       <div class="footer container">
-        <div class="brand"><h1><span>A</span>BOVE <span>A</span>LL Ls</h1></div>
+        <div class="brand"><h1>Above All <span>L</span>'s</h1></div>
         <h2>Your Complete Driving School Solution</h2>
         <div class="social-icon">
           <div class="social-item">
@@ -261,7 +267,7 @@
             <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/twitter.png"/></a>
           </div>
         </div>
-        <p>Copyright © 2020 AboveAllLs. All rights reserved</p>
+        <p>Copyright © 2021 Above All L's. All rights reserved</p>
       </div>
     </section>
 </div>

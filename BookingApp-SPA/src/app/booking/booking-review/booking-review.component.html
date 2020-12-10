@@ -9,7 +9,6 @@
         <div class="col-md-8 mb-3" *ngIf="uploader?.queue?.length == 0">
             <h4 class="para">Select Image</h4>
             <input class="para" type="file" ng2FileSelect [uploader]="uploader"/>
-            <div class="error-custom">Image is required</div>
         </div>
       </div>
 
@@ -92,7 +91,7 @@
       <div class="row justify-content-center m-3">
 
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-success btn-s" (click)="uploadSection(template)" [disabled]="!reviewForm.valid || !uploader.getNotUploadedItems().length ">
+          <button type="button" class="btn btn-success btn-s" (click)="uploadSection(template)" [disabled]="!reviewForm.valid">
             <span class="glyphicon glyphicon-upload"></span> Upload
           </button>
 
