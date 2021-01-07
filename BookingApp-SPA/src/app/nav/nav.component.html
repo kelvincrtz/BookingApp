@@ -2,7 +2,7 @@
   <div class="container">
 
       <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']">BookingApp</a>
-      <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['members', authService.decodedToken.nameid]">AboveAll Ls</a>
+      <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['members', authService.decodedToken.nameid]">Above All L's</a>
   
       <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">

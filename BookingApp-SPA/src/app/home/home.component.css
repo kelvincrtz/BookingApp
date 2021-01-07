@@ -164,22 +164,7 @@ pre {
 	padding: 20px;
 	display: block;
 }
-#header .nav-list ul a::after {
-	content: attr(data-after);
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%) scale(0);
-	color: rgba(240, 248, 255, 0.021);
-	font-size: 13rem;
-	letter-spacing: 50px;
-	z-index: -1;
-	transition: .3s ease letter-spacing;
-}
-#header .nav-list ul li:hover a::after {
-	transform: translate(-50%, -50%) scale(1);
-	letter-spacing: initial;
-}
+
 #header .nav-list ul li:hover a {
 	color: rgb(251, 255, 0);
 }
@@ -255,6 +240,13 @@ pre {
 }
 
 /* End Hero Section */
+
+
+/* Log in Section */
+.card {
+	width: 35rem;
+}
+/* End of Log in Section */
 
 /* Services Section */
 #services .service-item {
@@ -336,7 +328,7 @@ pre {
 /* Projects section */
 #projects .projects {
 	flex-direction: column;
-	max-width: 1100px;
+	max-width: 2000px;
 	margin: 0 auto;
 	padding: 100px 0;
 }
@@ -392,8 +384,7 @@ pre {
 	color: white;
 }
 #projects .project-img {
-	flex-basis: 50%;
-	height: 300px;
+	max-height: 300px;
 	overflow: hidden;
 	position: relative;
 	border-radius: 8px;
@@ -408,14 +399,6 @@ pre {
 	box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2);
 }
 
-#projects .project-img:after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-}
 #projects .project-img img {
 	transition: .3s ease transform;
 }
@@ -619,16 +602,6 @@ pre {
 /* End Footer */
 
 /* Keyframes */
-@keyframes hamburger_puls {
-	0% {
-		opacity: 1;
-		transform: scale(1);
-	}
-	100% {
-		opacity: 0;
-		transform: scale(1.4);
-	}
-}
 @keyframes text_reveal_box {
 	50% {
 		width: 100%;
@@ -655,17 +628,45 @@ pre {
 
 /* Media Query For Tablet */
 @media only screen and (min-width: 768px) {
+	/*Brand and Nav*/
+	.brand h1 {
+		font-size: 2.0rem;
+		color: white;
+	}
+
+	/* Header */
+	#header .hamburger {
+		display: none;
+	}
+	#header .nav-list ul {
+		position: initial;
+		display: block;
+		height: auto;
+		width: fit-content;
+		background-color: transparent;
+	}
+	#header .nav-list ul li {
+		display: inline-block;
+	}
+	#header .nav-list ul li a {
+		font-size: 1rem;
+	}
+	#header .nav-list ul a:after {
+		display: none;
+	}
+	/* End of Header */
+
 	.cta {
 		font-size: 2.5rem;
 		padding: 20px 60px;
 	}
 	h1.section-title {
-		font-size: 6rem;
+		font-size: 5rem;
 	}
 
 	/* Hero */
 	#hero h1 {
-		font-size: 7rem;
+		font-size: 6rem;
 	}
 	/* End Hero */
 
@@ -758,8 +759,47 @@ pre {
 }
 /* End Media Query For Tablet */
 
+
+/* Start Media Query For Smaller Phone devices */
+@media only screen and (min-width: 300px) {
+	/* Brand and Nav */
+	.brand h1 {
+		font-size: 1.6rem;
+		color: white;
+	}
+
+	/* Header */
+	#header .hamburger {
+		display: none;
+	}
+	#header .nav-list ul {
+		position: initial;
+		display: block;
+		height: auto;
+		width: fit-content;
+		background-color: transparent;
+	}
+	#header .nav-list ul li {
+		display: inline-block;
+	}
+	#header .nav-list ul li a {
+		font-size: .7rem;
+	}
+	#header .nav-list ul a:after {
+		display: none;
+	}
+	/* End of Header */
+}
+/* End Media Query For Smaller Phone devices */
+
 /* Media Query For Desktop */
 @media only screen and (min-width: 1200px) {
+	/* Brand and Nav */
+	.brand h1 {
+		font-size: 2.4rem;
+		color: white;
+	}
+
 	/* header */
 	#header .hamburger {
 		display: none;

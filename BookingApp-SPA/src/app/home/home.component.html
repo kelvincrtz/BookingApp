@@ -48,7 +48,7 @@
     <section #login id="login">
       <div *ngIf="!loggedIn()" class="login container">
         <div class="container">
-          <div class="card w-50">
+          <div class="card">
             <div class="card-body">
               <form class="" [formGroup]="loginForm" (ngSubmit)="loginClick()">
                 <div class="">
@@ -137,51 +137,12 @@
               <h1 class="cta-project section-title text-center">Reviews</h1>
             </div>
           </div>
-          <div class="all-projects" *ngFor="let review of reviews">
-            <div class="project-item mt-5">
 
-              <div class="project-info">
-                <div class="projects boxes">
-                  <div class="d-flex flex-column">
-                    <div class="projects quote">
-
-                      <i class="fa fa-quote-left"></i>
-
-                      <div class="projects description">
-
-                        <pre class="text-dark"> {{review.description}} </pre>
-
-                        <div class="d-flex justify-content-center m-2">
-                          <rating [max]="5" [(ngModel)]="review.rating" [customTemplate]="tt" [readonly]=true></rating>
-                          <ng-template #tt let-i="index" let-v="value">
-                            <button class="btn btn-{{i < v ? 'warning' : 'default'}} btn-sm">
-                              {{i < v ? '&#9733;' : '&#9734;'}}
-                            </button>
-                          </ng-template>
-                        </div>        
-
-                        <div class="d-flex justify-content-end">
-                          <div class="mt-3">
-                            <h3 class="font-weight-lighter text-capitalize">- {{review.user.fullName}} </h3> <span class="font-weight-lighter">{{review.dateAdded | date}}</span>
-                          </div>
-                        </div>
-                      
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
+          <div class="container mt-3">
+            <div class="row">
+              <div *ngFor="let review of reviews" class="col-xl-4 col-lg-6 col-md-8 col-sm-12">
+                <app-review-list-card [review]="review"></app-review-list-card>
               </div>
-
-              <div class="project-info mx-4">
-                <div class="projects boxes">
-                  <div class="project-img">
-                    <img *ngIf="review.url" src={{review.url}} alt="img">
-                    <img *ngIf="review.url == null" src="../../assets/happy.png" alt="img">
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
 
@@ -193,7 +154,7 @@
         </div>
       </div>
     </section>
-    <!-- End Projects Section -->
+    <!-- End Projects/Reviews Section -->
   
     <!-- About Section -->
     <section #about id="about">
