@@ -36,9 +36,8 @@
             </div>
             </li>
           </ul>
-          <div class="card-body">
-              <a *ngIf="!review.isApproved" class="card-link text-primary" (click)="openEditModal(review)">Edit Status</a>
-              <a class="card-link text-primary" (click)="openViewBookingModal(review.bookingId)">View Booking</a>
+          <div *ngIf="!review.isApproved" class="card-body">
+              <a class="card-link text-primary" (click)="openEditModal(review)">Edit Status</a>
           </div>
         </div>
       </div>
