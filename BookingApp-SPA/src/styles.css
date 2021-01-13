@@ -14,3 +14,12 @@
 .bg-signature-pink {
   background: linear-gradient(50deg, #c56e97 0%, #ce7198 80%);
 }
+
+@media only screen and (max-width: 1026px) {
+  .cal-month-view .cal-header .cal-cell {
+    font-size: 1.8vw;
+  }
+  .cal-week-view .cal-day-headers .cal-header {
+    font-size: 1.8vw;
+  }
+}

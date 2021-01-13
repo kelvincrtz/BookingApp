@@ -6,42 +6,43 @@
 
       <form class="form-inline" #form="ngForm" (ngSubmit)="loadBookings()" novalidate>
         
+        <div id="fade" class="col">
+          <div class="btn-group float-right my-1">
+            <button type="button" name="orderBy" class="btn btn-info btn-sm" tooltip="Sorts the request by Newly added request" [delay]="500"
+              [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
+            <button type="button" name="orderBy" class="btn btn-info btn-sm" tooltip="Sorts the event by the actual event date" [delay]="500"
+              [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">Decending Date</button>
+          </div>
+        </div> 
+
         <div class="btn-group mr-2">
-          <button type="button" name="eventstoday" class="btn" tooltip="Shows the events happening today" [delay]="500"
+          <button type="button" name="eventstoday" class="btn"
           [(ngModel)]="bookingParams.eventstoday" [ngClass]="bookingParams.eventstoday ? 'btn-success active' : 'btn-secondary'" (click)="loadToday()" [value]="true" btnRadio="eventstoday">Today</button>
 
-          <button type="button" name="eventstomorrow" class="btn" tooltip="Shows the events happening tomorrow" [delay]="500"
+          <button type="button" name="eventstomorrow" class="btn"
           [(ngModel)]="bookingParams.eventstomorrow" [ngClass]="bookingParams.eventstomorrow ? 'btn-success active' : 'btn-secondary'" (click)="loadTomorrow()" [value]="true" btnRadio="eventstomorrow">Tomorrow</button>
 
-          <button type="button" name="eventsthismonth" class="btn" tooltip="Shows all the events for this current month" [delay]="500"
+          <button type="button" name="eventsthismonth" class="btn"
           [(ngModel)]="bookingParams.eventsthismonth" [ngClass]="bookingParams.eventsthismonth ? 'btn-success active' : 'btn-secondary'" (click)="loadMonth()" [value]="true" btnRadio="eventsthismonth">This Month</button>
 
-          <button type="button" name="eventsall" class="btn" tooltip="Shows all the events" [delay]="500"
+          <button type="button" name="eventsall" class="btn"
           [(ngModel)]="bookingParams.all" [ngClass]="bookingParams.all ? 'btn-success active' : 'btn-secondary'" (click)="loadAll()" [value]="true" btnRadio="eventsall">All Events</button>
         </div>
 
-        <div class="form-group mr-2 my-1">
-          <label for="Status">Status: </label>
+        <div class="form-group mx-1 my-1">
           <select name="status" id="status" class="form-control" [(ngModel)]="bookingParams.status" style="width: 130px;">
+              <option value="" disabled selected>Select Status</option>
               <option *ngFor="let status of statusList" [value]="status.value">
                   {{status.display}}
               </option>
           </select>
         </div>
 
-        <div class="btn-group my-1">
-          <button type="submit" class="btn btn-danger" tooltip="Applies the filtering option when clicked" [delay]="500">Apply Filter</button>
-          <button type="button" class="btn btn-dark" (click)="resetFilters()" tooltip="Resets all the filtering" [delay]="500" >Reset Filter</button>
+        <div class="btn-group mx-1 my-1">
+          <button type="submit" class="btn btn-danger btn-sm">Apply Filter</button>
+          <button type="button" class="btn btn-dark btn-sm" (click)="resetFilters()">Reset Filter</button>
         </div>
 
-        <div class="col">
-          <div class="btn-group float-right my-1">
-            <button type="button" name="orderBy" class="btn btn-info btn-sm" tooltip="Sorts the request by Newly added request" [delay]="500"
-              [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
-            <button type="button" name="orderBy" class="btn btn-info btn-sm" tooltip="Sorts the event by the actual event date" [delay]="500"
-              [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">Decending Order</button>
-          </div>
-        </div> 
       </form>
   </div>
 

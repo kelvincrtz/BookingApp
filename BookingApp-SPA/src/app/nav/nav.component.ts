@@ -12,9 +12,16 @@ export class NavComponent implements OnInit {
   model: any = {};
   isCollapsed = true;
 
+
+  navbarOpen = false;
+
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
   login() {
