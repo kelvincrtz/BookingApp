@@ -1,5 +1,5 @@
 <div>
-    <!-- Header -->
+    <!-- Header
     <section id="header" *ngIf="!loggedIn()">
       <div class="header container">
         <div class="nav-bar">
@@ -12,7 +12,6 @@
             </a>
           </div>
           <div class="nav-list">
-            <div class="hamburger"><div class="bar"></div></div>
             <ul>
               <li><a (click)="scrollToElement(home)">Home</a></li>
               <li><a (click)="scrollToElement(services)">Services</a></li>
@@ -24,8 +23,71 @@
         </div>
       </div>
     </section>
-  
-    <!--End Header -->
+    -->
+
+    <!-- Header 2 -->
+        <section id="header" *ngIf="!loggedIn()">
+          <div class="header container">
+            <div class="nav-bar">
+              <div class="brand">
+                <a (click)="scrollToElement(home)">
+                  <h1>
+                    Above <div></div>
+                    All <span>L</span>'s
+                  </h1>
+                </a>
+              </div>
+
+
+              <div class="navbar-expand-lg navbar-dark">
+
+                <button class="navbar-toggler bg-dark" type="button"
+                        (click)="toggleNavbar()">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+              
+                <div class="collapse navbar-collapse nav-list"
+                     [ngClass]="{ 'show': navbarOpen }">
+                  <ul class="navbar-nav">
+                    <li><a (click)="scrollToElement(home)">Home</a></li>
+                    <li><a (click)="scrollToElement(services)">Services</a></li>
+                    <li><a (click)="scrollToElement(testimonials)">Reviews</a></li>
+                    <li><a (click)="scrollToElement(about)">About</a></li>
+                    <li><a (click)="scrollToElement(contact)">Contact</a>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      
+    <!--End Header 2-->
+
+    <!--
+    <div class="navbar-expand-lg navbar-dark bg-dark">
+
+      <button class="navbar-toggler" type="button"
+              (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    
+      <div class="collapse navbar-collapse"
+           [ngClass]="{ 'show': navbarOpen }">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Item 1</a>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link" href="#">Item 2</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    -->
   
     <!-- Hero Section  -->
     <section #home id="hero">
