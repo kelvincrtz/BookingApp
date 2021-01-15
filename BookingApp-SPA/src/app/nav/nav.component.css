@@ -1,3 +1,11 @@
 .dropdown-toggle, .dropdown-item {
     cursor: pointer;
 }
+
+.brand h1 {
+	font-size: 1.4rem;
+	color: white;
+}
+.brand h1 span {
+	color: rgb(230, 245, 19);
+}

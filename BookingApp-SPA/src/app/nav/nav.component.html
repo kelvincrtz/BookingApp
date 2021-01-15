@@ -2,7 +2,14 @@
   <div class="container">
 
     <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']">Home</a>
-    <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['members', authService.decodedToken.nameid]">Above All L's</a>
+    <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['members', authService.decodedToken.nameid]">
+      <div class="brand">
+          <h1>
+            Above <div></div>
+            All <span>L</span>'s
+          </h1>
+      </div>
+    </a>
     
   
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
