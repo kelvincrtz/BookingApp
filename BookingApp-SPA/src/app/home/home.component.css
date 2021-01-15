@@ -649,7 +649,7 @@ pre {
 		display: inline-block;
 	}
 	#header .nav-list ul li a {
-		font-size: 1rem;
+		font-size: 9rem;
 	}
 	#header .nav-list ul a:after {
 		display: none;
@@ -799,7 +799,6 @@ pre {
 		font-size: 2.4rem;
 		color: white;
 	}
-
 	/* header */
 	#header .hamburger {
 		display: none;
@@ -815,7 +814,7 @@ pre {
 		display: inline-block;
 	}
 	#header .nav-list ul li a {
-		font-size: 1.1rem;
+		font-size: 1.5rem;
 	}
 	#header .nav-list ul a:after {
 		display: none;
@@ -828,3 +827,43 @@ pre {
 	}
 }
 /* End  Media Query For Desktop */
+
+
+@media only screen and (max-width: 990px) {
+    #fade {
+        display: none;
+	}
+	#show {
+		display: block;
+	}
+	/* Hero */
+	#hero h1 {
+		font-size: 4rem;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	/* Hero */
+	#hero h1 {
+		font-size: 2.8rem;
+	}
+}
+
+.mobile {
+	display: none;
+}
+
+.nav-styled {
+	font-size: .8rem;
+	letter-spacing: .2rem;
+	text-decoration: none;
+	color: white;
+	text-transform: uppercase;
+	display: block;
+	margin-bottom: 8px;
+	text-align: right;
+}
+
+.nav-styled:hover {
+	color: rgb(251, 255, 0);
+}
