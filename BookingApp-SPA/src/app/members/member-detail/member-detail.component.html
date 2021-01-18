@@ -88,11 +88,11 @@
 
                   <alert *ngIf="booking.status == 'Approved'" [type]='"success"' [dismissible]="dismissible" (onClosed)="onClosed(booking.id)">
                     <h4 class="alert-heading">Heads up!</h4>
-                    Your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}!
+                    Your booking request for {{booking.when | date : 'fullDate'}} from {{booking.fromTime | date : 'shortTime'}} to {{booking.toTime | date : 'shortTime'}} at {{booking.location}} has been {{ booking.status | lowercase}}!
                   </alert>
 
                   <alert *ngIf="booking.status == 'Declined'" [type]='"danger"' [dismissible]="dismissible" (onClosed)="onClosed(booking.id)">
-                    <strong>Sorry</strong> but your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}
+                    <strong>Sorry</strong> but your booking request for {{booking.when | date : 'fullDate'}} from {{booking.fromTime | date : 'shortTime'}} to {{booking.toTime | date : 'shortTime'}} at {{booking.location}} has been {{ booking.status | lowercase}}
                     <p>
                       <small>You can message the 
                         <button class="btn btn-primary btn-sm" tooltip="Click to message the Admin" (click)="onClosed(booking.id)" [routerLink]="['/members/', 6]">Admin</button>
