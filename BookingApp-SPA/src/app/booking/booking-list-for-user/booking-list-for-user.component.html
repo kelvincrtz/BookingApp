@@ -9,7 +9,7 @@
     <div class="">Use this page to manage all your booking requests.</div>
     <div>Wait for the Administrator to process and review your booking request. You will be notified and if its <strong>approved</strong>, you can start making the payment.</div>
     <div>You can also write a review once you've completed your booking</div>
-    <div class=""><small class="text-muted">NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
+    <div class=""><small class="text-danger">NOTE:</small> You are not allowed to edit any request that has been <strong class="text-success">Approved</strong> or <strong class="text-danger">Declined</strong></div>
   </div>
   <hr>
 
@@ -74,7 +74,7 @@
               <div *ngIf="booking.status == 'Cancelled'" class="text-secondary">
                 <span class="badge badge-danger font-italic">{{booking.status}}</span>
               </div>
-              <div *ngIf="compareDates(booking.when)" class="text-dark">Expired</div>
+              <div *ngIf="compareDates(booking.when) && booking.status != 'Cancelled'" class="text-dark font-italic">Expired</div>
               <span class="badge badge-pill badge-info font-italic" *ngIf="booking.isEdited && !compareDates(booking.when)">Edited</span>
             </div>
           </div>
