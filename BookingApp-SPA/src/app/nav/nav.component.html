@@ -20,10 +20,7 @@
     <div *ngIf="loggedIn()" class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
       <ul class="navbar-nav mr-auto">
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/members']">Students</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+          <a class="nav-link" [routerLink]="['/calendar']">Calendar</a>
         </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/bookings']">Bookings</a>
@@ -31,17 +28,20 @@
         <li *appHasRole="['Member']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/bookingsforuser']">Bookings</a>
         </li>
-        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/admin']">Management</a>
-        </li>
-        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/calendar']">Calendar</a>
-        </li>
         <li *appHasRole="['VIP', 'Member']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/bookingcalendar']">Make a Booking</a>
         </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+        </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/members']">Students</a>
+        </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/reviews/admin/', authService.decodedToken.nameid]">Reviews</a>
+        </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/admin']">Management</a>
         </li>
       </ul>
 
