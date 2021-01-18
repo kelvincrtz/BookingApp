@@ -8,9 +8,9 @@
       <div *ngIf="event.meta === 'Pending'" class="card bg-secondary" style="width: 25rem;">
         <div class="card-header bg-transparent text-dark">Status: <strong>{{event.meta}}</strong></div>
           <div class="card-body text-dark">
-            <h5 class="card-text font-weight-light">Location: {{event.title}}</h5>
-            <h5 class="card-text font-weight-light">When: {{event.start | date}}</h5>
-            <h5 class="card-text font-weight-light">From: {{event.start  | date: 'shortTime' }} to {{event.end  | date: 'shortTime' }}</h5>
+            <h5 class="h6 font-weight-light text-capitalize">Location: {{event.title}}</h5>
+            <h5 class="h6 font-weight-light">When: {{event.start | date}}</h5>
+            <h5 class="h6 font-weight-light">From: {{event.start  | date: 'shortTime' }} to {{event.end  | date: 'shortTime' }}</h5>
 
             <hr>
 
@@ -44,9 +44,9 @@
       <div *ngIf="event.meta === 'Approved'" class="card bg-success-custom text-white mb-3" style="width: 25rem;">
         <div class="card-header bg-transparent">Status: <strong>{{event.meta}}</strong></div>
         <div class="card-body">
-          <h5 class="card-text font-weight-light">Location: {{event.title}}</h5>
-          <h5 class="card-text font-weight-light">When: {{event.start | date}}</h5>
-          <h5 class="card-text font-weight-light">From: {{event.start | date: 'shortTime' }} to {{event.end| date: 'shortTime' }}</h5>
+          <h5 class="h6 font-weight-light text-capitalize">Location: {{event.title}}</h5>
+          <h5 class="h6 font-weight-light">When: {{event.start | date}}</h5>
+          <h5 class="h6 font-weight-light">From: {{event.start | date: 'shortTime' }} to {{event.end| date: 'shortTime' }}</h5>
 
           <hr>
 
@@ -80,9 +80,9 @@
       <div *ngIf="event.meta === 'Declined'" class="card bg-danger-custom text-white mb-3" style="width: 25rem;">
         <div class="card-header bg-transparent">Status: <strong>{{event.meta}}</strong></div>
         <div class="card-body">
-          <h5 class="card-text font-weight-light">Location: {{event.title}}</h5>
-          <h5 class="card-text font-weight-light">When: {{event.start | date}}</h5>
-          <h5 class="card-text font-weight-light">From: {{event.start | date: 'shortTime' }} to {{event.end | date: 'shortTime' }}</h5>
+          <h5 class="h6 font-weight-light text-capitalize">Location: {{event.title}}</h5>
+          <h5 class="h6 font-weight-light">When: {{event.start | date}}</h5>
+          <h5 class="h6 font-weight-light">From: {{event.start | date: 'shortTime' }} to {{event.end | date: 'shortTime' }}</h5>
 
           <hr>
 

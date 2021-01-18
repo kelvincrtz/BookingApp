@@ -12,9 +12,9 @@
         <div *ngIf="booking.status === 'Pending'" class="card bg-white mb-3" style="width: 20rem;">
           <div class="card-header bg-transparent text-dark">Status: <strong>{{booking.status}}</strong></div>
             <div class="card-body text-dark">
-              <h5 class="card-text font-weight-light">Location: {{booking.location}}</h5>
-              <h5 class="card-text font-weight-light">When: {{booking.when | date}}</h5>
-              <h5 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h5>
+              <h6 class="card-text font-weight-light text-capitalize">Location: {{booking.location}} ({{booking.user.fullName}})</h6>
+              <h6 class="card-text font-weight-light">When: {{booking.when | date}}</h6>
+              <h6 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h6>
 
               <hr>
 
@@ -32,8 +32,8 @@
                       
                         <div class="form-group text-center">
                           <div class="btn-group" role="group" aria-label="Basic example">
-                            <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" tooltip="Click to save changes" [delay]="500">Save</button>
-                            <button class="btn btn-info" type="button" (click)="cancel()" tooltip="Click to cancel" [delay]="500">Cancel</button>
+                            <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid">Save</button>
+                            <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
                           </div>
                         </div>
                   </div>
@@ -45,9 +45,9 @@
         <div *ngIf="booking.status === 'Approved'" class="card bg-success-custom mb-3" style="width: 20rem;">
           <div class="card-header bg-transparent">Status: <strong>{{booking.status}}</strong></div>
           <div class="card-body">
-            <h5 class="card-text font-weight-light">Location: {{booking.location}}</h5>
-            <h5 class="card-text font-weight-light">When: {{booking.when | date}}</h5>
-            <h5 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h5>
+            <h6 class="card-text font-weight-light text-capitalize">Location: {{booking.location}} ({{booking.user.fullName}})</h6>
+            <h6 class="card-text font-weight-light">When: {{booking.when | date}}</h6>
+            <h6 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h6>
 
             <hr>
 
@@ -78,9 +78,9 @@
         <div *ngIf="booking.status === 'Declined'" class="card bg-danger-custom mb-3" style="width: 20rem;">
           <div class="card-header bg-transparent">Status: <strong>{{booking.status}}</strong></div>
           <div class="card-body">
-            <h5 class="card-text font-weight-light">Location: {{booking.location}}</h5>
-            <h5 class="card-text font-weight-light">When: {{booking.when | date}}</h5>
-            <h5 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h5>
+            <h6 class="card-text font-weight-light">Location: {{booking.location}} ({{booking.user.fullName}})</h6>
+            <h6 class="card-text font-weight-light">When: {{booking.when | date}}</h6>
+            <h6 class="card-text font-weight-light">From: {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</h6>
 
             <hr>
 

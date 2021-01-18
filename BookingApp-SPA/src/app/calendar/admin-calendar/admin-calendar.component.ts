@@ -102,7 +102,7 @@ export class AdminCalendarComponent implements OnInit {
       // tslint:disable-next-line: ban-types
       const event: Object = {
         id: res[i].id,
-        title: res[i].location,
+        title: res[i].location + ' (' + res[i].user.fullName + ')',
         meta: res[i].status,
         start: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), startTime.getHours(), startTime.getMinutes()),
         end: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), endTime.getHours(), endTime.getMinutes()),

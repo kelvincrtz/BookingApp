@@ -15,6 +15,10 @@
   background: linear-gradient(50deg, #c56e97 0%, #ce7198 80%);
 }
 
+.cal-event-title {
+  text-transform: capitalize;
+}
+
 @media only screen and (max-width: 1026px) {
   .cal-month-view .cal-header .cal-cell {
     font-size: 1.8vw;
