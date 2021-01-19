@@ -38,6 +38,10 @@ pre {
 	word-break: keep-all
 }
 
+.yellow {
+	color: rgb(210, 223, 32);
+}
+
 .section-title {
 	font-size: 4rem;
 	font-weight: 300;
