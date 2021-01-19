@@ -21,9 +21,9 @@ img {
 }
 p {
 	color: black;
-	font-size: 1.4rem;
+	font-size: 1.1rem;
 	margin-top: 5px;
-	line-height: 2.5rem;
+	line-height: 2.2rem;
 	font-weight: 300;
 	letter-spacing: .05rem;
 }
@@ -263,7 +263,7 @@ pre {
 #services .services {
 	flex-direction: column;
 	text-align: center;
-	max-width: 1500px;
+	max-width: 1600px;
 	margin: 0 auto;
 	padding: 100px 0;
 }
@@ -277,6 +277,8 @@ pre {
 	justify-content: center;
 	flex-wrap: wrap;
 	margin-top: 50px;
+	margin-left: 50px;
+	margin-right: 50px;
 }
 #services .service-item {
 	flex-basis: 80%;
@@ -304,18 +306,47 @@ pre {
 	opacity: .7;
 	z-index: -1;
 }
+
+#services .service-item2 {
+	flex-basis: 80%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+	padding: 30px;
+	border-radius: 10px;
+	background-image: url();
+	background-size: cover;
+	margin: 10px 5%;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+}
+#services .service-item2::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgb(37, 89, 201); 
+	opacity: .7;
+	z-index: -1;
+}
+
 #services .service-bottom .icon {
 	height: 80px;
 	width: 80px;
 	margin-bottom: 20px;
 }
-#services .service-item h2 {
-	font-size: 2rem;
+#services .service-item .service-item2 h2 {
+	font-size: 1.3rem;
 	color: rgb(36, 33, 33);
 	margin-bottom: 10px;
 	text-transform: uppercase;
 }
-#services .service-item p {
+#services .service-item .service-item2 p {
+	font-size: 1rem;
 	color: rgb(29, 28, 28);
 	text-align: left;
 }
@@ -477,7 +508,7 @@ pre {
 	width: 100%;
 }
 #about .col-right h2 {
-	font-size: 1.8rem;
+	font-size: 1.5rem;
 	font-weight: 500;
 	letter-spacing: .2rem;
 	margin-bottom: 10px;
