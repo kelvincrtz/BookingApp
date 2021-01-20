@@ -96,7 +96,7 @@
 
   <ng-template #template>
     <div class="modal-body">
-      <div class="text-center">Your request has now been submitted. While you wait, please read our terms and conditions for payment information and other policies.
+      <div class="text-center">Your request has now been submitted. While you wait, please read our payment information and other policies.
       </div>
       <div class="text-center mt-1">
         <button type="button" class="btn btn-primary btn-circle" (click)="isCollapsed = !isCollapsed"
@@ -107,24 +107,21 @@
         <hr>
 
         <div class="mt-3">
-          <h4>Payment</h4>
+          <h4>Payment Info</h4>
           <i class=""></i><strong> Credit Card or Bank Transfer</strong>
           <div>Payment Bank Reference : Name must be last name</div>
           <div>Upon approval payment needs to made 72hrs before the lesson</div>
         </div>
 
         <div class="mt-3">
-          <h4>Cancellation & Refunds </h4>
-          <div>Same day cancellation no refund</div>
+          <h4>Cancellation Policy</h4>
+          <div>Cancellations for all bookings need to be received in advance (at least 2-3 days before the lesson). Please note that you will incur a booking fine of $50 should you give less than 24 hours notification.</div>
         </div>
 
         <div class="mt-3">
           <h4>No-show</h4>
+          <div>Students who do not show up for their appointment without a call to cancel are considered a No Show and will be subject to a $50.00 No Show fee.</div>
         </div>
-
-        <div class="">Use this page to manage all your booking requests.</div>
-        <div>Wait for the Administrator to process and review your booking request. You will be notified.</div>
-        <div class=""><small class="text-muted">NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
         
         <div class="mt-3">
           <button type="button" class="btn btn-outline-success btn-circle" (click)="closeModal()">Close</button>
