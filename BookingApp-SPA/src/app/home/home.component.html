@@ -74,9 +74,9 @@
     <section #home id="hero">
       <div class="hero container">
         <div>
-          <h1>Hello, <span></span></h1>
-          <h1>Welcome to <span></span></h1>
-          <h1>Above All L's<span></span></h1>
+          <h1 class="single">Above All <b>L</b>'s <span></span></h1>
+          <h1>Where your safety<span></span></h1>
+          <h1>comes <b>first</b> <span></span></h1>
           <a (click)="scrollToElement(testimonials)" type="button" class="cta">Reviews</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(login)" type="button" class="cta">Log In</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(register)" (click)="registerToggle()" type="button" class="cta">Sign Up</a>
@@ -145,12 +145,13 @@
     <section #services id="services">
       <div class="services container">
         <div class="service-top">
-          <h1 class="section-title">Services</h1>
+          <h1 class="section-title"><span>Services</span></h1>
+          <p>Above All L's Driving School is committed to providing courses that not only fit every skill level and background, but also infuse our supportive and personalised teaching approach. We provide lessons for beginners, learners, restricted and full driving tests. Check out our course offerings below.</p>
         </div>
 
         <div class="container text-white">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-lg-6 col-sm-12">
               <div class="service-item2">
                 <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
                 <div class="card-body">
@@ -159,12 +160,12 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-lg-6 col-sm-12">
               <div class="service-item2">
                 <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
                 <div class="card-body">
-                  <h5 class="card-title">Mock Tests</h5>
-                  <p class="card-text text-white">Through this course, students have the opportunity to push their skills, techniques and confidence to a new level in a fun, dynamic way. Contact us today to learn more about each of our course offerings.</p>
+                  <h5 class="card-title">Beginner's Course</h5>
+                  <p class="card-text text-white">If you have little to no experience in driving, then this course is for you. Sitting behind the wheel for the first time can both be an exciting and nerve-wracking experience. Exciting because, finally, you are promoted from being a passenger to driver! However, as the saying goes, with great power comes great responsibility. Your decision-making is extremely vital! Our goal is to ensure you become a safe and confident driver. We suggest taking 2-hour lessons each time to build confidence and improve your driving skills more quickly. All of our instruction vehicles are fitted with dual controls for safety.</p>
                 </div>
               </div>
             </div>
@@ -175,11 +176,6 @@
         <div class="service-bottom">
           <div class="service-item">
             <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
-            <h2>Beginner's Course</h2>
-            <p>If you have little to no experience in driving, then this course is for you. Sitting behind the wheel for the first time can both be an exciting and nerve-wracking experience. Exciting because, finally, you are promoted from being a passenger to driver! However, as the saying goes, with great power comes great responsibility. Your decision-making is extremely vital! Our goal is to ensure you become a safe and confident driver. We suggest taking 2-hour lessons each time to build confidence and improve your driving skills more quickly. All of our instruction vehicles are fitted with dual controls for safety.</p>
-          </div>
-          <div class="service-item">
-            <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
             <h2>Restricted License Course</h2>
             <p>This course is suitable for anyone who is preparing for their restricted license test. This is the 2nd stage of the graduated driver licencing system. To pass your restricted test, you need to have lessons with a qualified driving instructor and practice with a supervisor in between each lesson. You need to be well-prepared with the right level of driving skill and ability as this exam is more challenging.</p>
           </div>
@@ -187,6 +183,11 @@
             <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
             <h2>Full License Course</h2>
             <p>This course is suitable for anyone who is preparing for their full licence test. As one of our most popular offerings, we recommend signing up for this course as early as possible as it tends to fill up quickly. If you’re unsure about your level or have questions, simply reach out.</p>
+          </div>
+          <div class="service-item">
+            <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
+            <h2>Mock Tests</h2>
+            <p>Through this course, students have the opportunity to push their skills, techniques and confidence to a new level in a fun, dynamic way. Contact us today to learn more about each of our course offerings.</p>
           </div>
         </div>
 
@@ -224,12 +225,12 @@
     </section>
     <!-- End Projects/Reviews Section -->
   
-    <!-- About Section -->
+    <!-- About Section 1 -->
     <section #about id="about">
       <div class="about container">
         <div class="col-left">
           <div class="about-img">
-            <img src="../../assets/susan.jpg" alt="img">
+            <img src="../../assets/about.jpg" alt="img">
           </div>
         </div>
         <div class="col-right">
@@ -243,26 +244,71 @@
 
           <br>
           <div class="font-weight-light">Since our founding, Above All L's Driving School's qualified instructor approved by NZTA has had the opportunity to help countless students acquire foundational skills, develop new techniques and confidently move forward in their learning journey. We provide a wide range of courses to support students from all backgrounds and levels including lessons for beginners, learners, restricted and full driving tests.</div>
-          
-          <br>
-          
-          <h2>About Our Driving Instructor</h2>
-          <h4><span>Susan Matencio</span><span class="yellow"> NZTA and NZQA Qualified</span></h4>
-          <div class="font-weight-light">I started as a volunteer driving mentor in 2017 and established my own driving school in 2018. I have been driving for over 30 years. I have driven extensively in the Philippines and now in New Zealand since we arrived in 2011.</div>
-
-
         </div>
       </div>
       <!-- Something similar to contact section -->
     </section>
+    <!-- End About Section 1 -->
+
+
+    <!-- About Section 2 -->
+    <section id="about">
+      <div class="about container">
+        <div class="col-left">
+          <div class="about-img">
+            <img src="../../assets/susan.jpg" alt="img">
+          </div>
+        </div>
+        <div class="col-right">
+          <h1 class="section-title"><span>NZTA and NZQA Qualified</span></h1>
+          <h2>About Our Driving Instructor</h2>
+          <h4><span>Susan Matencio</span></h4>
+          <div class="font-weight-light">I started as a volunteer driving mentor in 2017 and established my own driving school in 2019. I have been driving for over 30 years. I have driven extensively in the Philippines and now in New Zealand since we arrived in 2011.</div>
+
+        </div>
+
+        <br>
+      </div>
+      <!-- Something similar to contact section -->
+    </section>
     <!-- End About Section -->
+
+
+    <!-- FAQs Section -->
+    <section>
+      <div class="faqcontainer">
+        <div><h1 class="section-title">Frequently Asked Questions <span>FAQs</span></h1></div>
+        <br>
+        <accordion class="" [isAnimated]="true" [closeOthers]="oneAtATime">
+          <accordion-group class="button" heading="How much does a lesson cost?">
+            <p>The lesson fee is from $65 per hour depending on your location.</p>
+          </accordion-group>
+          <accordion-group heading="How many lessons do I need?">
+            <p>For zero knowledge, 3-5 lessons is enough depending on the learning skill and experience of each individual. After your first lesson, your driving instructor will let you know how many more lessons you will need.</p>
+          </accordion-group>
+          <accordion-group heading="What license do I need to have in order to take driving lessons?">
+            <p>You will need to have any of the following: a NZ Learners Licence, Restricted Licence or Overseas Licence. </p>
+          </accordion-group>
+          <accordion-group heading="How long is each lesson?">
+            <p>Each lesson varies from 1-2 hours.</p>
+          </accordion-group>
+          <accordion-group heading="I don’t have a car. Can I still take driving lessons?">
+            <p>Yes, you can. All of our instruction vehicles are fitted with dual controls for safety.</p>
+          </accordion-group>
+          <accordion-group heading="Can I use my own car during the lessons? ">
+            <p>Yes, depending on your driving experience. </p>
+          </accordion-group>
+        </accordion>
+      </div>
+    </section>
+    <!-- End of FAQs Section-->
+
   
     <!-- Contact Section -->
     <section #contact id="contact">
       <div class="contact container">
         <div><h1 class="section-title">Contact <span>info</span></h1></div>
-        <br>
-        <div class="font-weight-light p-5">We are based in Central Auckland and can cater to different areas within 30 km radius. The lesson fees differ depending on the student’s location. We are available 6 days a week, Monday to Saturday from 9am to 5pm.</div>
+        <div class="font-weight-light p-3">We are based in Central Auckland and can cater to different areas within 30 km radius. The lesson fees differ depending on the student’s location. We are available 6 days a week, Monday to Saturday from 9am to 5pm.</div>
         <br>
         <div class="contact-items">
           <div class="contact-item">

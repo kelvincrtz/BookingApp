@@ -199,7 +199,7 @@ pre {
 	padding: 0 50px;
 	justify-content: flex-start;
 }
-#hero h1 {
+#hero h1{
 	display: block;
 	width: fit-content;
 	font-size: 4rem;
@@ -635,6 +635,18 @@ pre {
 	font-size: 1.3rem;
 }
 /* End Footer */
+
+
+/* FAQs */
+.faqcontainer{
+	flex-direction: column;
+	max-width: 1200px;
+	margin: 0 auto;
+	margin-bottom: 70px;
+}
+
+/* End of FAQS*/
+
 
 /* Keyframes */
 @keyframes text_reveal_box {
