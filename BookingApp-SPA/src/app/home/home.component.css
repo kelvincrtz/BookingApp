@@ -257,12 +257,24 @@ pre {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
     transition: 0.3s;
-  }
+}
+
+#services .service-item2 {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
+    transition: 0.3s;
+}
   
 /* On mouse-over, add a deeper shadow */
 #services .service-item:hover {
     box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2);
 }
+
+/* On mouse-over, add a deeper shadow */
+#services .service-item2:hover {
+    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2);
+}
+
 
 #services .services {
 	flex-direction: column;
@@ -502,7 +514,7 @@ pre {
 	text-align: center;
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 100px 20px;
+	padding: 100px 10px;
 }
 #about .col-left {
 	width: 250px;
