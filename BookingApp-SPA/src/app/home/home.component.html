@@ -75,8 +75,8 @@
       <div class="hero container">
         <div>
           <h1 class="single">Above All <b>L</b>'s <span></span></h1>
-          <h1>Where your safety<span></span></h1>
-          <h1>comes <b>first</b> <span></span></h1>
+          <h1 class="font-weight-light">Where your safety<span></span></h1>
+          <h1 class="font-weight-light">comes <b>first</b> <span></span></h1>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(register)" (click)="registerToggle()" type="button" class="cta">Sign Up</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(login)" type="button" class="cta">Log In</a>
           <a (click)="scrollToElement(testimonials)" type="button" class="cta">Reviews</a>
@@ -271,7 +271,7 @@
     </section>
     <!-- End About Section -->
 
-
+    
     <!-- FAQs Section -->
     <section #faqs id="faqs">
       <div class="faqcontainer">

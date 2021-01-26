@@ -19,8 +19,14 @@ namespace BookingApp.API.Dtos
         [Required]
         public string Gender { get; set; }
 
+        /*
         [Required]
         public DateTime DateOfBirth { get; set; }
+        */
+
+        [Required]
+        [MinLength(5)] // Validation required
+        public string ContactNumber { get; set; }
 
         [Required]
         public DateTime Created { get; set; }

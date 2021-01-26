@@ -21,10 +21,10 @@ img {
 }
 p {
 	color: black;
-	font-size: 1.1rem;
+	font-size: .9rem;
 	margin-top: 5px;
-	line-height: 2.2rem;
-	font-weight: 300;
+	line-height: 2rem;
+	font-weight: 250;
 	letter-spacing: .05rem;
 }
 pre {
@@ -293,8 +293,8 @@ pre {
 	justify-content: center;
 	flex-wrap: wrap;
 	margin-top: 50px;
-	margin-left: 50px;
-	margin-right: 50px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 #services .service-item {
 	flex-basis: 80%;
@@ -302,7 +302,7 @@ pre {
 	align-items: flex-start;
 	justify-content: center;
 	flex-direction: column;
-	padding: 30px;
+	padding: 20px;
 	border-radius: 10px;
 	background-image: url();
 	background-size: cover;
@@ -324,7 +324,7 @@ pre {
 }
 
 #services .service-item2 {
-	flex-basis: 80%;
+	flex-basis: 90%;
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
@@ -362,7 +362,7 @@ pre {
 	text-transform: uppercase;
 }
 #services .service-item .service-item2 p {
-	font-size: 1rem;
+	font-size: .9rem;
 	color: rgb(29, 28, 28);
 	text-align: left;
 }
@@ -687,6 +687,9 @@ pre {
 
 /* Media Query For Tablet */
 @media only screen and (min-width: 768px) {
+	.p {
+		font-size: .5rem;
+	}
 	/*Brand and Nav*/
 	.brand h1 {
 		font-size: 2.0rem;
@@ -847,6 +850,10 @@ pre {
 	#header .nav-list ul a:after {
 		display: none;
 	}
+
+	.p {
+		font-size: .5rem;
+	}
 	/* End of Header */
 }
 /* End Media Query For Smaller Phone devices */
@@ -907,6 +914,7 @@ pre {
 		font-size: 2.8rem;
 	}
 }
+
 
 .mobile {
 	display: none;
