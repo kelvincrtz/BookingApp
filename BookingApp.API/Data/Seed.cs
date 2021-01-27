@@ -14,6 +14,8 @@ namespace BookingApp.API.Data
         public static void SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             string userString = Startup.StaticConfig.GetSection("AdminSettings:UName").Value;
+            string fullNameString = Startup.StaticConfig.GetSection("AdminSettings:FullName").Value;
+            string contactNumberString = Startup.StaticConfig.GetSection("AdminSettings:ContactNumber").Value;
 
             if (!userManager.Users.Any())
             {
@@ -43,7 +45,9 @@ namespace BookingApp.API.Data
                 // create admin user
                 var adminUser = new User
                 {
-                    UserName = userString
+                    UserName = userString,
+                    FullName = fullNameString,
+                    ContactNumber = contactNumberString
                 };
 
                 var result = userManager.CreateAsync(adminUser, Startup.StaticConfig.GetSection("AdminSettings:Poken").Value).Result;
