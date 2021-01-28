@@ -806,8 +806,8 @@ pre {
 		flex-direction: row;
 	}
 	#contact .contact-item .icon {
-		height: 100px;
-		width: 100px;
+		height: 80px;
+		width: 80px;
 	}
 	#contact .contact-item .icon img {
 		object-fit: contain;
