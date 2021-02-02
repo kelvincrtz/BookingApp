@@ -82,7 +82,6 @@ pre {
 
 
 #login {
-	background-image: url();
 	background-size: cover;
 	background-position: bottom center;
 	position: relative;
@@ -242,7 +241,6 @@ pre {
 #hero .custom:nth-child(3) span {
 	color:yellow;
 }
-
 /* End Hero Section */
 
 
@@ -304,7 +302,6 @@ pre {
 	flex-direction: column;
 	padding: 20px;
 	border-radius: 10px;
-	background-image: url();
 	background-size: cover;
 	margin: 10px 5%;
 	position: relative;
@@ -331,7 +328,6 @@ pre {
 	flex-direction: column;
 	padding: 30px;
 	border-radius: 10px;
-	background-image: url();
 	background-size: cover;
 	margin: 10px 5%;
 	position: relative;
@@ -388,105 +384,6 @@ pre {
 #projects .projects-header h1 {
 	margin-bottom: 50px;
 	color:#fffafa;
-}
-#projects .all-projects {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-}
-#projects .project-item {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: 80%;
-	margin: 20px auto;
-	border-radius: 10px;
-}
-#projects .project-info {
-	padding: 30px;
-	flex-basis: 50%;
-	height: 100%;
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	flex-direction: column;
-	background-image: white;
-	color: white;
-}
-#projects .project-info h1 {
-	font-size: 4rem;
-	font-weight: 500;
-}
-#projects .project-info h2 {
-	font-size: 1.8rem;
-	font-weight: 500;
-	margin-top: 10px;
-}
-#projects .project-info p {
-	color: white;
-}
-#projects .project-info pre {
-	color: white;
-}
-#projects .project-img {
-	max-height: 300px;
-	overflow: hidden;
-	position: relative;
-	border-radius: 8px;
-	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
-	transition: 0.3s;
-	padding: 1rem;
-	background-color: rgba(255,255,255,0.9);
-}
-  
-/* On mouse-over, add a deeper shadow */
-#projects .project-img:hover {
-	box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2);
-}
-
-#projects .project-img img {
-	transition: .3s ease transform;
-}
-#projects .project-item:hover .project-img img {
-	transform: scale(1.1);
-}
-
-#projects .boxes {
-	padding: 2.5rem;
-	background-color: #e1e97a;
-	position: relative;
-	border-radius: .25rem;
-	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
-}
-
-#projects .quote {
-	padding: 1rem;
-	color: #ec921c;
-	background-color: #fff;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	display: flex;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-radius: .5rem;
-}
-
-#projects .description {
-	padding: 1rem;
-	background-color: rgba(255,255,255,0.9);
-	color: rgba(0,0,0,0.7);
-	justify-content: center;
-	flex-direction: column;
-	display: flex;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-	border-radius: .5rem;
-	height: 310px;
-	width: 345px;
-	overflow-y: scroll;
 }
 
 .cta-project {
@@ -656,7 +553,6 @@ pre {
 	margin: 0 auto;
 	margin-bottom: 70px;
 }
-
 /* End of FAQS*/
 
 
@@ -738,27 +634,6 @@ pre {
 		margin: 2.5%;
 	}
 	/* End Services Section */
-
-	/* Project */
-	#projects .project-item {
-		flex-direction: row;
-	}
-	#projects .project-item:nth-child(even) {
-		flex-direction: row-reverse;
-	}
-	#projects .project-item {
-		height: 400px;
-		margin: 0;
-		width: 100%;
-		border-radius: 0;
-	}
-	#projects .all-projects .project-info {
-		height: 100%;
-	}
-	#projects .all-projects .project-img {
-		height: 100%;
-	}
-	/* End Project */
 
 	/* About */
 	#about .about {
