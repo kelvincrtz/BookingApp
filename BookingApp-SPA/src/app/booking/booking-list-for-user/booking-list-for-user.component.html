@@ -118,7 +118,7 @@
               <div *ngIf="booking.status == 'Approved'">
                 <div *ngIf="!booking.isReviewed && !compareDates(booking.when)" class="btn-group btn-block btn-group-sm">
                   <button class="btn btn-outline-info btn-sm mt-2" (click)="paymentInfo(template2)">Payment Info</button>
-                  <button class="btn btn-secondary btn-sm mt-2" (click)="cancelInfo(template3)">Cancel Booking</button>
+                  <button class="btn btn-outline-warning btn-sm mt-2" (click)="cancelInfo(template3)">Cancel Booking</button>
                 </div>
 
                 <button *ngIf="!booking.isReviewed && compareDates(booking.when)" class="btn btn-outline-info btn-block btn-sm mt-2" (click)="review(booking.id)">Want to write a review? 
