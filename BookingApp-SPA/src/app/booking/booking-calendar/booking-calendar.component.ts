@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
-import {
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
+import { ViewChild, TemplateRef } from '@angular/core';
 import {
   startOfDay,
   endOfDay,
