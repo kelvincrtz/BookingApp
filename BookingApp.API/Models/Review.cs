@@ -13,10 +13,5 @@ namespace BookingApp.API.Models
         public int Rating { get; set; }
         public virtual User User { get; set; }
         public int UserId { get; set; }
-
-        // From here //
-        public virtual Booking Booking { get; set; }
-        public int BookingId { get; set; }
-        // To here //
     }
 }

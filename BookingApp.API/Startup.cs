@@ -124,6 +124,7 @@ namespace BookingApp.API
             }
             else 
             {
+                /*
                 app.UseExceptionHandler(builder => {
                     builder.Run(async context => {
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -137,9 +138,12 @@ namespace BookingApp.API
                         }
                     });
                 });
+                */
+                app.UseHsts();
             }
+            app.UseDeveloperExceptionPage();
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
