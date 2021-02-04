@@ -62,7 +62,7 @@ export class ReviewCardComponent implements OnInit {
 
 
   openViewBookingModal(bookingId: number): void {
-
+  /*
     console.log(bookingId);
 
     this.bookingService.getBooking(this.authService.decodedToken.nameid, bookingId).subscribe((booking: Booking) => {
@@ -72,7 +72,7 @@ export class ReviewCardComponent implements OnInit {
     });
 
     console.log(this.booking);
-    /*
+
     const initialState = {
         booking
     };

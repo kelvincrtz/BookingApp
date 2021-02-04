@@ -9,6 +9,5 @@ namespace BookingApp.API.Dtos
         public DateTime DateAdded { get; set; }
         public bool IsApproved { get; set; }
         public int Rating { get; set; }
-        public int BookingId { get; set; }
     }
 }

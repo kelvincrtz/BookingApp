@@ -76,19 +76,13 @@ export class BookingReviewComponent implements OnInit {
 
   uploadSection(template: TemplateRef<any>) {
 
-    if (this.rating <= 4 ) {
-      this.modalRef2.hide();
-    }
-
     if (this.reviewForm.valid) {
       this.review = Object.assign({}, this.reviewForm.value);
 
       this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
         form.append('description', this.review.description); // note comma separating key and value
         form.append('rating', this.rating);
-        form.append('bookingId', this.booking.id);
         form.append('userId', this.authService.decodedToken.nameid);
-        form.append('booking', this.booking);
        };
 
       if (this.uploader.getNotUploadedItems().length) {
@@ -106,7 +100,6 @@ export class BookingReviewComponent implements OnInit {
         };
       } else {
         // Populate Review
-        this.review.bookingId = this.booking.id;
         this.review.rating = this.rating;
 
         // Call booking service for review upload no photo
@@ -139,9 +132,7 @@ export class BookingReviewComponent implements OnInit {
       this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
         form.append('description', this.review.description); // note comma separating key and value
         form.append('rating', this.rating);
-        form.append('bookingId', this.booking.id);
         form.append('userId', this.authService.decodedToken.nameid);
-        form.append('booking', this.booking);
        };
 
       if (this.uploader.getNotUploadedItems().length) {
@@ -160,7 +151,6 @@ export class BookingReviewComponent implements OnInit {
         };
       } else {
         // Populate Review
-        this.review.bookingId = this.booking.id;
         this.review.rating = this.rating;
 
         // Call booking service for review upload no photo

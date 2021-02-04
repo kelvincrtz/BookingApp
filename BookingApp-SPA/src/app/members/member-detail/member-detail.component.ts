@@ -69,7 +69,6 @@ export class MemberDetailComponent implements OnInit {
     this.messageService.getNotifyMessages(this.authService.decodedToken.nameid)
       .subscribe((message: any) => {
       this.messages = message;
-      console.log(this.messages);
       if (this.messages.length && this.user.id === +this.authService.decodedToken.nameid) {
         if (this.messages.length === 1) {
           this.alertify.success('You have a new message');
