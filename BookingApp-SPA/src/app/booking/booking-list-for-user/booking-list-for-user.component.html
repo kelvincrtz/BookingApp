@@ -18,7 +18,7 @@
       <button type="button" name="eventstoday" class="btn" [value]="true" 
         [(ngModel)]="bookingParams.eventstoday" [ngClass]="bookingParams.eventstoday ? 'btn-success active' : 'btn-secondary'" (click)="loadToday()" btnRadio="eventstoday">Today</button>
 
-      <button type="button" name="eventstoday" class="btn" [value]="true" 
+      <button type="button" name="eventstomorrow" class="btn" [value]="true" 
       [(ngModel)]="bookingParams.eventstomorrow" [ngClass]="bookingParams.eventstomorrow ? 'btn-success active' : 'btn-secondary'" (click)="loadTomorrow()" btnRadio="eventstomorrow">Tomorrow</button>
   
       <button type="button" name="eventsthismonth" class="btn" [value]="true" 
@@ -29,9 +29,9 @@
     </div>
 
     <div id="fade" class="btn-group float-right my-1">
-      <button type="button" name="orderBy" class="btn btn-info" tooltip="Sorts the events by newest request" [delay]="500"
+      <button type="button" name="orderBy" class="btn btn-info"
         [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
-      <button type="button" name="orderBy" class="btn btn-info" tooltip="Sorts results by actual event date" [delay]="500"
+      <button type="button" name="orderBy" class="btn btn-info"
         [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">By Event Date</button>
     </div>
   </div>
