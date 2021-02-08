@@ -15,7 +15,7 @@
         <p *ngIf="booking.isReviewed" class="">Review: <span class="font-italic font-weight-bold text-danger bg-white">Sent</span></p>
       </div>
 
-      <button disabled class="btn btn-info btn-block my-2" tooltip="This request has been approved. Click to change its status" [delay]="500" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
+      <button disabled class="btn btn-info btn-block my-2" [routerLink]="['/booking/edit/status', booking.id]">View Request</button>
     </div>
     <div class="card-footer bg-transparent">
       <small>Request received: {{booking.dateAdded | date}}</small>

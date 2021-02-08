@@ -80,12 +80,17 @@ export class BookingCalendarComponent implements OnInit {
   modalRef: BsModalRef;
   isCollapsed = true;
 
+  userName: any;
+  userId: any;
+
   constructor(private authService: AuthService, private bookingService: BookingService, private alertify: AlertifyService,
               private router: Router, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.getCalendarEvents((this.viewDate.getFullYear()), (this.viewDate.getMonth() + 1));
     this.todaysDate = new Date();
+    this.userName = this.authService.decodedToken.unique_name;
+    this.userId = this.authService.decodedToken.nameid;
   }
 
   notValidClick(day: any) {

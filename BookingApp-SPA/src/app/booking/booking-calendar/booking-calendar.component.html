@@ -139,7 +139,7 @@
 
   <ng-template #customCellTemplate let-day="day" let-locale="locale">
     <!-- Fully Booked Days -->
-    <div class="cal-cell-top" (click)="notValidClick(day)" *ngIf="day.badgeTotal == 3 && day.date > todaysDate" style="background-color: lightcoral;">
+    <div class="cal-cell-top" (click)="notValidClick(day)" *ngIf="(day.badgeTotal >= 3 && day.date > todaysDate) && (userId != 3 && userName != 'admin')" style="background-color: lightcoral;">
       <div>
         <span class="cal-day-number text-light">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
         <!--
@@ -152,8 +152,27 @@
       </div>
     </div>
 
+    <!-- Fully Booked Days for Admin-->
+    <div class="cal-cell-top" (click)="validClick(day)" *ngIf="(day.badgeTotal >= 3 && day.date > todaysDate) && (userId == 3 && userName == 'admin')" style="background-color: lightcoral">
+      <div>
+        <span class="cal-day-number text-light">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+        <!--
+        <div *ngFor="let event of day.events">
+          Where: {{ event.title }}
+          Start: {{ event.start | date:'shortTime'}}
+          End: {{ event.end | date:'shortTime' }}
+        </div>
+        -->
+      </div>
+    </div>
+
+    
+
     <!-- FULLY BOOKED -->
-    <small class="text-light text-center" style="background-color: lightcoral;" *ngIf="day.badgeTotal == 3 && day.date > todaysDate">FULLY BOOKED</small>
+    <small class="text-light text-center" style="background-color: lightcoral;" *ngIf="(day.badgeTotal >= 3 && day.date > todaysDate) && (userId != 3 && userName != 'admin')">FULLY BOOKED</small>
+
+    <!-- FULLY BOOKED for ADMIN -->
+    <small class="text-dark text-center font-italic" style="background-color: lightcoral;" *ngIf="(day.badgeTotal >= 3 && day.date > todaysDate) && (userId == 3 && userName == 'admin')">{{day.badgeTotal}} BOOKED</small>
 
     <!-- Still Available 1 Slot Left -->
     <div class="cal-cell-top" (click)="validClick(day)" *ngIf="day.badgeTotal == 2 && day.date > todaysDate" style="background-color: lightskyblue;">
